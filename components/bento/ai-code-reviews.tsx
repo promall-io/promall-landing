@@ -37,7 +37,7 @@ const AiCodeReviews: React.FC = () => {
           height: "205.949px",
           background: "linear-gradient(180deg, var(--ai-background-color) 0%, transparent 100%)",
           opacity: 0.6,
-          borderRadius: "8.826px",
+          borderRadius: "var(--radius-lg)",
           border: "0.791px solid var(--ai-border-color)",
           overflow: "hidden",
           backdropFilter: "blur(16px)",
@@ -54,7 +54,7 @@ const AiCodeReviews: React.FC = () => {
         >
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "var(--font-family-mono)",
               fontSize: "9.562px",
               lineHeight: "14.711px",
               letterSpacing: "-0.2942px",
@@ -105,7 +105,7 @@ const AiCodeReviews: React.FC = () => {
           height: "221.395px",
           background: "var(--ai-background-color)",
           backdropFilter: "blur(16px)",
-          borderRadius: "9.488px",
+          borderRadius: "var(--radius-lg)",
           border: "1px solid var(--ai-border-main)",
           overflow: "hidden",
         }}
@@ -146,7 +146,7 @@ const AiCodeReviews: React.FC = () => {
           />
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "var(--font-family-mono)",
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
@@ -202,7 +202,7 @@ const AiCodeReviews: React.FC = () => {
               whiteSpace: "nowrap",
               transition: "all 0.2s ease",
               padding: "3.163px 6.326px",
-              borderRadius: "5.535px",
+              borderRadius: "var(--radius-lg)",
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
@@ -212,7 +212,7 @@ const AiCodeReviews: React.FC = () => {
           >
             <span
               style={{
-                fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontFamily: "var(--font-family-sans)",
                 fontWeight: 500,
               }}
             >
@@ -220,7 +220,7 @@ const AiCodeReviews: React.FC = () => {
             </span>
             <span
               style={{
-                fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+                fontFamily: "var(--font-family-sans)",
                 fontWeight: 500,
               }}
             >

@@ -8,7 +8,7 @@
 
 .messageBox {
   position: absolute;
-  border-radius: 8px; /* Adjusted for consistency with shadcn/ui radius */
+  border-radius: var(--radius-lg);
   overflow: hidden;
   padding: 9.49px;
   box-sizing: border-box;
@@ -50,7 +50,7 @@
   white-space: pre-wrap;
   word-break: break-words;
   font-size: 10.28px;
-  font-family: "Geist Mono", monospace;
+  font-family: var(--font-family-mono);
   line-height: 15.81px;
   color: hsl(var(--foreground));
   width: 100%;
@@ -85,7 +85,7 @@
   align-items: center;
   gap: 3.95px;
   padding: 3.16px 6.33px;
-  border-radius: 5.53px;
+  border-radius: var(--radius-lg);
   box-shadow: 0px 0.7906976938247681px 2.3720932006835938px rgba(0, 0, 0, 0.1);
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
@@ -99,11 +99,11 @@
 }
 
 .buttonText {
-  font-family: "Geist", sans-serif;
+  font-family: var(--font-family-sans);
 }
 
 .buttonShortcut {
-  font-family: "SF Pro", sans-serif;
+  font-family: var(--font-family-sans);
 }
 
 /* Theme specific styles for code block text color */

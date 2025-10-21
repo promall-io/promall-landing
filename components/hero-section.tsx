@@ -1,141 +1,85 @@
 import { Button } from "@/components/ui/button"
-import { Header } from "./header"
 import Link from "next/link"
-import { Zap, Play, Package, TrendingUp, Sparkles } from "lucide-react"
+import { Zap, Sparkles, Clock, Code, Headphones, Play } from "lucide-react"
+import { AuroraBackground } from "@/components/aurora-background"
 
 export function HeroSection() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col bg-background pt-24 overflow-hidden">
-      <div className="relative z-10 w-full">
-        <Header />
+    <section className="relative w-full min-h-[600px] flex items-center justify-center bg-background">
+      {/* Real Aurora Borealis Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <AuroraBackground />
       </div>
 
-      <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        <div className="flex flex-col items-center text-center gap-8 sm:gap-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/20 backdrop-blur-xl border border-primary/40">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-bold text-foreground">اولین پلتفرم هوشمند مدیریت فروشگاه در ایران</span>
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-32">
+        <div className="flex flex-col items-center text-center gap-12">
+          {/* Enhanced Badge - Balanced */}
+          <div className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md hover:border-primary/50 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            <Sparkles className="w-4 h-4 text-primary relative z-10" />
+            <span className="text-sm font-semibold text-foreground relative z-10">
+              اولین پلتفرم هوشمند مدیریت آنلاین شاپ در ایران
+            </span>
           </div>
 
-          {/* متن اصلی */}
-          <div className="flex flex-col gap-6 max-w-4xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] text-balance">
-              <span className="text-foreground">فروشگاه آنلاینتون رو</span>
-              <br />
-              <span className="text-primary">به سطح بعدی ببرید</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed max-w-3xl mx-auto text-pretty font-medium">
-              با پرومال، مدیریت محصولات، سفارش‌ها و موجودی فروشگاهتون خیلی ساده‌تر میشه.
-              <span className="text-primary font-bold"> تجربه‌ای متفاوت، نتیجه‌ای باورنکردنی!</span>
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
-            <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-7 rounded-full font-black text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
-                <span className="flex items-center gap-3">
-                  ورود به اپلیکیشن
-                  <Zap className="w-6 h-6" />
+          {/* Enhanced Heading - Balanced */}
+          <div className="relative max-w-3xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.15] tracking-tight animate-fade-in-up" dir="rtl">
+              <span className="text-foreground block drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                فروشگاه آنلاینت رو
+              </span>
+              <span className="relative inline-block mt-2">
+                <span className="text-primary block drop-shadow-[0_4px_20px_rgba(163,230,53,0.4)]">
+                  به سطح بعدی ببر
                 </span>
+                <div className="absolute -inset-2 bg-primary/10 blur-2xl -z-10" />
+              </span>
+            </h1>
+          </div>
+
+          {/* Enhanced Description */}
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed max-w-3xl font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]" dir="rtl">
+            مدیریت کامل فروشگاه، فروشندگان، سفارشات و پرداخت‌ها - همه در یک پلتفرم یکپارچه
+            <span className="block mt-2 text-base sm:text-lg text-muted-foreground/70">
+              بدون نیاز به دانش فنی | راه‌اندازی در کمتر از ۱۰ دقیقه | پشتیبانی ۲۴/۷
+            </span>
+          </p>
+
+          {/* Enhanced CTA Buttons - Balanced */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-fade-in-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]">
+            <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
+              <Button className="group relative inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full font-bold text-lg shadow-[0_0_30px_rgba(163,230,53,0.25)] hover:shadow-[0_0_45px_rgba(163,230,53,0.4)] transition-all duration-300 hover:scale-[1.02] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <Zap className="h-5 w-5 relative z-10" />
+                <span className="relative z-10">شروع رایگان</span>
               </Button>
             </Link>
-            <Button
-              variant="outline"
-              className="border-2 border-primary/50 text-foreground hover:bg-primary/20 hover:border-primary px-10 py-7 rounded-full font-bold text-lg sm:text-xl bg-background/50 backdrop-blur-xl transition-all duration-300 hover:scale-105"
-            >
-              <Play className="w-6 h-6 ml-3" />
-              تماشای ویدیو معرفی
-            </Button>
-          </div>
-
-          {/* موبایل مدرن و تمیز */}
-          <div className="relative mt-12 sm:mt-16">
-            <div className="absolute inset-0 bg-primary/20 rounded-full blur-[100px]" />
-
-            {/* iPhone 16 Pro Frame */}
-            <div className="relative w-[300px] sm:w-[360px] md:w-[400px] aspect-[9/19.5] mx-auto transform hover:scale-105 transition-transform duration-700">
-              {/* Dynamic Island - iPhone 16 Pro style */}
-              <div className="absolute top-[14px] left-1/2 -translate-x-1/2 w-[120px] md:w-[130px] h-[36px] md:h-[38px] bg-black rounded-full z-20 shadow-[0_2px_10px_rgba(0,0,0,0.8)_inset]" />
-
-              {/* Screen with ProMall App UI */}
-              <div className="relative w-full h-full bg-primary rounded-[50px] md:rounded-[54px] overflow-hidden shadow-2xl">
-                {/* Multi-layer liquid glass overlay */}
-                <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
-
-                {/* ProMall App Interface */}
-                <div className="relative h-full p-6 md:p-7 pt-16 md:pt-18">
-                  {/* App Header with glass morphism */}
-                  <div className="flex items-center justify-between mb-6 md:mb-8">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 md:w-13 md:h-13 bg-white/50 rounded-2xl backdrop-blur-2xl shadow-lg border border-white/60 flex items-center justify-center">
-                        <Package className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <div className="h-3.5 w-24 bg-white/70 rounded-lg mb-1.5 shadow-sm" />
-                        <div className="h-2.5 w-16 bg-white/50 rounded-lg shadow-sm" />
-                      </div>
-                    </div>
-                    <div className="w-11 h-11 md:w-12 md:h-12 bg-white/40 rounded-full backdrop-blur-2xl shadow-lg border border-white/50" />
-                  </div>
-
-                  {/* Stats Cards with premium glass */}
-                  <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
-                    <div className="h-28 md:h-32 bg-white/40 rounded-3xl backdrop-blur-3xl p-4 shadow-lg border border-white/50 hover:scale-105 transition-transform">
-                      <TrendingUp className="w-5 h-5 text-primary-foreground mb-2" />
-                      <div className="h-7 md:h-8 w-20 bg-white/80 rounded-xl mt-2 shadow-sm" />
-                      <div className="h-2.5 w-14 bg-white/60 rounded-lg mt-2" />
-                    </div>
-                    <div className="h-28 md:h-32 bg-white/40 rounded-3xl backdrop-blur-3xl p-4 shadow-lg border border-white/50 hover:scale-105 transition-transform">
-                      <Sparkles className="w-5 h-5 text-primary-foreground mb-2" />
-                      <div className="h-7 md:h-8 w-20 bg-white/80 rounded-xl mt-2 shadow-sm" />
-                      <div className="h-2.5 w-14 bg-white/60 rounded-lg mt-2" />
-                    </div>
-                  </div>
-
-                  {/* Product List with glass morphism */}
-                  <div className="space-y-3 md:space-y-4">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="h-18 md:h-20 bg-white/35 rounded-2xl backdrop-blur-2xl shadow-md border border-white/40 p-3 flex items-center gap-3 hover:bg-white/45 transition-all"
-                      >
-                        <div className="w-12 h-12 bg-white/50 rounded-xl shadow-sm" />
-                        <div className="flex-1 space-y-2">
-                          <div className="h-3 w-28 bg-white/60 rounded-lg" />
-                          <div className="h-2.5 w-20 bg-white/50 rounded-lg" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Floating Action Button */}
-                  <div className="absolute bottom-6 md:bottom-8 right-6 md:right-8 w-16 h-16 md:w-18 md:h-18 bg-white/95 backdrop-blur-3xl rounded-full shadow-xl border-2 border-white/70 flex items-center justify-center hover:scale-110 transition-transform">
-                    <div className="w-7 h-7 bg-primary-foreground rounded-xl shadow-lg" />
-                  </div>
-
-                  {/* Premium Badge */}
-                  <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 bg-white/95 backdrop-blur-3xl rounded-full px-5 py-2.5 shadow-xl border-2 border-white/70">
-                    <span className="text-sm font-black text-primary-foreground">پرومال</span>
-                  </div>
+            <Link href="#features-section">
+              <Button variant="ghost" className="group relative inline-flex items-center gap-3 text-foreground hover:text-foreground px-6 py-6 rounded-full font-medium text-lg transition-all duration-300 hover:ring-2 hover:ring-primary/50">
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 transition-all duration-300">
+                  <Play className="h-4 w-4 text-primary fill-primary" />
                 </div>
-              </div>
-            </div>
+                <span className="relative">چطور کار میکنه؟</span>
+              </Button>
+            </Link>
           </div>
 
-          {/* آمار */}
-          <div className="grid grid-cols-3 gap-8 sm:gap-12 lg:gap-16 pt-16 border-t border-primary/30 w-full max-w-4xl">
-            <div className="flex flex-col items-center group hover:scale-110 transition-transform">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-black text-primary mb-2">+۵۰۰</div>
-              <div className="text-sm sm:text-base text-muted-foreground font-medium">فروشگاه فعال</div>
+          {/* Stats - Subtle */}
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 mt-12 animate-fade-in-up [animation-delay:600ms] opacity-0 [animation-fill-mode:forwards]" dir="rtl">
+            <div className="flex items-center gap-1.5 text-muted-foreground/40">
+              <Clock className="w-3.5 h-3.5" />
+              <span className="text-xs font-medium">راه‌اندازی سریع</span>
             </div>
-            <div className="flex flex-col items-center group hover:scale-110 transition-transform">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-black text-primary mb-2">+۱۰K</div>
-              <div className="text-sm sm:text-base text-muted-foreground font-medium">سفارش روزانه</div>
+            <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
+            <div className="flex items-center gap-1.5 text-muted-foreground/40">
+              <Code className="w-3.5 h-3.5" />
+              <span className="text-xs font-medium">بدون نیاز به کدنویسی</span>
             </div>
-            <div className="flex flex-col items-center group hover:scale-110 transition-transform">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-black text-primary mb-2">۹۹٪</div>
-              <div className="text-sm sm:text-base text-muted-foreground font-medium">رضایت کاربران</div>
+            <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
+            <div className="flex items-center gap-1.5 text-muted-foreground/40">
+              <Headphones className="w-3.5 h-3.5" />
+              <span className="text-xs font-medium">پشتیبانی اختصاصی</span>
             </div>
           </div>
         </div>

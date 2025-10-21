@@ -6,14 +6,14 @@ interface McpConnectivityIllustrationProps {
 }
 
 const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = ({ className = "" }) => {
-  // Integration data with new SVG paths
+  // Integration data - using text initials instead of images for simplicity
   const integrations = [
-    { name: "Figma", icon: "/images/mcp-integrations/figma.svg", installed: true },
-    { name: "Shadcn UI", icon: "/images/mcp-integrations/shadcn.svg" },
-    { name: "Next.js", icon: "/images/mcp-integrations/nextjs.svg", installed: true },
-    { name: "Tailwind CSS", icon: "/images/mcp-integrations/tailwind-css.svg" },
-    { name: "Resend", icon: "/images/mcp-integrations/resend.svg", installed: true },
-    { name: "React", icon: "/images/mcp-integrations/react.svg" },
+    { id: "integration-figma", name: "Figma", initials: "F", installed: true },
+    { id: "integration-shadcn", name: "Shadcn UI", initials: "S" },
+    { id: "integration-nextjs", name: "Next.js", initials: "N", installed: true },
+    { id: "integration-tailwind", name: "Tailwind CSS", initials: "T" },
+    { id: "integration-resend", name: "Resend", initials: "R", installed: true },
+    { id: "integration-react", name: "React", initials: "⚛" },
   ]
 
   return (
@@ -33,7 +33,7 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
           height: "277px",
           background: "linear-gradient(180deg, hsl(var(--background)) 0%, transparent 100%)",
           backdropFilter: "blur(16px)",
-          borderRadius: "9.628px",
+          borderRadius: "var(--radius-lg)",
           border: "0.802px solid hsl(var(--border))",
           overflow: "hidden",
         }}
@@ -70,7 +70,7 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
             </div>
             <span
               style={{
-                fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontFamily: "var(--font-family-sans)",
                 fontSize: "12.837px",
                 lineHeight: "19.256px",
                 color: "hsl(var(--muted-foreground))",
@@ -84,7 +84,7 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
           {/* Integration List */}
           {integrations.map((integration, index) => (
             <div
-              key={integration.name}
+              key={integration.id}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -111,17 +111,18 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
+                    background: "hsl(var(--primary) / 0.1)",
+                    borderRadius: "var(--radius-lg)",
+                    fontWeight: "600",
+                    fontSize: "12px",
+                    color: "hsl(var(--primary))",
                   }}
                 >
-                  <img
-                    src={integration.icon || "/placeholder.svg"}
-                    alt={integration.name}
-                    className="w-full h-full object-contain opacity-70 grayscale" // Apply opacity and grayscale
-                  />
+                  {integration.initials}
                 </div>
                 <span
                   style={{
-                    fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                    fontFamily: "var(--font-family-sans)",
                     fontSize: "12.837px",
                     lineHeight: "19.256px",
                     color: "hsl(var(--muted-foreground))",
@@ -137,7 +138,7 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
                   style={{
                     background: "hsl(var(--primary) / 0.08)",
                     padding: "1.318px 5.272px",
-                    borderRadius: "3.295px",
+                    borderRadius: "var(--radius-lg)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -145,7 +146,7 @@ const McpConnectivityIllustration: React.FC<McpConnectivityIllustrationProps> = 
                 >
                   <span
                     style={{
-                      fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontFamily: "var(--font-family-sans)",
                       fontSize: "9.583px",
                       lineHeight: "15.333px",
                       color: "hsl(var(--primary))",

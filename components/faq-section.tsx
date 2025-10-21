@@ -6,31 +6,37 @@ import { ChevronDown } from "lucide-react"
 
 const faqData = [
   {
+    id: "faq-what-is-promall",
     question: "پرومال چیه و برای کی مناسبه؟",
     answer:
       "پرومال یه اپلیکیشن هوشمنده که به شما کمک می‌کنه فروشگاه آنلاین‌تون رو راحت‌تر مدیریت کنید. برای هر کسی که می‌خواد آنلاین بفروشه، از فروشنده‌های کوچک تا کسب‌وکارهای بزرگ، مناسبه!",
   },
   {
+    id: "faq-manage-products",
     question: "چطوری محصولاتم رو مدیریت کنم؟",
     answer:
       "خیلی راحته! محصولاتتون رو اضافه کنید، قیمت و تخفیف بذارید، موجودی رو کنترل کنید و همه‌چیز رو در یک جا ببینید. همه‌چیز ساده و سریعه!",
   },
   {
+    id: "faq-integrations",
     question: "میشه پرومال رو با ابزارهای دیگه وصل کرد؟",
     answer:
       "بله! پرومال با درگاه‌های پرداخت، سیستم‌های حسابداری و خیلی ابزارهای دیگه کار می‌کنه. همه‌چیز رو به هم وصل کنید و راحت کار کنید!",
   },
   {
+    id: "faq-free-plan",
     question: "پلن رایگان چی داره؟",
     answer:
       "با پلن رایگان می‌تونید تا ۱۰ محصول اضافه کنید، سفارش‌های محدود ثبت کنید و گزارش‌های ساده ببینید. برای شروع کار و آشنایی با پرومال عالیه!",
   },
   {
+    id: "faq-track-orders",
     question: "چطوری سفارش‌ها رو پیگیری کنم؟",
     answer:
       "تمام سفارش‌ها رو در یک داشبورد می‌بینید، وضعیت‌شون رو تغییر می‌دید، مرجوعی‌ها رو مدیریت می‌کنید و موجودی به‌صورت خودکار کم میشه. همه‌چیز خودکاره!",
   },
   {
+    id: "faq-security",
     question: "اطلاعات فروشگاهم امنه؟",
     answer:
       "کاملاً! ما از بهترین استانداردهای امنیتی استفاده می‌کنیم. اطلاعاتتون رمزنگاری میشه، به‌صورت امن منتقل میشه و پشتیبان‌گیری منظم داریم. خیالتون راحت باشه!",
@@ -49,30 +55,50 @@ const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
     e.preventDefault()
     onToggle()
   }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      onToggle()
+    }
+  }
+
   return (
     <div
-      className={`w-full bg-[rgba(231,236,235,0.08)] shadow-[0px_2px_4px_rgba(0,0,0,0.16)] overflow-hidden rounded-[10px] outline outline-1 outline-border outline-offset-[-1px] transition-all duration-500 ease-out cursor-pointer`}
+      className={`group w-full bg-card/60 backdrop-blur-sm border-2 overflow-hidden rounded-3xl transition-all duration-500 cursor-pointer hover-lift ${
+        isOpen
+          ? "border-primary/60 shadow-strong shadow-primary/20"
+          : "border-border/60 hover:border-primary/50 shadow-medium hover:shadow-strong"
+      }`}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-expanded={isOpen}
     >
-      <div className="w-full px-5 py-[18px] pr-4 flex justify-between items-center gap-5 text-right transition-all duration-300 ease-out">
-        <div className="flex-1 text-foreground text-base font-medium leading-6 break-words">{question}</div>
-        <div className="flex justify-center items-center">
+      {/* Gradient Overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent transition-opacity duration-500 pointer-events-none ${isOpen ? "opacity-100" : "opacity-0"}`} />
+
+      <div className="relative w-full px-6 md:px-8 py-6 md:py-7 flex justify-between items-center gap-6 text-right">
+        <div className={`flex-1 text-base md:text-xl font-black transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
+          {question}
+        </div>
+        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isOpen ? "bg-primary/20 rotate-180" : "bg-primary/10 group-hover:bg-primary/15 rotate-0"}`}>
           <ChevronDown
-            className={`w-6 h-6 text-muted-foreground-dark transition-all duration-500 ease-out ${isOpen ? "rotate-180 scale-110" : "rotate-0 scale-100"}`}
+            className={`w-6 h-6 transition-all duration-500 ${isOpen ? "text-primary" : "text-muted-foreground group-hover:text-primary"}`}
           />
         </div>
       </div>
+
       <div
-        className={`overflow-hidden transition-all duration-500 ease-out ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
-        style={{
-          transitionProperty: "max-height, opacity, padding",
-          transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
+        className={`relative overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
-        <div
-          className={`px-5 transition-all duration-500 ease-out ${isOpen ? "pb-[18px] pt-2 translate-y-0" : "pb-0 pt-0 -translate-y-2"}`}
-        >
-          <div className="text-foreground/80 text-sm font-normal leading-6 break-words text-right">{answer}</div>
+        <div className={`px-6 md:px-8 pb-6 md:pb-7 transition-all duration-300 ${isOpen ? "pt-0" : "pt-0"}`}>
+          <div className="text-foreground/90 text-sm md:text-lg leading-relaxed font-medium border-t border-border/40 pt-6">
+            {answer}
+          </div>
         </div>
       </div>
     </div>
@@ -80,33 +106,54 @@ const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
 }
 
 export function FAQSection() {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
-  const toggleItem = (index: number) => {
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set())
+  const toggleItem = (id: string) => {
     const newOpenItems = new Set(openItems)
-    if (newOpenItems.has(index)) {
-      newOpenItems.delete(index)
+    if (newOpenItems.has(id)) {
+      newOpenItems.delete(id)
     } else {
-      newOpenItems.add(index)
+      newOpenItems.add(id)
     }
     setOpenItems(newOpenItems)
   }
   return (
-    <section className="w-full pt-[66px] pb-20 md:pb-40 px-5 relative flex flex-col justify-center items-center">
-      <div className="w-[300px] h-[500px] absolute top-[150px] left-1/2 -translate-x-1/2 origin-top-left rotate-[-33.39deg] bg-primary/10 blur-[100px] z-0" />
-      <div className="self-stretch pt-8 pb-8 md:pt-14 md:pb-14 flex flex-col justify-center items-center gap-2 relative z-10">
-        <div className="flex flex-col justify-start items-center gap-4">
-          <h2 className="w-full max-w-[435px] text-center text-foreground text-4xl font-semibold leading-10 break-words">
-            سوالات متداول
+    <section className="relative w-full py-20 md:py-32 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/8 rounded-full blur-[120px]" />
+      <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-primary/5 rounded-full blur-[100px]" />
+
+      <div className="relative max-w-4xl mx-auto px-4">
+        <div className="text-center mb-16 md:mb-20 space-y-6">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm md:text-base font-black text-primary tracking-tight">سوالات متداول</span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            سوالی دارید؟
+            <br />
+            <span className="text-primary">جوابش رو اینجا پیدا کنید!</span>
           </h2>
-          <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-[18.20px] break-words">
-            سوالی دارید؟ جوابش رو اینجا پیدا کنید!
+
+          {/* Description */}
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            پاسخ سوالات رایج درباره پرومال و امکاناتش
           </p>
         </div>
-      </div>
-      <div className="w-full max-w-[600px] pt-0.5 pb-10 flex flex-col justify-start items-start gap-4 relative z-10">
-        {faqData.map((faq, index) => (
-          <FAQItem key={index} {...faq} isOpen={openItems.has(index)} onToggle={() => toggleItem(index)} />
-        ))}
+
+        <div className="flex flex-col gap-4 md:gap-5">
+          {faqData.map((faq, index) => (
+            <div
+              key={faq.id}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
+            >
+              <FAQItem {...faq} isOpen={openItems.has(faq.id)} onToggle={() => toggleItem(faq.id)} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

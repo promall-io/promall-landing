@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "پرومال - مدیریت هوشمند فروشگاه آنلاین",
   description: "اولین اپلیکیشن مدیریت فروشگاه‌های آنلاین در ایران",
   generator: "v0.app",
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function RootLayout({

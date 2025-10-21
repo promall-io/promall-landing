@@ -25,7 +25,7 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
       width: "60px",
       height: "60px",
       position: "relative",
-      borderRadius: "9px",
+      borderRadius: "var(--radius-lg)",
       border: `1px ${themeVars["--oci-border-color"]} solid`,
       display: "flex",
       justifyContent: "center",

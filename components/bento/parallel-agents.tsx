@@ -120,7 +120,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
           position: "relative",
           background: `linear-gradient(180deg, var(--pca-container-gradient-start) 0%, var(--pca-container-gradient-end) 100%)`,
           backdropFilter: "blur(8.372px)",
-          borderRadius: "10.047px",
+          borderRadius: "var(--radius-lg)",
           boxSizing: "border-box",
           flexShrink: 0,
           margin: "0 auto",
@@ -143,7 +143,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
           width: "calc(100% - 48px)", // Adjusted width for 24px margin on both sides
           background: "linear-gradient(180deg, hsl(var(--primary) / 0.05) 0%, transparent 100%)", // Updated background property
           backdropFilter: "blur(16px)",
-          borderRadius: "9.628px",
+          borderRadius: "var(--radius-lg)",
           border: "0.802px solid hsl(var(--border))",
           overflow: "hidden",
           boxSizing: "border-box",
@@ -161,7 +161,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
               padding: "6.494px 8.658px",
               background: `linear-gradient(180deg, var(--pca-background-gradient-start) 0%, var(--pca-background-gradient-end) 100%)`,
               backdropFilter: "blur(19.481px)",
-              borderRadius: "8.658px",
+              borderRadius: "var(--radius-lg)",
               boxShadow: `0px 1.082px 2.165px 0px var(--pca-shadow-color)`,
               border: "0.541px solid var(--pca-border-color)",
               width: "100%",
@@ -220,7 +220,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
             >
               <div
                 style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "var(--font-family-sans)",
                   fontWeight: 400,
                   fontSize: "10.823px",
                   lineHeight: "17.316px",
@@ -233,7 +233,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
               </div>
               <div
                 style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "var(--font-family-sans)",
                   fontWeight: 400,
                   fontSize: "10.823px",
                   lineHeight: "17.316px",

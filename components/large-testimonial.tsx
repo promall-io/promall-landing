@@ -1,28 +1,19 @@
-import Image from "next/image"
-
 export function LargeTestimonial() {
   return (
-    <section className="w-full px-5 overflow-hidden flex justify-center items-center">
-      <div className="flex-1 flex flex-col justify-start items-start overflow-hidden">
-        <div className="self-stretch px-4 py-12 md:px-6 md:py-16 lg:py-28 flex flex-col justify-start items-start gap-2">
-          <div className="self-stretch flex justify-between items-center">
-            <div className="flex-1 px-4 py-8 md:px-12 lg:px-20 md:py-8 lg:py-10 overflow-hidden rounded-lg flex flex-col justify-center items-center gap-6 md:gap-8 lg:gap-11">
-              <div className="w-full max-w-[1024px] text-center text-foreground leading-7 md:leading-10 lg:leading-[64px] font-medium text-lg md:text-3xl lg:text-6xl">
-                با ProMall، مدیریت فروشگاه از یک کار پیچیده به یک تجربه روان و قابل پیش‌بینی تبدیل شد
+    <section className="w-full px-4 py-16 md:py-24 overflow-hidden flex justify-center items-center">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="px-6 md:px-12 py-12 md:py-16 rounded-2xl bg-card/30 border border-border/50 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-8 md:gap-10 text-center">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-relaxed max-w-4xl">
+              "با پرومال، مدیریت فروشگاه از یک کار پیچیده به یک تجربه ساده و روان تبدیل شد"
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center">
+                <span className="text-xl font-bold text-primary">ع</span>
               </div>
-              <div className="flex justify-start items-center gap-5">
-                <Image
-                  src="/images/guillermo-rauch.png"
-                  alt="تصویر پروفایل"
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 relative rounded-full"
-                  style={{ border: "1px solid rgba(0, 0, 0, 0.08)" }}
-                />
-                <div className="flex flex-col justify-start items-start">
-                  <div className="text-foreground text-base font-medium leading-6">علی محمدی</div>
-                  <div className="text-muted-foreground text-sm font-normal leading-6">مدیرعامل فروشگاه دیجی‌استایل</div>
-                </div>
+              <div className="flex flex-col items-start">
+                <div className="text-foreground text-base font-semibold">علی محمدی</div>
+                <div className="text-muted-foreground text-sm">مدیرعامل فروشگاه دیجی‌استایل</div>
               </div>
             </div>
           </div>

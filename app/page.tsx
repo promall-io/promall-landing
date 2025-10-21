@@ -1,5 +1,5 @@
+import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { DashboardPreview } from "@/components/dashboard-preview"
 import { BentoSection } from "@/components/bento-section"
 import { LargeTestimonial } from "@/components/large-testimonial"
 import { PricingSection } from "@/components/pricing-section"
@@ -11,47 +11,74 @@ import { AnimatedSection } from "@/components/animated-section"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden pb-0">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Header با موقعیت ثابت */}
+      <Header />
+
+      {/* محتوای اصلی */}
       <div className="relative z-10">
-        <main className="max-w-[1320px] mx-auto relative">
+        {/* Hero Section - Full width without container */}
+        <main className="w-full">
           <HeroSection />
-          <div className="absolute bottom-[-200px] md:bottom-[-350px] left-1/2 transform -translate-x-1/2 z-30 w-full">
-            <AnimatedSection>
-              <DashboardPreview />
-            </AnimatedSection>
-          </div>
         </main>
+
+        {/* Features Section با فاصله استاندارد */}
         <AnimatedSection
           id="features-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-[500px] md:mt-[450px] px-4"
-          delay={0.2}
+          className="relative z-10 w-full mt-32 sm:mt-40 md:mt-48 lg:mt-56"
+          delay={0.1}
         >
           <BentoSection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+
+        {/* Large Testimonial */}
+        <AnimatedSection
+          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
+          delay={0.15}
+        >
           <LargeTestimonial />
         </AnimatedSection>
+
+        {/* Pricing Section */}
         <AnimatedSection
           id="pricing-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"
+          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
           delay={0.2}
         >
           <PricingSection />
         </AnimatedSection>
+
+        {/* Testimonials Grid */}
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"
-          delay={0.2}
+          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
+          delay={0.15}
         >
           <TestimonialGridSection />
         </AnimatedSection>
-        <AnimatedSection id="faq-section" className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+
+        {/* FAQ Section */}
+        <AnimatedSection
+          id="faq-section"
+          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
+          delay={0.2}
+        >
           <FAQSection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+
+        {/* CTA Section */}
+        <AnimatedSection
+          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
+          delay={0.15}
+        >
           <CTASection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+
+        {/* Footer - بدون padding برای full-width background */}
+        <AnimatedSection
+          className="relative z-10 mt-24 sm:mt-32 lg:mt-40"
+          delay={0.1}
+        >
           <FooterSection />
         </AnimatedSection>
       </div>

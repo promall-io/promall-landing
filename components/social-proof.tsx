@@ -7,7 +7,7 @@ export function SocialProof() {
       <div className="self-stretch grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
         {Array.from({ length: 8 }).map((_, i) => (
           <Image
-            key={i}
+            key={`company-logo-${i + 1}`}
             src={`/logos/logo0${i + 1}.svg`}
             alt={`لوگوی شرکت ${i + 1}`}
             width={400}

@@ -41,7 +41,7 @@ const RealtimeCodingPreviews: React.FC = () => {
           height: "221px",
           background: "linear-gradient(180deg, var(--realtime-background-editor) 0%, transparent 100%)",
           backdropFilter: "blur(7.907px)",
-          borderRadius: "9.488px",
+          borderRadius: "var(--radius-lg)",
           border: "1px solid var(--realtime-border-main)",
           overflow: "hidden",
           boxSizing: "border-box",
@@ -63,7 +63,7 @@ const RealtimeCodingPreviews: React.FC = () => {
         >
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "var(--font-family-mono)",
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
@@ -125,8 +125,8 @@ const RealtimeCodingPreviews: React.FC = () => {
           height: "221px",
           background: "linear-gradient(180deg, var(--realtime-background-preview) 0%, transparent 100%)",
           backdropFilter: "blur(7.907px)",
-          borderRadius: "9.488px",
-          borderTopRightRadius: "9.488px",
+          borderRadius: "var(--radius-lg)",
+          borderTopRightRadius: "var(--radius-lg)",
           // Removed the border property from here
           overflow: "hidden",
           boxSizing: "border-box",
@@ -166,7 +166,7 @@ const RealtimeCodingPreviews: React.FC = () => {
               whiteSpace: "nowrap",
               transition: "all 0.2s ease",
               padding: "6.326px 12.651px",
-              borderRadius: "11.07px",
+              borderRadius: "var(--radius-lg)",
               boxShadow:
                 "0px 52.186px 14.233px rgba(0, 0, 0, 0), 0px 33.209px 12.651px rgba(0, 0, 0, 0.01), 0px 18.977px 11.07px rgba(0, 0, 0, 0.05), 0px 7.907px 7.907px rgba(0, 0, 0, 0.09), 0px 1.581px 4.744px rgba(0, 0, 0, 0.1)",
               boxSizing: "border-box",
@@ -174,7 +174,7 @@ const RealtimeCodingPreviews: React.FC = () => {
           >
             <div
               style={{
-                fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontFamily: "var(--font-family-sans)",
                 fontSize: "20.558px",
                 lineHeight: "31.628px",
                 letterSpacing: "-0.6326px",

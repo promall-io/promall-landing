@@ -1,20 +1,25 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { Menu, ShoppingBag, ArrowLeft } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ShoppingBag } from "lucide-react"
-import Link from "next/link"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
-    window.addEventListener("scroll", handleScroll)
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -24,131 +29,168 @@ export function Header() {
     { name: "سوالات متداول", href: "#faq-section" },
   ]
 
-  const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const targetId = href.substring(1)
+  const handleScrollClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault()
+    setSheetOpen(false) // Close mobile menu
+
+    const targetId = href.slice(1)
     const targetElement = document.getElementById(targetId)
-    if (targetElement) {
-      const headerOffset = 100
-      const elementPosition = targetElement.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-    }
+    if (!targetElement) return
+
+    const headerOffset = 90
+    const elementPosition = targetElement.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    })
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[99999] px-3 md:px-4 pt-3 md:pt-5 pointer-events-none will-change-transform">
-      <div className="pointer-events-auto">
-        <div
+    <header className="fixed inset-x-0 top-0 z-[9999] pointer-events-none">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5">
+        <nav
           className={`
-          max-w-5xl mx-auto
-          backdrop-blur-[60px] backdrop-saturate-[200%]
-          bg-background/85
-          border border-border/30
-          rounded-[24px]
-          shadow-[0_8px_32px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.1),0_0_60px_rgba(183,209,171,0.15)]
-          transition-all duration-500 ease-out
-          ${
-            scrolled
-              ? "bg-background/90 border-border/40 shadow-[0_12px_48px_rgba(0,0,0,0.3),0_4px_12px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.15),0_0_80px_rgba(183,209,171,0.25)]"
-              : ""
-          }
-        `}
+            relative flex items-center justify-between
+            h-16 px-6 lg:px-8
+            rounded-2xl
+            backdrop-blur-xl backdrop-saturate-150
+            border pointer-events-auto
+            transition-all duration-500 ease-out
+            ${
+              scrolled
+                ? "bg-background/90 border-border/60 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+                : "bg-background/70 border-border/40 shadow-[0_20px_50px_rgba(0,0,0,0.08)]"
+            }
+          `}
         >
-          <div className="px-4 md:px-6 lg:px-8 py-3 md:py-4 flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-2 md:gap-3">
-              <div
-                className={`
-                w-9 h-9 md:w-10 md:h-10 rounded-[14px] 
-                bg-primary backdrop-blur-sm 
-                flex items-center justify-center 
-                shadow-[0_4px_16px_rgba(183,209,171,0.4),0_0_30px_rgba(183,209,171,0.2)]
-                transition-all duration-300
-                ${scrolled ? "shadow-[0_6px_20px_rgba(183,209,171,0.5),0_0_40px_rgba(183,209,171,0.3)]" : ""}
-              `}
-              >
-                <ShoppingBag className="w-5 h-5 md:w-5 md:h-5 text-primary-foreground" />
+          {/* Subtle gradient overlay */}
+          <div
+            className={`
+              absolute inset-0 rounded-2xl
+              bg-gradient-to-r from-primary/[0.03] via-transparent to-primary/[0.03]
+              pointer-events-none
+              transition-opacity duration-500
+              ${scrolled ? "opacity-50" : "opacity-100"}
+            `}
+          />
+
+          {/* Logo */}
+          <Link href="/" className="group relative flex items-center gap-2.5 z-10">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-xl bg-primary/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-primary/95 to-primary/90 shadow-lg shadow-primary/20 group-hover:shadow-xl group-hover:shadow-primary/30 transition-all duration-300">
+                <ShoppingBag className="w-4.5 h-4.5 text-primary-foreground" strokeWidth={2.5} />
               </div>
-              <span className="text-foreground text-xl md:text-2xl font-black tracking-tight">پرومال</span>
             </div>
+            <span className="text-lg font-black tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
+              پرومال
+            </span>
+          </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleScrollClick(e, item.href)}
-                  className="text-muted-foreground hover:text-foreground px-4 py-2.5 rounded-[12px] text-[15px] font-medium transition-all duration-200 hover:bg-muted/40 backdrop-blur-sm"
-                >
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1 z-10">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={(event) => handleScrollClick(event, item.href)}
+                className="group relative px-4 py-2 rounded-lg transition-all duration-200"
+              >
+                <span className="relative z-10 text-sm font-semibold text-foreground/75 group-hover:text-foreground transition-colors duration-200">
                   {item.name}
-                </Link>
-              ))}
-            </nav>
-
-            {/* CTA and Mobile Menu */}
-            <div className="flex items-center gap-2 md:gap-3">
-              <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer" className="hidden md:block">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2.5 rounded-full text-[15px] font-black shadow-[0_4px_16px_rgba(183,209,171,0.3),0_0_30px_rgba(183,209,171,0.15)] transition-all duration-300 hover:shadow-[0_6px_24px_rgba(183,209,171,0.4),0_0_40px_rgba(183,209,171,0.25)] hover:scale-[1.05] active:scale-[0.98]">
-                  ورود به اپلیکیشن
-                </Button>
+                </span>
+                <div className="absolute inset-0 rounded-lg bg-foreground/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </Link>
+            ))}
+          </div>
 
-              {/* Mobile Menu */}
-              <Sheet>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-foreground h-10 w-10 hover:bg-muted/40 backdrop-blur-sm rounded-[12px] transition-all duration-200"
-                  >
-                    <Menu className="h-5 w-5" />
-                    <span className="sr-only">منوی ناوبری</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent
-                  side="left"
-                  className="bg-background/95 backdrop-blur-3xl border-r border-border/50 text-foreground"
+          {/* CTA & Mobile Menu */}
+          <div className="relative flex items-center gap-3 z-10">
+            {/* CTA Button */}
+            <Link
+              href="https://app.promall.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground overflow-hidden shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <span className="relative z-10 text-sm font-bold">شروع رایگان</span>
+              <ArrowLeft className="relative z-10 w-4 h-4 group-hover:translate-x-[-2px] transition-transform duration-300" strokeWidth={2.5} />
+            </Link>
+
+            {/* Mobile Menu */}
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="group relative w-11 h-11 rounded-xl hover:bg-primary/10 active:scale-95 transition-all duration-300 overflow-hidden"
                 >
-                  <SheetHeader>
-                    <SheetTitle className="text-right text-xl font-bold text-foreground flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[12px] bg-primary/95 flex items-center justify-center shadow-lg shadow-primary/20">
-                        <ShoppingBag className="w-5 h-5 text-primary-foreground" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Menu className="relative z-10 w-5.5 h-5.5 text-foreground/90 group-hover:text-primary transition-colors duration-300" strokeWidth={2.5} />
+                  <span className="sr-only">منو</span>
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent side="left" className="w-[85%] sm:w-[320px] p-0">
+                <div className="flex flex-col h-full">
+                  {/* Header */}
+                  <SheetHeader className="border-b border-border/30 px-6 py-6 bg-gradient-to-b from-background/50 to-transparent">
+                    <SheetTitle className="flex items-center gap-3 text-right">
+                      <div className="relative">
+                        <div className="absolute inset-0 rounded-xl bg-primary/30 blur-lg" />
+                        <div className="relative flex w-11 h-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-primary/95 to-primary/90 shadow-xl shadow-primary/25">
+                          <ShoppingBag className="w-5.5 h-5.5 text-primary-foreground" strokeWidth={2.5} />
+                        </div>
                       </div>
-                      پرومال
+                      <span className="text-2xl font-black tracking-tight">پرومال</span>
                     </SheetTitle>
                   </SheetHeader>
-                  <nav className="flex flex-col gap-3 mt-8">
-                    {navItems.map((item) => (
+
+                  {/* Navigation */}
+                  <nav className="flex-1 px-4 py-6 flex flex-col gap-2 overflow-y-auto">
+                    {navItems.map((item, index) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        onClick={(e) => handleScrollClick(e, item.href)}
-                        className="text-muted-foreground hover:text-foreground text-lg py-3 px-4 font-medium transition-all duration-200 hover:bg-muted/40 rounded-[12px]"
+                        onClick={(event) => handleScrollClick(event, item.href)}
+                        className="group relative flex items-center justify-between px-5 py-4 rounded-2xl text-foreground/80 font-bold hover:text-foreground transition-all duration-300"
+                        style={{
+                          animation: `slide-in-right 0.4s ease-out ${index * 0.1}s both`
+                        }}
                       >
-                        {item.name}
+                        <span className="relative z-10 text-base">{item.name}</span>
+                        <ArrowLeft className="relative z-10 w-4.5 h-4.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-[-4px] transition-all duration-300" strokeWidth={2.5} />
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-foreground/[0.02] to-foreground/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 rounded-2xl bg-primary/5 scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" />
                       </Link>
                     ))}
+                  </nav>
+
+                  {/* Footer CTA */}
+                  <div className="p-4 border-t border-border/30 bg-gradient-to-t from-background/50 to-transparent">
                     <Link
                       href="https://app.promall.io"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full mt-6"
+                      className="group relative flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-primary via-primary to-primary/95 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 active:scale-[0.97] transition-all duration-300 overflow-hidden"
                     >
-                      <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3.5 rounded-full font-black w-full shadow-[0_8px_32px_rgba(183,209,171,0.3)] text-base">
-                        ورود به اپلیکیشن
-                      </Button>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+                      <span className="relative z-10 text-base font-black tracking-tight">شروع رایگان</span>
+                      <ArrowLeft className="relative z-10 w-5 h-5 group-hover:translate-x-[-4px] transition-transform duration-300" strokeWidth={2.5} />
                     </Link>
-                  </nav>
-                </SheetContent>
-              </Sheet>
-            </div>
+
+                    <p className="text-center text-xs text-foreground/40 mt-3 font-medium">
+                      بدون نیاز به کارت اعتباری
+                    </p>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
   )
