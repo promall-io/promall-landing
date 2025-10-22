@@ -1,6 +1,7 @@
 "use client"
 
 import { Twitter, Github, Linkedin, Mail, Phone } from "lucide-react"
+import { EnamadBadge } from "./enamad-badge"
 
 export function FooterSection() {
   const currentYear = new Date().getFullYear()
@@ -131,11 +132,17 @@ export function FooterSection() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/50">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <div className="font-medium">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
+            {/* Copyright */}
+            <div className="font-medium order-2 md:order-1">
               © {currentYear} پرومال. تمامی حقوق محفوظ است.
             </div>
-            <div className="flex items-center gap-6">
+
+            {/* eNamad Trust Badge */}
+            <EnamadBadge className="order-1 md:order-2" size="md" />
+
+            {/* Links */}
+            <div className="flex items-center gap-6 order-3">
               <a href="#" className="hover:text-primary transition-colors font-medium">
                 حریم خصوصی
               </a>
