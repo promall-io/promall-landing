@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(true)
 
-  console.log('PricingSection render - isAnnual:', isAnnual)
+  console.log("PricingSection render - isAnnual:", isAnnual)
 
   const pricingPlans = [
     {
@@ -62,40 +62,48 @@ export function PricingSection() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up"
+            style={{ animationDelay: "0.1s" }}
+          >
             یه پلن مناسب برای
             <br />
             <span className="text-primary">هر کسب‌وکاری داریم</span>
           </h2>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p
+            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up"
+            style={{ animationDelay: "0.2s" }}
+          >
             رایگان شروع کنید و هر وقت خواستید ارتقا بدید
           </p>
 
           {/* Toggle - Enhanced */}
-          <div className="inline-flex p-1.5 bg-card/60 backdrop-blur-sm rounded-full border border-primary/30 shadow-medium animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`relative px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${
-                !isAnnual
-                  ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              ماهانه
-            </button>
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`relative px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${
-                isAnnual
-                  ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              سالانه
-              <span className="mr-2 text-xs bg-primary-foreground/30 px-2.5 py-1 rounded-full font-black">۲۰٪ تخفیف</span>
-            </button>
+          <div className="flex justify-center animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+            <div className="inline-flex items-center p-1.5 bg-card/60 backdrop-blur-sm rounded-full border border-primary/30 shadow-medium">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`relative px-6 md:px-8 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 whitespace-nowrap ${
+                  !isAnnual
+                    ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                ماهانه
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`relative px-6 md:px-8 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
+                  isAnnual
+                    ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <span>سالانه</span>
+                <span className="text-xs bg-primary-foreground/30 px-2 py-0.5 rounded-full font-black">۲۰٪ تخفیف</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -116,7 +124,10 @@ export function PricingSection() {
               )}
 
               {plan.popular && (
-                <div className="absolute -top-4 right-1/2 translate-x-1/2 px-6 py-2 bg-primary-foreground text-primary text-sm font-black rounded-full shadow-strong animate-bounce" style={{ animationIterationCount: '3', animationDuration: '1s' }}>
+                <div
+                  className="absolute -top-4 right-1/2 translate-x-1/2 px-6 py-2 bg-primary-foreground text-primary text-sm font-black rounded-full shadow-strong animate-bounce"
+                  style={{ animationIterationCount: "3", animationDuration: "1s" }}
+                >
                   محبوب‌ترین
                 </div>
               )}
@@ -127,7 +138,9 @@ export function PricingSection() {
                 >
                   {plan.name}
                 </h3>
-                <p className={`text-base ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground group-hover:text-foreground/80 transition-colors"}`}>
+                <p
+                  className={`text-base ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground group-hover:text-foreground/80 transition-colors"}`}
+                >
                   {plan.description}
                 </p>
               </div>
@@ -169,10 +182,10 @@ export function PricingSection() {
                     className="flex items-start gap-4 transition-all duration-300 hover:translate-x-1"
                     style={{ animationDelay: `${idx * 0.05}s` }}
                   >
-                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${plan.popular ? "bg-primary-foreground/20" : "bg-primary/15"}`}>
-                      <Check
-                        className={`w-4 h-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`}
-                      />
+                    <div
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${plan.popular ? "bg-primary-foreground/20" : "bg-primary/15"}`}
+                    >
+                      <Check className={`w-4 h-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`} />
                     </div>
                     <span
                       className={`text-base font-medium ${plan.popular ? "text-primary-foreground/95" : "text-foreground/80"}`}

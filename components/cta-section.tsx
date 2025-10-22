@@ -6,7 +6,8 @@ export function CTASection() {
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
+      <div className="absolute inset-0 bg-background" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/50 to-transparent" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-pulse" />
 
       {/* Glass Card Container - Enhanced */}
@@ -29,23 +30,29 @@ export function CTASection() {
             {/* Badge - Enhanced */}
             <div className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-primary/25 backdrop-blur-md border border-primary/50 shadow-glow-primary animate-fade-in-up">
               <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-              <span className="text-sm md:text-base font-black text-foreground">شروع رایگان، بدون نیاز به کارت اعتباری</span>
+              <span className="text-sm md:text-base font-black text-foreground">
+                شروع رایگان، بدون نیاز به کارت اعتباری
+              </span>
             </div>
 
             {/* Heading - Enhanced */}
-            <div className="flex flex-col gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <div className="flex flex-col gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               <h2 className="text-foreground text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
                 آماده‌اید
                 <br />
                 <span className="text-primary">شروع کنید؟</span>
               </h2>
               <p className="text-foreground/80 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto font-medium">
-                همین الان به جمع <span className="text-primary font-black">هزاران فروشنده موفق</span> بپیوندید و فروشگاه‌تان را با پرومال حرفه‌ای مدیریت کنید
+                همین الان به جمع <span className="text-primary font-black">هزاران فروشنده موفق</span> بپیوندید و
+                فروشگاه‌تان را با پرومال حرفه‌ای مدیریت کنید
               </p>
             </div>
 
             {/* CTA Buttons - Enhanced */}
-            <div className="flex flex-col sm:flex-row items-center gap-5 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <div
+              className="flex flex-col sm:flex-row items-center gap-5 animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
               <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
                 <Button
                   className="group relative px-14 py-8 bg-primary hover:bg-primary/90 text-primary-foreground text-xl font-black
@@ -75,7 +82,10 @@ export function CTASection() {
             </div>
 
             {/* Trust Indicators - Enhanced */}
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 pt-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <div
+              className="flex flex-wrap items-center justify-center gap-8 md:gap-12 pt-6 animate-fade-in-up"
+              style={{ animationDelay: "0.3s" }}
+            >
               {[
                 { text: "نصب در ۲ دقیقه", icon: "⚡" },
                 { text: "پشتیبانی ۲۴/۷", icon: "💬" },
@@ -83,7 +93,9 @@ export function CTASection() {
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-3 group cursor-default">
                   <div className="w-3 h-3 rounded-full bg-primary shadow-glow-primary group-hover:scale-125 transition-transform" />
-                  <span className="text-base font-bold text-foreground/80 group-hover:text-primary transition-colors">{item.text}</span>
+                  <span className="text-base font-bold text-foreground/80 group-hover:text-primary transition-colors">
+                    {item.text}
+                  </span>
                 </div>
               ))}
             </div>
