@@ -3,14 +3,20 @@
 import type React from "react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Menu, ShoppingBag, ArrowLeft } from "lucide-react"
+import { Menu, ShoppingBag, ArrowLeft, ArrowRight } from "lucide-react"
+import { useTranslations, useLocale } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { LanguageSwitcher } from "@/components/language-switcher"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
+  const t = useTranslations("header")
+  const locale = useLocale()
+  const isRTL = locale === "fa"
+  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -24,14 +30,14 @@ export function Header() {
   }, [])
 
   const navItems = [
-    { name: "امکانات", href: "#features-section" },
-    { name: "قیمت‌گذاری", href: "#pricing-section" },
-    { name: "سوالات متداول", href: "#faq-section" },
+    { name: t("nav.features"), href: "#features-section" },
+    { name: t("nav.pricing"), href: "#pricing-section" },
+    { name: t("nav.faq"), href: "#faq-section" },
   ]
 
   const handleScrollClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault()
-    setSheetOpen(false) // Close mobile menu
+    setSheetOpen(false)
 
     const targetId = href.slice(1)
     const targetElement = document.getElementById(targetId)
@@ -77,7 +83,7 @@ export function Header() {
           />
 
           {/* Logo */}
-          <Link href="/" className="group relative flex items-center gap-2.5 z-10">
+          <Link href={`/${locale}`} className="group relative flex items-center gap-2.5 z-10">
             <div className="relative">
               <div className="absolute inset-0 rounded-xl bg-primary/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-primary/95 to-primary/90 shadow-lg shadow-primary/20 group-hover:shadow-xl group-hover:shadow-primary/30 transition-all duration-300">
@@ -85,7 +91,7 @@ export function Header() {
               </div>
             </div>
             <span className="text-lg font-black tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
-              پرومال
+              {t("brandName")}
             </span>
           </Link>
 
@@ -106,8 +112,13 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA & Mobile Menu */}
+          {/* CTA & Language Switcher & Mobile Menu */}
           <div className="relative flex items-center gap-3 z-10">
+            {/* Language Switcher - Desktop */}
+            <div className="hidden sm:block">
+              <LanguageSwitcher />
+            </div>
+
             {/* CTA Button */}
             <Link
               href="https://app.promall.io"
@@ -116,8 +127,8 @@ export function Header() {
               className="group relative hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground overflow-hidden shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-              <span className="relative z-10 text-sm font-bold">شروع رایگان</span>
-              <ArrowLeft className="relative z-10 w-4 h-4 group-hover:translate-x-[-2px] transition-transform duration-300" strokeWidth={2.5} />
+              <span className="relative z-10 text-sm font-bold">{t("cta")}</span>
+              <ArrowIcon className="relative z-10 w-4 h-4 group-hover:translate-x-[-2px] transition-transform duration-300" strokeWidth={2.5} />
             </Link>
 
             {/* Mobile Menu */}
@@ -130,27 +141,32 @@ export function Header() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Menu className="relative z-10 w-5.5 h-5.5 text-foreground/90 group-hover:text-primary transition-colors duration-300" strokeWidth={2.5} />
-                  <span className="sr-only">منو</span>
+                  <span className="sr-only">{t("menu")}</span>
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="left" className="w-[85%] sm:w-[320px] p-0">
+              <SheetContent side={isRTL ? "left" : "right"} className="w-[85%] sm:w-[320px] p-0">
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <SheetHeader className="border-b border-border/30 px-6 py-6 bg-gradient-to-b from-background/50 to-transparent">
-                    <SheetTitle className="flex items-center gap-3 text-right">
+                    <SheetTitle className={`flex items-center gap-3 ${isRTL ? "text-right" : "text-left"}`}>
                       <div className="relative">
                         <div className="absolute inset-0 rounded-xl bg-primary/30 blur-lg" />
                         <div className="relative flex w-11 h-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-primary/95 to-primary/90 shadow-xl shadow-primary/25">
                           <ShoppingBag className="w-5.5 h-5.5 text-primary-foreground" strokeWidth={2.5} />
                         </div>
                       </div>
-                      <span className="text-2xl font-black tracking-tight">پرومال</span>
+                      <span className="text-2xl font-black tracking-tight">{t("brandName")}</span>
                     </SheetTitle>
                   </SheetHeader>
 
                   {/* Navigation */}
                   <nav className="flex-1 px-4 py-6 flex flex-col gap-2 overflow-y-auto">
+                    {/* Language Switcher - Mobile */}
+                    <div className="mb-4 px-2">
+                      <LanguageSwitcher />
+                    </div>
+
                     {navItems.map((item, index) => (
                       <Link
                         key={item.name}
@@ -162,7 +178,7 @@ export function Header() {
                         }}
                       >
                         <span className="relative z-10 text-base">{item.name}</span>
-                        <ArrowLeft className="relative z-10 w-4.5 h-4.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-[-4px] transition-all duration-300" strokeWidth={2.5} />
+                        <ArrowIcon className="relative z-10 w-4.5 h-4.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-[-4px] transition-all duration-300" strokeWidth={2.5} />
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-foreground/[0.02] to-foreground/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div className="absolute inset-0 rounded-2xl bg-primary/5 scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" />
                       </Link>
@@ -178,12 +194,12 @@ export function Header() {
                       className="group relative flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-primary via-primary to-primary/95 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 active:scale-[0.97] transition-all duration-300 overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                      <span className="relative z-10 text-base font-black tracking-tight">شروع رایگان</span>
-                      <ArrowLeft className="relative z-10 w-5 h-5 group-hover:translate-x-[-4px] transition-transform duration-300" strokeWidth={2.5} />
+                      <span className="relative z-10 text-base font-black tracking-tight">{t("cta")}</span>
+                      <ArrowIcon className="relative z-10 w-5 h-5 group-hover:translate-x-[-4px] transition-transform duration-300" strokeWidth={2.5} />
                     </Link>
 
                     <p className="text-center text-xs text-foreground/40 mt-3 font-medium">
-                      بدون نیاز به کارت اعتباری
+                      {t("noCreditCard")}
                     </p>
                   </div>
                 </div>

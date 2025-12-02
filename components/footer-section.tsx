@@ -1,10 +1,17 @@
 "use client"
 
 import { Twitter, Github, Linkedin, Mail, Phone } from "lucide-react"
+import { useTranslations, useLocale } from "next-intl"
 import { EnamadBadge } from "./enamad-badge"
 
 export function FooterSection() {
   const currentYear = new Date().getFullYear()
+  const t = useTranslations("footer")
+  const locale = useLocale()
+
+  const productLinks = t.raw("links.product.items") as string[]
+  const companyLinks = t.raw("links.company.items") as string[]
+  const resourceLinks = t.raw("links.resources.items") as string[]
 
   return (
     <footer className="relative w-full bg-card/30 backdrop-blur-sm border-t border-border/50 overflow-hidden">
@@ -20,32 +27,32 @@ export function FooterSection() {
               <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-glow-primary">
                 <span className="text-2xl font-black text-primary-foreground">P</span>
               </div>
-              <div className="text-3xl font-black text-foreground">پرومال</div>
+              <div className="text-3xl font-black text-foreground">{t("brandName")}</div>
             </div>
 
             <p className="text-base md:text-lg text-foreground/80 font-medium leading-relaxed max-w-sm">
-              مدیریت فروشگاه آنلاین، ساده، هوشمند و حرفه‌ای!
+              {t("tagline")}
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3">
               <a
-                href="mailto:info@promall.io"
+                href={`mailto:${t("contact.email")}`}
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
               >
                 <div className="w-9 h-9 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
-                <span className="text-sm font-medium">info@promall.io</span>
+                <span className="text-sm font-medium">{t("contact.email")}</span>
               </a>
               <a
-                href="tel:+982112345678"
+                href={`tel:${locale === "fa" ? "+982112345678" : "+12345678900"}`}
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
               >
                 <div className="w-9 h-9 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
                   <Phone className="w-4 h-4" />
                 </div>
-                <span className="text-sm font-medium">۰۲۱-۱۲۳۴۵۶۷۸</span>
+                <span className="text-sm font-medium">{t("contact.phone")}</span>
               </a>
             </div>
 
@@ -55,7 +62,7 @@ export function FooterSection() {
                 href="https://twitter.com/promall"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="توییتر"
+                aria-label={t("social.twitter")}
                 className="w-11 h-11 rounded-xl bg-primary/10 hover:bg-primary hover:shadow-glow-primary flex items-center justify-center transition-all duration-300 hover:scale-110 group"
               >
                 <Twitter className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
@@ -64,7 +71,7 @@ export function FooterSection() {
                 href="https://github.com/promall"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="گیت‌هاب"
+                aria-label={t("social.github")}
                 className="w-11 h-11 rounded-xl bg-primary/10 hover:bg-primary hover:shadow-glow-primary flex items-center justify-center transition-all duration-300 hover:scale-110 group"
               >
                 <Github className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
@@ -73,18 +80,19 @@ export function FooterSection() {
                 href="https://linkedin.com/company/promall"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="لینکدین"
+                aria-label={t("social.linkedin")}
                 className="w-11 h-11 rounded-xl bg-primary/10 hover:bg-primary hover:shadow-glow-primary flex items-center justify-center transition-all duration-300 hover:scale-110 group"
               >
                 <Linkedin className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
               </a>
             </div>
           </div>
+
           {/* Links Sections - Enhanced */}
           <div className="space-y-5">
-            <h3 className="text-base font-black text-foreground">محصول</h3>
+            <h3 className="text-base font-black text-foreground">{t("links.product.title")}</h3>
             <ul className="space-y-3">
-              {["امکانات", "قیمت‌گذاری", "یکپارچه‌سازی", "مدیریت محصولات", "گزارش‌گیری"].map((item) => (
+              {productLinks.map((item) => (
                 <li key={item}>
                   <a
                     href="#features-section"
@@ -98,9 +106,9 @@ export function FooterSection() {
           </div>
 
           <div className="space-y-5">
-            <h3 className="text-base font-black text-foreground">شرکت</h3>
+            <h3 className="text-base font-black text-foreground">{t("links.company.title")}</h3>
             <ul className="space-y-3">
-              {["درباره ما", "تیم ما", "فرصت‌های شغلی", "برند", "تماس با ما"].map((item) => (
+              {companyLinks.map((item) => (
                 <li key={item}>
                   <a
                     href="#"
@@ -114,9 +122,9 @@ export function FooterSection() {
           </div>
 
           <div className="space-y-5">
-            <h3 className="text-base font-black text-foreground">منابع</h3>
+            <h3 className="text-base font-black text-foreground">{t("links.resources.title")}</h3>
             <ul className="space-y-3">
-              {["شرایط استفاده", "مستندات", "راهنما", "انجمن کاربران", "پشتیبانی"].map((item) => (
+              {resourceLinks.map((item) => (
                 <li key={item}>
                   <a
                     href="#"
@@ -135,22 +143,22 @@ export function FooterSection() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
             {/* Copyright */}
             <div className="font-medium order-2 md:order-1">
-              © {currentYear} پرومال. تمامی حقوق محفوظ است.
+              © {currentYear} {t("copyright")}
             </div>
 
-            {/* eNamad Trust Badge */}
-            <EnamadBadge className="order-1 md:order-2" size="md" />
+            {/* eNamad Trust Badge - Only show for Persian locale */}
+            {locale === "fa" && <EnamadBadge className="order-1 md:order-2" size="md" />}
 
             {/* Links */}
             <div className="flex items-center gap-6 order-3">
               <a href="#" className="hover:text-primary transition-colors font-medium">
-                حریم خصوصی
+                {t("legal.privacy")}
               </a>
               <a href="#" className="hover:text-primary transition-colors font-medium">
-                قوانین و مقررات
+                {t("legal.terms")}
               </a>
               <a href="#" className="hover:text-primary transition-colors font-medium">
-                کوکی‌ها
+                {t("legal.cookies")}
               </a>
             </div>
           </div>

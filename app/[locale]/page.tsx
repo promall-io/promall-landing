@@ -1,28 +1,38 @@
-import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { BentoSection } from "@/components/bento-section"
-import { LargeTestimonial } from "@/components/large-testimonial"
-import { PricingSection } from "@/components/pricing-section"
-import { TestimonialGridSection } from "@/components/testimonial-grid-section"
-import { FAQSection } from "@/components/faq-section"
-import { CTASection } from "@/components/cta-section"
-import { FooterSection } from "@/components/footer-section"
-import { AnimatedSection } from "@/components/animated-section"
+import { setRequestLocale } from "next-intl/server";
+import { Header } from "@/components/header";
+import { HeroSection } from "@/components/hero-section";
+import { BentoSection } from "@/components/bento-section";
+import { LargeTestimonial } from "@/components/large-testimonial";
+import { PricingSection } from "@/components/pricing-section";
+import { TestimonialGridSection } from "@/components/testimonial-grid-section";
+import { FAQSection } from "@/components/faq-section";
+import { CTASection } from "@/components/cta-section";
+import { FooterSection } from "@/components/footer-section";
+import { AnimatedSection } from "@/components/animated-section";
 
-export default function LandingPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LandingPage({ params }: Props) {
+  const { locale } = await params;
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Header با موقعیت ثابت */}
+      {/* Header with fixed position */}
       <Header />
 
-      {/* محتوای اصلی */}
+      {/* Main content */}
       <div className="relative z-10">
         {/* Hero Section - Full width without container */}
         <main className="w-full">
           <HeroSection />
         </main>
 
-        {/* Features Section با فاصله استاندارد */}
+        {/* Features Section with standard spacing */}
         <AnimatedSection
           id="features-section"
           className="relative z-10 w-full mt-32 sm:mt-40 md:mt-48 lg:mt-56"
@@ -74,7 +84,7 @@ export default function LandingPage() {
           <CTASection />
         </AnimatedSection>
 
-        {/* Footer - بدون padding برای full-width background */}
+        {/* Footer - without padding for full-width background */}
         <AnimatedSection
           className="relative z-10 mt-24 sm:mt-32 lg:mt-40"
           delay={0.1}
@@ -83,5 +93,5 @@ export default function LandingPage() {
         </AnimatedSection>
       </div>
     </div>
-  )
+  );
 }

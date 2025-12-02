@@ -1,0 +1,293 @@
+{
+  "metadata": {
+    "title": "Promall - Smart Online Store Management",
+    "description": "The first smart online store management application in Iran"
+  },
+  "header": {
+    "brandName": "Promall",
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ"
+    },
+    "cta": "Start Free",
+    "menu": "Menu",
+    "noCreditCard": "No credit card required"
+  },
+  "hero": {
+    "badge": "The First Smart Online Shop Management Platform in Iran",
+    "title": {
+      "line1": "Take Your Online Store",
+      "line2": "to the Next Level"
+    },
+    "description": "Complete management of your store, sellers, orders, and payments - all in one integrated platform",
+    "subDescription": "No technical knowledge required | Setup in less than 10 minutes | 24/7 Support",
+    "cta": {
+      "primary": "Start Free",
+      "secondary": "How it works?"
+    },
+    "stats": {
+      "quickSetup": "Quick Setup",
+      "noCoding": "No Coding Required",
+      "dedicatedSupport": "Dedicated Support"
+    }
+  },
+  "features": {
+    "badge": "Features",
+    "title": {
+      "line1": "Everything You Need for",
+      "line2": "Online Selling"
+    },
+    "description": "From the moment you add a product until it reaches the customer,",
+    "descriptionHighlight": "Promall is by your side!",
+    "cards": {
+      "productManagement": {
+        "title": "Product Management",
+        "description": "Add your products with just a few clicks, set prices, and apply discounts. Everything is simple and fast!"
+      },
+      "orderControl": {
+        "title": "Order Control",
+        "description": "View all orders in one place, approve or cancel them. No order will be missed!"
+      },
+      "inventoryManagement": {
+        "title": "Inventory Management",
+        "description": "Monitor and control your inventory in real-time. No more worrying about stock shortages or overstock!"
+      },
+      "securePayment": {
+        "title": "Easy & Secure Payment",
+        "description": "Easily connect to payment gateways and receive your money with peace of mind."
+      },
+      "autoPrinting": {
+        "title": "Auto Printing",
+        "description": "Invoices and shipping labels are printed automatically. Stop wasting your time!"
+      },
+      "completeReports": {
+        "title": "Complete Reports",
+        "description": "See how much you've sold, which products sold the most, and how your customers behave."
+      }
+    }
+  },
+  "largeTestimonial": {
+    "quote": "With Promall, store management transformed from a complex task to a simple and smooth experience",
+    "name": "Ali Mohammadi",
+    "title": "CEO of DigiStyle Store"
+  },
+  "pricing": {
+    "badge": "Pricing",
+    "title": {
+      "line1": "A Perfect Plan for",
+      "line2": "Every Business"
+    },
+    "description": "Start free and upgrade whenever you want",
+    "toggle": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "discount": "20% OFF"
+    },
+    "currency": "USD/month",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "monthlyPrice": "0",
+        "annualPrice": "0",
+        "description": "To get started and get familiar with Promall",
+        "features": [
+          "Up to 10 products",
+          "Limited orders",
+          "Basic reports",
+          "Email support"
+        ],
+        "buttonText": "Start Now"
+      },
+      "professional": {
+        "name": "Professional",
+        "monthlyPrice": "19",
+        "annualPrice": "15",
+        "description": "Best choice for medium-sized stores",
+        "features": [
+          "Unlimited products",
+          "Full order management",
+          "Inventory control",
+          "Auto printing",
+          "Payment gateway",
+          "Advanced reports",
+          "Fast support"
+        ],
+        "buttonText": "Get it Now",
+        "popular": "Most Popular"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "monthlyPrice": "Contact Us",
+        "annualPrice": "Contact Us",
+        "description": "Special solution for large businesses",
+        "features": [
+          "24/7 Support",
+          "Multiple stores",
+          "Team management",
+          "High security",
+          "Full customization"
+        ],
+        "buttonText": "Contact Us"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Why Promall?",
+    "description": "Everything you need for your online store's success",
+    "benefits": {
+      "modernDesign": {
+        "title": "Modern & User-Friendly Design",
+        "description": "Beautiful and simple interface that makes using the app enjoyable"
+      },
+      "speed": {
+        "title": "Unmatched Speed",
+        "description": "Ultra-fast performance for managing your store anytime, anywhere"
+      },
+      "security": {
+        "title": "Guaranteed Security",
+        "description": "Complete protection of your and your customers' data with the highest standards"
+      },
+      "salesGrowth": {
+        "title": "Sales Growth",
+        "description": "Smart tools for business growth and attracting more customers"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Professional support team always by your side to solve any problem"
+      },
+      "updates": {
+        "title": "Continuous Updates",
+        "description": "New features and continuous improvements for a better experience"
+      }
+    },
+    "quotes": {
+      "sara": {
+        "quote": "Promall has really made our work easier. Product and order management has become much simpler, and our customers are satisfied with the app.",
+        "name": "Sara Ahmadi",
+        "company": "Armani Fashion Store"
+      },
+      "reza": {
+        "quote": "Our online sales tripled with Promall. It's really great!",
+        "name": "Reza Karimi",
+        "company": "Rezvan Home Appliances"
+      },
+      "maryam": {
+        "quote": "The interface is very simple and practical. Everything is in its place.",
+        "name": "Maryam Noori",
+        "company": "Golrang Cosmetics"
+      },
+      "ali": {
+        "quote": "They have excellent support. They solve any problem quickly.",
+        "name": "Ali Mohammadi",
+        "company": "Danesh Stationery & Books"
+      },
+      "fatemeh": {
+        "quote": "The best app for online store management. Highly recommended!",
+        "name": "Fatemeh Rezaei",
+        "company": "Iran Zamin Handicrafts"
+      },
+      "hosein": {
+        "quote": "Since we started using Promall, our work has become much more organized.",
+        "name": "Hosein Jafari",
+        "company": "Barcode Online Supermarket"
+      },
+      "niloofar": {
+        "quote": "Promall's features are really complete. From inventory management to order shipping, everything is in one place. Our customers are satisfied with the shopping experience, and this has increased our sales.",
+        "name": "Niloofar Sadeghi",
+        "company": "Digital Products Chain Store"
+      }
+    }
+  },
+  "cta": {
+    "badge": "Start free, no credit card required",
+    "title": {
+      "line1": "Ready to",
+      "line2": "Get Started?"
+    },
+    "description": "Join",
+    "descriptionHighlight": "thousands of successful sellers",
+    "descriptionEnd": "right now and manage your store professionally with Promall",
+    "buttons": {
+      "primary": "Open App",
+      "secondary": "View Demo"
+    },
+    "trustIndicators": {
+      "install": "Install in 2 minutes",
+      "support": "24/7 Support",
+      "unlimited": "No Limits"
+    }
+  },
+  "footer": {
+    "brandName": "Promall",
+    "tagline": "Online store management, simple, smart, and professional!",
+    "contact": {
+      "email": "info@promall.io",
+      "phone": "+1-234-567-8900"
+    },
+    "social": {
+      "twitter": "Twitter",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "links": {
+      "product": {
+        "title": "Product",
+        "items": ["Features", "Pricing", "Integrations", "Product Management", "Reporting"]
+      },
+      "company": {
+        "title": "Company",
+        "items": ["About Us", "Our Team", "Careers", "Brand", "Contact Us"]
+      },
+      "resources": {
+        "title": "Resources",
+        "items": ["Terms of Use", "Documentation", "Guide", "Community", "Support"]
+      }
+    },
+    "copyright": "Promall. All rights reserved.",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "cookies": "Cookies"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": {
+      "line1": "Got Questions?",
+      "line2": "Find Answers Here!"
+    },
+    "description": "Answers to common questions about Promall and its features",
+    "items": {
+      "whatIsPromall": {
+        "question": "What is Promall and who is it for?",
+        "answer": "Promall is a smart application that helps you manage your online store more easily. It's suitable for anyone who wants to sell online, from small sellers to large businesses!"
+      },
+      "manageProducts": {
+        "question": "How do I manage my products?",
+        "answer": "It's very easy! Add your products, set prices and discounts, control inventory, and see everything in one place. Everything is simple and fast!"
+      },
+      "integrations": {
+        "question": "Can Promall be connected to other tools?",
+        "answer": "Yes! Promall works with payment gateways, accounting systems, and many other tools. Connect everything and work easily!"
+      },
+      "freePlan": {
+        "question": "What does the free plan include?",
+        "answer": "With the free plan, you can add up to 10 products, register limited orders, and view simple reports. It's great for getting started and getting familiar with Promall!"
+      },
+      "trackOrders": {
+        "question": "How do I track orders?",
+        "answer": "You see all orders in one dashboard, change their status, manage returns, and inventory decreases automatically. Everything is automated!"
+      },
+      "security": {
+        "question": "Is my store data secure?",
+        "answer": "Absolutely! We use the best security standards. Your data is encrypted, securely transmitted, and we have regular backups. Rest assured!"
+      }
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us"
+  }
+}
