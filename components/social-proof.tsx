@@ -1,15 +1,20 @@
+"use client"
+
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 export function SocialProof() {
+  const t = useTranslations("socialProof")
+
   return (
     <section className="self-stretch py-16 flex flex-col justify-center items-center gap-6 overflow-hidden">
-      <div className="text-center text-gray-300 text-sm font-medium leading-tight">مورد اعتماد فروشگاه‌های پیشرو</div>
+      <div className="text-center text-gray-300 text-sm font-medium leading-tight">{t("title")}</div>
       <div className="self-stretch grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
         {Array.from({ length: 8 }).map((_, i) => (
           <Image
             key={`company-logo-${i + 1}`}
             src={`/logos/logo0${i + 1}.svg`}
-            alt={`لوگوی شرکت ${i + 1}`}
+            alt={`${t("logoAlt")} ${i + 1}`}
             width={400}
             height={120}
             className="w-full max-w-[400px] h-auto object-contain grayscale opacity-70"

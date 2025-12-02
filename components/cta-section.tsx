@@ -1,8 +1,19 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Sparkles, Zap, ArrowLeft } from "lucide-react"
+import { Sparkles, Zap, ArrowRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function CTASection() {
+  const t = useTranslations("cta")
+
+  const trustIndicators = [
+    { text: t("trustIndicators.install"), icon: "⚡" },
+    { text: t("trustIndicators.support"), icon: "💬" },
+    { text: t("trustIndicators.unlimited"), icon: "🚀" },
+  ]
+
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden">
       {/* Background Effects */}
@@ -31,20 +42,19 @@ export function CTASection() {
             <div className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-primary/25 backdrop-blur-md border border-primary/50 shadow-glow-primary animate-fade-in-up">
               <Sparkles className="w-5 h-5 text-primary animate-pulse" />
               <span className="text-sm md:text-base font-black text-foreground">
-                شروع رایگان، بدون نیاز به کارت اعتباری
+                {t("badge")}
               </span>
             </div>
 
             {/* Heading - Enhanced */}
             <div className="flex flex-col gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               <h2 className="text-foreground text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
-                آماده‌اید
+                {t("title.line1")}
                 <br />
-                <span className="text-primary">شروع کنید؟</span>
+                <span className="text-primary">{t("title.line2")}</span>
               </h2>
               <p className="text-foreground/80 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto font-medium">
-                همین الان به جمع <span className="text-primary font-black">هزاران فروشنده موفق</span> بپیوندید و
-                فروشگاه‌تان را با پرومال حرفه‌ای مدیریت کنید
+                {t("description")} <span className="text-primary font-black">{t("descriptionHighlight")}</span> {t("descriptionEnd")}
               </p>
             </div>
 
@@ -61,7 +71,7 @@ export function CTASection() {
                   size="lg"
                 >
                   <span className="flex items-center gap-3">
-                    ورود به اپلیکیشن
+                    {t("buttons.primary")}
                     <Zap className="w-6 h-6 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
                   </span>
                 </Button>
@@ -74,8 +84,8 @@ export function CTASection() {
                 size="lg"
               >
                 <span className="flex items-center gap-3">
-                  مشاهده دمو
-                  <ArrowLeft className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1" />
+                  {t("buttons.secondary")}
+                  <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </Button>
             </div>
@@ -85,11 +95,7 @@ export function CTASection() {
               className="flex flex-wrap items-center justify-center gap-8 md:gap-12 pt-6 animate-fade-in-up"
               style={{ animationDelay: "0.3s" }}
             >
-              {[
-                { text: "نصب در ۲ دقیقه", icon: "⚡" },
-                { text: "پشتیبانی ۲۴/۷", icon: "💬" },
-                { text: "بدون محدودیت", icon: "🚀" },
-              ].map((item) => (
+              {trustIndicators.map((item) => (
                 <div key={item.text} className="flex items-center gap-3 group cursor-default">
                   <div className="w-3 h-3 rounded-full bg-primary shadow-glow-primary group-hover:scale-125 transition-transform" />
                   <span className="text-base font-bold text-foreground/80 group-hover:text-primary transition-colors">

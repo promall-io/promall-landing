@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Promall - Smart Online Store Management | PROMAL LABORATORIES",
+    "title": "PROMAL LABORATORIES - Smart Online Store Management",
     "description": "Smart online store management application - Complete management of your store, sellers, orders, and payments"
   },
   "header": {
@@ -290,5 +290,9 @@
     "learnMore": "Learn More",
     "getStarted": "Get Started",
     "contactUs": "Contact Us"
+  },
+  "socialProof": {
+    "title": "Trusted by leading stores",
+    "logoAlt": "Company logo"
   }
 }

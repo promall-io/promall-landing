@@ -1,7 +1,10 @@
+"use client"
+
 import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3 } from "lucide-react"
 import { AnimatedList } from "@/components/animated-list"
+import { useTranslations } from "next-intl"
 
-const BentoCard = ({ title, description, icon: Icon }) => (
+const BentoCard = ({ title, description, icon: Icon }: { title: string; description: string; icon: React.ComponentType<{ className?: string }> }) => (
   <div
     className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/60 transition-all duration-500 hover:shadow-strong hover:shadow-primary/20 hover-lift hover-shine"
   >
@@ -27,35 +30,37 @@ const BentoCard = ({ title, description, icon: Icon }) => (
 )
 
 export function BentoSection() {
+  const t = useTranslations("features")
+
   const cards = [
     {
-      title: "مدیریت محصولات",
-      description: "محصولاتتون رو با چند کلیک اضافه کنید، قیمت‌گذاری کنید و تخفیف بذارید. همه‌چیز ساده و سریع!",
+      title: t("cards.productManagement.title"),
+      description: t("cards.productManagement.description"),
       icon: Package,
     },
     {
-      title: "کنترل سفارش‌ها",
-      description: "تمام سفارش‌ها رو در یک جا ببینید، تایید کنید یا لغو کنید. دیگه هیچ سفارشی جا نمی‌مونه!",
+      title: t("cards.orderControl.title"),
+      description: t("cards.orderControl.description"),
       icon: ShoppingCart,
     },
     {
-      title: "مدیریت انبار",
-      description: "موجودی انبارتون رو لحظه‌ای ببینید و کنترل کنید. دیگه نگران کمبود یا اضافه موجودی نباشید!",
+      title: t("cards.inventoryManagement.title"),
+      description: t("cards.inventoryManagement.description"),
       icon: Warehouse,
     },
     {
-      title: "پرداخت آسان و امن",
-      description: "به راحتی به درگاه‌های پرداخت وصل بشید و پول‌تون رو با خیال راحت دریافت کنید.",
+      title: t("cards.securePayment.title"),
+      description: t("cards.securePayment.description"),
       icon: CreditCard,
     },
     {
-      title: "چاپ خودکار",
-      description: "فاکتور و برچسب ارسال به‌صورت خودکار چاپ میشه. دیگه وقت‌تون رو هدر ندید!",
+      title: t("cards.autoPrinting.title"),
+      description: t("cards.autoPrinting.description"),
       icon: Printer,
     },
     {
-      title: "گزارش‌های کامل",
-      description: "ببینید چقدر فروش داشتید، کدوم محصولات بیشتر فروش رفتن و مشتری‌هاتون چطور رفتار می‌کنن.",
+      title: t("cards.completeReports.title"),
+      description: t("cards.completeReports.description"),
       icon: BarChart3,
     },
   ]
@@ -71,20 +76,20 @@ export function BentoSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">امکانات</span>
+            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
           </div>
 
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            همه‌چیزی که برای فروش آنلاین
+            {t("title.line1")}
             <br />
-            <span className="text-primary">نیاز دارید</span>
+            <span className="text-primary">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            از لحظه‌ای که محصول رو اضافه می‌کنید تا زمانی که به دست مشتری می‌رسه،
-            <span className="text-primary font-bold"> پرومال کنارتونه!</span>
+            {t("description")}
+            <span className="text-primary font-bold"> {t("descriptionHighlight")}</span>
           </p>
         </div>
 

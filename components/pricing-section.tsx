@@ -4,47 +4,47 @@ import { useState } from "react"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AnimatedList } from "@/components/animated-list"
+import { useTranslations } from "next-intl"
 
 export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(true)
+  const t = useTranslations("pricing")
 
-  console.log("PricingSection render - isAnnual:", isAnnual)
+  const freePlanFeatures = t.raw("plans.free.features") as string[]
+  const professionalPlanFeatures = t.raw("plans.professional.features") as string[]
+  const enterprisePlanFeatures = t.raw("plans.enterprise.features") as string[]
 
   const pricingPlans = [
     {
-      name: "رایگان",
-      monthlyPrice: "۰",
-      annualPrice: "۰",
-      description: "برای شروع کار و آشنایی با پرومال",
-      features: ["تا ۱۰ محصول", "سفارش‌های محدود", "گزارش‌های ساده", "پشتیبانی ایمیلی"],
-      buttonText: "همین الان شروع کنید",
+      name: t("plans.free.name"),
+      monthlyPrice: t("plans.free.monthlyPrice"),
+      annualPrice: t("plans.free.annualPrice"),
+      description: t("plans.free.description"),
+      features: freePlanFeatures,
+      buttonText: t("plans.free.buttonText"),
       popular: false,
+      isEnterprise: false,
     },
     {
-      name: "حرفه‌ای",
-      monthlyPrice: "۲۰۰,۰۰۰",
-      annualPrice: "۱۶۰,۰۰۰",
-      description: "بهترین انتخاب برای فروشگاه‌های متوسط",
-      features: [
-        "محصولات نامحدود",
-        "مدیریت کامل سفارش‌ها",
-        "کنترل انبار",
-        "چاپ خودکار",
-        "درگاه پرداخت",
-        "گزارش‌های پیشرفته",
-        "پشتیبانی سریع",
-      ],
-      buttonText: "الان خریدش کنید",
+      name: t("plans.professional.name"),
+      monthlyPrice: t("plans.professional.monthlyPrice"),
+      annualPrice: t("plans.professional.annualPrice"),
+      description: t("plans.professional.description"),
+      features: professionalPlanFeatures,
+      buttonText: t("plans.professional.buttonText"),
       popular: true,
+      popularLabel: t("plans.professional.popular"),
+      isEnterprise: false,
     },
     {
-      name: "سازمانی",
-      monthlyPrice: "تماس بگیرید",
-      annualPrice: "تماس بگیرید",
-      description: "راهکار ویژه برای کسب‌وکارهای بزرگ",
-      features: ["پشتیبانی ۲۴/۷", "چند فروشگاه", "مدیریت تیم", "امنیت بالا", "سفارشی‌سازی کامل"],
-      buttonText: "با ما تماس بگیرید",
+      name: t("plans.enterprise.name"),
+      monthlyPrice: t("plans.enterprise.monthlyPrice"),
+      annualPrice: t("plans.enterprise.annualPrice"),
+      description: t("plans.enterprise.description"),
+      features: enterprisePlanFeatures,
+      buttonText: t("plans.enterprise.buttonText"),
       popular: false,
+      isEnterprise: true,
     },
   ]
 
@@ -59,7 +59,7 @@ export function PricingSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">قیمت‌گذاری</span>
+            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
           </div>
 
           {/* Heading */}
@@ -67,9 +67,9 @@ export function PricingSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up"
             style={{ animationDelay: "0.1s" }}
           >
-            یه پلن مناسب برای
+            {t("title.line1")}
             <br />
-            <span className="text-primary">هر کسب‌وکاری داریم</span>
+            <span className="text-primary">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
@@ -77,7 +77,7 @@ export function PricingSection() {
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
           >
-            رایگان شروع کنید و هر وقت خواستید ارتقا بدید
+            {t("description")}
           </p>
 
           {/* Toggle - Enhanced */}
@@ -91,7 +91,7 @@ export function PricingSection() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                ماهانه
+                {t("toggle.monthly")}
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
@@ -101,8 +101,8 @@ export function PricingSection() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                <span>سالانه</span>
-                <span className="text-xs bg-primary-foreground/30 px-2 py-0.5 rounded-full font-black">۲۰٪ تخفیف</span>
+                <span>{t("toggle.annual")}</span>
+                <span className="text-xs bg-primary-foreground/30 px-2 py-0.5 rounded-full font-black">{t("toggle.discount")}</span>
               </button>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function PricingSection() {
           variant="scale-up"
           duration={700}
         >
-          {pricingPlans.map((plan, index) => (
+          {pricingPlans.map((plan) => (
             <div
               key={plan.name}
               className={`group relative rounded-3xl p-8 md:p-10 flex flex-col transition-all duration-500 hover-lift ${
@@ -128,12 +128,12 @@ export function PricingSection() {
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               )}
 
-              {plan.popular && (
+              {plan.popular && plan.popularLabel && (
                 <div
                   className="absolute -top-4 right-1/2 translate-x-1/2 px-6 py-2 bg-primary-foreground text-primary text-sm font-black rounded-full shadow-strong animate-bounce"
                   style={{ animationIterationCount: "3", animationDuration: "1s" }}
                 >
-                  محبوب‌ترین
+                  {plan.popularLabel}
                 </div>
               )}
 
@@ -157,11 +157,11 @@ export function PricingSection() {
                   >
                     {isAnnual ? plan.annualPrice : plan.monthlyPrice}
                   </span>
-                  {plan.name !== "سازمانی" && (
+                  {!plan.isEnterprise && (
                     <span
                       className={`text-lg font-bold ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}
                     >
-                      تومان/ماه
+                      {t("currency")}
                     </span>
                   )}
                 </div>
