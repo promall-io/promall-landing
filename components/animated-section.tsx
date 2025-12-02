@@ -5,12 +5,24 @@ import type { HTMLAttributes, ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 
+type AnimationVariant = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "blur-up"
+
 interface AnimatedSectionProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
   delay?: number
+  variant?: AnimationVariant
+  duration?: number
 }
 
-export function AnimatedSection({ children, className, delay = 0, style, ...props }: AnimatedSectionProps) {
+export function AnimatedSection({
+  children,
+  className,
+  delay = 0,
+  variant = "fade-up",
+  duration = 800,
+  style,
+  ...props
+}: AnimatedSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -60,8 +72,8 @@ export function AnimatedSection({ children, className, delay = 0, style, ...prop
         })
       },
       {
-        rootMargin: "50px 0px -50px 0px",
-        threshold: 0.05,
+        rootMargin: "100px 0px -100px 0px",
+        threshold: 0.1,
       },
     )
 
@@ -70,17 +82,54 @@ export function AnimatedSection({ children, className, delay = 0, style, ...prop
     return () => observer.disconnect()
   }, [])
 
+  const getAnimationClasses = () => {
+    const baseClasses = "transition-all ease-[cubic-bezier(0.16,1,0.3,1)]"
+
+    const variantClasses = {
+      "fade-up": {
+        hidden: "opacity-0 translate-y-12 scale-95",
+        visible: "opacity-100 translate-y-0 scale-100"
+      },
+      "fade-down": {
+        hidden: "opacity-0 -translate-y-12 scale-95",
+        visible: "opacity-100 translate-y-0 scale-100"
+      },
+      "fade-left": {
+        hidden: "opacity-0 translate-x-12 scale-95",
+        visible: "opacity-100 translate-x-0 scale-100"
+      },
+      "fade-right": {
+        hidden: "opacity-0 -translate-x-12 scale-95",
+        visible: "opacity-100 translate-x-0 scale-100"
+      },
+      "scale-up": {
+        hidden: "opacity-0 scale-75",
+        visible: "opacity-100 scale-100"
+      },
+      "blur-up": {
+        hidden: "opacity-0 translate-y-12 blur-md",
+        visible: "opacity-100 translate-y-0 blur-0"
+      }
+    }
+
+    return cn(
+      baseClasses,
+      isVisible ? variantClasses[variant].visible : variantClasses[variant].hidden
+    )
+  }
+
   return (
     <div
       ref={containerRef}
       className={cn(
-        "transition-all duration-700 ease-out",
-        isVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-100 translate-y-4",
+        getAnimationClasses(),
         className,
       )}
-      style={delay ? { ...style, transitionDelay: `${delay}s` } : style}
+      style={{
+        ...style,
+        transitionDuration: `${duration}ms`,
+        transitionDelay: delay ? `${delay * 100}ms` : undefined
+      }}
       {...props}
     >
       {children}

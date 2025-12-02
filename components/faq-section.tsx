@@ -3,7 +3,46 @@
 import type React from "react"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { AnimatedList } from "@/components/animated-list"
+
+const faqData = [
+  {
+    id: "faq-what-is-promall",
+    question: "پرومال چیه و برای کی مناسبه؟",
+    answer:
+      "پرومال یه اپلیکیشن هوشمنده که به شما کمک می‌کنه فروشگاه آنلاین‌تون رو راحت‌تر مدیریت کنید. برای هر کسی که می‌خواد آنلاین بفروشه، از فروشنده‌های کوچک تا کسب‌وکارهای بزرگ، مناسبه!",
+  },
+  {
+    id: "faq-manage-products",
+    question: "چطوری محصولاتم رو مدیریت کنم؟",
+    answer:
+      "خیلی راحته! محصولاتتون رو اضافه کنید، قیمت و تخفیف بذارید، موجودی رو کنترل کنید و همه‌چیز رو در یک جا ببینید. همه‌چیز ساده و سریعه!",
+  },
+  {
+    id: "faq-integrations",
+    question: "میشه پرومال رو با ابزارهای دیگه وصل کرد؟",
+    answer:
+      "بله! پرومال با درگاه‌های پرداخت، سیستم‌های حسابداری و خیلی ابزارهای دیگه کار می‌کنه. همه‌چیز رو به هم وصل کنید و راحت کار کنید!",
+  },
+  {
+    id: "faq-free-plan",
+    question: "پلن رایگان چی داره؟",
+    answer:
+      "با پلن رایگان می‌تونید تا ۱۰ محصول اضافه کنید، سفارش‌های محدود ثبت کنید و گزارش‌های ساده ببینید. برای شروع کار و آشنایی با پرومال عالیه!",
+  },
+  {
+    id: "faq-track-orders",
+    question: "چطوری سفارش‌ها رو پیگیری کنم؟",
+    answer:
+      "تمام سفارش‌ها رو در یک داشبورد می‌بینید، وضعیت‌شون رو تغییر می‌دید، مرجوعی‌ها رو مدیریت می‌کنید و موجودی به‌صورت خودکار کم میشه. همه‌چیز خودکاره!",
+  },
+  {
+    id: "faq-security",
+    question: "اطلاعات فروشگاهم امنه؟",
+    answer:
+      "کاملاً! ما از بهترین استانداردهای امنیتی استفاده می‌کنیم. اطلاعاتتون رمزنگاری میشه، به‌صورت امن منتقل میشه و پشتیبان‌گیری منظم داریم. خیالتون راحت باشه!",
+  },
+]
 
 interface FAQItemProps {
   question: string
@@ -43,7 +82,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
         className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent transition-opacity duration-500 pointer-events-none ${isOpen ? "opacity-100" : "opacity-0"}`}
       />
 
-      <div className="relative w-full px-6 md:px-8 py-6 md:py-7 flex justify-between items-center gap-6">
+      <div className="relative w-full px-6 md:px-8 py-6 md:py-7 flex justify-between items-center gap-6 text-right">
         <div
           className={`flex-1 text-base md:text-xl font-black transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}
         >
@@ -75,41 +114,6 @@ const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
 
 export function FAQSection() {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
-  const t = useTranslations("faq")
-
-  const faqData = [
-    {
-      id: "faq-what-is-promall",
-      question: t("items.whatIsPromall.question"),
-      answer: t("items.whatIsPromall.answer"),
-    },
-    {
-      id: "faq-manage-products",
-      question: t("items.manageProducts.question"),
-      answer: t("items.manageProducts.answer"),
-    },
-    {
-      id: "faq-integrations",
-      question: t("items.integrations.question"),
-      answer: t("items.integrations.answer"),
-    },
-    {
-      id: "faq-free-plan",
-      question: t("items.freePlan.question"),
-      answer: t("items.freePlan.answer"),
-    },
-    {
-      id: "faq-track-orders",
-      question: t("items.trackOrders.question"),
-      answer: t("items.trackOrders.answer"),
-    },
-    {
-      id: "faq-security",
-      question: t("items.security.question"),
-      answer: t("items.security.answer"),
-    },
-  ]
-
   const toggleItem = (id: string) => {
     const newOpenItems = new Set(openItems)
     if (newOpenItems.has(id)) {
@@ -119,7 +123,6 @@ export function FAQSection() {
     }
     setOpenItems(newOpenItems)
   }
-
   return (
     <section className="relative w-full py-20 md:py-32 overflow-hidden">
       {/* Add smooth gradient at the top for seamless transition */}
@@ -134,33 +137,32 @@ export function FAQSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up opacity-0 [animation-fill-mode:forwards]">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
+            <span className="text-sm md:text-base font-black text-primary tracking-tight">سوالات متداول</span>
           </div>
 
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up [animation-delay:100ms] opacity-0 [animation-fill-mode:forwards]">
-            {t("title.line1")}
+            سوالی دارید؟
             <br />
-            <span className="text-primary">{t("title.line2")}</span>
+            <span className="text-primary">جوابش رو اینجا پیدا کنید!</span>
           </h2>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]">
-            {t("description")}
+            پاسخ سوالات رایج درباره پرومال و امکاناتش
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 md:gap-5">
-          {faqData.map((faq, index) => (
-            <div
-              key={faq.id}
-              className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]"
-              style={{ animationDelay: `${index * 100 + 300}ms` }}
-            >
-              <FAQItem {...faq} isOpen={openItems.has(faq.id)} onToggle={() => toggleItem(faq.id)} />
-            </div>
+        <AnimatedList
+          className="flex flex-col gap-4 md:gap-5"
+          staggerDelay={120}
+          variant="fade-up"
+          duration={600}
+        >
+          {faqData.map((faq) => (
+            <FAQItem key={faq.id} {...faq} isOpen={openItems.has(faq.id)} onToggle={() => toggleItem(faq.id)} />
           ))}
-        </div>
+        </AnimatedList>
       </div>
     </section>
   )

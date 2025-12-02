@@ -1,14 +1,9 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Zap, Sparkles, Clock, Code, Headphones, Play } from "lucide-react"
 import { AuroraBackground } from "@/components/aurora-background"
-import { useTranslations } from "next-intl"
 
 export function HeroSection() {
-  const t = useTranslations("hero")
-
   return (
     <section className="relative w-full min-h-[600px] flex items-center justify-center bg-background">
       {/* Real Aurora Borealis Background */}
@@ -24,19 +19,19 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             <Sparkles className="w-4 h-4 text-primary relative z-10" />
             <span className="text-sm font-semibold text-foreground relative z-10">
-              {t("badge")}
+              اولین پلتفرم هوشمند مدیریت آنلاین شاپ در ایران
             </span>
           </div>
 
           {/* Enhanced Heading - Balanced */}
           <div className="relative max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.15] tracking-tight animate-fade-in-up">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.15] tracking-tight animate-fade-in-up" dir="rtl">
               <span className="text-foreground block drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-                {t("title.line1")}
+                فروشگاه آنلاینت رو
               </span>
               <span className="relative inline-block mt-2">
                 <span className="text-primary block drop-shadow-[0_4px_20px_rgba(163,230,53,0.4)]">
-                  {t("title.line2")}
+                  به سطح بعدی ببر
                 </span>
                 <div className="absolute -inset-2 bg-primary/10 blur-2xl -z-10" />
               </span>
@@ -44,47 +39,46 @@ export function HeroSection() {
           </div>
 
           {/* Enhanced Description */}
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed max-w-3xl font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]">
-            {t("description")}
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed max-w-3xl font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]" dir="rtl">
+            مدیریت کامل فروشگاه، فروشندگان، سفارشات و پرداخت‌ها - همه در یک پلتفرم یکپارچه
             <span className="block mt-2 text-base sm:text-lg text-muted-foreground/70">
-              {t("subDescription")}
+              بدون نیاز به دانش فنی | راه‌اندازی در کمتر از ۱۰ دقیقه | پشتیبانی ۲۴/۷
             </span>
           </p>
 
           {/* Enhanced CTA Buttons - Balanced */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-fade-in-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]">
             <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
-              <Button className="group relative inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full font-bold text-lg shadow-[0_0_30px_rgba(163,230,53,0.25)] hover:shadow-[0_0_45px_rgba(163,230,53,0.4)] transition-all duration-300 hover:scale-[1.02] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <Zap className="h-5 w-5 relative z-10" />
-                <span className="relative z-10">{t("cta.primary")}</span>
+              <Button className="group relative inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground px-8 py-6 rounded-full font-bold text-lg shadow-[0_0_30px_rgba(163,230,53,0.25)] hover:shadow-[0_0_45px_rgba(163,230,53,0.4)] transition-[background-color,box-shadow] duration-200 overflow-hidden touch-manipulation">
+                <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+                <span>شروع رایگان</span>
               </Button>
             </Link>
             <Link href="#features-section">
-              <Button variant="ghost" className="group relative inline-flex items-center gap-3 text-foreground hover:text-foreground px-6 py-6 rounded-full font-medium text-lg transition-all duration-300 hover:ring-2 hover:ring-primary/50">
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 transition-all duration-300">
+              <Button variant="ghost" className="group relative inline-flex items-center gap-3 text-foreground hover:text-foreground px-6 py-6 rounded-full font-medium text-lg transition-colors duration-200 hover:bg-primary/5 touch-manipulation">
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 transition-transform duration-200 group-hover:scale-105">
                   <Play className="h-4 w-4 text-primary fill-primary" />
                 </div>
-                <span className="relative">{t("cta.secondary")}</span>
+                <span>چطور کار میکنه؟</span>
               </Button>
             </Link>
           </div>
 
           {/* Stats - Subtle */}
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 mt-12 animate-fade-in-up [animation-delay:600ms] opacity-0 [animation-fill-mode:forwards]">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 mt-12 animate-fade-in-up [animation-delay:600ms] opacity-0 [animation-fill-mode:forwards]" dir="rtl">
             <div className="flex items-center gap-1.5 text-muted-foreground/40">
               <Clock className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.quickSetup")}</span>
+              <span className="text-xs font-medium">راه‌اندازی سریع</span>
             </div>
             <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
             <div className="flex items-center gap-1.5 text-muted-foreground/40">
               <Code className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.noCoding")}</span>
+              <span className="text-xs font-medium">بدون نیاز به کدنویسی</span>
             </div>
             <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
             <div className="flex items-center gap-1.5 text-muted-foreground/40">
               <Headphones className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.dedicatedSupport")}</span>
+              <span className="text-xs font-medium">پشتیبانی اختصاصی</span>
             </div>
           </div>
         </div>

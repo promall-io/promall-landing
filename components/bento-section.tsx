@@ -1,12 +1,9 @@
-"use client"
+import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3 } from "lucide-react"
+import { AnimatedList } from "@/components/animated-list"
 
-import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3, type LucideIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-const BentoCard = ({ title, description, icon: Icon, index }: { title: string; description: string; icon: LucideIcon; index: number }) => (
+const BentoCard = ({ title, description, icon: Icon }) => (
   <div
     className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/60 transition-all duration-500 hover:shadow-strong hover:shadow-primary/20 hover-lift hover-shine"
-    style={{ animationDelay: `${index * 0.1}s` }}
   >
     {/* Gradient Overlay */}
     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -30,37 +27,35 @@ const BentoCard = ({ title, description, icon: Icon, index }: { title: string; d
 )
 
 export function BentoSection() {
-  const t = useTranslations("features")
-
   const cards = [
     {
-      title: t("cards.productManagement.title"),
-      description: t("cards.productManagement.description"),
+      title: "مدیریت محصولات",
+      description: "محصولاتتون رو با چند کلیک اضافه کنید، قیمت‌گذاری کنید و تخفیف بذارید. همه‌چیز ساده و سریع!",
       icon: Package,
     },
     {
-      title: t("cards.orderControl.title"),
-      description: t("cards.orderControl.description"),
+      title: "کنترل سفارش‌ها",
+      description: "تمام سفارش‌ها رو در یک جا ببینید، تایید کنید یا لغو کنید. دیگه هیچ سفارشی جا نمی‌مونه!",
       icon: ShoppingCart,
     },
     {
-      title: t("cards.inventoryManagement.title"),
-      description: t("cards.inventoryManagement.description"),
+      title: "مدیریت انبار",
+      description: "موجودی انبارتون رو لحظه‌ای ببینید و کنترل کنید. دیگه نگران کمبود یا اضافه موجودی نباشید!",
       icon: Warehouse,
     },
     {
-      title: t("cards.securePayment.title"),
-      description: t("cards.securePayment.description"),
+      title: "پرداخت آسان و امن",
+      description: "به راحتی به درگاه‌های پرداخت وصل بشید و پول‌تون رو با خیال راحت دریافت کنید.",
       icon: CreditCard,
     },
     {
-      title: t("cards.autoPrinting.title"),
-      description: t("cards.autoPrinting.description"),
+      title: "چاپ خودکار",
+      description: "فاکتور و برچسب ارسال به‌صورت خودکار چاپ میشه. دیگه وقت‌تون رو هدر ندید!",
       icon: Printer,
     },
     {
-      title: t("cards.completeReports.title"),
-      description: t("cards.completeReports.description"),
+      title: "گزارش‌های کامل",
+      description: "ببینید چقدر فروش داشتید، کدوم محصولات بیشتر فروش رفتن و مشتری‌هاتون چطور رفتار می‌کنن.",
       icon: BarChart3,
     },
   ]
@@ -76,29 +71,34 @@ export function BentoSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
+            <span className="text-sm md:text-base font-black text-primary tracking-tight">امکانات</span>
           </div>
 
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            {t("title.line1")}
+            همه‌چیزی که برای فروش آنلاین
             <br />
-            <span className="text-primary">{t("title.line2")}</span>
+            <span className="text-primary">نیاز دارید</span>
           </h2>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            {t("description")}
-            <span className="text-primary font-bold"> {t("descriptionHighlight")}</span>
+            از لحظه‌ای که محصول رو اضافه می‌کنید تا زمانی که به دست مشتری می‌رسه،
+            <span className="text-primary font-bold"> پرومال کنارتونه!</span>
           </p>
         </div>
 
         {/* Cards Grid - Staggered Animation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
-          {cards.map((card, index) => (
-            <BentoCard key={card.title} {...card} index={index} />
+        <AnimatedList
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7"
+          staggerDelay={100}
+          variant="blur-up"
+          duration={700}
+        >
+          {cards.map((card) => (
+            <BentoCard key={card.title} {...card} />
           ))}
-        </div>
+        </AnimatedList>
       </div>
     </section>
   )

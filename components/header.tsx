@@ -3,8 +3,7 @@
 import type React from "react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Menu, ShoppingBag, ArrowRight } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { Menu, ShoppingBag, ArrowLeft } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -12,7 +11,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
-  const t = useTranslations("header")
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -26,14 +24,14 @@ export function Header() {
   }, [])
 
   const navItems = [
-    { name: t("nav.features"), href: "#features-section" },
-    { name: t("nav.pricing"), href: "#pricing-section" },
-    { name: t("nav.faq"), href: "#faq-section" },
+    { name: "امکانات", href: "#features-section" },
+    { name: "قیمت‌گذاری", href: "#pricing-section" },
+    { name: "سوالات متداول", href: "#faq-section" },
   ]
 
   const handleScrollClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault()
-    setSheetOpen(false)
+    setSheetOpen(false) // Close mobile menu
 
     const targetId = href.slice(1)
     const targetElement = document.getElementById(targetId)
@@ -49,23 +47,9 @@ export function Header() {
     })
   }
 
-  // TODO: Temporary - Company name shown only in English version
-  const companyName = t.raw("companyName") as string | undefined
-
   return (
     <header className="fixed inset-x-0 top-0 z-[9999] pointer-events-none">
-      {/* Company Name Banner - TODO: Temporary */}
-      {companyName && (
-        <div className="w-full bg-primary/10 backdrop-blur-sm border-b border-primary/20 pointer-events-auto">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
-            <p className="text-center text-xs sm:text-sm font-bold text-primary tracking-wider">
-              {companyName}
-            </p>
-          </div>
-        </div>
-      )}
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-3">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5">
         <nav
           className={`
             relative flex items-center justify-between
@@ -101,7 +85,7 @@ export function Header() {
               </div>
             </div>
             <span className="text-lg font-black tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
-              {t("brandName")}
+              پرومال
             </span>
           </Link>
 
@@ -129,11 +113,10 @@ export function Header() {
               href="https://app.promall.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground overflow-hidden shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="group relative hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground overflow-hidden shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-[background-color,box-shadow] duration-200 touch-manipulation"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-              <span className="relative z-10 text-sm font-bold">{t("cta")}</span>
-              <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-[2px] transition-transform duration-300" strokeWidth={2.5} />
+              <span className="text-sm font-bold">شروع رایگان</span>
+              <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-[-2px]" strokeWidth={2.5} />
             </Link>
 
             {/* Mobile Menu */}
@@ -142,31 +125,25 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="group relative w-11 h-11 rounded-xl hover:bg-primary/10 active:scale-95 transition-all duration-300 overflow-hidden"
+                  className="group relative w-11 h-11 rounded-xl hover:bg-primary/10 active:bg-primary/20 transition-colors duration-200 touch-manipulation"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <Menu className="relative z-10 w-5.5 h-5.5 text-foreground/90 group-hover:text-primary transition-colors duration-300" strokeWidth={2.5} />
-                  <span className="sr-only">{t("menu")}</span>
+                  <Menu className="w-5.5 h-5.5 text-foreground/90 group-hover:text-primary transition-colors duration-200" strokeWidth={2.5} />
+                  <span className="sr-only">منو</span>
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-[85%] sm:w-[320px] p-0">
+              <SheetContent side="left" className="w-[85%] sm:w-[320px] p-0">
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <SheetHeader className="border-b border-border/30 px-6 py-6 bg-gradient-to-b from-background/50 to-transparent">
-                    <SheetTitle className="flex items-center gap-3 text-left">
+                    <SheetTitle className="flex items-center gap-3 text-right">
                       <div className="relative">
                         <div className="absolute inset-0 rounded-xl bg-primary/30 blur-lg" />
                         <div className="relative flex w-11 h-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-primary/95 to-primary/90 shadow-xl shadow-primary/25">
                           <ShoppingBag className="w-5.5 h-5.5 text-primary-foreground" strokeWidth={2.5} />
                         </div>
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-2xl font-black tracking-tight">{t("brandName")}</span>
-                        {companyName && (
-                          <span className="text-xs font-medium text-muted-foreground">{companyName}</span>
-                        )}
-                      </div>
+                      <span className="text-2xl font-black tracking-tight">پرومال</span>
                     </SheetTitle>
                   </SheetHeader>
 
@@ -183,7 +160,7 @@ export function Header() {
                         }}
                       >
                         <span className="relative z-10 text-base">{item.name}</span>
-                        <ArrowRight className="relative z-10 w-4.5 h-4.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-[4px] transition-all duration-300" strokeWidth={2.5} />
+                        <ArrowLeft className="relative z-10 w-4.5 h-4.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-[-4px] transition-all duration-300" strokeWidth={2.5} />
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-foreground/[0.02] to-foreground/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div className="absolute inset-0 rounded-2xl bg-primary/5 scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300" />
                       </Link>
@@ -196,15 +173,14 @@ export function Header() {
                       href="https://app.promall.io"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-primary via-primary to-primary/95 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 active:scale-[0.97] transition-all duration-300 overflow-hidden"
+                      className="group relative flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-[background-color,box-shadow] duration-200 overflow-hidden touch-manipulation"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                      <span className="relative z-10 text-base font-black tracking-tight">{t("cta")}</span>
-                      <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-[4px] transition-transform duration-300" strokeWidth={2.5} />
+                      <span className="text-base font-black tracking-tight">شروع رایگان</span>
+                      <ArrowLeft className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-[-4px]" strokeWidth={2.5} />
                     </Link>
 
                     <p className="text-center text-xs text-foreground/40 mt-3 font-medium">
-                      {t("noCreditCard")}
+                      بدون نیاز به کارت اعتباری
                     </p>
                   </div>
                 </div>

@@ -466,6 +466,35 @@
   }
 }
 
+/* Shooting Star - Minimal & Sexy */
+.shooting-star {
+  position: absolute;
+  height: 0.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(163, 230, 53, 0.3) 100%
+  );
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: shoot-random 1s linear infinite;
+}
+
+@keyframes shoot-random {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(var(--shoot-angle, -45deg));
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--shoot-x, -700px), var(--shoot-y, 700px)) rotate(var(--shoot-angle, -45deg));
+  }
+}
+
 .aurora-wave {
   position: absolute;
   will-change: transform;

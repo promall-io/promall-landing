@@ -36,7 +36,9 @@ export default async function LandingPage({ params }: Props) {
         <AnimatedSection
           id="features-section"
           className="relative z-10 w-full mt-32 sm:mt-40 md:mt-48 lg:mt-56"
-          delay={0.1}
+          variant="fade-up"
+          duration={900}
+          delay={2}
         >
           <BentoSection />
         </AnimatedSection>
@@ -44,7 +46,9 @@ export default async function LandingPage({ params }: Props) {
         {/* Large Testimonial */}
         <AnimatedSection
           className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          delay={0.15}
+          variant="scale-up"
+          duration={800}
+          delay={1}
         >
           <LargeTestimonial />
         </AnimatedSection>
@@ -53,7 +57,9 @@ export default async function LandingPage({ params }: Props) {
         <AnimatedSection
           id="pricing-section"
           className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          delay={0.2}
+          variant="blur-up"
+          duration={1000}
+          delay={2}
         >
           <PricingSection />
         </AnimatedSection>
@@ -62,7 +68,9 @@ export default async function LandingPage({ params }: Props) {
         <AnimatedSection
           id="testimonials-section"
           className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          delay={0.15}
+          variant="fade-up"
+          duration={900}
+          delay={1}
         >
           <TestimonialGridSection />
         </AnimatedSection>
@@ -71,7 +79,9 @@ export default async function LandingPage({ params }: Props) {
         <AnimatedSection
           id="faq-section"
           className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          delay={0.2}
+          variant="scale-up"
+          duration={800}
+          delay={2}
         >
           <FAQSection />
         </AnimatedSection>
@@ -79,7 +89,9 @@ export default async function LandingPage({ params }: Props) {
         {/* CTA Section */}
         <AnimatedSection
           className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          delay={0.15}
+          variant="blur-up"
+          duration={900}
+          delay={1}
         >
           <CTASection />
         </AnimatedSection>
@@ -87,7 +99,9 @@ export default async function LandingPage({ params }: Props) {
         {/* Footer - without padding for full-width background */}
         <AnimatedSection
           className="relative z-10 mt-24 sm:mt-32 lg:mt-40"
-          delay={0.1}
+          variant="fade-up"
+          duration={700}
+          delay={1}
         >
           <FooterSection />
         </AnimatedSection>
