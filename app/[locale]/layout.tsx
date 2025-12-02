@@ -48,8 +48,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const dir = localeDirection[locale as Locale];
 
   return (
-    <html lang={locale} dir={dir} className="font-sans">
-      <body className="font-sans antialiased">
+    <html lang={locale} dir={dir} className={locale === 'fa' ? 'font-sans' : ''}>
+      <body className={locale === 'fa' ? 'font-sans antialiased' : 'antialiased'} style={locale === 'en' ? { fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' } : {}}>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
