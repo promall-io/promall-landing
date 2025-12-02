@@ -1,10 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
 import { locales, defaultLocale } from './i18n/config';
 
+// TODO: Temporarily forcing English only. Persian translations are preserved in /messages/fa.json
 export default createMiddleware({
   locales,
   defaultLocale,
-  localePrefix: 'always',
+  localePrefix: 'as-needed', // Changed to 'as-needed' so root URL works without /en prefix
 });
 
 export const config = {

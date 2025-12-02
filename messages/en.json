@@ -1,9 +1,10 @@
 {
   "metadata": {
-    "title": "Promall - Smart Online Store Management",
-    "description": "The first smart online store management application in Iran"
+    "title": "Promall - Smart Online Store Management | PROMAL LABORATORIES",
+    "description": "Smart online store management application - Complete management of your store, sellers, orders, and payments"
   },
   "header": {
+    "companyName": "PROMAL LABORATORIES",
     "brandName": "Promall",
     "nav": {
       "features": "Features",
@@ -15,7 +16,7 @@
     "noCreditCard": "No credit card required"
   },
   "hero": {
-    "badge": "The First Smart Online Shop Management Platform in Iran",
+    "badge": "Smart Online Shop Management Platform",
     "title": {
       "line1": "Take Your Online Store",
       "line2": "to the Next Level"

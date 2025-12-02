@@ -1,13 +1,11 @@
 "use client"
 
 import { Twitter, Github, Linkedin, Mail, Phone } from "lucide-react"
-import { useTranslations, useLocale } from "next-intl"
-import { EnamadBadge } from "./enamad-badge"
+import { useTranslations } from "next-intl"
 
 export function FooterSection() {
   const currentYear = new Date().getFullYear()
   const t = useTranslations("footer")
-  const locale = useLocale()
 
   const productLinks = t.raw("links.product.items") as string[]
   const companyLinks = t.raw("links.company.items") as string[]
@@ -46,7 +44,7 @@ export function FooterSection() {
                 <span className="text-sm font-medium">{t("contact.email")}</span>
               </a>
               <a
-                href={`tel:${locale === "fa" ? "+982112345678" : "+12345678900"}`}
+                href="tel:+12345678900"
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
               >
                 <div className="w-9 h-9 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
@@ -146,11 +144,8 @@ export function FooterSection() {
               © {currentYear} {t("copyright")}
             </div>
 
-            {/* eNamad Trust Badge - Only show for Persian locale */}
-            {locale === "fa" && <EnamadBadge className="order-1 md:order-2" size="md" />}
-
             {/* Links */}
-            <div className="flex items-center gap-6 order-3">
+            <div className="flex items-center gap-6 order-1 md:order-2">
               <a href="#" className="hover:text-primary transition-colors font-medium">
                 {t("legal.privacy")}
               </a>

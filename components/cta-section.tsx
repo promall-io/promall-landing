@@ -2,14 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Sparkles, Zap, ArrowLeft, ArrowRight } from "lucide-react"
-import { useTranslations, useLocale } from "next-intl"
+import { Sparkles, Zap, ArrowRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function CTASection() {
   const t = useTranslations("cta")
-  const locale = useLocale()
-  const isRTL = locale === "fa"
-  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight
 
   const trustIndicators = [
     { key: "install" },
@@ -89,7 +86,7 @@ export function CTASection() {
               >
                 <span className="flex items-center gap-3">
                   {t("buttons.secondary")}
-                  <ArrowIcon className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
             </div>
