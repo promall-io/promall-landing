@@ -146,7 +146,7 @@ export function FooterSection() {
 
             {/* Links */}
             <div className="flex items-center gap-6 order-1 md:order-2">
-              <a href="#" className="hover:text-primary transition-colors font-medium">
+              <a href="/privacy" className="hover:text-primary transition-colors font-medium">
                 {t("legal.privacy")}
               </a>
               <a href="#" className="hover:text-primary transition-colors font-medium">
