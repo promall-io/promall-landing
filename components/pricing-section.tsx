@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { AnimatedList } from "@/components/animated-list"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(true)
@@ -14,7 +14,7 @@ export function PricingSection() {
   const professionalPlanFeatures = t.raw("plans.professional.features") as string[]
   const enterprisePlanFeatures = t.raw("plans.enterprise.features") as string[]
 
-  const pricingPlans = [
+  const plans = [
     {
       name: t("plans.free.name"),
       monthlyPrice: t("plans.free.monthlyPrice"),
@@ -49,152 +49,135 @@ export function PricingSection() {
   ]
 
   return (
-    <section id="pricing-section" className="relative w-full py-20 md:py-32 bg-background overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-
-      <div className="relative max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16 md:mb-20 space-y-6">
+    <section id="pricing-section" className="relative w-full py-24 md:py-32 lg:py-40">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12 lg:mb-16">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationFillMode: "forwards" }}
+          >
+            <span className="text-sm font-medium text-primary">
+              {t("badge")}
+            </span>
           </div>
 
-          {/* Heading */}
+          {/* Title */}
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up"
-            style={{ animationDelay: "0.1s" }}
+            className="text-headline text-foreground mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
           >
-            {t("title.line1")}
-            <br />
-            <span className="text-primary">{t("title.line2")}</span>
+            <span className="block">{t("title.line1")}</span>
+            <span className="block text-muted-foreground">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
           <p
-            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up"
-            style={{ animationDelay: "0.2s" }}
+            className="text-body-large text-muted-foreground max-w-xl mx-auto mb-8 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
           >
             {t("description")}
           </p>
 
-          {/* Toggle - Enhanced */}
-          <div className="flex justify-center animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-            <div className="inline-flex items-center p-1.5 bg-card/60 backdrop-blur-sm rounded-full border border-primary/30 shadow-medium">
-              <button
-                onClick={() => setIsAnnual(false)}
-                className={`relative px-6 md:px-8 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 whitespace-nowrap ${
-                  !isAnnual
-                    ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t("toggle.monthly")}
-              </button>
-              <button
-                onClick={() => setIsAnnual(true)}
-                className={`relative px-6 md:px-8 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
-                  isAnnual
-                    ? "bg-primary text-primary-foreground shadow-glow-primary scale-105"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <span>{t("toggle.annual")}</span>
-                <span className="text-xs bg-primary-foreground/30 px-2 py-0.5 rounded-full font-black">{t("toggle.discount")}</span>
-              </button>
-            </div>
+          {/* Toggle */}
+          <div
+            className="inline-flex items-center p-1 rounded-full bg-white/5 border border-white/10 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+          >
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                !isAnnual
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t("toggle.monthly")}
+            </button>
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+                isAnnual
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t("toggle.annual")}
+              <span className="px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                {t("toggle.discount")}
+              </span>
+            </button>
           </div>
         </div>
 
-        <AnimatedList
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
-          staggerDelay={150}
-          variant="scale-up"
-          duration={700}
-        >
-          {pricingPlans.map((plan) => (
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`group relative rounded-3xl p-8 md:p-10 flex flex-col transition-all duration-500 hover-lift ${
+              className={`relative rounded-2xl p-8 flex flex-col opacity-0 animate-fade-in-up transition-all duration-300 ${
                 plan.popular
-                  ? "bg-primary border-2 border-primary shadow-galaxy hover:shadow-galaxy-hover scale-105 hover:scale-110"
-                  : "bg-card/50 backdrop-blur-sm border-2 border-border/60 hover:border-primary/50 shadow-medium hover:shadow-strong"
+                  ? "bg-foreground text-background border-2 border-foreground"
+                  : "card-feature border border-white/10 hover:border-white/20"
               }`}
+              style={{
+                animationDelay: `${400 + index * 100}ms`,
+                animationFillMode: "forwards"
+              }}
             >
-              {/* Gradient Overlay for Non-Popular */}
-              {!plan.popular && (
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              )}
-
+              {/* Popular badge */}
               {plan.popular && plan.popularLabel && (
-                <div
-                  className="absolute -top-4 right-1/2 translate-x-1/2 px-6 py-2 bg-primary-foreground text-primary text-sm font-black rounded-full shadow-strong animate-bounce"
-                  style={{ animationIterationCount: "3", animationDuration: "1s" }}
-                >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
                   {plan.popularLabel}
                 </div>
               )}
 
-              <div className="relative mb-8">
-                <h3
-                  className={`text-2xl md:text-3xl font-black mb-3 ${plan.popular ? "text-primary-foreground" : "text-foreground group-hover:text-primary transition-colors"}`}
-                >
+              {/* Plan header */}
+              <div className="mb-6">
+                <h3 className={`text-xl font-semibold mb-2 ${plan.popular ? "text-background" : "text-foreground"}`}>
                   {plan.name}
                 </h3>
-                <p
-                  className={`text-base ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground group-hover:text-foreground/80 transition-colors"}`}
-                >
+                <p className={`text-sm ${plan.popular ? "text-background/70" : "text-muted-foreground"}`}>
                   {plan.description}
                 </p>
               </div>
 
-              <div className="relative mb-8 md:mb-10">
-                <div className="flex items-baseline gap-2">
-                  <span
-                    className={`text-4xl md:text-5xl font-black transition-all duration-300 ${plan.popular ? "text-primary-foreground" : "text-foreground group-hover:text-primary"}`}
-                  >
-                    {isAnnual ? plan.annualPrice : plan.monthlyPrice}
+              {/* Price */}
+              <div className="mb-6">
+                <span className={`text-4xl font-bold tracking-tight ${plan.popular ? "text-background" : "text-foreground"}`}>
+                  {isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                </span>
+                {!plan.isEnterprise && (
+                  <span className={`text-sm ml-1 ${plan.popular ? "text-background/70" : "text-muted-foreground"}`}>
+                    {t("currency")}
                   </span>
-                  {!plan.isEnterprise && (
-                    <span
-                      className={`text-lg font-bold ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}
-                    >
-                      {t("currency")}
-                    </span>
-                  )}
-                </div>
+                )}
               </div>
 
-              <Button
-                className={`relative w-full mb-10 py-7 rounded-full font-black text-lg overflow-hidden transition-all duration-500 ${
-                  plan.popular
-                    ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-strong hover:scale-105"
-                    : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow-primary hover:shadow-galaxy-hover hover:scale-105"
-                }`}
-              >
-                <span className="relative z-10">{plan.buttonText}</span>
-                {!plan.popular && (
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
-                )}
-              </Button>
+              {/* CTA Button */}
+              <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer" className="mb-8">
+                <Button
+                  className={`w-full h-12 rounded-full font-medium transition-all duration-300 ${
+                    plan.popular
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "bg-white/10 text-foreground hover:bg-white/15 border border-white/10"
+                  }`}
+                >
+                  {plan.buttonText}
+                </Button>
+              </Link>
 
-              <div className="relative space-y-5">
-                {plan.features.map((feature, idx) => (
-                  <div
-                    key={feature}
-                    className="flex items-start gap-4 transition-all duration-300 hover:translate-x-1"
-                    style={{ animationDelay: `${idx * 0.05}s` }}
-                  >
-                    <div
-                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${plan.popular ? "bg-primary-foreground/20" : "bg-primary/15"}`}
-                    >
-                      <Check className={`w-4 h-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`} />
+              {/* Features */}
+              <div className="space-y-4 flex-1">
+                {plan.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-start gap-3">
+                    <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
+                      plan.popular ? "bg-primary/20" : "bg-primary/10"
+                    }`}>
+                      <Check className={`w-3 h-3 ${plan.popular ? "text-primary" : "text-primary"}`} />
                     </div>
-                    <span
-                      className={`text-base font-medium ${plan.popular ? "text-primary-foreground/95" : "text-foreground/80"}`}
-                    >
+                    <span className={`text-sm ${plan.popular ? "text-background/90" : "text-muted-foreground"}`}>
                       {feature}
                     </span>
                   </div>
@@ -202,7 +185,7 @@ export function PricingSection() {
               </div>
             </div>
           ))}
-        </AnimatedList>
+        </div>
       </div>
     </section>
   )

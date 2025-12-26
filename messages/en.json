@@ -1,230 +1,286 @@
 {
   "metadata": {
-    "title": "PROMAL LABORATORIES - Smart Online Store Management",
-    "description": "Smart online store management application - Complete management of your store, sellers, orders, and payments"
+    "title": "Promall — The Future of E-Commerce Management",
+    "description": "Run your online store like a pro. Powerful tools, beautiful interface, zero complexity."
   },
   "header": {
-    "companyName": "PROMAL LABORATORIES",
+    "companyName": "PROMALL",
     "brandName": "Promall",
     "nav": {
       "features": "Features",
+      "howItWorks": "How It Works",
       "pricing": "Pricing",
       "faq": "FAQ"
     },
-    "cta": "Start Free",
+    "cta": "Get Started",
     "menu": "Menu",
     "noCreditCard": "No credit card required"
   },
   "hero": {
-    "badge": "Smart Online Shop Management Platform",
+    "badge": "Introducing Promall",
     "title": {
-      "line1": "Take Your Online Store",
-      "line2": "to the Next Level"
+      "line1": "Your store.",
+      "line2": "Supercharged."
     },
-    "description": "Complete management of your store, sellers, orders, and payments - all in one integrated platform",
-    "subDescription": "No technical knowledge required | Setup in less than 10 minutes | 24/7 Support",
+    "description": "The all-in-one platform that transforms how you sell online. From inventory to AI-powered customer support — everything just works.",
+    "subDescription": "Join thousands of merchants who've already made the switch.",
     "cta": {
-      "primary": "Start Free",
-      "secondary": "How it works?"
+      "primary": "Start Free Trial",
+      "secondary": "Watch Demo"
     },
     "stats": {
-      "quickSetup": "Quick Setup",
-      "noCoding": "No Coding Required",
-      "dedicatedSupport": "Dedicated Support"
+      "activeStores": "10,000+",
+      "activeStoresLabel": "Active Stores",
+      "ordersProcessed": "2M+",
+      "ordersProcessedLabel": "Orders Processed",
+      "uptime": "99.9%",
+      "uptimeLabel": "Uptime"
     }
   },
   "features": {
     "badge": "Features",
     "title": {
-      "line1": "Everything You Need for",
-      "line2": "Online Selling"
+      "line1": "Everything you need.",
+      "line2": "Nothing you don't."
     },
-    "description": "From the moment you add a product until it reaches the customer,",
-    "descriptionHighlight": "Promall is by your side!",
+    "description": "We've thought of every detail so you can focus on what matters most —",
+    "descriptionHighlight": "growing your business.",
     "cards": {
       "productManagement": {
         "title": "Product Management",
-        "description": "Add your products with just a few clicks, set prices, and apply discounts. Everything is simple and fast!"
+        "description": "Add products in seconds, not hours. Bulk editing, variant management, and smart categorization that actually makes sense."
       },
       "orderControl": {
-        "title": "Order Control",
-        "description": "View all orders in one place, approve or cancel them. No order will be missed!"
+        "title": "Order Dashboard",
+        "description": "Every order, every status, one beautiful view. Filter, search, and process orders faster than ever before."
       },
       "inventoryManagement": {
-        "title": "Inventory Management",
-        "description": "Monitor and control your inventory in real-time. No more worrying about stock shortages or overstock!"
+        "title": "Smart Inventory",
+        "description": "Real-time stock tracking that prevents overselling. Low stock alerts, automatic reorder points, and warehouse sync."
       },
       "securePayment": {
-        "title": "Easy & Secure Payment",
-        "description": "Easily connect to payment gateways and receive your money with peace of mind."
+        "title": "Seamless Payments",
+        "description": "Accept any payment method your customers prefer. Instant settlement, zero failed transactions, complete peace of mind."
       },
       "autoPrinting": {
-        "title": "Auto Printing",
-        "description": "Invoices and shipping labels are printed automatically. Stop wasting your time!"
+        "title": "Auto-Print & Ship",
+        "description": "Labels, invoices, packing slips — generated and printed automatically. Connect your printer once, forget about it forever."
       },
       "completeReports": {
-        "title": "Complete Reports",
-        "description": "See how much you've sold, which products sold the most, and how your customers behave."
+        "title": "Actionable Analytics",
+        "description": "Understand your business at a glance. Revenue trends, best sellers, customer insights — the data you need to grow."
       }
     }
   },
+  "howItWorks": {
+    "badge": "How It Works",
+    "title": {
+      "line1": "From zero to selling",
+      "line2": "in three steps."
+    },
+    "description": "Getting started takes minutes, not weeks. Here's how simple it is.",
+    "steps": {
+      "connect": {
+        "number": "01",
+        "title": "Connect Your Store",
+        "description": "Import your existing products or start fresh. Our setup wizard handles everything — domains, payments, shipping. Just follow along."
+      },
+      "customize": {
+        "number": "02",
+        "title": "Make It Yours",
+        "description": "Configure your store exactly how you want it. Themes, checkout flow, notifications — every touchpoint reflects your brand."
+      },
+      "grow": {
+        "number": "03",
+        "title": "Start Selling",
+        "description": "Go live and watch orders roll in. Our AI handles customer inquiries while you focus on strategy. Scale without stress."
+      }
+    }
+  },
+  "aiFeatures": {
+    "badge": "AI-Powered",
+    "title": {
+      "line1": "Meet your new",
+      "line2": "sales assistant."
+    },
+    "description": "Instagram DMs, customer questions, product recommendations — our AI handles it all. 24/7, in your brand's voice, with zero training required.",
+    "capabilities": {
+      "instantResponses": {
+        "title": "Instant Responses",
+        "description": "Never miss a customer message. AI responds in seconds, any time of day."
+      },
+      "smartEscalation": {
+        "title": "Smart Escalation",
+        "description": "Complex issues get routed to your team. Simple ones get solved automatically."
+      },
+      "orderCreation": {
+        "title": "Order Creation",
+        "description": "Customers can complete purchases right in the chat. No redirects, no friction."
+      },
+      "brandVoice": {
+        "title": "Your Brand Voice",
+        "description": "Customize responses to sound exactly like you. Professional, friendly, whatever fits."
+      }
+    },
+    "cta": "See AI in Action"
+  },
   "largeTestimonial": {
-    "quote": "With Promall, store management transformed from a complex task to a simple and smooth experience",
-    "name": "Ali Mohammadi",
-    "title": "CEO of DigiStyle Store"
+    "quote": "Promall didn't just improve our operations — it completely transformed how we think about running an online business. The time we've saved is incredible.",
+    "name": "Sarah Chen",
+    "title": "Founder, Luxe Cosmetics"
   },
   "pricing": {
     "badge": "Pricing",
     "title": {
-      "line1": "A Perfect Plan for",
-      "line2": "Every Business"
+      "line1": "Simple pricing.",
+      "line2": "No surprises."
     },
-    "description": "Start free and upgrade whenever you want",
+    "description": "Start free. Upgrade when you're ready. No hidden fees, no long-term contracts.",
     "toggle": {
       "monthly": "Monthly",
       "annual": "Annual",
-      "discount": "20% OFF"
+      "discount": "Save 20%"
     },
-    "currency": "USD/month",
+    "currency": "/month",
     "plans": {
       "free": {
-        "name": "Free",
-        "monthlyPrice": "0",
-        "annualPrice": "0",
-        "description": "To get started and get familiar with Promall",
+        "name": "Starter",
+        "monthlyPrice": "$0",
+        "annualPrice": "$0",
+        "description": "Perfect for testing the waters",
         "features": [
-          "Up to 10 products",
-          "Limited orders",
-          "Basic reports",
+          "Up to 25 products",
+          "100 orders/month",
+          "Basic analytics",
           "Email support"
         ],
-        "buttonText": "Start Now"
+        "buttonText": "Start Free"
       },
       "professional": {
         "name": "Professional",
-        "monthlyPrice": "19",
-        "annualPrice": "15",
-        "description": "Best choice for medium-sized stores",
+        "monthlyPrice": "$29",
+        "annualPrice": "$23",
+        "description": "For growing businesses",
         "features": [
           "Unlimited products",
-          "Full order management",
-          "Inventory control",
-          "Auto printing",
-          "Payment gateway",
-          "Advanced reports",
-          "Fast support"
+          "Unlimited orders",
+          "AI customer support",
+          "Auto-print & shipping",
+          "Advanced analytics",
+          "Priority support",
+          "Team collaboration"
         ],
-        "buttonText": "Get it Now",
+        "buttonText": "Start 14-Day Trial",
         "popular": "Most Popular"
       },
       "enterprise": {
         "name": "Enterprise",
-        "monthlyPrice": "Contact Us",
-        "annualPrice": "Contact Us",
-        "description": "Special solution for large businesses",
+        "monthlyPrice": "Custom",
+        "annualPrice": "Custom",
+        "description": "For high-volume operations",
         "features": [
-          "24/7 Support",
-          "Multiple stores",
-          "Team management",
-          "High security",
-          "Full customization"
+          "Everything in Professional",
+          "Dedicated account manager",
+          "Custom integrations",
+          "SLA guarantee",
+          "On-premise option"
         ],
-        "buttonText": "Contact Us"
+        "buttonText": "Contact Sales"
       }
     }
   },
   "testimonials": {
-    "title": "Why Promall?",
-    "description": "Everything you need for your online store's success",
+    "title": "Why teams love Promall",
+    "description": "Don't take our word for it. Here's what our customers say.",
     "benefits": {
       "modernDesign": {
-        "title": "Modern & User-Friendly Design",
-        "description": "Beautiful and simple interface that makes using the app enjoyable"
+        "title": "Beautiful by Default",
+        "description": "An interface so intuitive, your team will actually enjoy using it. No training manual required."
       },
       "speed": {
-        "title": "Unmatched Speed",
-        "description": "Ultra-fast performance for managing your store anytime, anywhere"
+        "title": "Blazing Fast",
+        "description": "Every action, instant. No loading spinners, no waiting. Just get things done."
       },
       "security": {
-        "title": "Guaranteed Security",
-        "description": "Complete protection of your and your customers' data with the highest standards"
+        "title": "Bank-Level Security",
+        "description": "Your data is encrypted, backed up, and protected by the same standards used by financial institutions."
       },
       "salesGrowth": {
-        "title": "Sales Growth",
-        "description": "Smart tools for business growth and attracting more customers"
+        "title": "Built for Growth",
+        "description": "From 10 orders to 10,000 — Promall scales with you. No migrations, no downtime, no limits."
       },
       "support": {
-        "title": "24/7 Support",
-        "description": "Professional support team always by your side to solve any problem"
+        "title": "Humans Who Care",
+        "description": "Real people, real fast. Our support team responds in minutes, not days. We're in this together."
       },
       "updates": {
-        "title": "Continuous Updates",
-        "description": "New features and continuous improvements for a better experience"
+        "title": "Always Improving",
+        "description": "New features every week based on what you actually need. We listen, we build, you benefit."
       }
     },
     "quotes": {
       "sara": {
-        "quote": "Promall has really made our work easier. Product and order management has become much simpler, and our customers are satisfied with the app.",
-        "name": "Sara Ahmadi",
-        "company": "Armani Fashion Store"
+        "quote": "We switched from three different tools to just Promall. Our team is happier, our customers are happier, and our revenue is up 40%.",
+        "name": "Alex Rivera",
+        "company": "Urban Threads Apparel"
       },
       "reza": {
-        "quote": "Our online sales tripled with Promall. It's really great!",
-        "name": "Reza Karimi",
-        "company": "Rezvan Home Appliances"
+        "quote": "The AI customer support alone is worth the price. It handles 80% of our DMs automatically.",
+        "name": "Michael Torres",
+        "company": "Tech Gadgets Direct"
       },
       "maryam": {
-        "quote": "The interface is very simple and practical. Everything is in its place.",
-        "name": "Maryam Noori",
-        "company": "Golrang Cosmetics"
+        "quote": "Finally, software that doesn't feel like it was designed by robots for robots.",
+        "name": "Emma Watson",
+        "company": "Pure Beauty Co"
       },
       "ali": {
-        "quote": "They have excellent support. They solve any problem quickly.",
-        "name": "Ali Mohammadi",
-        "company": "Danesh Stationery & Books"
+        "quote": "Support responded in 3 minutes and actually solved my problem. Unheard of.",
+        "name": "David Kim",
+        "company": "Seoul Street Snacks"
       },
       "fatemeh": {
-        "quote": "The best app for online store management. Highly recommended!",
-        "name": "Fatemeh Rezaei",
-        "company": "Iran Zamin Handicrafts"
+        "quote": "I've recommended Promall to every e-commerce founder I know. It's that good.",
+        "name": "Priya Patel",
+        "company": "Artisan Home Goods"
       },
       "hosein": {
-        "quote": "Since we started using Promall, our work has become much more organized.",
-        "name": "Hosein Jafari",
-        "company": "Barcode Online Supermarket"
+        "quote": "Our operations went from chaos to clockwork in two weeks. Magic.",
+        "name": "James Wilson",
+        "company": "Fresh Market Delivery"
       },
       "niloofar": {
-        "quote": "Promall's features are really complete. From inventory management to order shipping, everything is in one place. Our customers are satisfied with the shopping experience, and this has increased our sales.",
-        "name": "Niloofar Sadeghi",
-        "company": "Digital Products Chain Store"
+        "quote": "From inventory nightmares to complete visibility. I can finally sleep at night knowing exactly what's in stock.",
+        "name": "Nina Johansson",
+        "company": "Nordic Design Store"
       }
     }
   },
   "cta": {
-    "badge": "Start free, no credit card required",
+    "badge": "Ready to grow?",
     "title": {
-      "line1": "Ready to",
-      "line2": "Get Started?"
+      "line1": "Start your",
+      "line2": "free trial today."
     },
     "description": "Join",
-    "descriptionHighlight": "thousands of successful sellers",
-    "descriptionEnd": "right now and manage your store professionally with Promall",
+    "descriptionHighlight": "10,000+ merchants",
+    "descriptionEnd": "who run their stores on Promall. No credit card required.",
     "buttons": {
-      "primary": "Open App",
-      "secondary": "View Demo"
+      "primary": "Get Started Free",
+      "secondary": "Book a Demo"
     },
     "trustIndicators": {
-      "install": "Install in 2 minutes",
-      "support": "24/7 Support",
-      "unlimited": "No Limits"
+      "install": "2-minute setup",
+      "support": "Cancel anytime",
+      "unlimited": "No credit card"
     }
   },
   "footer": {
     "brandName": "Promall",
-    "tagline": "Online store management, simple, smart, and professional!",
+    "tagline": "The future of e-commerce management. Simple, smart, powerful.",
     "contact": {
-      "email": "info@promall.io",
-      "phone": "+1-234-567-8900"
+      "email": "hello@promall.io",
+      "phone": "+1 (555) 123-4567"
     },
     "social": {
       "twitter": "Twitter",
@@ -234,55 +290,55 @@
     "links": {
       "product": {
         "title": "Product",
-        "items": ["Features", "Pricing", "Integrations", "Product Management", "Reporting"]
+        "items": ["Features", "Pricing", "Integrations", "API", "Changelog"]
       },
       "company": {
         "title": "Company",
-        "items": ["About Us", "Our Team", "Careers", "Brand", "Contact Us"]
+        "items": ["About", "Careers", "Blog", "Press", "Contact"]
       },
       "resources": {
         "title": "Resources",
-        "items": ["Terms of Use", "Documentation", "Guide", "Community", "Support"]
+        "items": ["Documentation", "Help Center", "Community", "Status", "Security"]
       }
     },
-    "copyright": "Promall. All rights reserved.",
+    "copyright": "Promall, Inc. All rights reserved.",
     "legal": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms & Conditions",
+      "privacy": "Privacy",
+      "terms": "Terms",
       "cookies": "Cookies"
     }
   },
   "faq": {
     "badge": "FAQ",
     "title": {
-      "line1": "Got Questions?",
-      "line2": "Find Answers Here!"
+      "line1": "Questions?",
+      "line2": "We've got answers."
     },
-    "description": "Answers to common questions about Promall and its features",
+    "description": "Everything you need to know about Promall. Can't find what you're looking for? Our support team is just a message away.",
     "items": {
       "whatIsPromall": {
-        "question": "What is Promall and who is it for?",
-        "answer": "Promall is a smart application that helps you manage your online store more easily. It's suitable for anyone who wants to sell online, from small sellers to large businesses!"
+        "question": "What exactly is Promall?",
+        "answer": "Promall is a complete e-commerce management platform. Think of it as your store's command center — products, orders, inventory, payments, customer communication, analytics — all in one place. We built it because we were tired of juggling a dozen different tools, and we figured you might be too."
       },
       "manageProducts": {
-        "question": "How do I manage my products?",
-        "answer": "It's very easy! Add your products, set prices and discounts, control inventory, and see everything in one place. Everything is simple and fast!"
+        "question": "How hard is it to get started?",
+        "answer": "Honestly? About as hard as setting up a new email account. Our setup wizard walks you through everything step by step. Most stores are up and running within an hour. If you're migrating from another platform, we can import your existing products automatically."
       },
       "integrations": {
-        "question": "Can Promall be connected to other tools?",
-        "answer": "Yes! Promall works with payment gateways, accounting systems, and many other tools. Connect everything and work easily!"
+        "question": "Can I connect my existing tools?",
+        "answer": "Absolutely. We integrate with all major payment processors, shipping carriers, and accounting software. Instagram, Facebook, Zapier — you name it. And if something isn't available yet, our API lets you build custom connections."
       },
       "freePlan": {
-        "question": "What does the free plan include?",
-        "answer": "With the free plan, you can add up to 10 products, register limited orders, and view simple reports. It's great for getting started and getting familiar with Promall!"
+        "question": "What's included in the free plan?",
+        "answer": "Everything you need to run a small store. Up to 25 products, 100 orders per month, basic analytics, and email support. It's not a trial — you can stay on free forever. When you need more power, you can upgrade anytime."
       },
       "trackOrders": {
-        "question": "How do I track orders?",
-        "answer": "You see all orders in one dashboard, change their status, manage returns, and inventory decreases automatically. Everything is automated!"
+        "question": "How does the AI customer support work?",
+        "answer": "Our AI reads your incoming messages and responds intelligently based on your products, policies, and brand voice. It can answer questions, provide tracking info, even create orders. When something needs a human touch, it routes the conversation to your team. You stay in control."
       },
       "security": {
-        "question": "Is my store data secure?",
-        "answer": "Absolutely! We use the best security standards. Your data is encrypted, securely transmitted, and we have regular backups. Rest assured!"
+        "question": "Is my data secure?",
+        "answer": "Security isn't an afterthought for us. All data is encrypted in transit and at rest. We're SOC 2 Type II compliant, run on enterprise-grade infrastructure, and perform regular third-party security audits. Your customers' trust is our responsibility."
       }
     }
   },
@@ -292,7 +348,7 @@
     "contactUs": "Contact Us"
   },
   "socialProof": {
-    "title": "Trusted by leading stores",
+    "title": "Trusted by innovative brands",
     "logoAlt": "Company logo"
   },
   "privacy": {

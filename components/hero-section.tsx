@@ -2,92 +2,131 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Zap, Sparkles, Clock, Code, Headphones, Play } from "lucide-react"
-import { AuroraBackground } from "@/components/aurora-background"
+import { ArrowRight, Play } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export function HeroSection() {
   const t = useTranslations("hero")
 
   return (
-    <section className="relative w-full min-h-[600px] flex items-center justify-center bg-background">
-      {/* Real Aurora Borealis Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <AuroraBackground />
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-background">
+        {/* Subtle spotlight effect */}
+        <div className="absolute inset-0 bg-spotlight" />
+
+        {/* Aurora glows */}
+        <div className="aurora-container">
+          <div className="aurora-glow aurora-glow-1" />
+          <div className="aurora-glow aurora-glow-2" />
+          <div className="aurora-glow aurora-glow-3" />
+        </div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-32">
-        <div className="flex flex-col items-center text-center gap-12">
-          {/* Enhanced Badge - Balanced */}
-          <div className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md hover:border-primary/50 transition-all duration-300 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-            <Sparkles className="w-4 h-4 text-primary relative z-10" />
-            <span className="text-sm font-semibold text-foreground relative z-10">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-32 lg:py-40">
+        <div className="flex flex-col items-center text-center">
+          {/* Badge */}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "0ms", animationFillMode: "forwards" }}
+          >
+            <span className="w-2 h-2 rounded-full bg-primary animate-gentle-pulse" />
+            <span className="text-sm font-medium text-muted-foreground">
               {t("badge")}
             </span>
           </div>
 
-          {/* Enhanced Heading - Balanced */}
-          <div className="relative max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.15] tracking-tight animate-fade-in-up">
-              <span className="text-foreground block drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-                {t("title.line1")}
-              </span>
-              <span className="relative inline-block mt-2">
-                <span className="text-primary block drop-shadow-[0_4px_20px_rgba(163,230,53,0.4)]">
-                  {t("title.line2")}
-                </span>
-                <div className="absolute -inset-2 bg-primary/10 blur-2xl -z-10" />
-              </span>
-            </h1>
-          </div>
+          {/* Main Heading - Apple style with tight letter spacing */}
+          <h1
+            className="text-display text-foreground mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+          >
+            <span className="block">{t("title.line1")}</span>
+            <span className="block text-primary">{t("title.line2")}</span>
+          </h1>
 
-          {/* Enhanced Description */}
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed max-w-3xl font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]">
+          {/* Description */}
+          <p
+            className="text-body-large text-muted-foreground max-w-2xl mb-4 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+          >
             {t("description")}
-            <span className="block mt-2 text-base sm:text-lg text-muted-foreground/70">
-              {t("subDescription")}
-            </span>
           </p>
 
-          {/* Enhanced CTA Buttons - Balanced */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-fade-in-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]">
+          <p
+            className="text-caption text-muted-foreground/70 mb-10 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "250ms", animationFillMode: "forwards" }}
+          >
+            {t("subDescription")}
+          </p>
+
+          {/* CTA Buttons */}
+          <div
+            className="flex flex-col sm:flex-row items-center gap-4 mb-16 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
+          >
             <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
-              <Button className="group relative inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground px-8 py-6 rounded-full font-bold text-lg shadow-[0_0_30px_rgba(163,230,53,0.25)] hover:shadow-[0_0_45px_rgba(163,230,53,0.4)] transition-[background-color,box-shadow] duration-200 overflow-hidden touch-manipulation">
-                <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
-                <span>{t("cta.primary")}</span>
+              <Button
+                className="group h-14 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-glow hover:shadow-glow-strong transition-all duration-300"
+              >
+                {t("cta.primary")}
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link href="#features-section">
-              <Button variant="ghost" className="group relative inline-flex items-center gap-3 text-foreground hover:text-foreground px-6 py-6 rounded-full font-medium text-lg transition-colors duration-200 hover:bg-primary/5 touch-manipulation">
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 transition-transform duration-200 group-hover:scale-105">
-                  <Play className="h-4 w-4 text-primary fill-primary" />
-                </div>
-                <span>{t("cta.secondary")}</span>
-              </Button>
-            </Link>
+
+            <Button
+              variant="ghost"
+              className="group h-14 px-6 rounded-full text-foreground hover:bg-white/5 font-medium text-base transition-all duration-300"
+            >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 mr-3 transition-all duration-300 group-hover:bg-white/15">
+                <Play className="h-4 w-4 text-foreground fill-foreground" />
+              </div>
+              {t("cta.secondary")}
+            </Button>
           </div>
 
-          {/* Stats - Subtle */}
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 mt-12 animate-fade-in-up [animation-delay:600ms] opacity-0 [animation-fill-mode:forwards]">
-            <div className="flex items-center gap-1.5 text-muted-foreground/40">
-              <Clock className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.quickSetup")}</span>
+          {/* Stats */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "450ms", animationFillMode: "forwards" }}
+          >
+            <div className="flex flex-col items-center">
+              <span className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+                {t("stats.activeStores")}
+              </span>
+              <span className="text-sm text-muted-foreground mt-1">
+                {t("stats.activeStoresLabel")}
+              </span>
             </div>
-            <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
-            <div className="flex items-center gap-1.5 text-muted-foreground/40">
-              <Code className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.noCoding")}</span>
+
+            <div className="hidden sm:block w-px h-12 bg-white/10" />
+
+            <div className="flex flex-col items-center">
+              <span className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+                {t("stats.ordersProcessed")}
+              </span>
+              <span className="text-sm text-muted-foreground mt-1">
+                {t("stats.ordersProcessedLabel")}
+              </span>
             </div>
-            <div className="w-0.5 h-0.5 rounded-full bg-primary/20" />
-            <div className="flex items-center gap-1.5 text-muted-foreground/40">
-              <Headphones className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">{t("stats.dedicatedSupport")}</span>
+
+            <div className="hidden sm:block w-px h-12 bg-white/10" />
+
+            <div className="flex flex-col items-center">
+              <span className="text-3xl sm:text-4xl font-bold text-primary tracking-tight">
+                {t("stats.uptime")}
+              </span>
+              <span className="text-sm text-muted-foreground mt-1">
+                {t("stats.uptimeLabel")}
+              </span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom fade gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   )
 }

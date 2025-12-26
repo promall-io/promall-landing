@@ -3,7 +3,6 @@
 import type React from "react"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { AnimatedList } from "@/components/animated-list"
 import { useTranslations } from "next-intl"
 
 interface FAQItemProps {
@@ -11,9 +10,10 @@ interface FAQItemProps {
   answer: string
   isOpen: boolean
   onToggle: () => void
+  index: number
 }
 
-const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
+function FAQItem({ question, answer, isOpen, onToggle, index }: FAQItemProps) {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
     onToggle()
@@ -28,46 +28,43 @@ const FAQItem = ({ question, answer, isOpen, onToggle }: FAQItemProps) => {
 
   return (
     <div
-      className={`group w-full bg-card/60 backdrop-blur-sm border-2 overflow-hidden rounded-3xl transition-all duration-500 cursor-pointer hover-lift ${
+      className={`opacity-0 animate-fade-in-up rounded-2xl border transition-all duration-300 cursor-pointer ${
         isOpen
-          ? "border-primary/60 shadow-strong shadow-primary/20"
-          : "border-border/60 hover:border-primary/50 shadow-medium hover:shadow-strong"
+          ? "border-primary/30 bg-white/5"
+          : "border-white/10 hover:border-white/20"
       }`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
       aria-expanded={isOpen}
+      style={{
+        animationDelay: `${200 + index * 80}ms`,
+        animationFillMode: "forwards"
+      }}
     >
-      {/* Gradient Overlay */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent transition-opacity duration-500 pointer-events-none ${isOpen ? "opacity-100" : "opacity-0"}`}
-      />
-
-      <div className="relative w-full px-6 md:px-8 py-6 md:py-7 flex justify-between items-center gap-6 text-left">
-        <div
-          className={`flex-1 text-base md:text-xl font-black transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground group-hover:text-primary"}`}
-        >
+      <div className="flex items-center justify-between p-6 gap-4">
+        <h3 className={`text-lg font-medium transition-colors duration-200 ${
+          isOpen ? "text-primary" : "text-foreground"
+        }`}>
           {question}
-        </div>
-        <div
-          className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isOpen ? "bg-primary/20 rotate-180" : "bg-primary/10 group-hover:bg-primary/15 rotate-0"}`}
-        >
-          <ChevronDown
-            className={`w-6 h-6 transition-all duration-500 ${isOpen ? "text-primary" : "text-muted-foreground group-hover:text-primary"}`}
-          />
+        </h3>
+        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+          isOpen ? "bg-primary/20 rotate-180" : "bg-white/5"
+        }`}>
+          <ChevronDown className={`w-4 h-4 transition-colors duration-200 ${
+            isOpen ? "text-primary" : "text-muted-foreground"
+          }`} />
         </div>
       </div>
 
-      <div
-        className={`relative overflow-hidden transition-all duration-500 ease-in-out ${
-          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className={`px-6 md:px-8 pb-6 md:pb-7 transition-all duration-300 ${isOpen ? "pt-0" : "pt-0"}`}>
-          <div className="text-foreground/90 text-sm md:text-lg leading-relaxed font-medium border-t border-border/40 pt-6">
+      <div className={`overflow-hidden transition-all duration-300 ${
+        isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+      }`}>
+        <div className="px-6 pb-6">
+          <p className="text-base text-muted-foreground leading-relaxed">
             {answer}
-          </div>
+          </p>
         </div>
       </div>
     </div>
@@ -122,45 +119,51 @@ export function FAQSection() {
   }
 
   return (
-    <section id="faq-section" className="relative w-full py-20 md:py-32 overflow-hidden">
-      {/* Add smooth gradient at the top for seamless transition */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-10" />
-
-      {/* Background Effects */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/8 rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-primary/5 rounded-full blur-[100px]" />
-
-      <div className="relative max-w-4xl mx-auto px-4">
-        <div className="text-center mb-16 md:mb-20 space-y-6">
+    <section id="faq-section" className="relative w-full py-24 md:py-32 lg:py-40">
+      <div className="max-w-3xl mx-auto px-6 sm:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12 lg:mb-16">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up opacity-0 [animation-fill-mode:forwards]">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationFillMode: "forwards" }}
+          >
+            <span className="text-sm font-medium text-primary">
+              {t("badge")}
+            </span>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up [animation-delay:100ms] opacity-0 [animation-fill-mode:forwards]">
-            {t("title.line1")}
-            <br />
-            <span className="text-primary">{t("title.line2")}</span>
+          {/* Title */}
+          <h2
+            className="text-headline text-foreground mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+          >
+            <span className="block">{t("title.line1")}</span>
+            <span className="block text-primary">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium animate-fade-in-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]">
+          <p
+            className="text-body-large text-muted-foreground max-w-xl mx-auto opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "150ms", animationFillMode: "forwards" }}
+          >
             {t("description")}
           </p>
         </div>
 
-        <AnimatedList
-          className="flex flex-col gap-4 md:gap-5"
-          staggerDelay={120}
-          variant="fade-up"
-          duration={600}
-        >
-          {faqData.map((faq) => (
-            <FAQItem key={faq.id} {...faq} isOpen={openItems.has(faq.id)} onToggle={() => toggleItem(faq.id)} />
+        {/* FAQ Items */}
+        <div className="space-y-3">
+          {faqData.map((faq, index) => (
+            <FAQItem
+              key={faq.id}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openItems.has(faq.id)}
+              onToggle={() => toggleItem(faq.id)}
+              index={index}
+            />
           ))}
-        </AnimatedList>
+        </div>
       </div>
     </section>
   )

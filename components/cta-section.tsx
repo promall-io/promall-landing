@@ -2,109 +2,84 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Sparkles, Zap, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export function CTASection() {
   const t = useTranslations("cta")
 
   const trustIndicators = [
-    { text: t("trustIndicators.install"), icon: "⚡" },
-    { text: t("trustIndicators.support"), icon: "💬" },
-    { text: t("trustIndicators.unlimited"), icon: "🚀" },
+    t("trustIndicators.install"),
+    t("trustIndicators.support"),
+    t("trustIndicators.unlimited"),
   ]
 
   return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/50 to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-pulse" />
+    <section className="relative w-full py-24 md:py-32 lg:py-40">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Glass Card Container - Enhanced */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-8 text-center">
+        {/* Badge */}
         <div
-          className="relative glass-card rounded-[48px] p-12 md:p-16 lg:p-20
-                     shadow-galaxy hover:shadow-galaxy-hover
-                     transition-all duration-700 hover:scale-[1.02] group"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8 opacity-0 animate-fade-in-up"
+          style={{ animationFillMode: "forwards" }}
         >
-          {/* Animated Border Gradient */}
-          <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          <span className="text-sm font-medium text-primary">
+            {t("badge")}
+          </span>
+        </div>
 
-          {/* Shine Effect */}
-          <div className="absolute inset-0 rounded-[48px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          </div>
+        {/* Title */}
+        <h2
+          className="text-headline text-foreground mb-6 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+        >
+          <span className="block">{t("title.line1")}</span>
+          <span className="block text-primary">{t("title.line2")}</span>
+        </h2>
 
-          <div className="relative flex flex-col justify-center items-center gap-10 md:gap-12 text-center">
-            {/* Badge - Enhanced */}
-            <div className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-primary/25 backdrop-blur-md border border-primary/50 shadow-glow-primary animate-fade-in-up">
-              <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-              <span className="text-sm md:text-base font-black text-foreground">
-                {t("badge")}
-              </span>
-            </div>
+        {/* Description */}
+        <p
+          className="text-body-large text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+        >
+          {t("description")} <span className="text-foreground font-medium">{t("descriptionHighlight")}</span> {t("descriptionEnd")}
+        </p>
 
-            {/* Heading - Enhanced */}
-            <div className="flex flex-col gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <h2 className="text-foreground text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
-                {t("title.line1")}
-                <br />
-                <span className="text-primary">{t("title.line2")}</span>
-              </h2>
-              <p className="text-foreground/80 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto font-medium">
-                {t("description")} <span className="text-primary font-black">{t("descriptionHighlight")}</span> {t("descriptionEnd")}
-              </p>
-            </div>
-
-            {/* CTA Buttons - Enhanced */}
-            <div
-              className="flex flex-col sm:flex-row items-center gap-5 animate-fade-in-up"
-              style={{ animationDelay: "0.2s" }}
+        {/* CTA Buttons */}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+        >
+          <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
+            <Button
+              className="group h-14 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-glow hover:shadow-glow-strong transition-all duration-300"
             >
-              <Link href="https://app.promall.io" target="_blank" rel="noopener noreferrer">
-                <Button
-                  className="group relative px-14 py-8 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground text-xl font-black
-                           rounded-full shadow-galaxy hover:shadow-galaxy-hover
-                           transition-[background-color,box-shadow] duration-200 overflow-hidden touch-manipulation"
-                  size="lg"
-                >
-                  <span className="flex items-center gap-3">
-                    {t("buttons.primary")}
-                    <Zap className="w-6 h-6 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-                  </span>
-                </Button>
-              </Link>
-              <Button
-                variant="outline"
-                className="group px-12 py-8 bg-background/60 backdrop-blur-md border-2 border-primary/40 hover:bg-primary/10 hover:border-primary/70
-                         text-foreground text-lg font-bold rounded-full
-                         transition-[background-color,border-color] duration-200 shadow-medium touch-manipulation"
-                size="lg"
-              >
-                <span className="flex items-center gap-3">
-                  {t("buttons.secondary")}
-                  <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-                </span>
-              </Button>
-            </div>
+              {t("buttons.primary")}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </Link>
 
-            {/* Trust Indicators - Enhanced */}
-            <div
-              className="flex flex-wrap items-center justify-center gap-8 md:gap-12 pt-6 animate-fade-in-up"
-              style={{ animationDelay: "0.3s" }}
-            >
-              {trustIndicators.map((item) => (
-                <div key={item.text} className="flex items-center gap-3 group cursor-default">
-                  <div className="w-3 h-3 rounded-full bg-primary shadow-glow-primary group-hover:scale-125 transition-transform" />
-                  <span className="text-base font-bold text-foreground/80 group-hover:text-primary transition-colors">
-                    {item.text}
-                  </span>
-                </div>
-              ))}
+          <Button
+            variant="ghost"
+            className="h-14 px-8 rounded-full text-foreground hover:bg-white/5 font-medium text-base border border-white/10 hover:border-white/20 transition-all duration-300"
+          >
+            {t("buttons.secondary")}
+          </Button>
+        </div>
+
+        {/* Trust indicators */}
+        <div
+          className="flex flex-wrap items-center justify-center gap-6 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
+        >
+          {trustIndicators.map((indicator, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="text-sm text-muted-foreground">{indicator}</span>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

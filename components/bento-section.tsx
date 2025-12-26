@@ -1,38 +1,49 @@
 "use client"
 
-import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3 } from "lucide-react"
-import { AnimatedList } from "@/components/animated-list"
+import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3, type LucideIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-const BentoCard = ({ title, description, icon: Icon }: { title: string; description: string; icon: React.ComponentType<{ className?: string }> }) => (
-  <div
-    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/60 transition-all duration-500 hover:shadow-strong hover:shadow-primary/20 hover-lift hover-shine"
-  >
-    {/* Gradient Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+interface FeatureCardProps {
+  title: string
+  description: string
+  icon: LucideIcon
+  index: number
+}
 
-    {/* Shine Effect Border */}
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-    <div className="relative p-7 md:p-9 flex flex-col gap-6 h-full">
-      {/* Icon Container - Enhanced */}
-      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary/15 flex items-center justify-center group-hover:bg-primary/25 group-hover:scale-110 transition-all duration-500 shadow-soft">
-        <div className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <Icon className="relative w-7 h-7 md:w-8 md:h-8 text-primary group-hover:rotate-6 transition-transform duration-500" />
+function FeatureCard({ title, description, icon: Icon, index }: FeatureCardProps) {
+  return (
+    <div
+      className="group relative p-8 rounded-2xl card-feature hover-lift opacity-0 animate-fade-in-up"
+      style={{
+        animationDelay: `${index * 100}ms`,
+        animationFillMode: "forwards"
+      }}
+    >
+      {/* Icon */}
+      <div className="mb-6">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 transition-all duration-300 group-hover:bg-primary/15 group-hover:scale-110">
+          <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <h3 className="text-xl md:text-2xl font-black text-foreground group-hover:text-primary transition-colors duration-300">{title}</h3>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">{description}</p>
-      </div>
+      {/* Content */}
+      <h3 className="text-xl font-semibold text-foreground mb-3 tracking-tight transition-colors duration-300 group-hover:text-primary">
+        {title}
+      </h3>
+      <p className="text-base text-muted-foreground leading-relaxed">
+        {description}
+      </p>
+
+      {/* Subtle border glow on hover */}
+      <div className="absolute inset-0 rounded-2xl border border-transparent transition-colors duration-500 group-hover:border-primary/20 pointer-events-none" />
     </div>
-  </div>
-)
+  )
+}
 
 export function BentoSection() {
   const t = useTranslations("features")
 
-  const cards = [
+  const features: { title: string; description: string; icon: LucideIcon }[] = [
     {
       title: t("cards.productManagement.title"),
       description: t("cards.productManagement.description"),
@@ -66,44 +77,49 @@ export function BentoSection() {
   ]
 
   return (
-    <section id="features-section" className="relative w-full py-20 md:py-32 bg-background overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-
-      <div className="relative max-w-7xl mx-auto">
-        <div className="text-center mb-16 md:mb-20 space-y-6">
+    <section id="features-section" className="relative w-full py-24 md:py-32 lg:py-40">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16 lg:mb-20">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary/15 backdrop-blur-sm border border-primary/30 shadow-glow-primary animate-fade-in-up">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm md:text-base font-black text-primary tracking-tight">{t("badge")}</span>
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationFillMode: "forwards" }}
+          >
+            <span className="text-sm font-medium text-primary">
+              {t("badge")}
+            </span>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            {t("title.line1")}
-            <br />
-            <span className="text-primary">{t("title.line2")}</span>
+          {/* Title */}
+          <h2
+            className="text-headline text-foreground mb-6 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+          >
+            <span className="block">{t("title.line1")}</span>
+            <span className="block text-muted-foreground">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p
+            className="text-body-large text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+          >
             {t("description")}
-            <span className="text-primary font-bold"> {t("descriptionHighlight")}</span>
+            <span className="text-primary font-medium"> {t("descriptionHighlight")}</span>
           </p>
         </div>
 
-        {/* Cards Grid - Staggered Animation */}
-        <AnimatedList
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7"
-          staggerDelay={100}
-          variant="blur-up"
-          duration={700}
-        >
-          {cards.map((card) => (
-            <BentoCard key={card.title} {...card} />
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={feature.title}
+              {...feature}
+              index={index}
+            />
           ))}
-        </AnimatedList>
+        </div>
       </div>
     </section>
   )

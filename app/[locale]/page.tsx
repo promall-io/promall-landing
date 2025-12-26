@@ -2,13 +2,14 @@ import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { BentoSection } from "@/components/bento-section";
+import { HowItWorksSection } from "@/components/how-it-works-section";
+import { AIFeaturesSection } from "@/components/ai-features-section";
 import { LargeTestimonial } from "@/components/large-testimonial";
 import { PricingSection } from "@/components/pricing-section";
 import { TestimonialGridSection } from "@/components/testimonial-grid-section";
 import { FAQSection } from "@/components/faq-section";
 import { CTASection } from "@/components/cta-section";
 import { FooterSection } from "@/components/footer-section";
-import { AnimatedSection } from "@/components/animated-section";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -21,91 +22,42 @@ export default async function LandingPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Header with fixed position */}
+    <div className="min-h-screen bg-background">
+      {/* Header */}
       <Header />
 
       {/* Main content */}
-      <div className="relative z-10">
-        {/* Hero Section - Full width without container */}
-        <main className="w-full">
-          <HeroSection />
-        </main>
+      <main>
+        {/* Hero Section */}
+        <HeroSection />
 
-        {/* Features Section with standard spacing */}
-        <AnimatedSection
-          id="features-section"
-          className="relative z-10 w-full mt-32 sm:mt-40 md:mt-48 lg:mt-56"
-          variant="fade-up"
-          duration={900}
-          delay={2}
-        >
-          <BentoSection />
-        </AnimatedSection>
+        {/* Features Section */}
+        <BentoSection />
+
+        {/* How It Works */}
+        <HowItWorksSection />
+
+        {/* AI Features */}
+        <AIFeaturesSection />
 
         {/* Large Testimonial */}
-        <AnimatedSection
-          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          variant="scale-up"
-          duration={800}
-          delay={1}
-        >
-          <LargeTestimonial />
-        </AnimatedSection>
+        <LargeTestimonial />
 
         {/* Pricing Section */}
-        <AnimatedSection
-          id="pricing-section"
-          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          variant="blur-up"
-          duration={1000}
-          delay={2}
-        >
-          <PricingSection />
-        </AnimatedSection>
+        <PricingSection />
 
-        {/* Testimonials Grid */}
-        <AnimatedSection
-          id="testimonials-section"
-          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          variant="fade-up"
-          duration={900}
-          delay={1}
-        >
-          <TestimonialGridSection />
-        </AnimatedSection>
+        {/* Benefits Grid */}
+        <TestimonialGridSection />
 
         {/* FAQ Section */}
-        <AnimatedSection
-          id="faq-section"
-          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          variant="scale-up"
-          duration={800}
-          delay={2}
-        >
-          <FAQSection />
-        </AnimatedSection>
+        <FAQSection />
 
         {/* CTA Section */}
-        <AnimatedSection
-          className="relative z-10 w-full mt-24 sm:mt-32 lg:mt-40"
-          variant="blur-up"
-          duration={900}
-          delay={1}
-        >
-          <CTASection />
-        </AnimatedSection>
+        <CTASection />
+      </main>
 
-        {/* Footer - without padding for full-width background */}
-        <AnimatedSection
-          className="relative z-10 mt-24 sm:mt-32 lg:mt-40"
-          variant="fade-up"
-          duration={700}
-          delay={1}
-        >
-          <FooterSection />
-        </AnimatedSection>
-      </div>
+      {/* Footer */}
+      <FooterSection />
     </div>
   );
 }
