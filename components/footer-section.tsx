@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Twitter, Github, Linkedin, Mail, Phone } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -22,9 +23,13 @@ export function FooterSection() {
           {/* Brand Section - Enhanced */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-glow-primary">
-                <span className="text-2xl font-black text-primary-foreground">P</span>
-              </div>
+              <Image
+                src="/icon.svg"
+                alt="ProMall"
+                width={48}
+                height={48}
+                className="w-12 h-12"
+              />
               <div className="text-3xl font-black text-foreground">{t("brandName")}</div>
             </div>
 

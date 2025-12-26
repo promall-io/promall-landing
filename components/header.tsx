@@ -3,6 +3,7 @@
 import type React from "react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -67,9 +68,13 @@ export function Header() {
         >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-sm font-bold text-primary-foreground">P</span>
-            </div>
+            <Image
+              src="/icon.svg"
+              alt="ProMall"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+            />
             <span className="text-lg font-bold text-foreground">
               {t("brandName")}
             </span>
@@ -123,9 +128,13 @@ export function Header() {
                   {/* Header */}
                   <SheetHeader className="p-6 border-b border-white/10">
                     <SheetTitle className="flex items-center gap-2 text-left">
-                      <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                        <span className="text-sm font-bold text-primary-foreground">P</span>
-                      </div>
+                      <Image
+                        src="/icon.svg"
+                        alt="ProMall"
+                        width={32}
+                        height={32}
+                        className="w-8 h-8"
+                      />
                       <span className="text-lg font-bold text-foreground">{t("brandName")}</span>
                     </SheetTitle>
                   </SheetHeader>
