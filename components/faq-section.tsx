@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, HelpCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 interface FAQItemProps {
@@ -28,11 +28,11 @@ function FAQItem({ question, answer, isOpen, onToggle, index }: FAQItemProps) {
 
   return (
     <div
-      className={`opacity-0 animate-fade-in-up rounded-2xl border transition-all duration-300 cursor-pointer ${
-        isOpen
-          ? "border-primary/30 bg-white/5"
-          : "border-white/10 hover:border-white/20"
-      }`}
+      className={`
+        group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer
+        opacity-0 animate-fade-in-up
+        ${isOpen ? "ring-1 ring-primary/30" : "hover:ring-1 hover:ring-border/50"}
+      `}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
@@ -43,28 +43,43 @@ function FAQItem({ question, answer, isOpen, onToggle, index }: FAQItemProps) {
         animationFillMode: "forwards"
       }}
     >
-      <div className="flex items-center justify-between p-6 gap-4">
-        <h3 className={`text-lg font-medium transition-colors duration-200 ${
-          isOpen ? "text-primary" : "text-foreground"
-        }`}>
-          {question}
-        </h3>
-        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-          isOpen ? "bg-primary/20 rotate-180" : "bg-white/5"
-        }`}>
-          <ChevronDown className={`w-4 h-4 transition-colors duration-200 ${
-            isOpen ? "text-primary" : "text-muted-foreground"
-          }`} />
-        </div>
-      </div>
+      {/* Background */}
+      <div className={`absolute inset-0 card-feature transition-all duration-500 ${isOpen ? "border-primary/20" : ""}`} />
 
-      <div className={`overflow-hidden transition-all duration-300 ${
-        isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-      }`}>
-        <div className="px-6 pb-6">
-          <p className="text-base text-muted-foreground leading-relaxed">
-            {answer}
-          </p>
+      {/* Gradient on open */}
+      <div className={`absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/3 transition-opacity duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`} />
+
+      {/* Content */}
+      <div className="relative">
+        {/* Question */}
+        <div className="flex items-center justify-between p-6 gap-4">
+          <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+            isOpen ? "text-primary" : "text-foreground group-hover:text-primary"
+          }`}>
+            {question}
+          </h3>
+          <div className={`
+            shrink-0 w-10 h-10 rounded-xl flex items-center justify-center
+            bg-gradient-to-br from-primary/10 to-accent/5 border border-primary/15
+            transition-all duration-500
+            ${isOpen ? "rotate-180 shadow-glow border-primary/25" : "group-hover:border-primary/20"}
+          `}>
+            <ChevronDown className={`w-5 h-5 transition-colors duration-300 ${
+              isOpen ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+            }`} />
+          </div>
+        </div>
+
+        {/* Answer */}
+        <div className={`overflow-hidden transition-all duration-500 ease-out ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}>
+          <div className="px-6 pb-6">
+            <div className="h-px w-full bg-gradient-to-r from-primary/20 via-border/50 to-transparent mb-4" />
+            <p className="text-base text-muted-foreground leading-relaxed">
+              {answer}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -119,15 +134,21 @@ export function FAQSection() {
   }
 
   return (
-    <section id="faq-section" className="relative w-full py-24 md:py-32 lg:py-40">
-      <div className="max-w-3xl mx-auto px-6 sm:px-8">
+    <section id="faq-section" className="relative w-full py-24 md:py-32 lg:py-40 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/3 rounded-full blur-[180px]" />
+      </div>
+
+      <div className="relative max-w-3xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           {/* Badge */}
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 opacity-0 animate-fade-in-up"
+            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass border border-primary/20 mb-8 opacity-0 animate-fade-in-up"
             style={{ animationFillMode: "forwards" }}
           >
+            <HelpCircle className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">
               {t("badge")}
             </span>
@@ -139,7 +160,7 @@ export function FAQSection() {
             style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
           >
             <span className="block">{t("title.line1")}</span>
-            <span className="block text-primary">{t("title.line2")}</span>
+            <span className="block gradient-text">{t("title.line2")}</span>
           </h2>
 
           {/* Description */}
@@ -152,7 +173,7 @@ export function FAQSection() {
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {faqData.map((faq, index) => (
             <FAQItem
               key={faq.id}

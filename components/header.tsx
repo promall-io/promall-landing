@@ -4,11 +4,11 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, ArrowRight } from "lucide-react"
+import { Menu, ArrowRight, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -52,30 +52,41 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-[9999]">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8 pt-4">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
         <nav
           className={`
-            flex items-center justify-between
-            h-14 px-4 lg:px-6
-            rounded-full
-            transition-all duration-300
+            relative flex items-center justify-between
+            h-16 px-5 lg:px-8
+            rounded-2xl
+            transition-all duration-500 ease-out
             ${
               scrolled
-                ? "glass border border-white/10 shadow-medium"
+                ? "glass shadow-medium"
                 : "bg-transparent"
             }
           `}
         >
+          {/* Animated gradient border on scroll */}
+          {scrolled && (
+            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+              <div className="absolute inset-[-1px] rounded-2xl bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 opacity-50" />
+            </div>
+          )}
+
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/icon.svg"
-              alt="ProMall"
-              width={32}
-              height={32}
-              className="w-8 h-8"
-            />
-            <span className="text-lg font-bold text-foreground">
+          <Link href="/" className="relative flex items-center gap-2.5 group">
+            <div className="relative">
+              <Image
+                src="/icon.svg"
+                alt="ProMall"
+                width={36}
+                height={36}
+                className="w-9 h-9 transition-transform duration-300 group-hover:scale-110"
+              />
+              {/* Subtle glow on hover */}
+              <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+            <span className="text-lg font-bold text-foreground tracking-tight">
               {t("brandName")}
             </span>
           </Link>
@@ -87,9 +98,11 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={(event) => handleScrollClick(event, item.href)}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 group"
               >
                 {item.name}
+                {/* Hover underline effect */}
+                <span className="absolute bottom-1 left-4 right-4 h-px bg-gradient-to-r from-primary to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             ))}
           </div>
@@ -104,9 +117,10 @@ export function Header() {
               className="hidden sm:flex"
             >
               <Button
-                className="h-9 px-4 rounded-full bg-foreground hover:bg-foreground/90 text-background text-sm font-medium transition-all duration-200"
+                className="group h-10 px-5 rounded-xl bg-foreground hover:bg-foreground/90 text-background text-sm font-semibold transition-all duration-300 shadow-glow hover:shadow-glow-strong"
               >
                 {t("cta")}
+                <ArrowRight className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:group-hover:translate-x-1" />
               </Button>
             </Link>
 
@@ -116,46 +130,64 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-9 h-9 rounded-full hover:bg-white/10 transition-colors duration-200"
+                  className="relative w-10 h-10 rounded-xl hover:bg-primary/10 transition-all duration-300"
                 >
                   <Menu className="w-5 h-5 text-foreground" />
                   <span className="sr-only">{t("menu")}</span>
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-[300px] p-0 bg-background border-l border-white/10">
+              <SheetContent
+                side="right"
+                className="w-[320px] p-0 glass border-l border-border/50"
+              >
                 <div className="flex flex-col h-full">
                   {/* Header */}
-                  <SheetHeader className="p-6 border-b border-white/10">
-                    <SheetTitle className="flex items-center gap-2 text-left">
-                      <Image
-                        src="/icon.svg"
-                        alt="ProMall"
-                        width={32}
-                        height={32}
-                        className="w-8 h-8"
-                      />
-                      <span className="text-lg font-bold text-foreground">{t("brandName")}</span>
-                    </SheetTitle>
+                  <SheetHeader className="p-6 border-b border-border/50">
+                    <div className="flex items-center justify-between">
+                      <SheetTitle className="flex items-center gap-2.5 text-right">
+                        <Image
+                          src="/icon.svg"
+                          alt="ProMall"
+                          width={36}
+                          height={36}
+                          className="w-9 h-9"
+                        />
+                        <span className="text-lg font-bold text-foreground">{t("brandName")}</span>
+                      </SheetTitle>
+                      <SheetClose asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="w-9 h-9 rounded-xl hover:bg-primary/10"
+                        >
+                          <X className="w-5 h-5" />
+                        </Button>
+                      </SheetClose>
+                    </div>
                   </SheetHeader>
 
                   {/* Navigation */}
-                  <nav className="flex-1 p-4">
-                    {navItems.map((item) => (
+                  <nav className="flex-1 p-4 space-y-1">
+                    {navItems.map((item, index) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         onClick={(event) => handleScrollClick(event, item.href)}
-                        className="flex items-center justify-between px-4 py-3 rounded-lg text-foreground font-medium hover:bg-white/5 transition-colors duration-200"
+                        className="group flex items-center justify-between px-4 py-4 rounded-xl text-foreground font-medium hover:bg-primary/5 transition-all duration-300 opacity-0 animate-fade-in-up"
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          animationFillMode: "forwards"
+                        }}
                       >
-                        {item.name}
-                        <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                        <span>{item.name}</span>
+                        <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:-translate-x-1 rtl:group-hover:translate-x-1 transition-all duration-300" />
                       </Link>
                     ))}
                   </nav>
 
                   {/* Footer CTA */}
-                  <div className="p-4 border-t border-white/10">
+                  <div className="p-6 border-t border-border/50 space-y-4">
                     <Link
                       href="https://app.promall.io"
                       target="_blank"
@@ -163,12 +195,13 @@ export function Header() {
                       className="block"
                     >
                       <Button
-                        className="w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-200"
+                        className="w-full h-14 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base transition-all duration-300 shadow-glow hover:shadow-glow-strong"
                       >
                         {t("cta")}
+                        <ArrowRight className="mr-2 h-4 w-4" />
                       </Button>
                     </Link>
-                    <p className="text-center text-xs text-muted-foreground mt-3">
+                    <p className="text-center text-sm text-muted-foreground">
                       {t("noCreditCard")}
                     </p>
                   </div>
