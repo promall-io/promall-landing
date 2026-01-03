@@ -33,7 +33,7 @@ export function TestimonialGridSection() {
           >
             <div className="w-2 h-2 rounded-full bg-primary animate-gentle-pulse" />
             <span className="text-sm font-medium text-primary">
-              {t("badge") || "مزایای کلیدی"}
+              {t("badge")}
             </span>
           </div>
 

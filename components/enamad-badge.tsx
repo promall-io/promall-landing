@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 interface EnamadBadgeProps {
   className?: string
@@ -12,6 +15,7 @@ const sizeClasses = {
 }
 
 export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
+  const t = useTranslations("enamad")
   const ENAMAD_ID = "650462"
   const ENAMAD_CODE = "b6cJOzpyayyExJwFHb8LSZv4ZdAJ24MB"
   const trustSealUrl = `https://trustseal.enamad.ir/?id=${ENAMAD_ID}&Code=${ENAMAD_CODE}`
@@ -25,7 +29,7 @@ export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
         rel="noopener noreferrer"
         href={trustSealUrl}
         className="group relative block"
-        aria-label="نماد اعتماد الکترونیکی"
+        aria-label={t("label")}
       >
         <div
           className={`
@@ -37,7 +41,7 @@ export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
         >
           <Image
             src={logoUrl}
-            alt="نماد اعتماد الکترونیکی پروMall"
+            alt={t("altText")}
             width={100}
             height={100}
             className="w-full h-full object-contain"

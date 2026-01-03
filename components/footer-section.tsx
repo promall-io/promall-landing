@@ -163,7 +163,7 @@ export function FooterSection() {
               <span>{t("copyright")}</span>
               <span className="mx-1">•</span>
               <span className="inline-flex items-center gap-1">
-                ساخته شده با
+                {t("madeWith")}
                 <Heart className="w-3.5 h-3.5 text-primary fill-primary" />
               </span>
             </div>

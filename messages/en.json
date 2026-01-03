@@ -16,6 +16,10 @@
     "menu": "Menu",
     "noCreditCard": "No credit card required"
   },
+  "enamad": {
+    "label": "E-Trust Seal",
+    "altText": "ProMall E-Trust Seal"
+  },
   "hero": {
     "badge": "Introducing Promall",
     "title": {
@@ -190,6 +194,7 @@
     }
   },
   "testimonials": {
+    "badge": "Why Promall",
     "title": "Why teams love Promall",
     "description": "Don't take our word for it. Here's what our customers say.",
     "benefits": {
@@ -302,6 +307,7 @@
       }
     },
     "copyright": "Promall, Inc. All rights reserved.",
+    "madeWith": "Made with",
     "legal": {
       "privacy": "Privacy",
       "terms": "Terms",
