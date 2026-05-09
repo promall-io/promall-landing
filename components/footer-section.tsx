@@ -40,13 +40,14 @@ export function FooterSection() {
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
             {/* Logo */}
-            <Link href="/" className="inline-flex items-center gap-3 group">
+            <Link href="/" aria-label={t("brandName")} className="inline-flex items-center gap-3 group">
               <div className="relative">
                 <Image
                   src="/icon.svg"
-                  alt="ProMall"
+                  alt=""
                   width={48}
                   height={48}
+                  sizes="48px"
                   className="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

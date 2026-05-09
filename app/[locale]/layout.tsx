@@ -1,33 +1,95 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
 import { locales, localeDirection, type Locale } from "@/i18n/config";
 import "../globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
 
+const SITE_URL = "https://promall.io";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const messages = await getMessages();
   const metadata = messages.metadata as { title: string; description: string };
 
+  const localePath = locale === "en" ? "" : `/${locale}`;
+  const canonical = `${SITE_URL}${localePath || "/"}`;
+
+  const languages: Record<string, string> = {};
+  for (const candidate of locales) {
+    const path = candidate === "en" ? "/" : `/${candidate}`;
+    languages[candidate] = `${SITE_URL}${path}`;
+  }
+  languages["x-default"] = `${SITE_URL}/`;
+
   return {
+    metadataBase: new URL(SITE_URL),
     title: metadata.title,
     description: metadata.description,
-    generator: "v0.app",
+    applicationName: "ProMall",
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
+    },
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      type: "website",
+      url: canonical,
+      siteName: "ProMall",
+      title: metadata.title,
+      description: metadata.description,
+      locale: locale === "fa" ? "fa_IR" : "en_US",
+      images: [
+        {
+          url: "/icon.svg",
+          width: 1200,
+          height: 630,
+          alt: "ProMall",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: ["/icon.svg"],
+    },
+    icons: {
+      icon: "/icon.svg",
     },
   };
 }
@@ -35,21 +97,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  // Validate locale
   if (!locales.includes(locale as Locale)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale);
 
-  // Get messages for the current locale
   const messages = await getMessages();
   const dir = localeDirection[locale as Locale];
 
   return (
-    <html lang={locale} dir={dir} className={locale === 'fa' ? 'font-sans' : ''}>
-      <body className={locale === 'fa' ? 'font-sans antialiased' : 'antialiased'} style={locale === 'en' ? { fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' } : {}}>
+    <html
+      lang={locale}
+      dir={dir}
+      className={locale === "fa" ? "font-sans" : inter.variable}
+    >
+      <body
+        className={locale === "fa" ? "font-sans antialiased" : "antialiased"}
+        style={
+          locale === "en"
+            ? {
+                fontFamily:
+                  'var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              }
+            : undefined
+        }
+      >
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

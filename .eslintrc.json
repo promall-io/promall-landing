@@ -1,0 +1,8 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "@next/next/no-img-element": "error",
+    "react/no-unescaped-entities": "off"
+  }
+}

@@ -44,8 +44,8 @@ export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
             alt={t("altText")}
             width={100}
             height={100}
+            sizes="(max-width: 768px) 80px, 144px"
             className="w-full h-full object-contain"
-            unoptimized
             priority={false}
           />
         </div>

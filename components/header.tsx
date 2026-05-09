@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet"
+import { LanguageSwitcher } from "@/components/language-switcher"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -74,13 +75,15 @@ export function Header() {
           )}
 
           {/* Logo */}
-          <Link href="/" className="relative flex items-center gap-2.5 group">
+          <Link href="/" aria-label={t("brandName")} className="relative flex items-center gap-2.5 group">
             <div className="relative">
               <Image
                 src="/icon.svg"
-                alt="ProMall"
+                alt=""
                 width={36}
                 height={36}
+                priority
+                sizes="36px"
                 className="w-9 h-9 transition-transform duration-300 group-hover:scale-110"
               />
               {/* Subtle glow on hover */}
@@ -109,6 +112,9 @@ export function Header() {
 
           {/* CTA & Mobile Menu */}
           <div className="flex items-center gap-3">
+            <div className="hidden sm:flex">
+              <LanguageSwitcher />
+            </div>
             {/* Desktop CTA */}
             <Link
               href="https://app.promall.io"
@@ -148,9 +154,10 @@ export function Header() {
                       <SheetTitle className="flex items-center gap-2.5 text-right">
                         <Image
                           src="/icon.svg"
-                          alt="ProMall"
+                          alt=""
                           width={36}
                           height={36}
+                          sizes="36px"
                           className="w-9 h-9"
                         />
                         <span className="text-lg font-bold text-foreground">{t("brandName")}</span>

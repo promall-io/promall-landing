@@ -3,16 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Inter Font for English */
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Variable.woff2") format("woff2-variations");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Estedaad Font for Persian */
 @font-face {
   font-family: "Estedaad";
   src: url("/fonts/estedaad.ttf") format("truetype");
@@ -83,8 +73,7 @@
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: #CCCFD2;
 
-  /* Typography */
-  --font-sans: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-inter), "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "SF Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
 }
 

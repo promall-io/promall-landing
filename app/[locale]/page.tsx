@@ -18,45 +18,22 @@ type Props = {
 export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
 
-  // Enable static rendering
   setRequestLocale(locale);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <Header />
-
-      {/* Main content */}
       <main>
-        {/* Hero Section */}
         <HeroSection />
-
-        {/* Features Section */}
         <BentoSection />
-
-        {/* How It Works */}
         <HowItWorksSection />
-
-        {/* AI Features */}
         <AIFeaturesSection />
-
-        {/* Large Testimonial */}
         <LargeTestimonial />
-
-        {/* Pricing Section */}
         <PricingSection />
-
-        {/* Benefits Grid */}
         <TestimonialGridSection />
-
-        {/* FAQ Section */}
         <FAQSection />
-
-        {/* CTA Section */}
         <CTASection />
       </main>
-
-      {/* Footer */}
       <FooterSection />
     </div>
   );
