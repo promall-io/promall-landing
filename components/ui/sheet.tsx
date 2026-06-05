@@ -48,9 +48,11 @@ function SheetContent({
   className,
   children,
   side = 'right',
+  closeLabel = 'بستن',
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left'
+  closeLabel?: string
 }) {
   return (
     <SheetPortal>
@@ -74,7 +76,7 @@ function SheetContent({
         {children}
         <SheetPrimitive.Close className="ring-offset-background focus:ring-ring absolute top-6 left-6 rounded-xl p-2.5 bg-foreground/5 hover:bg-foreground/10 opacity-70 hover:opacity-100 transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
           <XIcon className="size-5 text-foreground" strokeWidth={2.5} />
-          <span className="sr-only">بستن</span>
+          <span className="sr-only">{closeLabel}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>

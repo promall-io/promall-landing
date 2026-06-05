@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, ArrowRight, X } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet"
@@ -15,6 +15,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
   const t = useTranslations("header")
+  const locale = useLocale()
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -144,8 +145,8 @@ export function Header() {
               </SheetTrigger>
 
               <SheetContent
-                side="right"
-                className="w-[320px] p-0 glass border-l border-border/50"
+                side={locale === "fa" ? "right" : "left"}
+                className={`w-80 max-w-[85vw] p-0 glass ${locale === "fa" ? "border-l" : "border-r"} border-border/50`}
               >
                 <div className="flex flex-col h-full">
                   {/* Header */}

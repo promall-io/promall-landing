@@ -5,7 +5,8 @@
 
 @font-face {
   font-family: "Estedaad";
-  src: url("/fonts/estedaad.ttf") format("truetype");
+  src: url("/fonts/estedaad.woff2") format("woff2"),
+       url("/fonts/estedaad.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

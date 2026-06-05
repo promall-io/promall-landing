@@ -71,15 +71,12 @@ export function FooterSection() {
                 </div>
                 <span className="text-sm font-medium">{t("contact.email")}</span>
               </a>
-              <a
-                href="tel:+12345678900"
-                className="group flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/5 border border-primary/15 flex items-center justify-center group-hover:border-primary/30 group-hover:shadow-glow transition-all duration-300">
+              <div className="group flex items-center gap-3 text-muted-foreground">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/5 border border-primary/15 flex items-center justify-center transition-all duration-300">
                   <Phone className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-medium">{t("contact.phone")}</span>
-              </a>
+              </div>
             </div>
 
             {/* Social Links */}
@@ -127,6 +124,8 @@ export function FooterSection() {
                 <li key={item}>
                   <a
                     href="#"
+                    aria-disabled="true"
+                    onClick={(e) => e.preventDefault()}
                     className="group inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-300"
                   >
                     <span>{item}</span>
@@ -144,6 +143,8 @@ export function FooterSection() {
                 <li key={item}>
                   <a
                     href="#"
+                    aria-disabled="true"
+                    onClick={(e) => e.preventDefault()}
                     className="group inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-300"
                   >
                     <span>{item}</span>
@@ -174,10 +175,10 @@ export function FooterSection() {
               <Link href="/privacy" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300">
                 {t("legal.privacy")}
               </Link>
-              <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300">
+              <a href="#" aria-disabled="true" onClick={(e) => e.preventDefault()} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300">
                 {t("legal.terms")}
               </a>
-              <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300">
+              <a href="#" aria-disabled="true" onClick={(e) => e.preventDefault()} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300">
                 {t("legal.cookies")}
               </a>
             </div>

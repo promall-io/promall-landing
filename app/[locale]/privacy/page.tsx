@@ -1,10 +1,8 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Shield, Database, Eye, Trash2, Lock, Globe, Mail, ArrowLeft } from "lucide-react"
 
-export default function PrivacyPolicyPage() {
-  const t = useTranslations("privacy")
+export default async function PrivacyPolicyPage() {
+  const t = await getTranslations("privacy")
 
   const sections = [
     {
@@ -52,7 +50,7 @@ export default function PrivacyPolicyPage() {
           href="/"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
           <span className="text-sm font-medium">{t("backToHome")}</span>
         </a>
 
@@ -102,7 +100,7 @@ export default function PrivacyPolicyPage() {
                 </div>
               </div>
 
-              <ul className="space-y-3 ml-16">
+              <ul className="space-y-3 ms-16">
                 {section.content.map((item, itemIndex) => (
                   <li
                     key={itemIndex}

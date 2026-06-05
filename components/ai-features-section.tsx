@@ -91,7 +91,7 @@ export function AIFeaturesSection() {
                   className="group h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base transition-all duration-300 shadow-glow hover:shadow-glow-strong"
                 >
                   {t("cta")}
-                  <ArrowRight className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:group-hover:translate-x-1" />
+                  <ArrowRight className="ms-2 h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:group-hover:translate-x-1" />
                 </Button>
               </Link>
 
@@ -99,7 +99,7 @@ export function AIFeaturesSection() {
                 variant="ghost"
                 className="h-12 px-6 rounded-xl text-foreground hover:bg-primary/5 font-medium text-base border border-border/50 hover:border-primary/30 transition-all duration-300"
               >
-                <Zap className="ml-2 h-4 w-4 text-primary" />
+                <Zap className="me-2 h-4 w-4 text-primary" />
                 {t("badge")}
               </Button>
             </div>
