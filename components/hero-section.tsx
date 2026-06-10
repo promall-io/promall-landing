@@ -61,10 +61,7 @@ export function HeroSection() {
           </div>
 
           {/* Main Heading - Apple style with gradient text */}
-          <h1
-            className="text-display text-foreground mb-8 opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
-          >
+          <h1 className="text-display text-foreground mb-8">
             <span className="block">{t("title.line1")}</span>
             <span className="block gradient-text">{t("title.line2")}</span>
           </h1>

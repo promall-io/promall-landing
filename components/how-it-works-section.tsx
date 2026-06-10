@@ -1,10 +1,8 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Upload, Palette, Rocket, ArrowLeft } from "lucide-react"
 
-export function HowItWorksSection() {
-  const t = useTranslations("howItWorks")
+export async function HowItWorksSection() {
+  const t = await getTranslations("howItWorks")
 
   const steps = [
     {

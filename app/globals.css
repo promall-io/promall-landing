@@ -3,15 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: "Estedaad";
-  src: url("/fonts/estedaad.woff2") format("woff2"),
-       url("/fonts/estedaad.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* Apple-inspired dark theme - clean and sophisticated */
   --background: #000000;
@@ -81,7 +72,7 @@
 /* Persian locale override */
 :root:lang(fa),
 [dir="rtl"] {
-  --font-sans: "Estedaad", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: var(--font-estedaad), "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .dark {

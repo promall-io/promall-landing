@@ -1,12 +1,10 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { MessageSquare, ArrowUpRight, ShoppingBag, Sparkles, ArrowRight, Zap, Bot } from "lucide-react"
 
-export function AIFeaturesSection() {
-  const t = useTranslations("aiFeatures")
+export async function AIFeaturesSection() {
+  const t = await getTranslations("aiFeatures")
 
   const capabilities = [
     {

@@ -1,10 +1,8 @@
-"use client"
-
 import { Smartphone, Zap, Shield, TrendingUp, Users, Sparkles, type LucideIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export function TestimonialGridSection() {
-  const t = useTranslations("testimonials")
+export async function TestimonialGridSection() {
+  const t = await getTranslations("testimonials")
 
   const benefits: { key: string; icon: LucideIcon; gradient: string }[] = [
     { key: "modernDesign", icon: Smartphone, gradient: "from-primary/20 to-accent/10" },

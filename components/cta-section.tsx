@@ -1,12 +1,10 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, Sparkles, Check, Zap } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export function CTASection() {
-  const t = useTranslations("cta")
+export async function CTASection() {
+  const t = await getTranslations("cta")
 
   const trustIndicators = [
     t("trustIndicators.install"),

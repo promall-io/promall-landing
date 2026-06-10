@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
@@ -12,6 +13,22 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const estedaad = localFont({
+  src: [
+    {
+      path: "../../public/fonts/estedaad.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/estedaad.ttf",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  variable: "--font-estedaad",
+  adjustFontFallback: false,
 });
 
 type Props = {
@@ -110,7 +127,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={dir}
-      className={locale === "fa" ? "font-sans" : inter.variable}
+      className={
+        locale === "fa" ? `${estedaad.variable} font-sans` : inter.variable
+      }
     >
       <body
         className={locale === "fa" ? "font-sans antialiased" : "antialiased"}

@@ -1,10 +1,8 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Quote, Star } from "lucide-react"
 
-export function LargeTestimonial() {
-  const t = useTranslations("largeTestimonial")
+export async function LargeTestimonial() {
+  const t = await getTranslations("largeTestimonial")
 
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden">

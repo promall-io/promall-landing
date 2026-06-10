@@ -1,7 +1,5 @@
-"use client"
-
 import { Package, ShoppingCart, Warehouse, CreditCard, Printer, BarChart3, type LucideIcon, Sparkles } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
 interface FeatureCardProps {
   title: string
@@ -76,8 +74,8 @@ function FeatureCard({ title, description, icon: Icon, index, featured }: Featur
   )
 }
 
-export function BentoSection() {
-  const t = useTranslations("features")
+export async function BentoSection() {
+  const t = await getTranslations("features")
 
   const features: { title: string; description: string; icon: LucideIcon; featured?: boolean }[] = [
     {
