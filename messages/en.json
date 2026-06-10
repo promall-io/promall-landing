@@ -1,361 +1,263 @@
 {
   "metadata": {
-    "title": "Promall — The Future of E-Commerce Management",
-    "description": "Run your online store like a pro. Powerful tools, beautiful interface, zero complexity."
+    "title": "ProMall — Smart Online Store with an Instagram AI Assistant",
+    "description": "ProMall is an AI-powered store management platform. Turn your Instagram DMs into a smart salesperson — products, orders, payments and reports in one panel."
   },
   "header": {
-    "companyName": "PROMALL",
-    "brandName": "Promall",
+    "brand": "ProMall",
     "nav": {
       "features": "Features",
-      "howItWorks": "How It Works",
+      "instagramAi": "Instagram AI",
       "pricing": "Pricing",
       "faq": "FAQ"
     },
-    "cta": "Get Started",
-    "menu": "Menu",
-    "noCreditCard": "No credit card required"
+    "cta": "Open Dashboard",
+    "menuLabel": "Menu"
+  },
+  "hero": {
+    "badge": "AI sales assistant for Instagram DMs",
+    "titleLine1": "Build your store,",
+    "titleLine2": "let AI handle the selling",
+    "description": "ProMall manages products, orders, payments and inventory in one place — and its AI answers your Instagram DMs like your best salesperson, even at midnight.",
+    "ctaPrimary": "Start for Free",
+    "ctaSecondary": "See the AI in Action",
+    "note": "No credit card required · Set up in under 10 minutes",
+    "kicker": "The smart sales platform for the new generation of Iranian businesses"
+  },
+  "stats": {
+    "activeShops": "Active stores",
+    "ordersProcessed": "Orders processed",
+    "uptime": "Reliable uptime",
+    "support": "Always-on support"
+  },
+  "bento": {
+    "badge": "All Features",
+    "title": "Everything an online store needs",
+    "subtitle": "From your first product to your sales reports — every tool in one unified panel, built for Iranian businesses.",
+    "cells": {
+      "instagramAi": {
+        "title": "Smart Instagram DMs",
+        "description": "AI answers customer questions with real prices and stock, and places the order right inside the DM."
+      },
+      "products": {
+        "title": "Products & Variants",
+        "description": "Simple products or full color/size matrices; variants are generated in seconds."
+      },
+      "orders": {
+        "title": "Order Management",
+        "description": "From checkout to delivery — every order's status is always clear and current."
+      },
+      "payments": {
+        "title": "Secure Payments",
+        "description": "Bank gateway plus card-to-card with receipt verification — both methods the Iranian market loves."
+      },
+      "reports": {
+        "title": "Live Reports",
+        "description": "See sales, profit and growth the moment they happen, not at month's end."
+      },
+      "storefront": {
+        "title": "Your Own Storefront",
+        "description": "An online showcase with its own link; customers order and pay with no middleman."
+      },
+      "inventory": {
+        "title": "Smart Inventory",
+        "description": "Stock updates with every order and warns you before anything runs out."
+      },
+      "customers": {
+        "title": "Customer Profiles",
+        "description": "Know every customer's purchase history and build repeat sales."
+      },
+      "print": {
+        "title": "Auto Receipt Printing",
+        "description": "Every order prints its invoice automatically on your store's printer."
+      },
+      "realtime": {
+        "title": "Realtime Alerts",
+        "description": "New orders appear on all your devices the second they arrive."
+      }
+    }
+  },
+  "instagram": {
+    "badge": "Instagram AI",
+    "title": "Your Instagram DMs, a full-time salesperson",
+    "subtitle": "A customer asks in your DMs and ProMall's AI answers with your store's real data — accurate, in your tone, at any hour of the day.",
+    "bullets": {
+      "alwaysOn": {
+        "title": "Instant replies, 24/7",
+        "description": "No message goes unanswered; even at midnight customers get a complete reply."
+      },
+      "grounded": {
+        "title": "Connected to your real store data",
+        "description": "Prices, stock and product details come straight from your panel — never guesswork."
+      },
+      "personality": {
+        "title": "Adjustable tone & personality",
+        "description": "Formal, friendly or playful — the AI speaks with your brand's personality."
+      },
+      "handoff": {
+        "title": "Orders placed, handoff when needed",
+        "description": "Orders are created right in the DM, and the conversation is handed to you whenever it matters."
+      }
+    },
+    "ghost": "The salesperson that never sleeps"
+  },
+  "howItWorks": {
+    "badge": "Getting Started",
+    "title": "Three steps to automated sales",
+    "steps": {
+      "create": {
+        "number": "1",
+        "title": "Create your store",
+        "description": "Sign up and your store panel is ready in under ten minutes — no technical skills needed."
+      },
+      "stock": {
+        "number": "2",
+        "title": "Add your products",
+        "description": "Enter products, prices and stock; variants and invoices organize themselves."
+      },
+      "sell": {
+        "number": "3",
+        "title": "Connect Instagram",
+        "description": "From that moment the AI answers your DMs and you simply manage the orders."
+      }
+    }
+  },
+  "reports": {
+    "badge": "Reports & Analytics",
+    "title": "Decide with numbers, not guesses",
+    "subtitle": "ProMall's reporting dashboard shows sales, profit and customer behavior in plain language, so you know what actually sells.",
+    "kpis": {
+      "monthSales": "Sales this month (Toman)",
+      "growth": "Growth vs last month",
+      "bestDay": "Best-selling day"
+    },
+    "chartTitle": "Sales trend, last 12 weeks",
+    "chartDelta": "+32% growth"
+  },
+  "pricing": {
+    "badge": "Pricing",
+    "title": "A plan for every business size",
+    "subtitle": "Start free; upgrade whenever you grow.",
+    "toggle": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "discount": "20% off"
+    },
+    "currencySuffix": "Toman / month",
+    "popularLabel": "Most Popular",
+    "footnote": "All plans include continuous updates; you can change plans at any time.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "monthlyPrice": "0",
+        "annualPrice": "0",
+        "hasCurrency": "true",
+        "description": "For getting started with ProMall",
+        "features": [
+          "Up to 10 products",
+          "Limited orders",
+          "Basic reports",
+          "Email support"
+        ],
+        "cta": "Start Now"
+      },
+      "professional": {
+        "name": "Professional",
+        "monthlyPrice": "200,000",
+        "annualPrice": "160,000",
+        "hasCurrency": "true",
+        "description": "The best choice for growing stores",
+        "features": [
+          "Unlimited products",
+          "Smart Instagram DMs",
+          "Full order & inventory management",
+          "Payment gateway & card-to-card",
+          "Auto receipt printing",
+          "Advanced reports",
+          "Priority support"
+        ],
+        "cta": "Go Professional"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "monthlyPrice": "Contact us",
+        "annualPrice": "Contact us",
+        "hasCurrency": "false",
+        "description": "Tailored for large businesses",
+        "features": [
+          "Multiple stores & team management",
+          "Member access levels",
+          "Dedicated 24/7 support",
+          "Full customization"
+        ],
+        "cta": "Contact Us"
+      }
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Whatever you're wondering, it's here",
+    "items": {
+      "noTech": {
+        "question": "Do I need technical skills to use ProMall?",
+        "answer": "No. ProMall is designed for business owners, not programmers. You sign up, add products, and your store is ready — everything is simple and localized."
+      },
+      "howAi": {
+        "question": "How does the AI know what to answer?",
+        "answer": "The assistant is connected to your store's real data: products, prices, stock and the knowledge base you maintain. Answers are built from that data, and you control the tone."
+      },
+      "instagramSafe": {
+        "question": "Is connecting Instagram safe?",
+        "answer": "Yes. The connection uses Meta's official API and your password is never stored in ProMall. You can disconnect at any time."
+      },
+      "payments": {
+        "question": "How do customers pay?",
+        "answer": "Two methods are available: an online bank gateway and card-to-card transfer with receipt upload. Card-to-card receipts are verified right inside your panel."
+      },
+      "switchPlans": {
+        "question": "Can I change my plan later?",
+        "answer": "Yes — you can upgrade or change plans at any moment from your panel, and your account and history stay intact."
+      },
+      "support": {
+        "question": "Who helps me if I run into trouble?",
+        "answer": "ProMall's support team is available through the in-panel ticket system; higher plans include fast, dedicated support."
+      }
+    }
+  },
+  "cta": {
+    "title": "Make your next store a smart one",
+    "subtitle": "Start free today; ten minutes later your store is online and your AI assistant is ready to answer.",
+    "button": "Start for Free",
+    "note": "No credit card · Cancel anytime"
+  },
+  "footer": {
+    "brand": "ProMall",
+    "description": "An AI-powered store management platform, built for Iranian businesses.",
+    "columns": {
+      "product": "Product",
+      "company": "Company",
+      "trust": "Trust Seal"
+    },
+    "links": {
+      "features": "Features",
+      "instagramAi": "Instagram AI",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "app": "Open Dashboard",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "© 2026 ProMall. All rights reserved.",
+    "madeIn": "Made with ❤️ for Iranian businesses"
   },
   "enamad": {
     "label": "E-Trust Seal",
     "altText": "ProMall E-Trust Seal"
   },
-  "hero": {
-    "badge": "Introducing Promall",
-    "title": {
-      "line1": "Your store.",
-      "line2": "Supercharged."
-    },
-    "description": "The all-in-one platform that transforms how you sell online. From inventory to AI-powered customer support — everything just works.",
-    "subDescription": "Join thousands of merchants who've already made the switch.",
-    "cta": {
-      "primary": "Start Free Trial",
-      "secondary": "Watch Demo"
-    },
-    "stats": {
-      "activeStores": "10,000+",
-      "activeStoresLabel": "Active Stores",
-      "ordersProcessed": "2M+",
-      "ordersProcessedLabel": "Orders Processed",
-      "uptime": "99.9%",
-      "uptimeLabel": "Uptime"
-    }
-  },
-  "features": {
-    "badge": "Features",
-    "title": {
-      "line1": "Everything you need.",
-      "line2": "Nothing you don't."
-    },
-    "description": "We've thought of every detail so you can focus on what matters most —",
-    "descriptionHighlight": "growing your business.",
-    "cards": {
-      "productManagement": {
-        "title": "Product Management",
-        "description": "Add products in seconds, not hours. Bulk editing, variant management, and smart categorization that actually makes sense."
-      },
-      "orderControl": {
-        "title": "Order Dashboard",
-        "description": "Every order, every status, one beautiful view. Filter, search, and process orders faster than ever before."
-      },
-      "inventoryManagement": {
-        "title": "Smart Inventory",
-        "description": "Real-time stock tracking that prevents overselling. Low stock alerts, automatic reorder points, and warehouse sync."
-      },
-      "securePayment": {
-        "title": "Seamless Payments",
-        "description": "Accept any payment method your customers prefer. Instant settlement, zero failed transactions, complete peace of mind."
-      },
-      "autoPrinting": {
-        "title": "Auto-Print & Ship",
-        "description": "Labels, invoices, packing slips — generated and printed automatically. Connect your printer once, forget about it forever."
-      },
-      "completeReports": {
-        "title": "Actionable Analytics",
-        "description": "Understand your business at a glance. Revenue trends, best sellers, customer insights — the data you need to grow."
-      }
-    }
-  },
-  "howItWorks": {
-    "badge": "How It Works",
-    "title": {
-      "line1": "From zero to selling",
-      "line2": "in three steps."
-    },
-    "description": "Getting started takes minutes, not weeks. Here's how simple it is.",
-    "steps": {
-      "connect": {
-        "number": "01",
-        "title": "Connect Your Store",
-        "description": "Import your existing products or start fresh. Our setup wizard handles everything — domains, payments, shipping. Just follow along."
-      },
-      "customize": {
-        "number": "02",
-        "title": "Make It Yours",
-        "description": "Configure your store exactly how you want it. Themes, checkout flow, notifications — every touchpoint reflects your brand."
-      },
-      "grow": {
-        "number": "03",
-        "title": "Start Selling",
-        "description": "Go live and watch orders roll in. Our AI handles customer inquiries while you focus on strategy. Scale without stress."
-      }
-    }
-  },
-  "aiFeatures": {
-    "badge": "AI-Powered",
-    "title": {
-      "line1": "Meet your new",
-      "line2": "sales assistant."
-    },
-    "description": "Instagram DMs, customer questions, product recommendations — our AI handles it all. 24/7, in your brand's voice, with zero training required.",
-    "capabilities": {
-      "instantResponses": {
-        "title": "Instant Responses",
-        "description": "Never miss a customer message. AI responds in seconds, any time of day."
-      },
-      "smartEscalation": {
-        "title": "Smart Escalation",
-        "description": "Complex issues get routed to your team. Simple ones get solved automatically."
-      },
-      "orderCreation": {
-        "title": "Order Creation",
-        "description": "Customers can complete purchases right in the chat. No redirects, no friction."
-      },
-      "brandVoice": {
-        "title": "Your Brand Voice",
-        "description": "Customize responses to sound exactly like you. Professional, friendly, whatever fits."
-      }
-    },
-    "cta": "See AI in Action"
-  },
-  "largeTestimonial": {
-    "quote": "Promall didn't just improve our operations — it completely transformed how we think about running an online business. The time we've saved is incredible.",
-    "name": "Sarah Chen",
-    "title": "Founder, Luxe Cosmetics"
-  },
-  "pricing": {
-    "badge": "Pricing",
-    "title": {
-      "line1": "Simple pricing.",
-      "line2": "No surprises."
-    },
-    "description": "Start free. Upgrade when you're ready. No hidden fees, no long-term contracts.",
-    "toggle": {
-      "monthly": "Monthly",
-      "annual": "Annual",
-      "discount": "Save 20%"
-    },
-    "currency": "/month",
-    "plans": {
-      "free": {
-        "name": "Starter",
-        "monthlyPrice": "$0",
-        "annualPrice": "$0",
-        "description": "Perfect for testing the waters",
-        "features": [
-          "Up to 25 products",
-          "100 orders/month",
-          "Basic analytics",
-          "Email support"
-        ],
-        "buttonText": "Start Free"
-      },
-      "professional": {
-        "name": "Professional",
-        "monthlyPrice": "$29",
-        "annualPrice": "$23",
-        "description": "For growing businesses",
-        "features": [
-          "Unlimited products",
-          "Unlimited orders",
-          "AI customer support",
-          "Auto-print & shipping",
-          "Advanced analytics",
-          "Priority support",
-          "Team collaboration"
-        ],
-        "buttonText": "Start 14-Day Trial",
-        "popular": "Most Popular"
-      },
-      "enterprise": {
-        "name": "Enterprise",
-        "monthlyPrice": "Custom",
-        "annualPrice": "Custom",
-        "description": "For high-volume operations",
-        "features": [
-          "Everything in Professional",
-          "Dedicated account manager",
-          "Custom integrations",
-          "SLA guarantee",
-          "On-premise option"
-        ],
-        "buttonText": "Contact Sales"
-      }
-    }
-  },
-  "testimonials": {
-    "badge": "Why Promall",
-    "title": "Why teams love Promall",
-    "description": "Don't take our word for it. Here's what our customers say.",
-    "benefits": {
-      "modernDesign": {
-        "title": "Beautiful by Default",
-        "description": "An interface so intuitive, your team will actually enjoy using it. No training manual required."
-      },
-      "speed": {
-        "title": "Blazing Fast",
-        "description": "Every action, instant. No loading spinners, no waiting. Just get things done."
-      },
-      "security": {
-        "title": "Bank-Level Security",
-        "description": "Your data is encrypted, backed up, and protected by the same standards used by financial institutions."
-      },
-      "salesGrowth": {
-        "title": "Built for Growth",
-        "description": "From 10 orders to 10,000 — Promall scales with you. No migrations, no downtime, no limits."
-      },
-      "support": {
-        "title": "Humans Who Care",
-        "description": "Real people, real fast. Our support team responds in minutes, not days. We're in this together."
-      },
-      "updates": {
-        "title": "Always Improving",
-        "description": "New features every week based on what you actually need. We listen, we build, you benefit."
-      }
-    },
-    "quotes": {
-      "sara": {
-        "quote": "We switched from three different tools to just Promall. Our team is happier, our customers are happier, and our revenue is up 40%.",
-        "name": "Alex Rivera",
-        "company": "Urban Threads Apparel"
-      },
-      "reza": {
-        "quote": "The AI customer support alone is worth the price. It handles 80% of our DMs automatically.",
-        "name": "Michael Torres",
-        "company": "Tech Gadgets Direct"
-      },
-      "maryam": {
-        "quote": "Finally, software that doesn't feel like it was designed by robots for robots.",
-        "name": "Emma Watson",
-        "company": "Pure Beauty Co"
-      },
-      "ali": {
-        "quote": "Support responded in 3 minutes and actually solved my problem. Unheard of.",
-        "name": "David Kim",
-        "company": "Seoul Street Snacks"
-      },
-      "fatemeh": {
-        "quote": "I've recommended Promall to every e-commerce founder I know. It's that good.",
-        "name": "Priya Patel",
-        "company": "Artisan Home Goods"
-      },
-      "hosein": {
-        "quote": "Our operations went from chaos to clockwork in two weeks. Magic.",
-        "name": "James Wilson",
-        "company": "Fresh Market Delivery"
-      },
-      "niloofar": {
-        "quote": "From inventory nightmares to complete visibility. I can finally sleep at night knowing exactly what's in stock.",
-        "name": "Nina Johansson",
-        "company": "Nordic Design Store"
-      }
-    }
-  },
-  "cta": {
-    "badge": "Ready to grow?",
-    "title": {
-      "line1": "Start your",
-      "line2": "free trial today."
-    },
-    "description": "Join",
-    "descriptionHighlight": "10,000+ merchants",
-    "descriptionEnd": "who run their stores on Promall. No credit card required.",
-    "buttons": {
-      "primary": "Get Started Free",
-      "secondary": "Book a Demo"
-    },
-    "trustIndicators": {
-      "install": "2-minute setup",
-      "support": "Cancel anytime",
-      "unlimited": "No credit card"
-    }
-  },
-  "footer": {
-    "brandName": "Promall",
-    "tagline": "The future of e-commerce management. Simple, smart, powerful.",
-    "contact": {
-      "email": "hello@promall.io",
-      "phone": "+1 (555) 123-4567"
-    },
-    "social": {
-      "twitter": "Twitter",
-      "github": "GitHub",
-      "linkedin": "LinkedIn"
-    },
-    "links": {
-      "product": {
-        "title": "Product",
-        "items": ["Features", "Pricing", "Integrations", "API", "Changelog"]
-      },
-      "company": {
-        "title": "Company",
-        "items": ["About", "Careers", "Blog", "Press", "Contact"]
-      },
-      "resources": {
-        "title": "Resources",
-        "items": ["Documentation", "Help Center", "Community", "Status", "Security"]
-      }
-    },
-    "copyright": "Promall, Inc. All rights reserved.",
-    "madeWith": "Made with",
-    "legal": {
-      "privacy": "Privacy",
-      "terms": "Terms",
-      "cookies": "Cookies"
-    }
-  },
-  "faq": {
-    "badge": "FAQ",
-    "title": {
-      "line1": "Questions?",
-      "line2": "We've got answers."
-    },
-    "description": "Everything you need to know about Promall. Can't find what you're looking for? Our support team is just a message away.",
-    "items": {
-      "whatIsPromall": {
-        "question": "What exactly is Promall?",
-        "answer": "Promall is a complete e-commerce management platform. Think of it as your store's command center — products, orders, inventory, payments, customer communication, analytics — all in one place. We built it because we were tired of juggling a dozen different tools, and we figured you might be too."
-      },
-      "manageProducts": {
-        "question": "How hard is it to get started?",
-        "answer": "Honestly? About as hard as setting up a new email account. Our setup wizard walks you through everything step by step. Most stores are up and running within an hour. If you're migrating from another platform, we can import your existing products automatically."
-      },
-      "integrations": {
-        "question": "Can I connect my existing tools?",
-        "answer": "Absolutely. We integrate with all major payment processors, shipping carriers, and accounting software. Instagram, Facebook, Zapier — you name it. And if something isn't available yet, our API lets you build custom connections."
-      },
-      "freePlan": {
-        "question": "What's included in the free plan?",
-        "answer": "Everything you need to run a small store. Up to 25 products, 100 orders per month, basic analytics, and email support. It's not a trial — you can stay on free forever. When you need more power, you can upgrade anytime."
-      },
-      "trackOrders": {
-        "question": "How does the AI customer support work?",
-        "answer": "Our AI reads your incoming messages and responds intelligently based on your products, policies, and brand voice. It can answer questions, provide tracking info, even create orders. When something needs a human touch, it routes the conversation to your team. You stay in control."
-      },
-      "security": {
-        "question": "Is my data secure?",
-        "answer": "Security isn't an afterthought for us. All data is encrypted in transit and at rest. We're SOC 2 Type II compliant, run on enterprise-grade infrastructure, and perform regular third-party security audits. Your customers' trust is our responsibility."
-      }
-    }
-  },
   "common": {
     "learnMore": "Learn More",
     "getStarted": "Get Started",
     "contactUs": "Contact Us"
-  },
-  "socialProof": {
-    "title": "Trusted by innovative brands",
-    "logoAlt": "Company logo"
   },
   "privacy": {
     "badge": "Privacy Policy",
@@ -523,5 +425,43 @@
       "email": "legal@promall.io"
     },
     "footerNote": "By continuing to use Promall after these Terms are updated, you agree to the updated Terms. If you do not agree, please stop using the Services and contact us to close your account."
+  },
+  "marquee": {
+    "items": [
+      "Smart Instagram DMs",
+      "Order management",
+      "Gateway & card-to-card payments",
+      "Auto receipt printing",
+      "Live sales reports",
+      "Smart inventory",
+      "Your own storefront",
+      "Customer profiles"
+    ]
+  },
+  "showcase": {
+    "heading": "Every feature, no compromises",
+    "scrollHint": "Keep scrolling",
+    "panels": {
+      "direct": {
+        "number": "01",
+        "title": "DMs become your salesperson",
+        "description": "ProMall's AI answers Instagram DMs with your store's real data, quotes prices and closes the order right there."
+      },
+      "orders": {
+        "number": "02",
+        "title": "Order to payment, in one place",
+        "description": "Every order has a clear path from checkout to settlement; bank gateway and card-to-card with receipt verification, both ready."
+      },
+      "logistics": {
+        "number": "03",
+        "title": "Inventory & invoices, automated",
+        "description": "Stock updates with every sale, shortages raise alerts, and the invoice prints instantly on your store's printer."
+      },
+      "insight": {
+        "number": "04",
+        "title": "Numbers, not guesses",
+        "description": "Sales, profit and growth are in front of you the moment they happen — reports that speak a merchant's language."
+      }
+    }
   }
 }
