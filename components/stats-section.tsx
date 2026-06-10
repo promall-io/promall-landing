@@ -22,7 +22,7 @@ const STATS: StatConfig[] = [
     value: 2,
     suffix: { fa: " میلیون", en: "M" },
     prefix: { fa: "+", en: "+" },
-    sizeClass: "text-3xl md:text-4xl lg:text-5xl",
+    sizeClass: "text-3xl md:text-3xl lg:text-4xl",
   },
   { key: "uptime", value: 99.9, decimals: 1, suffix: { fa: "٪", en: "%" } },
   { key: "support", value: 0, static: { fa: "۲۴/۷", en: "24/7" } },
@@ -84,7 +84,7 @@ export function StatsSection() {
           >
             <p
               className={`text-gradient-ink whitespace-nowrap font-extrabold tracking-tight ${
-                stat.sizeClass ?? "text-4xl md:text-5xl lg:text-6xl"
+                stat.sizeClass ?? "text-3xl md:text-4xl lg:text-5xl"
               }`}
             >
               <AnimatedNumber stat={stat} />
