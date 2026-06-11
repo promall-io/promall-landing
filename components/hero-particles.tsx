@@ -14,7 +14,7 @@ import {
   WebGLRenderer,
 } from "three"
 
-const PARTICLE_COUNT = 90
+const PARTICLE_COUNT = 48
 const FIELD = { x: 22, y: 13, z: 7 }
 
 function createGlowTexture() {
@@ -65,7 +65,7 @@ export function HeroParticles({ className }: { className?: string }) {
       positions[index * 3] = (Math.random() - 0.5) * FIELD.x
       positions[index * 3 + 1] = (Math.random() - 0.5) * FIELD.y
       positions[index * 3 + 2] = (Math.random() - 0.5) * FIELD.z
-      speeds[index] = 0.12 + Math.random() * 0.3
+      speeds[index] = 0.05 + Math.random() * 0.14
       phases[index] = Math.random() * Math.PI * 2
     }
 
@@ -74,11 +74,11 @@ export function HeroParticles({ className }: { className?: string }) {
 
     const texture = createGlowTexture()
     const material = new PointsMaterial({
-      size: 0.34,
+      size: 0.52,
       map: texture ?? undefined,
       color: new Color("#dfe9ff"),
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.3,
       depthWrite: false,
       blending: AdditiveBlending,
       sizeAttenuation: true,
@@ -121,7 +121,7 @@ export function HeroParticles({ className }: { className?: string }) {
         attribute.setX(
           index,
           attribute.getX(index) +
-            Math.sin(elapsed * 0.6 + phases[index]) * 0.0035,
+            Math.sin(elapsed * 0.6 + phases[index]) * 0.0022,
         )
       }
       attribute.needsUpdate = true

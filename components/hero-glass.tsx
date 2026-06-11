@@ -25,7 +25,7 @@ const HeroParticles = dynamic(
 const BACKGROUND_IMAGE =
   "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=75&w=1920&auto=format&fit=crop"
 const BACKGROUND_PLACEHOLDER =
-  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ece9e4'/%3E%3Cstop offset='1' stop-color='%23b8ada0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='16' height='9' fill='url(%23g)'/%3E%3C/svg%3E"
+  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef0f3'/%3E%3Cstop offset='1' stop-color='%23aab4c0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='16' height='9' fill='url(%23g)'/%3E%3C/svg%3E"
 const PRODUCT_IMAGE =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=320&auto=format&fit=crop"
 
@@ -86,10 +86,10 @@ function DmGlassCard() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 24, rotate: 5 }}
-      animate={{ opacity: 1, x: 0, rotate: 2.5 }}
+      initial={{ opacity: 0, x: 24, rotate: 4 }}
+      animate={{ opacity: 1, x: 0, rotate: 1.5 }}
       transition={{ duration: 0.9, ease: EASE, delay: 1.05 }}
-      className="absolute right-8 top-[24%] z-20 hidden xl:block"
+      className="absolute right-10 top-[26%] z-20 hidden xl:block"
     >
       <div
         ref={cardRef}
@@ -287,12 +287,15 @@ export function HeroGlass() {
   }, [])
 
   return (
-    <div ref={wrapperRef} className="h-[100svh] w-full p-3 md:p-5">
+    <div ref={wrapperRef} className="h-[100svh] w-full p-2 md:p-2.5">
       <section
         ref={windowRef}
-        className="group relative mx-auto flex h-full w-full max-w-[1536px] flex-col items-center overflow-hidden rounded-[1.5rem] bg-white/10 shadow-ink md:rounded-[2.75rem]"
+        className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-[1.25rem] shadow-[0_18px_60px_-24px_rgba(17,25,42,0.4)] ring-1 ring-ink/5 md:rounded-[1.75rem]"
       >
-        <div ref={backdropRef} className="absolute inset-0 will-change-transform">
+        <div
+          ref={backdropRef}
+          className="absolute inset-0 will-change-transform"
+        >
           <Image
             src={BACKGROUND_IMAGE}
             alt={t("altBackground")}
@@ -301,10 +304,11 @@ export function HeroGlass() {
             placeholder="blur"
             blurDataURL={BACKGROUND_PLACEHOLDER}
             sizes="100vw"
-            className="object-cover object-[65%_50%] lg:object-center"
+            className="object-cover object-[65%_50%] brightness-[1.05] contrast-[0.98] saturate-[0.88] lg:object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#f6f7f9]/85 via-[#f6f7f9]/40 to-[#f6f7f9]/10" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_62%_52%_at_50%_32%,rgba(246,247,249,0.72),transparent_72%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f6f7f9]/90 via-[#f6f7f9]/30 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-[#f6f7f9]/55 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_30%,rgba(246,247,249,0.7),transparent_72%)]" />
         </div>
 
         <HeroParticles className="absolute inset-0 z-[1]" />
@@ -315,7 +319,7 @@ export function HeroGlass() {
         >
           <MacMenuBar />
 
-          <div className="flex w-full max-w-4xl flex-col items-center px-6 pt-24 text-center md:pt-28 lg:pt-32">
+          <div className="flex w-full max-w-5xl flex-col items-center px-6 pt-24 text-center md:pt-28 lg:pt-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -328,7 +332,7 @@ export function HeroGlass() {
               </span>
             </motion.div>
 
-            <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1]">
+            <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-ink [text-shadow:0_2px_28px_rgba(246,247,249,0.85)] sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1] xl:text-[76px]">
               <StaggeredWords text={t("titleLine1")} baseDelay={0.15} />
               <br />
               <StaggeredWords

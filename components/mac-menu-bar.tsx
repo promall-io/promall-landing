@@ -72,7 +72,7 @@ export function MacMenuBar() {
         </div>
       </motion.nav>
 
-      <div className="flex items-center justify-between px-4 pt-3.5 md:px-6 md:pt-4">
+      <div className="flex items-center justify-between px-4 pt-3.5 md:px-7 md:pt-4">
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
