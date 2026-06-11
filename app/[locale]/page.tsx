@@ -1,6 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
+import { HeroGlass } from "@/components/hero-glass";
 import { MarqueeBand } from "@/components/marquee-band";
 import { ShowcaseSection } from "@/components/showcase-section";
 import { InstagramAiSection } from "@/components/instagram-ai-section";
@@ -22,9 +21,8 @@ export default async function LandingPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <main>
-        <HeroSection />
+        <HeroGlass />
         <MarqueeBand />
         <ShowcaseSection />
         <InstagramAiSection />

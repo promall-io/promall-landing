@@ -1,0 +1,354 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+import dynamic from "next/dynamic"
+import Image from "next/image"
+import { useTranslations } from "next-intl"
+import { motion, useReducedMotion } from "framer-motion"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  ChevronRight,
+  Instagram,
+  Sparkles,
+} from "lucide-react"
+import { MacMenuBar } from "@/components/mac-menu-bar"
+import { EASE } from "@/components/motion"
+
+const HeroParticles = dynamic(
+  () => import("@/components/hero-particles").then((mod) => mod.HeroParticles),
+  { ssr: false },
+)
+
+const BACKGROUND_IMAGE =
+  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2400&auto=format&fit=crop"
+const PRODUCT_IMAGE =
+  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=320&auto=format&fit=crop"
+
+function StaggeredWords({
+  text,
+  className,
+  baseDelay = 0,
+}: {
+  text: string
+  className?: string
+  baseDelay?: number
+}) {
+  const reduced = useReducedMotion()
+  return (
+    <span className={className}>
+      {text.split(" ").map((word, index) => (
+        <span
+          key={`${word}-${index}`}
+          className="-mb-[0.15em] inline-block overflow-hidden pb-[0.15em] align-bottom"
+        >
+          <motion.span
+            className="inline-block"
+            initial={{ y: reduced ? 0 : "110%" }}
+            animate={{ y: 0 }}
+            transition={{
+              duration: 0.9,
+              ease: EASE,
+              delay: baseDelay + index * 0.08,
+            }}
+          >
+            {word}
+          </motion.span>
+          <span className="inline-block">&nbsp;</span>
+        </span>
+      ))}
+    </span>
+  )
+}
+
+function DmGlassCard() {
+  const t = useTranslations("hero.dm")
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced || !cardRef.current) return
+    const tween = gsap.to(cardRef.current, {
+      y: -14,
+      duration: 5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    })
+    return () => {
+      tween.kill()
+    }
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 24, rotate: 5 }}
+      animate={{ opacity: 1, x: 0, rotate: 2.5 }}
+      transition={{ duration: 0.9, ease: EASE, delay: 1.05 }}
+      className="absolute right-8 top-[24%] z-20 hidden xl:block"
+    >
+      <div
+        ref={cardRef}
+        className="w-72 rounded-[1.6rem] border border-white/50 bg-white/45 p-3 shadow-float backdrop-blur-2xl"
+      >
+        <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
+          <span className="rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
+            <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
+              <Instagram className="size-4 text-ink" aria-hidden="true" />
+            </span>
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-xs font-bold text-ink">{t("shopName")}</p>
+            <p className="text-[10px] font-medium text-emerald-600">
+              {t("status")}
+            </p>
+          </div>
+        </div>
+        <div className="space-y-2 rounded-[1.1rem] bg-white/70 p-2.5">
+          <div className="flex items-center gap-2.5 rounded-xl bg-white p-2 shadow-soft">
+            <Image
+              src={PRODUCT_IMAGE}
+              alt={t("productAlt")}
+              width={48}
+              height={48}
+              className="size-12 rounded-lg object-cover"
+            />
+            <div className="min-w-0">
+              <p className="truncate text-[11px] font-bold text-ink">
+                {t("productName")}
+              </p>
+              <p className="text-[10px] font-semibold text-ink/60">
+                {t("productPrice")}
+              </p>
+            </div>
+          </div>
+          <div className="w-fit max-w-[88%] rounded-xl rounded-ss-sm bg-ice/90 px-3 py-1.5 text-[11px] text-ink">
+            {t("customer")}
+          </div>
+          <div className="ms-auto w-fit max-w-[88%] rounded-xl rounded-se-sm bg-ink px-3 py-1.5 text-[11px] leading-5 text-white">
+            {t("reply")}
+          </div>
+          <div className="flex w-fit items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
+            <BadgeCheck className="size-3.5" aria-hidden="true" />
+            {t("confirmed")}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+function BottomLeftCard() {
+  const t = useTranslations("hero")
+  return (
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
+      className="absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] border border-white/45 bg-white/35 p-4 shadow-float backdrop-blur-xl md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
+    >
+      <div>
+        <p className="text-2xl font-extrabold tracking-tight text-ink md:text-3xl">
+          {t("statValue")}
+        </p>
+        <p className="text-[10px] font-bold tracking-wider text-ink/55 md:text-[11px]">
+          {t("statLabel")}
+        </p>
+      </div>
+      <motion.a
+        href="#instagram-ai"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="group flex items-center gap-2 self-start rounded-full bg-white py-1.5 pe-4 ps-1.5 transition-colors hover:bg-white/90"
+      >
+        <span className="flex items-center justify-center rounded-full bg-ink/10 p-1">
+          <ArrowUpRight
+            className="size-3.5 text-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
+            aria-hidden="true"
+          />
+        </span>
+        <span className="whitespace-nowrap text-[13px] font-semibold text-ink">
+          {t("statAction")}
+        </span>
+      </motion.a>
+    </motion.div>
+  )
+}
+
+function CornerMask({ position }: { position: "top" | "left" }) {
+  const placement =
+    position === "top"
+      ? "-top-[1.5rem] right-0 sm:-top-[2rem] md:-top-[3.5rem]"
+      : "bottom-0 -left-[1.5rem] sm:-left-[2rem] md:-left-[3.5rem]"
+  const path =
+    position === "top"
+      ? "M56 56V0C56 30.9279 30.9279 56 0 56H56Z"
+      : "M56 56H0C30.9279 56 56 30.9279 56 0V56Z"
+  return (
+    <div
+      className={`pointer-events-none absolute size-[1.5rem] sm:size-[2rem] md:size-[3.5rem] ${placement}`}
+      aria-hidden="true"
+    >
+      <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none">
+        <path d={path} fill="#f6f7f9" />
+      </svg>
+    </div>
+  )
+}
+
+function BottomRightCutout() {
+  const t = useTranslations("hero")
+  return (
+    <motion.a
+      href="https://app.promall.io"
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: EASE, delay: 1.1 }}
+      className="group absolute bottom-0 right-0 z-20 flex items-center gap-3 rounded-tl-[1.5rem] bg-[#f6f7f9] p-3 pl-8 pt-5 sm:gap-4 sm:rounded-tl-[2rem] sm:p-4 sm:pl-10 sm:pt-6 md:gap-6 md:rounded-tl-[3.5rem] md:p-6 md:pl-14 md:pt-8"
+    >
+      <CornerMask position="top" />
+      <CornerMask position="left" />
+      <span className="flex size-10 items-center justify-center rounded-full border border-ink/10 bg-ink/5 transition-colors duration-300 group-hover:bg-ink/10 md:size-14">
+        <ArrowUpRight
+          className="size-5 text-ink/80 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 md:size-6"
+          aria-hidden="true"
+        />
+      </span>
+      <span className="flex flex-col">
+        <span className="text-[16px] font-extrabold tracking-tight text-ink md:text-[20px]">
+          {t("cutoutTitle")}
+        </span>
+        <span className="flex items-center gap-1 text-ink/55 transition-colors duration-300 group-hover:text-ink/80">
+          <span className="text-[12px] font-medium md:text-[14px]">
+            {t("cutoutSub")}
+          </span>
+          <ChevronRight
+            className="size-3.5 rtl:-scale-x-100 md:size-4"
+            aria-hidden="true"
+          />
+        </span>
+      </span>
+    </motion.a>
+  )
+}
+
+export function HeroGlass() {
+  const t = useTranslations("hero")
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const windowRef = useRef<HTMLElement>(null)
+  const backdropRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) return
+
+    gsap.registerPlugin(ScrollTrigger)
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        windowRef.current,
+        { scale: 0.965, opacity: 0, y: 18 },
+        { scale: 1, opacity: 1, y: 0, duration: 1.1, ease: "power3.out" },
+      )
+      gsap.fromTo(
+        backdropRef.current,
+        { scale: 1.16 },
+        { scale: 1, duration: 1.8, ease: "power2.out" },
+      )
+      gsap.to(backdropRef.current, {
+        yPercent: 10,
+        scale: 1.08,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      })
+      gsap.to(contentRef.current, {
+        yPercent: -10,
+        opacity: 0.3,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      })
+    }, wrapperRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <div ref={wrapperRef} className="h-[100svh] w-full p-3 md:p-5">
+      <section
+        ref={windowRef}
+        className="group relative mx-auto flex h-full w-full max-w-[1536px] flex-col items-center overflow-hidden rounded-[1.5rem] bg-white/10 shadow-ink md:rounded-[2.75rem]"
+      >
+        <div ref={backdropRef} className="absolute inset-0 will-change-transform">
+          <Image
+            src={BACKGROUND_IMAGE}
+            alt={t("altBackground")}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[65%_50%] lg:object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f6f7f9]/85 via-[#f6f7f9]/40 to-[#f6f7f9]/10" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_62%_52%_at_50%_32%,rgba(246,247,249,0.72),transparent_72%)]" />
+        </div>
+
+        <HeroParticles className="absolute inset-0 z-[1]" />
+
+        <div
+          ref={contentRef}
+          className="relative z-10 flex h-full w-full flex-col items-center"
+        >
+          <MacMenuBar />
+
+          <div className="flex w-full max-w-4xl flex-col items-center px-6 pt-28 text-center md:pt-32 lg:pt-36">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/30 bg-white/60 px-4 py-2 backdrop-blur-md"
+            >
+              <Sparkles className="size-4 text-ink/80" aria-hidden="true" />
+              <span className="text-[13px] font-semibold text-ink/90 md:text-[14px]">
+                {t("badge")}
+              </span>
+            </motion.div>
+
+            <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1]">
+              <StaggeredWords text={t("titleLine1")} baseDelay={0.15} />
+              <br />
+              <StaggeredWords
+                text={t("titleLine2")}
+                baseDelay={0.45}
+                className="text-gradient-ink"
+              />
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="mt-5 max-w-xl text-pretty text-sm font-medium leading-7 text-ink/85 [text-shadow:0_1px_14px_rgba(246,247,249,0.9),0_0_28px_rgba(246,247,249,0.7)] sm:text-base md:text-lg md:leading-8"
+            >
+              {t("description")}
+            </motion.p>
+          </div>
+
+          <DmGlassCard />
+          <BottomLeftCard />
+          <BottomRightCutout />
+        </div>
+      </section>
+    </div>
+  )
+}

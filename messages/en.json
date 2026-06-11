@@ -22,7 +22,23 @@
     "ctaPrimary": "Start for Free",
     "ctaSecondary": "See the AI in Action",
     "note": "No credit card required · Set up in under 10 minutes",
-    "kicker": "The smart sales platform for the new generation of Iranian businesses"
+    "kicker": "The smart sales platform for the new generation of Iranian businesses",
+    "statValue": "5,200+",
+    "statLabel": "Active stores",
+    "statAction": "See the AI live",
+    "cutoutTitle": "Start for Free",
+    "cutoutSub": "No credit card needed",
+    "altBackground": "Interior of a bright modern boutique",
+    "dm": {
+      "shopName": "Style Store",
+      "status": "Online with ProMall",
+      "productAlt": "Red sport sneaker",
+      "productName": "Air running sneaker",
+      "productPrice": "2,480,000 Toman",
+      "customer": "Do you have size 42?",
+      "reply": "Yes we do! Want me to place the order right now? 🙌",
+      "confirmed": "Order placed in the DM"
+    }
   },
   "stats": {
     "activeShops": "Active stores",
