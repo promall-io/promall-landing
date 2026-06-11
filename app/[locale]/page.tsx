@@ -1,4 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
+import { FloatingNav } from "@/components/floating-nav";
 import { HeroGlass } from "@/components/hero-glass";
 import { MarqueeBand } from "@/components/marquee-band";
 import { ShowcaseSection } from "@/components/showcase-section";
@@ -21,6 +22,7 @@ export default async function LandingPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-background">
+      <FloatingNav />
       <main>
         <HeroGlass />
         <MarqueeBand />

@@ -36,6 +36,7 @@ function NotchFillet({ side }: { side: "left" | "right" }) {
 export function MacMenuBar() {
   const t = useTranslations("header")
   const [menuOpen, setMenuOpen] = useState(false)
+  const [hovered, setHovered] = useState<string | null>(null)
 
   return (
     <header className="absolute inset-x-0 top-0 z-40">
@@ -48,7 +49,10 @@ export function MacMenuBar() {
         <div className="relative flex h-12 items-center rounded-b-3xl bg-[#f6f7f9] px-7">
           <NotchFillet side="left" />
           <NotchFillet side="right" />
-          <ul className="flex items-center">
+          <ul
+            className="flex items-center"
+            onMouseLeave={() => setHovered(null)}
+          >
             {NAV_LINKS.map((link, index) => (
               <motion.li
                 key={link.key}
@@ -59,12 +63,22 @@ export function MacMenuBar() {
                   ease: EASE,
                   delay: 0.7 + index * 0.06,
                 }}
+                className="relative"
               >
                 <a
                   href={link.href}
-                  className="block px-5 py-2 text-[11px] font-semibold uppercase text-ink/55 transition-colors duration-200 hover:text-ink ltr:tracking-[0.16em] rtl:text-[12.5px] rtl:font-medium"
+                  onMouseEnter={() => setHovered(link.key)}
+                  onFocus={() => setHovered(link.key)}
+                  className="relative block px-5 py-2 text-[11px] font-semibold uppercase text-ink/55 transition-colors duration-200 hover:text-ink ltr:tracking-[0.16em] rtl:text-[12.5px] rtl:font-medium"
                 >
-                  {t(`nav.${link.key}`)}
+                  {hovered === link.key ? (
+                    <motion.span
+                      layoutId="notch-nav-hover"
+                      transition={{ duration: 0.35, ease: EASE }}
+                      className="absolute inset-x-1 inset-y-0.5 rounded-full bg-ink/[0.07]"
+                    />
+                  ) : null}
+                  <span className="relative">{t(`nav.${link.key}`)}</span>
                 </a>
               </motion.li>
             ))}

@@ -313,6 +313,14 @@
   opacity: 1;
 }
 
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 .ghost-numeral {
   font-weight: 800;
   line-height: 1;
