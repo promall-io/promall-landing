@@ -14,7 +14,7 @@ import {
   WebGLRenderer,
 } from "three"
 
-const PARTICLE_COUNT = 130
+const PARTICLE_COUNT = 90
 const FIELD = { x: 22, y: 13, z: 7 }
 
 function createGlowTexture() {

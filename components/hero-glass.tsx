@@ -23,7 +23,9 @@ const HeroParticles = dynamic(
 )
 
 const BACKGROUND_IMAGE =
-  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2400&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=75&w=1920&auto=format&fit=crop"
+const BACKGROUND_PLACEHOLDER =
+  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ece9e4'/%3E%3Cstop offset='1' stop-color='%23b8ada0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='16' height='9' fill='url(%23g)'/%3E%3C/svg%3E"
 const PRODUCT_IMAGE =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=320&auto=format&fit=crop"
 
@@ -296,6 +298,8 @@ export function HeroGlass() {
             alt={t("altBackground")}
             fill
             priority
+            placeholder="blur"
+            blurDataURL={BACKGROUND_PLACEHOLDER}
             sizes="100vw"
             className="object-cover object-[65%_50%] lg:object-center"
           />
@@ -311,7 +315,7 @@ export function HeroGlass() {
         >
           <MacMenuBar />
 
-          <div className="flex w-full max-w-4xl flex-col items-center px-6 pt-28 text-center md:pt-32 lg:pt-36">
+          <div className="flex w-full max-w-4xl flex-col items-center px-6 pt-24 text-center md:pt-28 lg:pt-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
