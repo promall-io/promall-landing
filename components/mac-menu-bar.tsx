@@ -16,14 +16,14 @@ const NAV_LINKS = [
 ] as const
 
 function NotchFillet({ side }: { side: "left" | "right" }) {
-  const placement = side === "left" ? "-left-5 top-0" : "-right-5 top-0"
+  const placement = side === "left" ? "-left-6 top-0" : "-right-6 top-0"
   const path =
     side === "left"
       ? "M0 0H56V56C56 25.0721 30.9279 0 0 0Z"
       : "M56 0H0V56C0 25.0721 25.0721 0 56 0Z"
   return (
     <span
-      className={`pointer-events-none absolute size-5 ${placement}`}
+      className={`pointer-events-none absolute size-6 ${placement}`}
       aria-hidden="true"
     >
       <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none">
@@ -45,7 +45,7 @@ export function MacMenuBar() {
         transition={{ duration: 0.8, ease: EASE, delay: 0.4 }}
         className="absolute inset-x-0 top-0 hidden justify-center lg:flex"
       >
-        <div className="relative rounded-b-[1.25rem] bg-[#f6f7f9] px-2 pb-1.5 pt-1">
+        <div className="relative flex h-12 items-center rounded-b-3xl bg-[#f6f7f9] px-7">
           <NotchFillet side="left" />
           <NotchFillet side="right" />
           <ul className="flex items-center">
@@ -62,7 +62,7 @@ export function MacMenuBar() {
               >
                 <a
                   href={link.href}
-                  className="block rounded-full px-3.5 py-1.5 text-[13px] font-medium text-ink/60 transition-colors duration-200 hover:bg-ink/[0.05] hover:text-ink"
+                  className="block px-5 py-2 text-[11px] font-semibold uppercase text-ink/55 transition-colors duration-200 hover:text-ink ltr:tracking-[0.16em] rtl:text-[12.5px] rtl:font-medium"
                 >
                   {t(`nav.${link.key}`)}
                 </a>
