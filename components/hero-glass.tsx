@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { MacMenuBar } from "@/components/mac-menu-bar"
 import { EASE } from "@/components/motion"
+import { scrollToSection } from "@/lib/smooth-scroll"
 
 const HeroParticles = dynamic(
   () => import("@/components/hero-particles").then((mod) => mod.HeroParticles),
@@ -161,6 +162,10 @@ function BottomLeftCard() {
       </div>
       <motion.a
         href="#instagram-ai"
+        onClick={(event) => {
+          event.preventDefault()
+          scrollToSection("#instagram-ai")
+        }}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className="group flex items-center gap-2 self-start rounded-full bg-white py-1.5 pe-4 ps-1.5 transition-colors hover:bg-white/90"

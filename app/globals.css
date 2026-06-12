@@ -313,6 +313,66 @@
   opacity: 1;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@property --dock-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.dock-aura {
+  position: relative;
+}
+
+.dock-aura::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--dock-angle),
+    transparent 0deg,
+    rgba(65, 90, 119, 0.55) 40deg,
+    transparent 110deg,
+    transparent 180deg,
+    rgba(196, 184, 148, 0.6) 230deg,
+    transparent 300deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: dock-aura-spin 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes dock-aura-spin {
+  to {
+    --dock-angle: 360deg;
+  }
+}
+
 .scrollbar-none {
   scrollbar-width: none;
 }

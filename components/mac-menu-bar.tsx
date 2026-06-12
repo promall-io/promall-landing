@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Menu, X } from "lucide-react"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { EASE } from "@/components/motion"
+import { scrollToSection } from "@/lib/smooth-scroll"
 
 const NAV_LINKS = [
   { key: "features", href: "#features" },
@@ -41,9 +42,16 @@ export function MacMenuBar() {
   return (
     <header className="absolute inset-x-0 top-0 z-40">
       <motion.nav
-        initial={{ y: "-110%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: EASE, delay: 0.4 }}
+        initial={{ y: "-110%", rotateX: -38, opacity: 0 }}
+        animate={{ y: 0, rotateX: 0, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 190,
+          damping: 21,
+          mass: 0.9,
+          delay: 0.4,
+        }}
+        style={{ transformPerspective: 700, transformOrigin: "top center" }}
         className="absolute inset-x-0 top-0 hidden justify-center lg:flex"
       >
         <div className="relative flex h-12 items-center rounded-b-3xl bg-[#f6f7f9] px-7">
@@ -67,6 +75,10 @@ export function MacMenuBar() {
               >
                 <a
                   href={link.href}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    scrollToSection(link.href)
+                  }}
                   onMouseEnter={() => setHovered(link.key)}
                   onFocus={() => setHovered(link.key)}
                   className="relative block px-5 py-2 text-[11px] font-semibold uppercase text-ink/55 transition-colors duration-200 hover:text-ink ltr:tracking-[0.16em] rtl:text-[12.5px] rtl:font-medium"
@@ -141,28 +153,42 @@ export function MacMenuBar() {
       <AnimatePresence>
         {menuOpen ? (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            className="mx-4 mt-2 space-y-1 rounded-2xl bg-[#f6f7f9] p-2 shadow-card lg:hidden"
+            initial={{ opacity: 0, y: -14, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -14, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 360, damping: 28 }}
+            className="mx-4 mt-2 space-y-1 overflow-hidden rounded-2xl bg-[#f6f7f9] p-2 shadow-card lg:hidden"
           >
-            {NAV_LINKS.map((link) => (
-              <a
+            {NAV_LINKS.map((link, index) => (
+              <motion.a
                 key={link.key}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.35,
+                  ease: EASE,
+                  delay: 0.06 + index * 0.05,
+                }}
+                onClick={(event) => {
+                  event.preventDefault()
+                  setMenuOpen(false)
+                  scrollToSection(link.href)
+                }}
                 className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-ink transition-colors hover:bg-ink/5"
               >
                 {t(`nav.${link.key}`)}
-              </a>
+              </motion.a>
             ))}
-            <a
+            <motion.a
               href="https://app.promall.io"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: EASE, delay: 0.3 }}
               className="mt-1 block rounded-xl bg-ink px-4 py-2.5 text-center text-[15px] font-semibold text-white"
             >
               {t("cta")}
-            </a>
+            </motion.a>
           </motion.div>
         ) : null}
       </AnimatePresence>
