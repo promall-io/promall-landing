@@ -81,39 +81,6 @@ function TypingBubble() {
   )
 }
 
-function StatusBar() {
-  return (
-    <div className="flex h-12 shrink-0 items-end justify-between px-7 pb-1">
-      <span className="text-[13px] font-semibold tabular-nums tracking-wide text-ink">
-        ۹:۴۱
-      </span>
-      <span className="flex items-center gap-1.5" aria-hidden="true">
-        <span className="flex items-end gap-[2px]">
-          {[4, 6, 8, 10].map((height) => (
-            <span
-              key={height}
-              className="w-[3px] rounded-[1px] bg-ink"
-              style={{ height }}
-            />
-          ))}
-        </span>
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-          <path
-            d="M8 9.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM4.9 7.6a4.6 4.6 0 0 1 6.2 0l-1.3 1.4a2.7 2.7 0 0 0-3.6 0L4.9 7.6ZM2.2 4.9a8.4 8.4 0 0 1 11.6 0l-1.3 1.3a6.5 6.5 0 0 0-9 0L2.2 4.9Z"
-            fill="#1b263b"
-          />
-        </svg>
-        <span className="flex items-center gap-[2px]">
-          <span className="relative h-[11px] w-[22px] rounded-[3.5px] border border-ink/40 p-[1.5px]">
-            <span className="block h-full w-[78%] rounded-[1.5px] bg-ink" />
-          </span>
-          <span className="h-[4px] w-[1.5px] rounded-e-full bg-ink/40" />
-        </span>
-      </span>
-    </div>
-  )
-}
-
 function DynamicIsland() {
   return (
     <div className="pointer-events-none absolute left-1/2 top-2.5 z-20 flex h-[25px] w-[88px] -translate-x-1/2 items-center justify-end rounded-full bg-black pe-2.5">
@@ -124,7 +91,7 @@ function DynamicIsland() {
 
 function ChatHeader() {
   return (
-    <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-white px-4 pb-2.5 pt-1.5">
+    <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-white px-4 pb-2.5 pt-11">
       <ChevronRight className="size-5 shrink-0 text-ink" />
       <span className="shrink-0 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
@@ -293,7 +260,6 @@ function PhoneChat() {
           <div className="h-full w-full rounded-[calc(3.2rem-3px)] bg-[#0c0f17] p-[7px]">
             <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.6rem] bg-white">
               <DynamicIsland />
-              <StatusBar />
               <ChatHeader />
 
               <div
