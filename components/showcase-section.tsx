@@ -63,11 +63,11 @@ const PANELS: Panel[] = [
       <VisualCard>
         <div dir="rtl" className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">
-              +۳۲٪ رشد
-            </span>
             <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-ink">
-              ۱۲ هفته‌ی اخیر
+              نمونه‌ی گزارش
+            </span>
+            <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-muted-foreground">
+              روند فروش زنده
             </span>
           </div>
           <ReportsMini />
