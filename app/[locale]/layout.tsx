@@ -45,6 +45,7 @@ export function generateStaticParams() {
 
 export const viewport: Viewport = {
   themeColor: "#f6f7f9",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = candidate === "en" ? "/" : `/${candidate}`;
     languages[candidate] = `${SITE_URL}${path}`;
   }
-  languages["x-default"] = `${SITE_URL}/`;
+  languages["x-default"] = `${SITE_URL}/fa`;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -91,6 +92,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: metadata.title,
       description: metadata.description,
       locale: locale === "fa" ? "fa_IR" : "en_US",
+      alternateLocale: locale === "fa" ? ["en_US"] : ["fa_IR"],
     },
     twitter: {
       card: "summary_large_image",

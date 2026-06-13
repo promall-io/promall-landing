@@ -7,6 +7,8 @@ import { Plus } from "lucide-react"
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 const FAQ_KEYS = [
+  "manageShop",
+  "whatIsOnlineShop",
   "noTech",
   "howAi",
   "instagramSafe",

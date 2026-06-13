@@ -259,6 +259,14 @@
     "badge": "Frequently Asked",
     "title": "Whatever you're wondering, the answer's here",
     "items": {
+      "manageShop": {
+        "question": "How do I manage my online shop with ProMall?",
+        "answer": "Everything your shop needs lives in one panel: products, inventory, orders, payments and sales reports, plus an Instagram DM inbox your AI assistant can answer for you. There's no need to juggle separate apps — from first setup to delivering an order, you run the whole shop from one place."
+      },
+      "whatIsOnlineShop": {
+        "question": "What is an Instagram online shop, and how is ProMall different?",
+        "answer": "An online shop is simply the store you run on Instagram, taking orders through DMs. ProMall is more than a chat bot: its AI answers with your real prices and stock and closes the sale with a payment link, builds you a hosted storefront on promall.io, and keeps your orders, inventory and reports in one place."
+      },
       "noTech": {
         "question": "Do I need to know any programming to use ProMall?",
         "answer": "Not at all. We built ProMall for shop owners, not programmers. You sign up, add your products, and your store is ready — everything is in Persian and dead simple. You don't even need to turn on the AI at first; you can just build the order and send a payment link."

@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url,
         lastModified: now,
         changeFrequency: route === "" ? "weekly" : "monthly",
-        priority: route === "" ? 1.0 : 0.5,
+        priority: route === "" ? (locale === "fa" ? 1.0 : 0.8) : 0.5,
         alternates: { languages },
       });
     }
