@@ -1,14 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import {
-  BadgeCheck,
-  Bell,
-  CreditCard,
-  Printer,
-  ShieldCheck,
-  Store,
-} from "lucide-react"
+import { BadgeCheck, CreditCard, Printer, ShieldCheck } from "lucide-react"
 import { EASE } from "@/components/motion"
 
 function TypingDots() {
@@ -63,46 +56,6 @@ export function ChatMini() {
         <BadgeCheck className="size-4" />
         سفارش ثبت شد — لینک پرداخت رفت
       </motion.div>
-    </div>
-  )
-}
-
-export function ProductMini() {
-  return (
-    <div dir="rtl" className="rounded-2xl border border-border bg-[#fafbfc] p-4">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-bold text-ink">مانتو کتان کرم</p>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            ۱٬۲۸۰٬۰۰۰ تومان
-          </p>
-        </div>
-        <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
-          ۱۲ واریانت
-        </span>
-      </div>
-      <div className="mt-3 flex items-center gap-1.5">
-        {["#6b4a2f", "#1b263b", "#9a8264"].map((color) => (
-          <span
-            key={color}
-            className="size-5 rounded-full border-2 border-white shadow-soft"
-            style={{ backgroundColor: color }}
-          />
-        ))}
-        <span className="mx-1 h-4 w-px bg-border" />
-        {["S", "M", "L"].map((size) => (
-          <span
-            key={size}
-            className={`flex size-6 items-center justify-center rounded-md text-[10px] font-semibold ${
-              size === "M"
-                ? "bg-ink text-white"
-                : "border border-border bg-white text-muted-foreground"
-            }`}
-          >
-            {size}
-          </span>
-        ))}
-      </div>
     </div>
   )
 }
@@ -220,78 +173,6 @@ export function InventoryMini() {
   )
 }
 
-export function StorefrontMini() {
-  return (
-    <div
-      dir="rtl"
-      className="overflow-hidden rounded-2xl border border-border bg-white"
-    >
-      <div className="flex items-center justify-between border-b border-border bg-[#fafbfc] px-3.5 py-2.5">
-        <div className="flex items-center gap-2">
-          <span className="flex size-6 items-center justify-center rounded-lg bg-ink text-white">
-            <Store className="size-3" />
-          </span>
-          <span className="text-xs font-bold text-ink">مزون ترمه</span>
-        </div>
-        <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-semibold text-emerald-600">
-          آنلاین
-        </span>
-      </div>
-      <div className="grid grid-cols-3 gap-2 p-3">
-        {[
-          { tone: "from-[#d9cfc0] to-[#bca987]", price: "۴۸۵٬۰۰۰" },
-          { tone: "from-[#cdd5e0] to-[#9fb0c7]", price: "۴۲۰٬۰۰۰" },
-          { tone: "from-[#e3e5e9] to-[#c2c8d2]", price: "۸۹۰٬۰۰۰" },
-        ].map((tile, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: index * 0.1 }}
-          >
-            <div
-              className={`aspect-square rounded-lg bg-gradient-to-br ${tile.tone}`}
-            />
-            <p className="mt-1 text-[9px] font-semibold text-ink">
-              {tile.price}
-              <span className="mr-0.5 font-normal text-muted-foreground">
-                تومان
-              </span>
-            </p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-export function CustomersMini() {
-  const tones = ["#415a77", "#778da9", "#9a8264", "#1b263b"]
-  return (
-    <div dir="rtl" className="flex items-center gap-3">
-      <div className="flex -space-x-2 space-x-reverse">
-        {tones.map((tone, index) => (
-          <motion.span
-            key={tone}
-            initial={{ opacity: 0, scale: 0.6 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.4, ease: EASE, delay: index * 0.08 }}
-            className="flex size-9 items-center justify-center rounded-full border-2 border-white text-[10px] font-bold text-white shadow-soft"
-            style={{ backgroundColor: tone, zIndex: tones.length - index }}
-          >
-            {["س", "ا", "ن", "م"][index]}
-          </motion.span>
-        ))}
-      </div>
-      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-        +۸۴ مشتری این ماه
-      </span>
-    </div>
-  )
-}
-
 export function PrintMini() {
   return (
     <div dir="rtl" className="flex items-start gap-3">
@@ -311,33 +192,6 @@ export function PrintMini() {
           <p className="font-semibold text-ink">۱٬۲۸۰٬۰۰۰ تومان</p>
         </motion.div>
       </div>
-    </div>
-  )
-}
-
-export function RealtimeMini() {
-  return (
-    <div dir="rtl" className="flex items-center gap-3">
-      <span className="relative flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-        <Bell className="size-5" />
-        <motion.span
-          className="absolute -top-1 -left-1 size-3 rounded-full bg-gold-deep"
-          animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      </span>
-      <motion.div
-        initial={{ opacity: 0, x: -14 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
-        className="rounded-xl border border-border bg-white px-3.5 py-2.5 shadow-soft"
-      >
-        <p className="text-[10px] font-bold text-ink">سفارش جدید! 🎉</p>
-        <p className="text-[9px] text-muted-foreground">
-          سارا محمدی — همین الان
-        </p>
-      </motion.div>
     </div>
   )
 }

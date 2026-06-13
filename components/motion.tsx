@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useSpring, type Variants } from "framer-motio
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-export function useRevealVariants(distance = 28): Variants {
+function useRevealVariants(distance = 28): Variants {
   const reduced = useReducedMotion()
   return {
     hidden: { opacity: 0, y: reduced ? 0 : distance },
