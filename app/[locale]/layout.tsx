@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
 import { locales, localeDirection, type Locale } from "@/i18n/config";
+import { StructuredData } from "@/components/structured-data";
 import "../globals.css";
 
 const inter = Inter({
@@ -90,20 +91,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: metadata.title,
       description: metadata.description,
       locale: locale === "fa" ? "fa_IR" : "en_US",
-      images: [
-        {
-          url: "/icon.svg",
-          width: 1200,
-          height: 630,
-          alt: "ProMall",
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: metadata.title,
       description: metadata.description,
-      images: ["/icon.svg"],
     },
     icons: {
       icon: "/icon.svg",
@@ -142,6 +134,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             : undefined
         }
       >
+        <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

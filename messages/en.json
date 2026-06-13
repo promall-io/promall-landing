@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "title": "ProMall — Smart Online Store with an Instagram AI Assistant",
-    "description": "ProMall is an AI-powered store management platform. Turn your Instagram DMs into a smart salesperson — products, orders, payments and reports in one panel."
+    "title": "ProMall — Instagram store builder with an AI DM assistant",
+    "description": "ProMall brings your products, orders, payments and inventory into one panel, builds your online store, and hands your Instagram DMs to an AI that answers with real prices and stock and closes the sale — even at midnight. Or sell by hand with one clean payment link. A clean, professional way to build an online store and run your Instagram boutique."
   },
   "header": {
     "brand": "ProMall",
     "nav": {
       "features": "Features",
-      "instagramAi": "Instagram AI",
+      "instagramAi": "Smart DMs",
       "pricing": "Pricing",
       "faq": "FAQ"
     },
@@ -15,19 +15,19 @@
     "menuLabel": "Menu"
   },
   "hero": {
-    "badge": "AI sales assistant for Instagram DMs",
-    "titleLine1": "Build your store,",
-    "titleLine2": "let AI handle the selling",
-    "description": "ProMall manages products, orders, payments and inventory in one place — and its AI answers your Instagram DMs like your best salesperson, even at midnight.",
+    "badge": "An AI salesperson, always in your DMs",
+    "titleLine1": "Your DMs fill up with \"how much?\" while you sleep —",
+    "titleLine2": "here's a salesperson who doesn't",
+    "description": "Every night a few \"in stock?\", \"what size?\", \"how much?\" go unanswered, and by morning the customer is gone. ProMall pulls your products, orders, payments and inventory into one place — and you can hand your DMs to an AI that answers with your store's real prices and stock and closes the order right there, even at midnight. Don't want the AI? Sell by hand yourself — still clean, still professional.",
     "ctaPrimary": "Start for Free",
-    "ctaSecondary": "See the AI in Action",
-    "note": "No credit card required · Set up in under 10 minutes",
-    "kicker": "The smart sales platform for the new generation of Iranian businesses",
-    "statValue": "5,200+",
-    "statLabel": "Active stores",
-    "statAction": "See the AI live",
+    "ctaSecondary": "See Smart DMs",
+    "note": "No credit card · 10 days free to try · Fast, no technical skills",
+    "kicker": "The Instagram store builder for the new generation of Iranian businesses",
+    "statValue": "24/7",
+    "statLabel": "your DMs get answered",
+    "statAction": "See Smart DMs",
     "cutoutTitle": "Start for Free",
-    "cutoutSub": "No credit card needed",
+    "cutoutSub": "No credit card",
     "altBackground": "Interior of a bright modern boutique",
     "dm": {
       "shopName": "Termeh Boutique",
@@ -36,124 +36,167 @@
       "productName": "Cream cotton manteau",
       "productPrice": "1,280,000 Toman",
       "customer": "Do you have size 38?",
-      "reply": "Yes we do! Want me to set one aside for you? 🙌",
-      "confirmed": "Order placed in the DM"
+      "reply": "Yes, it's in stock! I've set one aside for you — here's your payment link 🙌",
+      "confirmed": "The order was placed right in the DM and the payment link went out"
     }
   },
   "stats": {
-    "activeShops": "Active stores",
-    "ordersProcessed": "Orders processed",
-    "uptime": "Reliable uptime",
-    "support": "Always-on support"
+    "alwaysOn": {
+      "value": "24/7",
+      "label": "your DMs get answered, even at midnight"
+    },
+    "dmToPay": {
+      "value": "Payment link",
+      "label": "from \"how much?\" to paid, right in the DM"
+    },
+    "gateways": {
+      "value": "4 payment methods",
+      "label": "ZarinPal, Zibal, BitPay and card-to-card"
+    },
+    "trial": {
+      "value": "10 days free",
+      "label": "no credit card, then upgrade"
+    }
+  },
+  "twoTracks": {
+    "badge": "By hand or with AI",
+    "title": "Selling small or selling big, ProMall is with you",
+    "subtitle": "You don't have to switch on the AI from day one. ProMall is a ladder: at one end you sell by hand yourself, at the other your DMs answer on their own — both ends clean and professional.",
+    "tracks": {
+      "byHand": {
+        "label": "By hand, you set it up",
+        "title": "Stop collecting addresses by hand in the DM",
+        "description": "Instead of piecing together a customer's address and number from a messy chat and then shipping to the wrong place, you build the order yourself and send one clean payment link. The customer fills in their own address and details and pays. Fewer back-and-forths, fewer mistakes, no AI at all.",
+        "points": [
+          "You build the order yourself, and stock is reserved for it the moment you do",
+          "You send one link; the customer writes their own address and pays",
+          "The address comes from the customer, not a hand-copy or a mis-shipped parcel",
+          "Running out of time? Extend the reservation with one button"
+        ],
+        "cta": "Start by Hand"
+      },
+      "byAi": {
+        "label": "Smart, it sells for you",
+        "title": "Getting busy? Hand the DMs to the AI",
+        "description": "When the messages pile up and you can't keep up, you switch on the AI and your DMs answer themselves: it gives your real prices and stock, sends a product catalog, and closes the order with a payment link — the same path you'd take by hand, just automatic.",
+        "points": [
+          "Instant replies to customers, any hour of the day or night",
+          "The same payment link, this time sent by the AI itself",
+          "Whenever things get sensitive, it hands the conversation to you"
+        ],
+        "cta": "See Smart DMs"
+      }
+    },
+    "footnote": "Move from by-hand to smart or back whenever you like; your orders and customers stay right where they are."
   },
   "bento": {
-    "badge": "All Features",
-    "title": "Everything an online store needs",
-    "subtitle": "From your first product to your sales reports — every tool in one unified panel, built for Iranian businesses.",
+    "badge": "Everything you need",
+    "title": "Everything an online store needs, right here",
+    "subtitle": "From the first product you add to your end-of-month sales report — it's all in one store management panel, exactly the way an Iranian business needs it.",
     "cells": {
       "instagramAi": {
         "title": "Smart Instagram DMs",
-        "description": "AI answers customer questions with real prices and stock, and places the order right inside the DM."
+        "description": "The AI answers your customers, gives real prices and stock, sends a product catalog, and closes the order with a payment link right inside the DM."
       },
       "products": {
         "title": "Products & Variants",
-        "description": "Simple products or full color/size matrices; variants are generated in seconds."
+        "description": "Simple products or color and size; up to 200 variants, each with its own price and stock — it even learns your Persian color and size names."
       },
       "orders": {
         "title": "Order Management",
-        "description": "From checkout to delivery — every order's status is always clear and current."
+        "description": "From the moment an order is placed to the customer's doorstep, you know where each one stands; the system won't let you sell out-of-stock items, and returns and cancellations are handled."
       },
       "payments": {
-        "title": "Secure Payments",
-        "description": "Bank gateway plus card-to-card with receipt verification — both methods the Iranian market loves."
+        "title": "Secure Iranian Payments",
+        "description": "ZarinPal, Zibal and BitPay gateways, plus card-to-card with receipt verification — the exact methods Iranian customers are comfortable with."
       },
       "reports": {
         "title": "Live Reports",
-        "description": "See sales, profit and growth the moment they happen, not at month's end."
+        "description": "See real sales, real profit (after returns) and your best sellers the moment they happen, in Tehran time, not at month's end."
       },
       "storefront": {
         "title": "Your Own Storefront",
-        "description": "An online showcase with its own link; customers order and pay with no middleman."
+        "description": "An online showcase on promall.io with your own name; customers browse with no login, place orders and pay."
       },
       "inventory": {
-        "title": "Smart Inventory",
-        "description": "Stock updates with every order and warns you before anything runs out."
+        "title": "Online Inventory",
+        "description": "Stock updates itself with every order, syncs live across all your devices, and warns you before it runs low."
       },
       "customers": {
         "title": "Customer Profiles",
-        "description": "Know every customer's purchase history and build repeat sales."
+        "description": "Your customer list is built from real paid orders; see who's VIP, who's drifting away, and win them back."
       },
       "print": {
-        "title": "Auto Receipt Printing",
-        "description": "Every order prints its invoice automatically on your store's printer."
+        "title": "Auto Invoice Printing",
+        "description": "Every paid order prints its invoice automatically on your store's printer — up to 9 order cards on a single A4 sheet."
       },
       "realtime": {
-        "title": "Realtime Alerts",
-        "description": "New orders appear on all your devices the second they arrive."
+        "title": "Instant In-Panel Alerts",
+        "description": "A new order, a fresh DM, low stock — they appear live on every open panel the same second."
       }
     }
   },
   "instagram": {
-    "badge": "Instagram AI",
-    "title": "Your Instagram DMs, a full-time salesperson",
-    "subtitle": "A customer asks in your DMs and ProMall's AI answers with your store's real data — accurate, in your tone, at any hour of the day.",
+    "badge": "Smart DMs",
+    "title": "An Instagram sales agent that doesn't just chat, it sells",
+    "subtitle": "A customer asks in your DMs and ProMall's AI sales assistant answers with your store's real data — accurate, in your own tone, sending product photos and closing the order with a payment link; at any hour of the day or night.",
     "bullets": {
       "alwaysOn": {
         "title": "Instant replies, 24/7",
-        "description": "No message goes unanswered; even at midnight customers get a complete reply."
+        "description": "It understands what the customer means, not just the words; no message goes unanswered, and even at midnight the customer gets a complete reply."
       },
       "grounded": {
         "title": "Connected to your real store data",
-        "description": "Prices, stock and product details come straight from your panel — never guesswork."
+        "description": "Prices, stock and product details are read straight from your panel, not guessed; it understands you even through typos and slang, hands off to you when it can't answer, and never makes anything up."
       },
       "personality": {
-        "title": "Adjustable tone & personality",
-        "description": "Formal, friendly or playful — the AI speaks with your brand's personality."
+        "title": "Its tone and personality are yours to set",
+        "description": "Give it a name; formal, friendly or playful; Persian or bilingual; with emoji or without — however your brand speaks. Every time you answer yourself, it learns from you."
       },
       "handoff": {
-        "title": "Orders placed, handoff when needed",
-        "description": "Orders are created right in the DM, and the conversation is handed to you whenever it matters."
+        "title": "It closes the order, and hands off when things get sensitive",
+        "description": "It finalizes size and color, checks and reserves stock live, builds the order and sends the payment link; when a customer is upset or a payment is sensitive, it hands off to you — and you can switch it back to the AI whenever you want."
       }
     },
     "ghost": "The salesperson that never sleeps"
   },
   "howItWorks": {
-    "badge": "Getting Started",
-    "title": "Three steps to automated sales",
+    "badge": "Where do I start?",
+    "title": "Three steps to clean selling",
     "steps": {
       "create": {
         "number": "1",
-        "title": "Create your store",
-        "description": "Sign up and your store panel is ready in under ten minutes — no technical skills needed."
+        "title": "Build your store",
+        "description": "Sign up, pick your store's address on promall.io, and get going fast — no technical skills, everything in Persian."
       },
       "stock": {
         "number": "2",
         "title": "Add your products",
-        "description": "Enter products, prices and stock; variants and invoices organize themselves."
+        "description": "Enter products, prices and stock; color and size variants and categories organize themselves."
       },
       "sell": {
         "number": "3",
-        "title": "Connect Instagram",
-        "description": "From that moment the AI answers your DMs and you simply manage the orders."
+        "title": "Sell, by hand or with AI",
+        "description": "Either build the order yourself and send a payment link, or connect your Instagram and let the AI answer your DMs — the choice is yours."
       }
     }
   },
   "reports": {
     "badge": "Reports & Analytics",
-    "title": "Decide with numbers, not guesses",
-    "subtitle": "ProMall's reporting dashboard shows sales, profit and customer behavior in plain language, so you know what actually sells.",
+    "title": "Decide with numbers, not guesswork",
+    "subtitle": "ProMall's reporting dashboard shows real sales, real profit, your best sellers and customer behavior in plain terms, so you know what actually makes money — in Tehran time, not at month's end. Excel and PDF exports are ready for your accountant too.",
     "kpis": {
-      "monthSales": "Sales this month (Toman)",
-      "growth": "Growth vs last month",
+      "monthSales": "Net sales this month (Toman)",
+      "growth": "Profit and margin",
       "bestDay": "Best-selling day"
     },
-    "chartTitle": "Sales trend, last 12 weeks",
-    "chartDelta": "+32% growth"
+    "chartTitle": "Sales trend, last 12 weeks (sample)",
+    "chartDelta": "Sample chart"
   },
   "pricing": {
     "badge": "Pricing",
     "title": "A plan for every business size",
-    "subtitle": "Start free; upgrade whenever you grow.",
+    "subtitle": "Start with a 10-day free trial, no credit card; upgrade whenever you grow and only pay the difference.",
     "toggle": {
       "monthly": "Monthly",
       "annual": "Annual",
@@ -161,94 +204,104 @@
     },
     "currencySuffix": "Toman / month",
     "popularLabel": "Most Popular",
-    "footnote": "All plans include continuous updates; you can change plans at any time.",
+    "footnote": "Every plan starts with a 10-day free trial, no credit card. Upgrade or downgrade from your panel anytime, and the price difference is prorated.",
     "plans": {
       "free": {
-        "name": "Free",
-        "monthlyPrice": "0",
-        "annualPrice": "0",
-        "hasCurrency": "true",
-        "description": "For getting started with ProMall",
+        "name": "10-day trial",
+        "monthlyPrice": "Free",
+        "annualPrice": "Free",
+        "hasCurrency": "false",
+        "description": "Try every Professional feature free for 10 days",
         "features": [
-          "Up to 10 products",
-          "Limited orders",
-          "Basic reports",
-          "Email support"
+          "All Professional plan features",
+          "No credit card, no commitment",
+          "Build your store and add products",
+          "A dedicated payment link for customers",
+          "After 10 days, choose your own plan"
         ],
-        "cta": "Start Now"
+        "cta": "Start for Free"
       },
       "professional": {
         "name": "Professional",
         "monthlyPrice": "200,000",
         "annualPrice": "160,000",
         "hasCurrency": "true",
-        "description": "The best choice for growing stores",
+        "description": "The best choice for stores that are growing",
         "features": [
-          "Unlimited products",
           "Smart Instagram DMs",
-          "Full order & inventory management",
-          "Payment gateway & card-to-card",
-          "Auto receipt printing",
-          "Advanced reports",
-          "Priority support"
+          "Full order and inventory management",
+          "ZarinPal, Zibal and card-to-card",
+          "Auto invoice printing on your store's printer",
+          "Sales and profit reports + Excel and PDF export",
+          "Returns and customer profiles",
+          "First 10 days free, no credit card"
         ],
-        "cta": "Go Professional"
+        "cta": "This Is What I Want"
       },
       "enterprise": {
         "name": "Enterprise",
         "monthlyPrice": "Contact us",
         "annualPrice": "Contact us",
         "hasCurrency": "false",
-        "description": "Tailored for large businesses",
+        "description": "For large businesses that need teams and access levels",
         "features": [
-          "Multiple stores & team management",
-          "Member access levels",
-          "Dedicated 24/7 support",
-          "Full customization"
+          "All Professional features",
+          "9 roles and 50+ team access levels",
+          "Instant alerts and in-panel support tickets",
+          "Higher-priority support",
+          "Customization tailored to your business"
         ],
-        "cta": "Contact Us"
+        "cta": "Send Us a Message"
       }
     }
   },
   "faq": {
-    "badge": "FAQ",
-    "title": "Whatever you're wondering, it's here",
+    "badge": "Frequently Asked",
+    "title": "Whatever you're wondering, the answer's here",
     "items": {
       "noTech": {
-        "question": "Do I need technical skills to use ProMall?",
-        "answer": "No. ProMall is designed for business owners, not programmers. You sign up, add products, and your store is ready — everything is simple and localized."
+        "question": "Do I need to know any programming to use ProMall?",
+        "answer": "Not at all. We built ProMall for shop owners, not programmers. You sign up, add your products, and your store is ready — everything is in Persian and dead simple. You don't even need to turn on the AI at first; you can just build the order and send a payment link."
+      },
+      "withoutAi": {
+        "question": "Do I have to use the AI?",
+        "answer": "No, it's not required at all. You can build the order by hand yourself and just send the customer a clean payment link so they fill in their own address and pay. When you get busy, that's when you switch on the AI to let your DMs answer themselves. The choice is yours."
       },
       "howAi": {
         "question": "How does the AI know what to answer?",
-        "answer": "The assistant is connected to your store's real data: products, prices, stock and the knowledge base you maintain. Answers are built from that data, and you control the tone."
+        "answer": "It answers from your store's real data: products, prices, stock, and anything you've taught it. You can even point it at your website or Instagram page so it reads and learns on its own. It makes nothing up, hands off to you when it can't answer, and you set the tone however you like."
       },
       "instagramSafe": {
         "question": "Is connecting Instagram safe?",
-        "answer": "Yes. The connection uses Meta's official API and your password is never stored in ProMall. You can disconnect at any time."
+        "answer": "Yes, rest assured. The connection is made in a few clicks through Meta's official gateway, and your token is stored encrypted. You can disconnect anytime you want."
       },
       "payments": {
         "question": "How do customers pay?",
-        "answer": "Two methods are available: an online bank gateway and card-to-card transfer with receipt upload. Card-to-card receipts are verified right inside your panel."
+        "answer": "You have two methods: an online bank gateway (ZarinPal, Zibal, BitPay) and card-to-card with receipt upload. The online gateway confirms the payment itself and the order is approved; for card-to-card, the customer sends the receipt and you approve it with one click in your panel."
+      },
+      "print": {
+        "question": "How does printing invoices on the store's printer work?",
+        "answer": "You install a small Windows app on the store computer, pair it with a 6-character code that's valid for thirty seconds, and from then on every paid order prints its invoice automatically. Up to 9 order cards on one A4 sheet, with your own logo."
       },
       "switchPlans": {
         "question": "Can I change my plan later?",
-        "answer": "Yes — you can upgrade or change plans at any moment from your panel, and your account and history stay intact."
+        "answer": "Yes, you can upgrade or downgrade from your panel at any moment; on an upgrade only the price difference is charged, and your account and history stay untouched."
       },
       "support": {
         "question": "Who helps me if I run into trouble?",
-        "answer": "ProMall's support team is available through the in-panel ticket system; higher plans include fast, dedicated support."
+        "answer": "You open a support ticket from your panel, attach a screenshot of the issue if you like, and follow it live until it's resolved; on higher plans your ticket is handled with higher priority."
       }
     }
   },
   "cta": {
-    "title": "Make your next store a smart one",
-    "subtitle": "Start free today; ten minutes later your store is online and your AI assistant is ready to answer.",
+    "title": "Stop letting midnight sales burn away",
+    "subtitle": "Start free today; build your store, send a clean payment link — or hand your DMs to an AI that never sleeps. 10 days free, no credit card.",
     "button": "Start for Free",
-    "note": "No credit card · Cancel anytime"
+    "note": "No credit card · 10 days free · Cancel anytime"
   },
   "footer": {
     "brand": "ProMall",
-    "description": "An AI-powered store management platform, built for Iranian businesses.",
+    "description": "An Instagram store builder and AI-powered online store management panel; built for Iranian businesses.",
     "columns": {
       "product": "Product",
       "company": "Company",
@@ -256,7 +309,7 @@
     },
     "links": {
       "features": "Features",
-      "instagramAi": "Instagram AI",
+      "instagramAi": "Smart DMs",
       "pricing": "Pricing",
       "faq": "FAQ",
       "app": "Open Dashboard",
@@ -274,6 +327,48 @@
     "learnMore": "Learn More",
     "getStarted": "Get Started",
     "contactUs": "Contact Us"
+  },
+  "marquee": {
+    "items": [
+      "Automated Instagram DM replies",
+      "Instagram sales agent",
+      "Instagram order management",
+      "ZarinPal and Zibal gateways",
+      "Card-to-card payment with receipt",
+      "Auto order invoice printing",
+      "Live sales and profit reports",
+      "Online store inventory",
+      "Build an online store on promall.io",
+      "Online Instagram boutique",
+      "E-Trust Seal",
+      "A clean payment link for customers"
+    ]
+  },
+  "showcase": {
+    "heading": "See what it can do",
+    "scrollHint": "Keep scrolling",
+    "panels": {
+      "direct": {
+        "number": "01",
+        "title": "DMs become a salesperson",
+        "description": "Build the order by hand and send a payment link, or switch on ProMall's AI to answer with your store's real data, send a catalog, give prices and stock, and close the order with a payment link right there in the DM."
+      },
+      "orders": {
+        "number": "02",
+        "title": "Order to payment, in one place",
+        "description": "Build it yourself or let the AI; a payment link goes out, the customer fills in their address. ZarinPal, Zibal and card-to-card with receipt verification are all ready; returns and cancellations restore stock automatically."
+      },
+      "logistics": {
+        "number": "03",
+        "title": "Inventory and invoices, automated",
+        "description": "Stock updates with every sale and syncs across all your devices, low-stock alerts fire, and invoices for paid orders print on your store's printer the moment they come in."
+      },
+      "insight": {
+        "number": "04",
+        "title": "Numbers talk, not guesses",
+        "description": "Real sales, real profit, your best sellers and VIP customers are right in front of you the moment they happen, in Tehran time — reports that speak a merchant's language, with exports you can take away."
+      }
+    }
   },
   "privacy": {
     "badge": "Privacy Policy",
@@ -441,43 +536,5 @@
       "email": "legal@promall.io"
     },
     "footerNote": "By continuing to use Promall after these Terms are updated, you agree to the updated Terms. If you do not agree, please stop using the Services and contact us to close your account."
-  },
-  "marquee": {
-    "items": [
-      "Smart Instagram DMs",
-      "Order management",
-      "Gateway & card-to-card payments",
-      "Auto receipt printing",
-      "Live sales reports",
-      "Smart inventory",
-      "Your own storefront",
-      "Customer profiles"
-    ]
-  },
-  "showcase": {
-    "heading": "Every feature, no compromises",
-    "scrollHint": "Keep scrolling",
-    "panels": {
-      "direct": {
-        "number": "01",
-        "title": "DMs become your salesperson",
-        "description": "ProMall's AI answers Instagram DMs with your store's real data, quotes prices and closes the order right there."
-      },
-      "orders": {
-        "number": "02",
-        "title": "Order to payment, in one place",
-        "description": "Every order has a clear path from checkout to settlement; bank gateway and card-to-card with receipt verification, both ready."
-      },
-      "logistics": {
-        "number": "03",
-        "title": "Inventory & invoices, automated",
-        "description": "Stock updates with every sale, shortages raise alerts, and the invoice prints instantly on your store's printer."
-      },
-      "insight": {
-        "number": "04",
-        "title": "Numbers, not guesses",
-        "description": "Sales, profit and growth are in front of you the moment they happen — reports that speak a merchant's language."
-      }
-    }
   }
 }

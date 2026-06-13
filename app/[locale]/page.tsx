@@ -4,7 +4,9 @@ import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { HeroGlass } from "@/components/hero-glass";
 import { MarqueeBand } from "@/components/marquee-band";
 import { ShowcaseSection } from "@/components/showcase-section";
+import { TwoTracksSection } from "@/components/two-tracks-section";
 import { InstagramAiSection } from "@/components/instagram-ai-section";
+import { FeaturesGrid } from "@/components/features-grid";
 import { StatsSection } from "@/components/stats-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { PricingSection } from "@/components/pricing-section";
@@ -29,7 +31,9 @@ export default async function LandingPage({ params }: Props) {
         <HeroGlass />
         <MarqueeBand />
         <ShowcaseSection />
+        <TwoTracksSection />
         <InstagramAiSection />
+        <FeaturesGrid />
         <StatsSection />
         <HowItWorksSection />
         <PricingSection />
