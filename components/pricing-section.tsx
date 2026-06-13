@@ -16,7 +16,7 @@ export function PricingSection() {
     : "monthlyPrice"
 
   return (
-    <section id="pricing" className="relative bg-white py-24 md:py-32">
+    <section id="pricing" className="relative bg-background py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
           <Reveal>
@@ -92,7 +92,7 @@ export function PricingSection() {
                   className={`relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-500 ${
                     popular
                       ? "border-ink bg-gradient-to-b from-ink to-ink-deep text-white shadow-ink md:-translate-y-3"
-                      : "border-border bg-background hover:-translate-y-1 hover:shadow-card"
+                      : "border-border bg-white hover:-translate-y-1 hover:shadow-card"
                   }`}
                 >
                   {popular ? (

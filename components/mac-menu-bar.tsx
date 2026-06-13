@@ -16,24 +16,6 @@ const NAV_LINKS = [
   { key: "faq", href: "#faq" },
 ] as const
 
-function NotchFillet({ side }: { side: "left" | "right" }) {
-  const placement = side === "left" ? "-left-6 top-0" : "-right-6 top-0"
-  const path =
-    side === "left"
-      ? "M0 0H56V56C56 25.0721 30.9279 0 0 0Z"
-      : "M56 0H0V56C0 25.0721 25.0721 0 56 0Z"
-  return (
-    <span
-      className={`pointer-events-none absolute size-6 ${placement}`}
-      aria-hidden="true"
-    >
-      <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none">
-        <path d={path} fill="#f6f7f9" />
-      </svg>
-    </span>
-  )
-}
-
 export function MacMenuBar() {
   const t = useTranslations("header")
   const [menuOpen, setMenuOpen] = useState(false)
@@ -41,94 +23,58 @@ export function MacMenuBar() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-40">
-      <motion.nav
-        initial={{ y: "-110%", rotateX: -38, opacity: 0 }}
-        animate={{ y: 0, rotateX: 0, opacity: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 190,
-          damping: 21,
-          mass: 0.9,
-          delay: 0.4,
-        }}
-        style={{ transformPerspective: 700, transformOrigin: "top center" }}
-        className="absolute inset-x-0 top-0 hidden justify-center lg:flex"
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
+        className="relative flex items-center justify-between px-4 py-3.5 md:px-7 md:py-4"
       >
-        <div className="relative flex h-12 items-center rounded-b-3xl bg-[#f6f7f9] px-7">
-          <NotchFillet side="left" />
-          <NotchFillet side="right" />
-          <ul
-            className="flex items-center"
-            onMouseLeave={() => setHovered(null)}
-          >
-            {NAV_LINKS.map((link, index) => (
-              <motion.li
-                key={link.key}
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.45,
-                  ease: EASE,
-                  delay: 0.7 + index * 0.06,
+        <Link
+          href="/"
+          className="flex items-center gap-2 rounded-full border border-white/20 bg-white/60 py-1.5 pe-3.5 ps-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-white/75"
+        >
+          <span className="flex size-6 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-white">
+            P
+          </span>
+          <span className="text-[13px] font-bold tracking-tight text-ink">
+            {t("brand")}
+          </span>
+        </Link>
+
+        <ul
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-white/55 px-1.5 py-1 backdrop-blur-md lg:flex"
+          onMouseLeave={() => setHovered(null)}
+        >
+          {NAV_LINKS.map((link) => (
+            <li key={link.key} className="relative">
+              <a
+                href={link.href}
+                onClick={(event) => {
+                  event.preventDefault()
+                  scrollToSection(link.href)
                 }}
-                className="relative"
+                onMouseEnter={() => setHovered(link.key)}
+                onFocus={() => setHovered(link.key)}
+                className="relative block rounded-full px-4 py-1.5 text-[13px] font-semibold text-ink/70 transition-colors duration-300 hover:text-ink"
               >
-                <a
-                  href={link.href}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    scrollToSection(link.href)
-                  }}
-                  onMouseEnter={() => setHovered(link.key)}
-                  onFocus={() => setHovered(link.key)}
-                  className="relative block px-5 py-2 text-[11px] font-semibold uppercase text-ink/55 transition-colors duration-200 hover:text-ink ltr:tracking-[0.16em] rtl:text-[12.5px] rtl:font-medium"
-                >
-                  {hovered === link.key ? (
-                    <motion.span
-                      layoutId="notch-nav-hover"
-                      transition={{ duration: 0.35, ease: EASE }}
-                      className="absolute inset-x-1 inset-y-0.5 rounded-full bg-ink/[0.07]"
-                    />
-                  ) : null}
-                  <span className="relative">{t(`nav.${link.key}`)}</span>
-                </a>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      </motion.nav>
+                {hovered === link.key ? (
+                  <motion.span
+                    layoutId="nav-hover-pill"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-ink/[0.07]"
+                  />
+                ) : null}
+                <span className="relative">{t(`nav.${link.key}`)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-      <div className="flex items-center justify-between px-4 pt-3.5 md:px-7 md:pt-4">
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.55 }}
-        >
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-full border border-white/40 bg-white/55 py-1.5 pe-3.5 ps-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-white/75"
-          >
-            <span className="flex size-6 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-white">
-              P
-            </span>
-            <span className="text-[13px] font-bold tracking-tight text-ink">
-              {t("brand")}
-            </span>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.65 }}
-          className="flex items-center gap-2"
-        >
+        <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <motion.a
+          <a
             href="https://app.promall.io"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="group hidden items-center gap-2 rounded-full bg-ink/90 py-1.5 pe-4 ps-1.5 text-white transition-colors duration-300 hover:bg-ink sm:flex"
+            className="group hidden items-center gap-2 rounded-full bg-[rgba(27,38,59,0.85)] py-1.5 pe-4 ps-1.5 text-white backdrop-blur-md transition-colors duration-300 hover:bg-ink sm:flex"
           >
             <span className="flex items-center justify-center rounded-full bg-white/20 p-1">
               <ArrowUpRight
@@ -137,39 +83,32 @@ export function MacMenuBar() {
               />
             </span>
             <span className="text-xs font-semibold">{t("cta")}</span>
-          </motion.a>
+          </a>
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("menuLabel")}
             aria-expanded={menuOpen}
-            className="flex size-9 items-center justify-center rounded-full border border-white/40 bg-white/55 text-ink backdrop-blur-md lg:hidden"
+            className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-white/60 text-ink backdrop-blur-md lg:hidden"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
       <AnimatePresence>
         {menuOpen ? (
           <motion.div
-            initial={{ opacity: 0, y: -14, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -14, scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 360, damping: 28 }}
-            className="mx-4 mt-2 space-y-1 overflow-hidden rounded-2xl bg-[#f6f7f9] p-2 shadow-card lg:hidden"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 bg-white/80 p-2 shadow-card backdrop-blur-xl lg:hidden"
           >
-            {NAV_LINKS.map((link, index) => (
-              <motion.a
+            {NAV_LINKS.map((link) => (
+              <a
                 key={link.key}
                 href={link.href}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.35,
-                  ease: EASE,
-                  delay: 0.06 + index * 0.05,
-                }}
                 onClick={(event) => {
                   event.preventDefault()
                   setMenuOpen(false)
@@ -178,17 +117,14 @@ export function MacMenuBar() {
                 className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-ink transition-colors hover:bg-ink/5"
               >
                 {t(`nav.${link.key}`)}
-              </motion.a>
+              </a>
             ))}
-            <motion.a
+            <a
               href="https://app.promall.io"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: EASE, delay: 0.3 }}
               className="mt-1 block rounded-xl bg-ink px-4 py-2.5 text-center text-[15px] font-semibold text-white"
             >
               {t("cta")}
-            </motion.a>
+            </a>
           </motion.div>
         ) : null}
       </AnimatePresence>

@@ -21,7 +21,7 @@ export function FooterSection() {
   const t = useTranslations("footer")
 
   return (
-    <footer className="border-t border-border bg-white">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-6xl px-5 py-14 md:py-16">
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">

@@ -42,7 +42,7 @@ export function FeaturesGrid() {
   const reduced = useReducedMotion()
 
   return (
-    <section className="relative bg-white py-24 md:py-32">
+    <section className="relative bg-background py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-14 max-w-3xl text-center md:mb-16">
           <Reveal>
@@ -79,7 +79,7 @@ export function FeaturesGrid() {
                   className={`flex h-full flex-col rounded-3xl border p-7 ${
                     cell.accent
                       ? "border-ink bg-gradient-to-br from-ink to-ink-deep text-white shadow-ink"
-                      : "border-border bg-background shadow-soft transition-colors duration-300 hover:border-ink/20"
+                      : "border-border bg-white shadow-soft transition-colors duration-300 hover:border-ink/20"
                   }`}
                 >
                   <span

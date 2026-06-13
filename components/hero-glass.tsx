@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useTranslations } from "next-intl"
 import { motion, useReducedMotion } from "framer-motion"
@@ -18,17 +17,33 @@ import { MacMenuBar } from "@/components/mac-menu-bar"
 import { EASE } from "@/components/motion"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
-const HeroParticles = dynamic(
-  () => import("@/components/hero-particles").then((mod) => mod.HeroParticles),
-  { ssr: false },
-)
-
-const BACKGROUND_IMAGE =
-  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=75&w=1920&auto=format&fit=crop"
-const BACKGROUND_PLACEHOLDER =
-  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef0f3'/%3E%3Cstop offset='1' stop-color='%23aab4c0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='16' height='9' fill='url(%23g)'/%3E%3C/svg%3E"
 const PRODUCT_IMAGE =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=320&auto=format&fit=crop"
+
+const VIDEO_SRC =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260428_193507_4286c423-2fd9-4efd-92bd-91a939453fc1.mp4"
+
+function VideoBackdrop() {
+  return (
+    <>
+      <div className="absolute inset-0 bg-[#f6f7f9]" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-[68%_center] lg:object-center"
+      >
+        <source src={VIDEO_SRC} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_48%_at_50%_36%,rgba(246,247,249,0.5),transparent_72%)]" />
+      <div className="absolute inset-x-0 top-0 h-[24%] bg-gradient-to-b from-[#f6f7f9]/72 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-[#f6f7f9]/55 to-transparent" />
+    </>
+  )
+}
 
 function StaggeredWords({
   text,
@@ -94,7 +109,7 @@ function DmGlassCard() {
     >
       <div
         ref={cardRef}
-        className="w-72 rounded-[1.6rem] border border-white/50 bg-white/45 p-3 shadow-float backdrop-blur-2xl"
+        className="w-72 rounded-[1.6rem] border border-white/20 bg-white/30 p-3 backdrop-blur-2xl"
       >
         <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
           <span className="rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
@@ -150,7 +165,7 @@ function BottomLeftCard() {
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
-      className="absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] border border-white/45 bg-white/35 p-4 shadow-float backdrop-blur-xl md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
+      className="absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] bg-white/30 p-4 backdrop-blur-xl md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
     >
       <div>
         <p className="text-2xl font-extrabold tracking-tight text-ink md:text-3xl">
@@ -276,8 +291,7 @@ export function HeroGlass() {
         },
       })
       gsap.to(contentRef.current, {
-        yPercent: -10,
-        opacity: 0.3,
+        yPercent: -6,
         ease: "none",
         scrollTrigger: {
           trigger: wrapperRef.current,
@@ -295,28 +309,14 @@ export function HeroGlass() {
     <div ref={wrapperRef} className="h-[100svh] w-full p-2 md:p-2.5">
       <section
         ref={windowRef}
-        className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-[1.25rem] shadow-[0_18px_60px_-24px_rgba(17,25,42,0.4)] ring-1 ring-ink/5 md:rounded-[1.75rem]"
+        className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-[1.25rem] shadow-[0_18px_60px_-24px_rgba(17,25,42,0.4)] md:rounded-[1.75rem]"
       >
         <div
           ref={backdropRef}
           className="absolute inset-0 will-change-transform"
         >
-          <Image
-            src={BACKGROUND_IMAGE}
-            alt={t("altBackground")}
-            fill
-            priority
-            placeholder="blur"
-            blurDataURL={BACKGROUND_PLACEHOLDER}
-            sizes="100vw"
-            className="object-cover object-[65%_50%] brightness-[1.05] contrast-[0.98] saturate-[0.88] lg:object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#f6f7f9]/90 via-[#f6f7f9]/30 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-[#f6f7f9]/55 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_30%,rgba(246,247,249,0.7),transparent_72%)]" />
+          <VideoBackdrop />
         </div>
-
-        <HeroParticles className="absolute inset-0 z-[1]" />
 
         <div
           ref={contentRef}
@@ -329,7 +329,7 @@ export function HeroGlass() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/30 bg-white/60 px-4 py-2 backdrop-blur-md"
+              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/60 px-4 py-2 backdrop-blur-md"
             >
               <Sparkles className="size-4 text-ink/80" aria-hidden="true" />
               <span className="text-[13px] font-semibold text-ink/90 md:text-[14px]">

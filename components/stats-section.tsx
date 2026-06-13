@@ -9,7 +9,7 @@ export function StatsSection() {
   const t = useTranslations("stats")
 
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-background">
       <Stagger
         className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-12 px-5 py-20 md:grid-cols-4 md:py-28"
         staggerChildren={0.08}
