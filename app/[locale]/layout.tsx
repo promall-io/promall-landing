@@ -28,7 +28,7 @@ const estedaad = localFont({
   ],
   display: "swap",
   variable: "--font-estedaad",
-  adjustFontFallback: false,
+  adjustFontFallback: "Arial",
 });
 
 type Props = {
