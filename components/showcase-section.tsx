@@ -67,7 +67,7 @@ const PANELS: Panel[] = [
               +۳۲٪ رشد
             </span>
             <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-ink">
-              ۱۲ هفته اخیر
+              ۱۲ هفته‌ی اخیر
             </span>
           </div>
           <ReportsMini />

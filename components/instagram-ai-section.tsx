@@ -33,26 +33,26 @@ type ChatMessage = {
 }
 
 const SCRIPT: ChatMessage[] = [
-  { from: "customer", text: "سلام! قهوه عربیکا ۲۵۰ گرمی موجوده؟" },
+  { from: "customer", text: "سلام، اون مانتو کتانِ کرم سایز ۳۸ هست؟" },
   {
     from: "ai",
-    text: "سلام 🌱 بله موجوده! عربیکای تازه‌برشت ۲۵۰ گرمی ۴۸۵٬۰۰۰ تومانه. دانه می‌خواید یا آسیاب‌شده؟",
+    text: "سلام 🌿 آره موجوده! تنش خنکه و قدش بلند، ۱٬۲۸۰٬۰۰۰ تومن. کرم می‌خوای یا مشکیشم برات بفرستم ببینی؟",
   },
-  { from: "customer", text: "آسیاب‌شده برای اسپرسو. دو بسته لطفاً 🙏" },
+  { from: "customer", text: "همون کرم. یه دونه لطفاً 🙏" },
   {
     from: "ai",
-    text: "عالیه! دو بسته عربیکا، آسیاب اسپرسو — جمعاً ۹۷۰٬۰۰۰ تومان. لینک پرداخت براتون می‌فرستم 👇",
+    text: "چشم! یه مانتو کتان کرم سایز ۳۸ — جمعاً ۱٬۲۸۰٬۰۰۰ تومن. لینک پرداختو همین‌جا برات می‌فرستم 👇",
   },
   { from: "ai", orderCard: true },
-  { from: "customer", text: "پرداخت کردم ✅ کی به دستم می‌رسه؟" },
+  { from: "customer", text: "پرداخت کردم ✅ کی می‌رسه دستم؟" },
   {
     from: "ai",
-    text: "پرداختتون تأیید شد 🎉 سفارش فردا با پست پیشتاز ارسال می‌شه و کد رهگیری همین‌جا براتون میاد 📦",
+    text: "پرداختت ثبت شد 🎉 فردا با پست پیشتاز می‌فرستیمش، کد رهگیریشم همین‌جا برات میاد 📦",
   },
-  { from: "customer", text: "مرسی، چه سریع! 😍" },
+  { from: "customer", text: "مرسی، چه سریع 😍" },
   {
     from: "ai",
-    text: "نوش جان ☕ هر ساعتی از شبانه‌روز سوال داشتید، همین‌جا در خدمتتونم 🌙",
+    text: "خواهش 🌸 هر ساعتی از شب‌وروز سوال داشتی، همین‌جام در خدمتت 🌙",
   },
 ]
 
@@ -95,14 +95,14 @@ function ChatHeader() {
       <ChevronRight className="size-5 shrink-0 text-ink" />
       <span className="shrink-0 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
-          م
+          ت
           <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-emerald-500" />
         </span>
       </span>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-bold text-ink">کافه مانا</p>
+        <p className="truncate text-sm font-bold text-ink">مزون ترمه</p>
         <p className="truncate text-[10px] text-emerald-600">
-          پاسخ‌گویی فوری با پرومال
+          معمولاً سریع جواب می‌ده
         </p>
       </div>
       <Phone className="size-[18px] shrink-0 text-ink/70" />
@@ -141,11 +141,11 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         <div className="border-b border-border bg-[#fafbfc] px-3.5 py-2.5">
           <p className="text-[11px] font-bold text-ink">سفارش #۱۰۸۷</p>
           <p className="text-[10px] text-muted-foreground">
-            ۲ × عربیکا ۲۵۰ گرم · آسیاب اسپرسو
+            ۱ × مانتو کتان کرم · سایز ۳۸
           </p>
         </div>
         <div className="flex items-center justify-between px-3.5 py-2.5">
-          <span className="text-[11px] font-bold text-ink">۹۷۰٬۰۰۰ تومان</span>
+          <span className="text-[11px] font-bold text-ink">۱٬۲۸۰٬۰۰۰ تومان</span>
           <span className="rounded-full bg-ink px-3 py-1 text-[10px] font-semibold text-white">
             پرداخت آنلاین
           </span>
@@ -300,7 +300,7 @@ function PhoneChat() {
             className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-emerald-700 shadow-card"
           >
             <BadgeCheck className="size-4" />
-            بدون دخالت شما انجام شد
+            بدون اینکه تو کاری کنی، انجام شد
           </motion.div>
         ) : null}
       </AnimatePresence>

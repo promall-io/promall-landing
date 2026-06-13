@@ -30,13 +30,13 @@
     "cutoutSub": "No credit card needed",
     "altBackground": "Interior of a bright modern boutique",
     "dm": {
-      "shopName": "Style Store",
+      "shopName": "Termeh Boutique",
       "status": "Online with ProMall",
-      "productAlt": "Red sport sneaker",
-      "productName": "Air running sneaker",
-      "productPrice": "2,480,000 Toman",
-      "customer": "Do you have size 42?",
-      "reply": "Yes we do! Want me to place the order right now? 🙌",
+      "productAlt": "Cream cotton manteau",
+      "productName": "Cream cotton manteau",
+      "productPrice": "1,280,000 Toman",
+      "customer": "Do you have size 38?",
+      "reply": "Yes we do! Want me to set one aside for you? 🙌",
       "confirmed": "Order placed in the DM"
     }
   },

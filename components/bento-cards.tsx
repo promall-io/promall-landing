@@ -40,20 +40,20 @@ export function ChatMini() {
         {...bubble(0.1)}
         className="w-fit max-w-[85%] rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-ink"
       >
-        سلام! این کیف چرمی قهوه‌ای موجوده؟
+        سلام! این شومیز ساتن مشکی موجوده؟
       </motion.div>
       <motion.div
         {...bubble(0.5)}
         className="mr-auto w-fit max-w-[85%] rounded-2xl rounded-tl-md bg-primary px-4 py-2.5 text-sm leading-6 text-white"
       >
-        سلام 👋 بله موجوده! کیف چرم طبیعی قهوه‌ای ۲٬۴۸۰٬۰۰۰ تومان. مایلید همین
-        الان براتون ثبتش کنم؟
+        سلام 👋 آره موجوده! شومیز ساتن مشکی ۸۹۰٬۰۰۰ تومن. همین الان برات
+        بذارمش کنار؟
       </motion.div>
       <motion.div
         {...bubble(0.9)}
         className="flex w-fit items-center gap-2 rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-ink"
       >
-        بله لطفاً
+        آره لطفاً
         <TypingDots />
       </motion.div>
       <motion.div
@@ -61,7 +61,7 @@ export function ChatMini() {
         className="mr-auto flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-700"
       >
         <BadgeCheck className="size-4" />
-        سفارش ثبت شد — لینک پرداخت ارسال شد
+        سفارش ثبت شد — لینک پرداخت رفت
       </motion.div>
     </div>
   )
@@ -72,9 +72,9 @@ export function ProductMini() {
     <div dir="rtl" className="rounded-2xl border border-border bg-[#fafbfc] p-4">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-bold text-ink">کیف چرم دست‌دوز</p>
+          <p className="text-sm font-bold text-ink">مانتو کتان کرم</p>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            ۲٬۴۸۰٬۰۰۰ تومان
+            ۱٬۲۸۰٬۰۰۰ تومان
           </p>
         </div>
         <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
@@ -185,9 +185,9 @@ export function ReportsMini() {
 }
 
 const STOCK_ROWS = [
-  { name: "عربیکا ۲۵۰ گرم", level: 78, tone: "bg-primary" },
-  { name: "ماگ سرامیکی", level: 46, tone: "bg-primary" },
-  { name: "فیلتر V60", level: 12, tone: "bg-amber-400", low: true },
+  { name: "مانتو کتان کرم", level: 78, tone: "bg-primary" },
+  { name: "شومیز ساتن مشکی", level: 46, tone: "bg-primary" },
+  { name: "شال نخی", level: 12, tone: "bg-amber-400", low: true },
 ]
 
 export function InventoryMini() {
@@ -231,7 +231,7 @@ export function StorefrontMini() {
           <span className="flex size-6 items-center justify-center rounded-lg bg-ink text-white">
             <Store className="size-3" />
           </span>
-          <span className="text-xs font-bold text-ink">کافه مانا</span>
+          <span className="text-xs font-bold text-ink">مزون ترمه</span>
         </div>
         <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-semibold text-emerald-600">
           آنلاین
@@ -307,8 +307,8 @@ export function PrintMini() {
           className="rounded-b-lg border border-dashed border-border bg-white px-3 py-2.5 text-[9px] leading-5 text-muted-foreground shadow-soft"
         >
           <p className="font-bold text-ink">فاکتور #۱۰۸۶</p>
-          <p>عربیکا ۲۵۰ گرم × ۲</p>
-          <p className="font-semibold text-ink">۹۷۰٬۰۰۰ تومان</p>
+          <p>مانتو کتان کرم × ۱</p>
+          <p className="font-semibold text-ink">۱٬۲۸۰٬۰۰۰ تومان</p>
         </motion.div>
       </div>
     </div>
