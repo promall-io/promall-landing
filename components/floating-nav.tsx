@@ -102,7 +102,7 @@ export function FloatingNav() {
                         onMouseEnter={() => setHovered(link.key)}
                         onFocus={() => setHovered(link.key)}
                         className={`relative block rounded-full px-3 py-2 text-[12px] font-semibold transition-colors duration-300 sm:px-4 sm:text-[13px] ${
-                          isActive ? "text-white" : "text-ink/65 hover:text-ink"
+                          isActive ? "text-white" : "text-muted-foreground hover:text-foreground"
                         }`}
                       >
                         {hovered === link.key && !isActive ? (

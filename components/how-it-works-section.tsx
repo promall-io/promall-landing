@@ -24,7 +24,7 @@ export function HowItWorksSection() {
             </span>
           </Reveal>
           <Reveal as="h2" delay={0.08}>
-            <span className="text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+            <span className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               {t("title")}
             </span>
           </Reveal>
@@ -49,11 +49,11 @@ export function HowItWorksSection() {
                   <span className="ghost-numeral pointer-events-none absolute inset-x-0 -top-2 text-[6.5rem]">
                     {t(`steps.${step.key}.number`)}
                   </span>
-                  <span className="relative flex size-14 items-center justify-center rounded-2xl bg-white shadow-card">
+                  <span className="relative flex size-14 items-center justify-center rounded-2xl bg-card shadow-card">
                     <step.icon variant="bold" className="size-6 text-primary" />
                   </span>
                 </div>
-                <h3 className="text-2xl font-extrabold tracking-tight text-ink">
+                <h3 className="text-2xl font-extrabold tracking-tight text-foreground">
                   {t(`steps.${step.key}.title`)}
                 </h3>
                 <p className="mx-auto mt-3 max-w-xs text-pretty text-sm leading-7 text-muted-foreground">

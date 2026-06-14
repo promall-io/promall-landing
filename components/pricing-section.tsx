@@ -25,7 +25,7 @@ export function PricingSection() {
             </span>
           </Reveal>
           <Reveal as="h2" delay={0.08}>
-            <span className="text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+            <span className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               {t("title")}
             </span>
           </Reveal>
@@ -61,7 +61,7 @@ export function PricingSection() {
                         <span
                           className={`rounded-full px-2 py-px text-[10px] font-bold ${
                             selected
-                              ? "bg-gold text-ink"
+                              ? "bg-gold text-foreground"
                               : "bg-primary/10 text-primary"
                           }`}
                         >
@@ -92,17 +92,17 @@ export function PricingSection() {
                   className={`relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-500 ${
                     popular
                       ? "border-ink bg-gradient-to-b from-ink to-ink-deep text-white shadow-ink md:-translate-y-3"
-                      : "border-border bg-white hover:-translate-y-1 hover:shadow-card"
+                      : "border-border bg-card hover:-translate-y-1 hover:shadow-card"
                   }`}
                 >
                   {popular ? (
-                    <span className="absolute -top-3.5 right-8 rounded-full bg-gold px-4 py-1 text-xs font-bold text-ink ltr:left-8 ltr:right-auto">
+                    <span className="absolute -top-3.5 right-8 rounded-full bg-gold px-4 py-1 text-xs font-bold text-foreground ltr:left-8 ltr:right-auto">
                       {t("popularLabel")}
                     </span>
                   ) : null}
 
                   <h3
-                    className={`text-lg font-bold ${popular ? "text-white" : "text-ink"}`}
+                    className={`text-lg font-bold ${popular ? "text-white" : "text-foreground"}`}
                   >
                     {t(`plans.${plan}.name`)}
                   </h3>
@@ -120,7 +120,7 @@ export function PricingSection() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.35, ease: EASE }}
-                        className={`text-4xl font-bold tracking-tight ${popular ? "text-white" : "text-ink"}`}
+                        className={`text-4xl font-bold tracking-tight ${popular ? "text-white" : "text-foreground"}`}
                       >
                         {price}
                       </motion.span>
@@ -159,8 +159,8 @@ export function PricingSection() {
                     href="https://app.promall.io"
                     className={`mt-8 block rounded-full py-3 text-center text-sm font-semibold transition-all duration-300 ${
                       popular
-                        ? "bg-gold text-ink hover:bg-gold-deep"
-                        : "border border-ink/15 bg-white text-ink hover:border-ink hover:bg-ink hover:text-white"
+                        ? "bg-gold text-foreground hover:bg-gold-deep"
+                        : "border border-ink/15 bg-card text-foreground hover:border-ink hover:bg-ink hover:text-white"
                     }`}
                   >
                     {t(`plans.${plan}.cta`)}

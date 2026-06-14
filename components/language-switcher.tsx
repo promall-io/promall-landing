@@ -32,11 +32,11 @@ export function LanguageSwitcher() {
     <button
       type="button"
       onClick={() => handleLanguageChange(otherLocale)}
-      className="flex items-center gap-1.5 rounded-full border border-white/40 bg-white/55 px-3 py-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-white/75"
+      className="flex items-center gap-1.5 rounded-full border border-white/40 bg-card/55 px-3 py-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-card/75"
       aria-label={`Switch to ${localeNames[otherLocale]}`}
     >
-      <Globe className="size-3.5 text-ink/60" aria-hidden="true" />
-      <span className="text-[12px] font-semibold text-ink">
+      <Globe className="size-3.5 text-muted-foreground" aria-hidden="true" />
+      <span className="text-[12px] font-semibold text-foreground">
         {localeNames[otherLocale]}
       </span>
     </button>

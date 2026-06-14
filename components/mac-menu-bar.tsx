@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Menu, X } from "@/components/icons"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { EASE } from "@/components/motion"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
@@ -31,18 +32,18 @@ export function MacMenuBar() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-full border border-white/20 bg-white/60 py-1.5 pe-3.5 ps-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-white/75"
+          className="flex items-center gap-2 rounded-full border border-white/20 bg-card/60 py-1.5 pe-3.5 ps-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-card/75"
         >
           <span className="flex size-6 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-white">
             P
           </span>
-          <span className="text-[13px] font-bold tracking-tight text-ink">
+          <span className="text-[13px] font-bold tracking-tight text-foreground">
             {t("brand")}
           </span>
         </Link>
 
         <ul
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-white/55 px-1.5 py-1 backdrop-blur-md lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-card/55 px-1.5 py-1 backdrop-blur-md lg:flex"
           onMouseLeave={() => setHovered(null)}
         >
           {NAV_LINKS.map((link) => (
@@ -55,7 +56,7 @@ export function MacMenuBar() {
                 }}
                 onMouseEnter={() => setHovered(link.key)}
                 onFocus={() => setHovered(link.key)}
-                className="relative block rounded-full px-4 py-1.5 text-[13px] font-semibold text-ink/70 transition-colors duration-300 hover:text-ink"
+                className="relative block rounded-full px-4 py-1.5 text-[13px] font-semibold text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
                 {hovered === link.key ? (
                   <motion.span
@@ -71,6 +72,7 @@ export function MacMenuBar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSwitcher />
           <a
             href="https://app.promall.io"
@@ -89,7 +91,7 @@ export function MacMenuBar() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("menuLabel")}
             aria-expanded={menuOpen}
-            className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-white/60 text-ink backdrop-blur-md lg:hidden"
+            className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-card/60 text-foreground backdrop-blur-md lg:hidden"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -103,7 +105,7 @@ export function MacMenuBar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 bg-white/80 p-2 shadow-card backdrop-blur-xl lg:hidden"
+            className="mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 bg-card/80 p-2 shadow-card backdrop-blur-xl lg:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
@@ -114,7 +116,7 @@ export function MacMenuBar() {
                   setMenuOpen(false)
                   scrollToSection(link.href)
                 }}
-                className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-ink transition-colors hover:bg-ink/5"
+                className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-foreground transition-colors hover:bg-ink/5"
               >
                 {t(`nav.${link.key}`)}
               </a>

@@ -114,18 +114,18 @@ function DmGlassCard() {
         <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
           <span className="rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
             <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
-              <Instagram className="size-4 text-ink" aria-hidden="true" />
+              <Instagram className="size-4 text-foreground" aria-hidden="true" />
             </span>
           </span>
           <div className="min-w-0">
-            <p className="truncate text-xs font-bold text-ink">{t("shopName")}</p>
+            <p className="truncate text-xs font-bold text-foreground">{t("shopName")}</p>
             <p className="text-[10px] font-medium text-emerald-600">
               {t("status")}
             </p>
           </div>
         </div>
-        <div className="space-y-2 rounded-[1.1rem] bg-white/70 p-2.5">
-          <div className="flex items-center gap-2.5 rounded-xl bg-white p-2 shadow-soft">
+        <div className="space-y-2 rounded-[1.1rem] bg-card/70 p-2.5">
+          <div className="flex items-center gap-2.5 rounded-xl bg-card p-2 shadow-soft">
             <Image
               src={PRODUCT_IMAGE}
               alt={t("productAlt")}
@@ -134,15 +134,15 @@ function DmGlassCard() {
               className="size-12 rounded-lg object-cover"
             />
             <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold text-ink">
+              <p className="truncate text-[11px] font-bold text-foreground">
                 {t("productName")}
               </p>
-              <p className="text-[10px] font-semibold text-ink/60">
+              <p className="text-[10px] font-semibold text-muted-foreground">
                 {t("productPrice")}
               </p>
             </div>
           </div>
-          <div className="w-fit max-w-[88%] rounded-xl rounded-ss-sm bg-ice/90 px-3 py-1.5 text-[11px] text-ink">
+          <div className="w-fit max-w-[88%] rounded-xl rounded-ss-sm bg-ice/90 px-3 py-1.5 text-[11px] text-foreground">
             {t("customer")}
           </div>
           <div className="ms-auto w-fit max-w-[88%] rounded-xl rounded-se-sm bg-ink px-3 py-1.5 text-[11px] leading-5 text-white">
@@ -168,10 +168,10 @@ function BottomLeftCard() {
       className="absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] bg-white/30 p-4 backdrop-blur-xl md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
     >
       <div>
-        <p className="text-2xl font-extrabold tracking-tight text-ink md:text-3xl">
+        <p className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
           {t("statValue")}
         </p>
-        <p className="text-[10px] font-bold tracking-wider text-ink/55 md:text-[11px]">
+        <p className="text-[10px] font-bold tracking-wider text-muted-foreground md:text-[11px]">
           {t("statLabel")}
         </p>
       </div>
@@ -183,15 +183,15 @@ function BottomLeftCard() {
         }}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="group flex items-center gap-2 self-start rounded-full bg-white py-1.5 pe-4 ps-1.5 transition-colors hover:bg-white/90"
+        className="group flex items-center gap-2 self-start rounded-full bg-card py-1.5 pe-4 ps-1.5 transition-colors hover:bg-card/90"
       >
         <span className="flex items-center justify-center rounded-full bg-ink/10 p-1">
           <ArrowUpRight
-            className="size-3.5 text-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
+            className="size-3.5 text-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
             aria-hidden="true"
           />
         </span>
-        <span className="whitespace-nowrap text-[13px] font-semibold text-ink">
+        <span className="whitespace-nowrap text-[13px] font-semibold text-foreground">
           {t("statAction")}
         </span>
       </motion.a>
@@ -234,15 +234,15 @@ function BottomRightCutout() {
       <CornerMask position="left" />
       <span className="flex size-10 items-center justify-center rounded-full border border-ink/10 bg-ink/5 transition-colors duration-300 group-hover:bg-ink/10 md:size-14">
         <ArrowUpRight
-          className="size-5 text-ink/80 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 md:size-6"
+          className="size-5 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 md:size-6"
           aria-hidden="true"
         />
       </span>
       <span className="flex flex-col">
-        <span className="text-[16px] font-extrabold tracking-tight text-ink md:text-[20px]">
+        <span className="text-[16px] font-extrabold tracking-tight text-foreground md:text-[20px]">
           {t("cutoutTitle")}
         </span>
-        <span className="flex items-center gap-1 text-ink/55 transition-colors duration-300 group-hover:text-ink/80">
+        <span className="flex items-center gap-1 text-muted-foreground transition-colors duration-300 group-hover:text-muted-foreground">
           <span className="text-[12px] font-medium md:text-[14px]">
             {t("cutoutSub")}
           </span>
@@ -329,15 +329,15 @@ export function HeroGlass() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/60 px-4 py-2 backdrop-blur-md"
+              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-card/60 px-4 py-2 backdrop-blur-md"
             >
-              <Sparkles className="size-4 text-ink/80" aria-hidden="true" />
-              <span className="text-[13px] font-semibold text-ink/90 md:text-[14px]">
+              <Sparkles className="size-4 text-muted-foreground" aria-hidden="true" />
+              <span className="text-[13px] font-semibold text-muted-foreground md:text-[14px]">
                 {t("badge")}
               </span>
             </motion.div>
 
-            <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-ink [text-shadow:0_2px_28px_rgba(246,247,249,0.85)] sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1] xl:text-[76px]">
+            <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-foreground [text-shadow:0_2px_28px_rgba(246,247,249,0.85)] sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1] xl:text-[76px]">
               <StaggeredWords text={t("titleLine1")} baseDelay={0.15} />
               <br />
               <StaggeredWords
@@ -351,7 +351,7 @@ export function HeroGlass() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-5 max-w-xl text-pretty text-sm font-medium leading-7 text-ink/85 [text-shadow:0_1px_14px_rgba(246,247,249,0.9),0_0_28px_rgba(246,247,249,0.7)] sm:text-base md:text-lg md:leading-8"
+              className="mt-5 max-w-xl text-pretty text-sm font-medium leading-7 text-muted-foreground [text-shadow:0_1px_14px_rgba(246,247,249,0.9),0_0_28px_rgba(246,247,249,0.7)] sm:text-base md:text-lg md:leading-8"
             >
               {t("description")}
             </motion.p>

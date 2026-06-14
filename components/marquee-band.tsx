@@ -60,7 +60,7 @@ export function MarqueeBand() {
           {row.map((item, index) => (
             <span
               key={`${item}-${index}`}
-              className="flex items-center gap-10 px-10 text-[13px] font-semibold text-ink/40 transition-colors duration-300 hover:text-ink/70"
+              className="flex items-center gap-10 px-10 text-[13px] font-semibold text-muted-foreground transition-colors duration-300 hover:text-muted-foreground"
             >
               {item}
               <span className="text-[9px] text-gold-deep/60">✦</span>

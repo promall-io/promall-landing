@@ -31,7 +31,7 @@ export function ChatMini() {
     <div dir="rtl" className="flex h-full flex-col justify-end gap-2.5">
       <motion.div
         {...bubble(0.1)}
-        className="w-fit max-w-[85%] rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-ink"
+        className="w-fit max-w-[85%] rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-foreground"
       >
         سلام! این شومیز ساتن مشکی موجوده؟
       </motion.div>
@@ -44,7 +44,7 @@ export function ChatMini() {
       </motion.div>
       <motion.div
         {...bubble(0.9)}
-        className="flex w-fit items-center gap-2 rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-ink"
+        className="flex w-fit items-center gap-2 rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-foreground"
       >
         آره لطفاً
         <TypingDots />
@@ -76,9 +76,9 @@ export function OrdersMini() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: EASE, delay: index * 0.12 }}
-          className="flex items-center justify-between rounded-xl border border-border bg-white px-3.5 py-2.5"
+          className="flex items-center justify-between rounded-xl border border-border bg-card px-3.5 py-2.5"
         >
-          <span className="text-xs font-semibold text-ink">{order.name}</span>
+          <span className="text-xs font-semibold text-foreground">{order.name}</span>
           <span
             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${order.tone}`}
           >
@@ -93,22 +93,22 @@ export function OrdersMini() {
 export function PaymentMini() {
   return (
     <div dir="rtl" className="space-y-2">
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-3.5 py-3">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
         <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <CreditCard className="size-4" />
         </span>
         <div className="flex-1">
-          <p className="text-xs font-semibold text-ink">درگاه بانکی</p>
+          <p className="text-xs font-semibold text-foreground">درگاه بانکی</p>
           <p className="text-[10px] text-muted-foreground">اتصال مستقیم سپ</p>
         </div>
         <ShieldCheck className="size-4 text-emerald-500" />
       </div>
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-3.5 py-3">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
         <span className="flex size-8 items-center justify-center rounded-lg bg-gold/40 text-gold-deep">
           <BadgeCheck className="size-4" />
         </span>
         <div className="flex-1">
-          <p className="text-xs font-semibold text-ink">کارت‌به‌کارت</p>
+          <p className="text-xs font-semibold text-foreground">کارت‌به‌کارت</p>
           <p className="text-[10px] text-muted-foreground">تأیید رسید در پنل</p>
         </div>
       </div>
@@ -149,7 +149,7 @@ export function InventoryMini() {
       {STOCK_ROWS.map((row, index) => (
         <div key={row.name}>
           <div className="mb-1 flex items-center justify-between text-[10px]">
-            <span className="font-medium text-ink">{row.name}</span>
+            <span className="font-medium text-foreground">{row.name}</span>
             {row.low ? (
               <span className="rounded-full bg-amber-100 px-2 py-px font-semibold text-amber-700">
                 رو به اتمام
@@ -185,11 +185,11 @@ export function PrintMini() {
           whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 1, ease: EASE, delay: 0.3 }}
-          className="rounded-b-lg border border-dashed border-border bg-white px-3 py-2.5 text-[9px] leading-5 text-muted-foreground shadow-soft"
+          className="rounded-b-lg border border-dashed border-border bg-card px-3 py-2.5 text-[9px] leading-5 text-muted-foreground shadow-soft"
         >
-          <p className="font-bold text-ink">فاکتور #۱۰۸۶</p>
+          <p className="font-bold text-foreground">فاکتور #۱۰۸۶</p>
           <p>مانتو کتان کرم × ۱</p>
-          <p className="font-semibold text-ink">۱٬۲۸۰٬۰۰۰ تومان</p>
+          <p className="font-semibold text-foreground">۱٬۲۸۰٬۰۰۰ تومان</p>
         </motion.div>
       </div>
     </div>

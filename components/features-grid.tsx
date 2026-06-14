@@ -53,7 +53,7 @@ export function FeaturesGrid() {
           <AnimatedTitle
             as="h2"
             text={t("title")}
-            className="text-balance text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl md:text-5xl"
+            className="text-balance text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
           />
           <Reveal as="p" delay={0.16} className="mt-5">
             <span className="text-pretty text-lg leading-8 text-muted-foreground">
@@ -79,7 +79,7 @@ export function FeaturesGrid() {
                   className={`flex h-full flex-col rounded-3xl border p-7 ${
                     cell.accent
                       ? "border-ink bg-gradient-to-br from-ink to-ink-deep text-white shadow-ink"
-                      : "border-border bg-white shadow-soft transition-colors duration-300 hover:border-ink/20"
+                      : "border-border bg-card shadow-soft transition-colors duration-300 hover:border-ink/20"
                   }`}
                 >
                   <span
@@ -90,7 +90,7 @@ export function FeaturesGrid() {
                     <Icon variant="bold" className="size-6" />
                   </span>
                   <h3
-                    className={`text-lg font-bold ${cell.accent ? "text-white" : "text-ink"}`}
+                    className={`text-lg font-bold ${cell.accent ? "text-white" : "text-foreground"}`}
                   >
                     {t(`cells.${cell.key}.title`)}
                   </h3>

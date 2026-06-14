@@ -29,7 +29,7 @@ export function FooterSection() {
               <span className="flex size-9 items-center justify-center rounded-xl bg-ink text-sm font-bold text-white">
                 P
               </span>
-              <span className="text-lg font-bold tracking-tight text-ink">
+              <span className="text-lg font-bold tracking-tight text-foreground">
                 {t("brand")}
               </span>
             </div>
@@ -39,7 +39,7 @@ export function FooterSection() {
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="mb-4 text-sm font-bold text-ink">
+            <h3 className="mb-4 text-sm font-bold text-foreground">
               {t("columns.product")}
             </h3>
             <ul className="space-y-2.5">
@@ -47,7 +47,7 @@ export function FooterSection() {
                 <li key={link.key}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-ink"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {t(`links.${link.key}`)}
                   </a>
@@ -57,7 +57,7 @@ export function FooterSection() {
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="mb-4 text-sm font-bold text-ink">
+            <h3 className="mb-4 text-sm font-bold text-foreground">
               {t("columns.company")}
             </h3>
             <ul className="space-y-2.5">
@@ -66,14 +66,14 @@ export function FooterSection() {
                   {link.external ? (
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-ink"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {t(`links.${link.key}`)}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-ink"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {t(`links.${link.key}`)}
                     </Link>
@@ -84,7 +84,7 @@ export function FooterSection() {
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="mb-4 text-sm font-bold text-ink">
+            <h3 className="mb-4 text-sm font-bold text-foreground">
               {t("columns.trust")}
             </h3>
             <EnamadBadge size="md" />

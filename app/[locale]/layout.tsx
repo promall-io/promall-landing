@@ -49,11 +49,16 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#f6f7f9",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f7f9" },
+    { media: "(prefers-color-scheme: dark)", color: "#11192a" },
+  ],
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
 };
+
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);var e=document.documentElement;if(d){e.classList.add('dark');e.style.colorScheme='dark';}}catch(e){}})();`;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -102,7 +107,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: metadata.description,
     },
     icons: {
-      icon: "/icon.svg",
+      icon: "/brand/favicon.png",
     },
   };
 }
@@ -138,6 +143,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             : undefined
         }
       >
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
           {children}

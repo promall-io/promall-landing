@@ -31,7 +31,7 @@ export function FAQSection() {
             </span>
           </Reveal>
           <Reveal as="h2" delay={0.08}>
-            <span className="text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+            <span className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               {t("title")}
             </span>
           </Reveal>
@@ -51,7 +51,7 @@ export function FAQSection() {
                   >
                     <span
                       className={`text-lg font-bold transition-colors duration-300 md:text-xl ${
-                        open ? "text-ink" : "text-ink/70 group-hover:text-ink"
+                        open ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
                       }`}
                     >
                       {t(`items.${key}.question`)}

@@ -39,7 +39,7 @@ export function TwoTracksSection() {
           <AnimatedTitle
             as="h2"
             text={t("title")}
-            className="text-balance text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl md:text-5xl"
+            className="text-balance text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
           />
           <Reveal as="p" delay={0.16} className="mt-5">
             <span className="text-pretty text-lg leading-8 text-muted-foreground">
@@ -64,7 +64,7 @@ export function TwoTracksSection() {
                   className={`flex h-full flex-col rounded-[2rem] border p-8 md:p-10 ${
                     track.accent
                       ? "border-ink bg-gradient-to-b from-ink to-ink-deep text-white shadow-ink"
-                      : "border-border bg-white shadow-card"
+                      : "border-border bg-card shadow-card"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export function TwoTracksSection() {
                       className={`rounded-full px-3 py-1 text-xs font-bold ${
                         track.accent
                           ? "bg-gold/20 text-gold"
-                          : "bg-ice text-ink"
+                          : "bg-ice text-foreground"
                       }`}
                     >
                       {t(`tracks.${track.key}.label`)}
@@ -90,7 +90,7 @@ export function TwoTracksSection() {
 
                   <h3
                     className={`mt-6 text-balance text-2xl font-extrabold leading-snug tracking-tight ${
-                      track.accent ? "text-white" : "text-ink"
+                      track.accent ? "text-white" : "text-foreground"
                     }`}
                   >
                     {t(`tracks.${track.key}.title`)}
@@ -130,8 +130,8 @@ export function TwoTracksSection() {
                     href={track.href}
                     className={`mt-8 block rounded-full py-3 text-center text-sm font-semibold transition-all duration-300 ${
                       track.accent
-                        ? "bg-gold text-ink hover:bg-gold-deep"
-                        : "border border-ink/15 bg-white text-ink hover:border-ink hover:bg-ink hover:text-white"
+                        ? "bg-gold text-foreground hover:bg-gold-deep"
+                        : "border border-ink/15 bg-card text-foreground hover:border-ink hover:bg-ink hover:text-white"
                     }`}
                   >
                     {t(`tracks.${track.key}.cta`)}

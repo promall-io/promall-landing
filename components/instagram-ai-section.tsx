@@ -72,7 +72,7 @@ function TypingBubble() {
       {[0, 1, 2].map((dot) => (
         <motion.span
           key={dot}
-          className="size-1.5 rounded-full bg-white/80"
+          className="size-1.5 rounded-full bg-card/80"
           animate={{ opacity: [0.35, 1, 0.35] }}
           transition={{ duration: 1, repeat: Infinity, delay: dot * 0.16 }}
         />
@@ -91,8 +91,8 @@ function DynamicIsland() {
 
 function ChatHeader() {
   return (
-    <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-white px-4 pb-2.5 pt-11">
-      <ChevronRight className="size-5 shrink-0 text-ink" />
+    <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-card px-4 pb-2.5 pt-11">
+      <ChevronRight className="size-5 shrink-0 text-foreground" />
       <span className="shrink-0 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
           ت
@@ -100,27 +100,27 @@ function ChatHeader() {
         </span>
       </span>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-bold text-ink">مزون ترمه</p>
+        <p className="truncate text-sm font-bold text-foreground">مزون ترمه</p>
         <p className="truncate text-[10px] text-emerald-600">
           معمولاً سریع جواب می‌ده
         </p>
       </div>
-      <Phone className="size-[18px] shrink-0 text-ink/70" />
-      <Video className="size-5 shrink-0 text-ink/70" />
+      <Phone className="size-[18px] shrink-0 text-muted-foreground" />
+      <Video className="size-5 shrink-0 text-muted-foreground" />
     </div>
   )
 }
 
 function Composer() {
   return (
-    <div className="shrink-0 bg-white px-3 pb-1.5 pt-2">
+    <div className="shrink-0 bg-card px-3 pb-1.5 pt-2">
       <div className="flex items-center gap-2 rounded-full border border-border bg-[#fafbfc] py-1.5 pe-3 ps-1.5">
         <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-ink">
           <Camera className="size-4 text-white" />
         </span>
         <span className="flex-1 text-[11px] text-muted-foreground">پیام...</span>
-        <Mic className="size-4 text-ink/50" />
-        <Heart className="size-4 text-ink/50" />
+        <Mic className="size-4 text-muted-foreground" />
+        <Heart className="size-4 text-muted-foreground" />
       </div>
       <div className="mx-auto mt-2 h-1 w-28 rounded-full bg-ink/15" />
     </div>
@@ -136,16 +136,16 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="mr-auto w-[85%] shrink-0 overflow-hidden rounded-2xl rounded-tl-md border border-border bg-white shadow-soft"
+        className="mr-auto w-[85%] shrink-0 overflow-hidden rounded-2xl rounded-tl-md border border-border bg-card shadow-soft"
       >
         <div className="border-b border-border bg-[#fafbfc] px-3.5 py-2.5">
-          <p className="text-[11px] font-bold text-ink">سفارش #۱۰۸۷</p>
+          <p className="text-[11px] font-bold text-foreground">سفارش #۱۰۸۷</p>
           <p className="text-[10px] text-muted-foreground">
             ۱ × مانتو کتان کرم · سایز ۳۸
           </p>
         </div>
         <div className="flex items-center justify-between px-3.5 py-2.5">
-          <span className="text-[11px] font-bold text-ink">۱٬۲۸۰٬۰۰۰ تومان</span>
+          <span className="text-[11px] font-bold text-foreground">۱٬۲۸۰٬۰۰۰ تومان</span>
           <span className="rounded-full bg-ink px-3 py-1 text-[10px] font-semibold text-white">
             پرداخت آنلاین
           </span>
@@ -162,7 +162,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       transition={{ duration: 0.45, ease: EASE }}
       className={
         message.from === "customer"
-          ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-ice/80 px-3.5 py-2 text-[12.5px] leading-6 text-ink"
+          ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-ice/80 px-3.5 py-2 text-[12.5px] leading-6 text-foreground"
           : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-gradient-to-bl from-primary to-[#344963] px-3.5 py-2 text-[12.5px] leading-6 text-white"
       }
     >
@@ -258,7 +258,7 @@ function PhoneChat() {
 
         <div className="shadow-ink relative aspect-[10/21] w-full rounded-[3.2rem] bg-gradient-to-b from-[#3a4356] via-[#1c2233] to-[#3a4356] p-[3px]">
           <div className="h-full w-full rounded-[calc(3.2rem-3px)] bg-[#0c0f17] p-[7px]">
-            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.6rem] bg-white">
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.6rem] bg-card">
               <DynamicIsland />
               <ChatHeader />
 
@@ -297,7 +297,7 @@ function PhoneChat() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-emerald-700 shadow-card"
+            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-emerald-700 shadow-card"
           >
             <BadgeCheck className="size-4" />
             بدون اینکه تو کاری کنی، انجام شد

@@ -20,7 +20,7 @@ type Panel = {
 
 function VisualCard({ children }: { children: ReactNode }) {
   return (
-    <div className="w-full max-w-md rounded-[2rem] border border-border bg-white p-6 shadow-float md:p-8">
+    <div className="w-full max-w-md rounded-[2rem] border border-border bg-card p-6 shadow-float md:p-8">
       {children}
     </div>
   )
@@ -63,7 +63,7 @@ const PANELS: Panel[] = [
       <VisualCard>
         <div dir="rtl" className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-ink">
+            <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-foreground">
               نمونه‌ی گزارش
             </span>
             <span className="rounded-full bg-ice/70 px-3 py-1 text-xs font-bold text-muted-foreground">
@@ -85,7 +85,7 @@ function PanelContent({ panel }: { panel: Panel }) {
         <span className="ghost-numeral pointer-events-none absolute -top-24 start-0 text-[7rem] md:-top-36 md:text-[11rem]">
           {t(`panels.${panel.key}.number`)}
         </span>
-        <h3 className="relative text-balance text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">
+        <h3 className="relative text-balance text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-5xl">
           {t(`panels.${panel.key}.title`)}
         </h3>
         <p className="relative mt-5 max-w-md text-pretty text-base leading-8 text-muted-foreground md:text-lg">
@@ -119,7 +119,7 @@ export function ShowcaseSection() {
           <div className="mx-auto mb-10 w-full max-w-6xl px-8">
             <AnimatedTitle
               text={t("heading")}
-              className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl"
+              className="text-3xl font-extrabold tracking-tight text-foreground md:text-4xl"
             />
           </div>
           <motion.div style={{ x }} className="flex w-max">
@@ -151,7 +151,7 @@ export function ShowcaseSection() {
       <div className="space-y-20 px-5 py-20 md:hidden">
         <AnimatedTitle
           text={t("heading")}
-          className="text-3xl font-extrabold tracking-tight text-ink"
+          className="text-3xl font-extrabold tracking-tight text-foreground"
         />
         {PANELS.map((panel) => (
           <Reveal key={panel.key}>

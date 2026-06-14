@@ -34,7 +34,7 @@ export function CTASection() {
                 <Magnetic>
                   <a
                     href="https://app.promall.io"
-                    className="btn-shimmer group inline-flex items-center gap-2 rounded-full bg-white px-10 py-4 text-lg font-bold text-ink shadow-card transition-colors duration-300 hover:bg-gold"
+                    className="btn-shimmer group inline-flex items-center gap-2 rounded-full bg-card px-10 py-4 text-lg font-bold text-foreground shadow-card transition-colors duration-300 hover:bg-gold"
                   >
                     {t("button")}
                     <ArrowIcon className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
