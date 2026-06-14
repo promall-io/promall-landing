@@ -6,7 +6,12 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
-import { locales, localeDirection, type Locale } from "@/i18n/config";
+import {
+  locales,
+  defaultLocale,
+  localeDirection,
+  type Locale,
+} from "@/i18n/config";
 import { StructuredData } from "@/components/structured-data";
 import "../globals.css";
 
@@ -55,15 +60,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const messages = await getMessages();
   const metadata = messages.metadata as { title: string; description: string };
 
-  const localePath = locale === "en" ? "" : `/${locale}`;
+  const localePath = locale === defaultLocale ? "" : `/${locale}`;
   const canonical = `${SITE_URL}${localePath || "/"}`;
 
   const languages: Record<string, string> = {};
   for (const candidate of locales) {
-    const path = candidate === "en" ? "/" : `/${candidate}`;
+    const path = candidate === defaultLocale ? "/" : `/${candidate}`;
     languages[candidate] = `${SITE_URL}${path}`;
   }
-  languages["x-default"] = `${SITE_URL}/fa`;
+  languages["x-default"] = languages[defaultLocale];
 
   return {
     metadataBase: new URL(SITE_URL),

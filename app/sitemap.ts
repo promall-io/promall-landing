@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { locales } from "@/i18n/config";
+import { locales, defaultLocale } from "@/i18n/config";
 
 const SITE_URL = "https://promall.io";
 
@@ -11,12 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const route of ROUTES) {
     for (const locale of locales) {
-      const localePrefix = locale === "en" ? "" : `/${locale}`;
+      const localePrefix = locale === defaultLocale ? "" : `/${locale}`;
       const url = `${SITE_URL}${localePrefix}${route}`;
 
       const languages: Record<string, string> = {};
       for (const candidate of locales) {
-        const candidatePrefix = candidate === "en" ? "" : `/${candidate}`;
+        const candidatePrefix = candidate === defaultLocale ? "" : `/${candidate}`;
         languages[candidate] = `${SITE_URL}${candidatePrefix}${route}`;
       }
 
@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url,
         lastModified: now,
         changeFrequency: route === "" ? "weekly" : "monthly",
-        priority: route === "" ? (locale === "fa" ? 1.0 : 0.8) : 0.5,
+        priority: route === "" ? (locale === defaultLocale ? 1.0 : 0.8) : 0.5,
         alternates: { languages },
       });
     }
