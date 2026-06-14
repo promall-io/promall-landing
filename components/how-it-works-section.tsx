@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
-import { Instagram, Package, Rocket, type LucideIcon } from "lucide-react"
+import { Instagram, Package, Rocket, type LucideIcon } from "@/components/icons"
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 const STEPS: { key: string; icon: LucideIcon }[] = [
@@ -50,7 +50,7 @@ export function HowItWorksSection() {
                     {t(`steps.${step.key}.number`)}
                   </span>
                   <span className="relative flex size-14 items-center justify-center rounded-2xl bg-white shadow-card">
-                    <step.icon className="size-6 text-primary" />
+                    <step.icon variant="bold" className="size-6 text-primary" />
                   </span>
                 </div>
                 <h3 className="text-2xl font-extrabold tracking-tight text-ink">

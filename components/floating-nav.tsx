@@ -10,7 +10,7 @@ import {
   useScroll,
   useSpring,
 } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/components/icons"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
 const NAV_LINKS = [

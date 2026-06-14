@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { BadgeCheck, CreditCard, Printer, ShieldCheck } from "lucide-react"
+import { BadgeCheck, CreditCard, Printer, ShieldCheck } from "@/components/icons"
 import { EASE } from "@/components/motion"
 
 function TypingDots() {

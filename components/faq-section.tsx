@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
-import { Plus } from "lucide-react"
+import { Plus } from "@/components/icons"
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 const FAQ_KEYS = [

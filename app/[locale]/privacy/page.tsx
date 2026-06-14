@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server"
-import { Shield, Database, Eye, Trash2, Lock, Globe, Mail, ArrowLeft } from "lucide-react"
+import { Shield, Database, Eye, Trash2, Lock, Globe, Mail, ArrowLeft } from "@/components/icons"
 
 export default async function PrivacyPolicyPage() {
   const t = await getTranslations("privacy")

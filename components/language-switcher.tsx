@@ -2,7 +2,7 @@
 
 import { useLocale } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
-import { Globe } from "lucide-react"
+import { Globe } from "@/components/icons"
 import { locales, localeNames, defaultLocale, type Locale } from "@/i18n/config"
 
 export function LanguageSwitcher() {

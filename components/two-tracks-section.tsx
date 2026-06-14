@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { motion, useReducedMotion } from "framer-motion"
-import { Check, Link2, Sparkles } from "lucide-react"
+import { Check, Link2, Sparkles } from "@/components/icons"
 import {
   AnimatedTitle,
   EASE,
@@ -75,7 +75,7 @@ export function TwoTracksSection() {
                           : "bg-primary/10 text-primary"
                       }`}
                     >
-                      <Icon className="size-5" />
+                      <Icon variant="bold" className="size-5" />
                     </span>
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-bold ${

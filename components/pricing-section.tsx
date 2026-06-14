@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
-import { Check } from "lucide-react"
+import { Check } from "@/components/icons"
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 const PLAN_KEYS = ["free", "professional", "enterprise"] as const

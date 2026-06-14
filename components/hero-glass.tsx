@@ -12,7 +12,7 @@ import {
   ChevronRight,
   Instagram,
   Sparkles,
-} from "lucide-react"
+} from "@/components/icons"
 import { MacMenuBar } from "@/components/mac-menu-bar"
 import { EASE } from "@/components/motion"
 import { scrollToSection } from "@/lib/smooth-scroll"
@@ -26,7 +26,7 @@ const VIDEO_SRC =
 function VideoBackdrop() {
   return (
     <>
-      <div className="absolute inset-0 bg-[#f6f7f9]" />
+      <div className="absolute inset-0 bg-background" />
       <video
         autoPlay
         muted
@@ -39,8 +39,8 @@ function VideoBackdrop() {
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_48%_at_50%_36%,rgba(246,247,249,0.5),transparent_72%)]" />
-      <div className="absolute inset-x-0 top-0 h-[24%] bg-gradient-to-b from-[#f6f7f9]/72 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-[#f6f7f9]/55 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-[24%] bg-gradient-to-b from-background/72 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-background/55 to-transparent" />
     </>
   )
 }
@@ -214,7 +214,7 @@ function CornerMask({ position }: { position: "top" | "left" }) {
       aria-hidden="true"
     >
       <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none">
-        <path d={path} fill="#f6f7f9" />
+        <path d={path} fill="var(--background)" />
       </svg>
     </div>
   )
@@ -228,7 +228,7 @@ function BottomRightCutout() {
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: EASE, delay: 1.1 }}
-      className="group absolute bottom-0 right-0 z-20 flex items-center gap-3 rounded-tl-[1.5rem] bg-[#f6f7f9] p-3 pl-8 pt-5 sm:gap-4 sm:rounded-tl-[2rem] sm:p-4 sm:pl-10 sm:pt-6 md:gap-6 md:rounded-tl-[3.5rem] md:p-6 md:pl-14 md:pt-8"
+      className="group absolute bottom-0 right-0 z-20 flex items-center gap-3 rounded-tl-[1.5rem] bg-background p-3 pl-8 pt-5 sm:gap-4 sm:rounded-tl-[2rem] sm:p-4 sm:pl-10 sm:pt-6 md:gap-6 md:rounded-tl-[3.5rem] md:p-6 md:pl-14 md:pt-8"
     >
       <CornerMask position="top" />
       <CornerMask position="left" />
@@ -356,11 +356,11 @@ export function HeroGlass() {
               {t("description")}
             </motion.p>
           </div>
-
-          <DmGlassCard />
-          <BottomLeftCard />
-          <BottomRightCutout />
         </div>
+
+        <DmGlassCard />
+        <BottomLeftCard />
+        <BottomRightCutout />
       </section>
     </div>
   )

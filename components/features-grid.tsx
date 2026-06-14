@@ -14,7 +14,7 @@ import {
   Store,
   Users,
   type LucideIcon,
-} from "lucide-react"
+} from "@/components/icons"
 import { AnimatedTitle, EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 type Cell = {
@@ -87,7 +87,7 @@ export function FeaturesGrid() {
                       cell.accent ? "bg-white/10 text-gold" : "bg-primary/10 text-primary"
                     }`}
                   >
-                    <Icon className="size-6" />
+                    <Icon variant="bold" className="size-6" />
                   </span>
                   <h3
                     className={`text-lg font-bold ${cell.accent ? "text-white" : "text-ink"}`}

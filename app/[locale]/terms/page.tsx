@@ -12,7 +12,7 @@ import {
   AlertTriangle,
   Mail,
   ArrowLeft,
-} from "lucide-react"
+} from "@/components/icons"
 
 export default function TermsOfServicePage() {
   const t = useTranslations("terms")

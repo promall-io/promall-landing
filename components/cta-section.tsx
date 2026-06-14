@@ -1,7 +1,7 @@
 "use client"
 
 import { useLocale, useTranslations } from "next-intl"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "@/components/icons"
 import { Magnetic, Reveal } from "@/components/motion"
 
 export function CTASection() {

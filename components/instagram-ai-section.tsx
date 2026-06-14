@@ -23,7 +23,7 @@ import {
   UserCheck,
   Video,
   type LucideIcon,
-} from "lucide-react"
+} from "@/components/icons"
 import { AnimatedTitle, EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 type ChatMessage = {
@@ -408,7 +408,7 @@ export function InstagramAiSection() {
                 className="h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.09]"
               >
                 <span className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-white/10 text-gold">
-                  <bullet.icon className="size-5" />
+                  <bullet.icon variant="bold" className="size-5" />
                 </span>
                 <h3 className="font-bold text-white">
                   {t(`bullets.${bullet.key}.title`)}
