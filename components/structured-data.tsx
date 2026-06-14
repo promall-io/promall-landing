@@ -35,6 +35,7 @@ export async function StructuredData({ locale }: Props) {
     alternateName: altBrandName,
     url: SITE_URL,
     logo: `${SITE_URL}/icon.svg`,
+    sameAs: ["https://instagram.com/promall.io"],
     inLanguage,
     description: tMeta("description"),
   };
