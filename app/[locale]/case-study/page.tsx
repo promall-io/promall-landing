@@ -451,8 +451,8 @@ const BODY = `
         <div class="store__grid">
           <div class="pc"><div class="pc__img" style="background:#415a77"><iconify-icon icon="solar:hanger-2-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">مانتو نخی کرم</div><div class="pc__pr">۱٬۲۸۰٬۰۰۰ تومان</div></div></div>
           <div class="pc"><div class="pc__img" style="background:#1b263b"><iconify-icon icon="solar:t-shirt-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">شومیز ساتن مشکی</div><div class="pc__pr">۸۹۰٬۰۰۰ تومان</div></div></div>
-          <div class="pc"><div class="pc__img" style="background:#c4b894"><iconify-icon icon="solar:scarf-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">روسری ابریشمی</div><div class="pc__pr">۴۲۰٬۰۰۰ تومان</div></div></div>
-          <div class="pc"><div class="pc__img" style="background:#778da9"><iconify-icon icon="solar:dress-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">پیراهن ابریشمی</div><div class="pc__pr">۱٬۴۵۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:#c4b894"><iconify-icon icon="solar:bag-4-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">روسری ابریشمی</div><div class="pc__pr">۴۲۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:#778da9"><iconify-icon icon="solar:hanger-bold"></iconify-icon></div><div class="pc__b"><div class="pc__nm">پیراهن ابریشمی</div><div class="pc__pr">۱٬۴۵۰٬۰۰۰ تومان</div></div></div>
         </div>
       </div>
     </div>
