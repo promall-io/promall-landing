@@ -116,7 +116,7 @@ export function FloatingNav() {
                           <motion.span
                             layoutId="float-nav-active"
                             transition={PILL_SPRING}
-                            className="absolute inset-0 rounded-full bg-gradient-to-b from-[#27354e] to-ink shadow-soft"
+                            className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-ink shadow-soft"
                           />
                         ) : null}
                         <span className="relative">{t(`nav.${link.key}`)}</span>

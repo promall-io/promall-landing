@@ -112,14 +112,14 @@ function DmGlassCard() {
         className="w-72 rounded-[1.6rem] border border-white/20 bg-white/30 p-3 backdrop-blur-2xl"
       >
         <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
-          <span className="rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
+          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
             <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
               <Instagram className="size-4 text-foreground" aria-hidden="true" />
             </span>
           </span>
           <div className="min-w-0">
             <p className="truncate text-xs font-bold text-foreground">{t("shopName")}</p>
-            <p className="text-[10px] font-medium text-emerald-600">
+            <p className="text-[10px] font-medium text-[var(--success-ink)]">
               {t("status")}
             </p>
           </div>
@@ -148,7 +148,7 @@ function DmGlassCard() {
           <div className="ms-auto w-fit max-w-[88%] rounded-xl rounded-se-sm bg-ink px-3 py-1.5 text-[11px] leading-5 text-white">
             {t("reply")}
           </div>
-          <div className="flex w-fit items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
+          <div className="flex w-fit items-center gap-1.5 rounded-full border border-success/30 bg-success-soft px-2.5 py-1 text-[10px] font-semibold text-[var(--success-ink)]">
             <BadgeCheck className="size-3.5" aria-hidden="true" />
             {t("confirmed")}
           </div>

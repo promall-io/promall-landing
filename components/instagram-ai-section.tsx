@@ -84,7 +84,7 @@ function TypingBubble() {
 function DynamicIsland() {
   return (
     <div className="pointer-events-none absolute left-1/2 top-2.5 z-20 flex h-[25px] w-[88px] -translate-x-1/2 items-center justify-end rounded-full bg-black pe-2.5">
-      <span className="size-[9px] rounded-full bg-[#10131c] ring-1 ring-white/10" />
+      <span className="size-[9px] rounded-full bg-ink-deep ring-1 ring-white/10" />
     </div>
   )
 }
@@ -93,15 +93,15 @@ function ChatHeader() {
   return (
     <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-card px-4 pb-2.5 pt-11">
       <ChevronRight className="size-5 shrink-0 text-foreground" />
-      <span className="shrink-0 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
+      <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
           ت
-          <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-emerald-500" />
+          <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-success" />
         </span>
       </span>
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-bold text-foreground">مزون ترمه</p>
-        <p className="truncate text-[10px] text-emerald-600">
+        <p className="truncate text-[10px] text-[var(--success-ink)]">
           معمولاً سریع جواب می‌ده
         </p>
       </div>
@@ -114,7 +114,7 @@ function ChatHeader() {
 function Composer() {
   return (
     <div className="shrink-0 bg-card px-3 pb-1.5 pt-2">
-      <div className="flex items-center gap-2 rounded-full border border-border bg-[#fafbfc] py-1.5 pe-3 ps-1.5">
+      <div className="flex items-center gap-2 rounded-full border border-border bg-background py-1.5 pe-3 ps-1.5">
         <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-ink">
           <Camera className="size-4 text-white" />
         </span>
@@ -138,7 +138,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         transition={{ duration: 0.5, ease: EASE }}
         className="mr-auto w-[85%] shrink-0 overflow-hidden rounded-2xl rounded-tl-md border border-border bg-card shadow-soft"
       >
-        <div className="border-b border-border bg-[#fafbfc] px-3.5 py-2.5">
+        <div className="border-b border-border bg-background px-3.5 py-2.5">
           <p className="text-[11px] font-bold text-foreground">سفارش #۱۰۸۷</p>
           <p className="text-[10px] text-muted-foreground">
             ۱ × مانتو کتان کرم · سایز ۳۸
@@ -163,7 +163,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       className={
         message.from === "customer"
           ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-ice/80 px-3.5 py-2 text-[12.5px] leading-6 text-foreground"
-          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-gradient-to-bl from-primary to-[#344963] px-3.5 py-2 text-[12.5px] leading-6 text-white"
+          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-gradient-to-bl from-primary to-ink px-3.5 py-2 text-[12.5px] leading-6 text-white"
       }
     >
       {message.text}
@@ -251,20 +251,20 @@ function PhoneChat() {
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative"
       >
-        <span className="absolute -left-[3px] top-[110px] h-8 w-[3px] rounded-l-md bg-[#2a3142]" />
-        <span className="absolute -left-[3px] top-[156px] h-14 w-[3px] rounded-l-md bg-[#2a3142]" />
-        <span className="absolute -left-[3px] top-[226px] h-14 w-[3px] rounded-l-md bg-[#2a3142]" />
-        <span className="absolute -right-[3px] top-[176px] h-20 w-[3px] rounded-r-md bg-[#2a3142]" />
+        <span className="absolute -left-[3px] top-[110px] h-8 w-[3px] rounded-l-md bg-ink" />
+        <span className="absolute -left-[3px] top-[156px] h-14 w-[3px] rounded-l-md bg-ink" />
+        <span className="absolute -left-[3px] top-[226px] h-14 w-[3px] rounded-l-md bg-ink" />
+        <span className="absolute -right-[3px] top-[176px] h-20 w-[3px] rounded-r-md bg-ink" />
 
-        <div className="shadow-ink relative aspect-[10/21] w-full rounded-[3.2rem] bg-gradient-to-b from-[#3a4356] via-[#1c2233] to-[#3a4356] p-[3px]">
-          <div className="h-full w-full rounded-[calc(3.2rem-3px)] bg-[#0c0f17] p-[7px]">
+        <div className="shadow-ink relative aspect-[10/21] w-full rounded-[3.2rem] bg-gradient-to-b from-ink via-ink-deep to-ink p-[3px]">
+          <div className="h-full w-full rounded-[calc(3.2rem-3px)] bg-ink-deep p-[7px]">
             <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.6rem] bg-card">
               <DynamicIsland />
               <ChatHeader />
 
               <div
                 ref={scrollRef}
-                className="scrollbar-none flex flex-1 flex-col gap-2.5 overflow-y-auto bg-[#fafbfc] px-3 py-3"
+                className="scrollbar-none flex flex-1 flex-col gap-2.5 overflow-y-auto bg-background px-3 py-3"
               >
                 <span className="mt-auto" aria-hidden="true" />
                 <span className="mx-auto mb-1 shrink-0 rounded-full bg-ink/5 px-3 py-1 text-[9px] font-medium text-muted-foreground">
@@ -297,7 +297,7 @@ function PhoneChat() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-emerald-700 shadow-card"
+            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-[var(--success-ink)] shadow-card"
           >
             <BadgeCheck className="size-4" />
             بدون اینکه تو کاری کنی، انجام شد
@@ -353,7 +353,7 @@ export function InstagramAiSection() {
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
           <Reveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-[#f9ce34]/15 via-[#ee2a7b]/15 to-[#6228d7]/15 px-5 py-2 text-sm font-bold text-[#f3a0c2]">
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[#f3a0c2]" style={{ background: "linear-gradient(to left, rgba(249,206,52,0.15), rgba(238,42,123,0.15), rgba(98,40,215,0.15))" }}>
               {t("badge")}
             </span>
           </Reveal>

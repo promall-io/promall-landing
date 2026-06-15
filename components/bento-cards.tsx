@@ -51,7 +51,7 @@ export function ChatMini() {
       </motion.div>
       <motion.div
         {...bubble(1.3)}
-        className="mr-auto flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-700"
+        className="mr-auto flex w-fit items-center gap-2 rounded-full border border-success/30 bg-success-soft px-3.5 py-1.5 text-xs font-semibold text-[var(--success-ink)]"
       >
         <BadgeCheck className="size-4" />
         سفارش ثبت شد — لینک پرداخت رفت
@@ -61,9 +61,9 @@ export function ChatMini() {
 }
 
 const MINI_ORDERS = [
-  { name: "سفارش #۱۰۸۴", state: "پرداخت شد", tone: "bg-emerald-100 text-emerald-700" },
-  { name: "سفارش #۱۰۸۵", state: "آماده‌سازی", tone: "bg-amber-100 text-amber-700" },
-  { name: "سفارش #۱۰۸۶", state: "ارسال شد", tone: "bg-sky-100 text-sky-700" },
+  { name: "سفارش #۱۰۸۴", state: "پرداخت شد", tone: "bg-success-soft text-[var(--success-ink)]" },
+  { name: "سفارش #۱۰۸۵", state: "آماده‌سازی", tone: "bg-warning-soft text-[var(--warning-ink)]" },
+  { name: "سفارش #۱۰۸۶", state: "ارسال شد", tone: "bg-info-soft text-info" },
 ]
 
 export function OrdersMini() {
@@ -101,7 +101,7 @@ export function PaymentMini() {
           <p className="text-xs font-semibold text-foreground">درگاه بانکی</p>
           <p className="text-[10px] text-muted-foreground">اتصال مستقیم سپ</p>
         </div>
-        <ShieldCheck className="size-4 text-emerald-500" />
+        <ShieldCheck className="size-4 text-success" />
       </div>
       <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
         <span className="flex size-8 items-center justify-center rounded-lg bg-gold/40 text-gold-deep">
@@ -140,7 +140,7 @@ export function ReportsMini() {
 const STOCK_ROWS = [
   { name: "مانتو کتان کرم", level: 78, tone: "bg-primary" },
   { name: "شومیز ساتن مشکی", level: 46, tone: "bg-primary" },
-  { name: "شال نخی", level: 12, tone: "bg-amber-400", low: true },
+  { name: "شال نخی", level: 12, tone: "bg-warning", low: true },
 ]
 
 export function InventoryMini() {
@@ -151,7 +151,7 @@ export function InventoryMini() {
           <div className="mb-1 flex items-center justify-between text-[10px]">
             <span className="font-medium text-foreground">{row.name}</span>
             {row.low ? (
-              <span className="rounded-full bg-amber-100 px-2 py-px font-semibold text-amber-700">
+              <span className="rounded-full bg-warning-soft px-2 py-px font-semibold text-[var(--warning-ink)]">
                 رو به اتمام
               </span>
             ) : (
