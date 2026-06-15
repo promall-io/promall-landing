@@ -5,23 +5,23 @@
 
 :root {
   /* ProMall light theme — ink blue on ice white, matching the product brand */
-  --background: #f6f7f9;
-  --foreground: #1b263b;
+  --background: var(--paper);
+  --foreground: var(--ink);
   --card: #ffffff;
   --card-foreground: #1b263b;
   --popover: #ffffff;
   --popover-foreground: #1b263b;
 
-  --primary: #415a77;
+  --primary: var(--slate);
   --primary-foreground: #ffffff;
 
   --secondary: #eceef2;
   --secondary-foreground: #1b263b;
 
   --muted: #eef0f4;
-  --muted-foreground: #5c6b84;
+  --muted-foreground: var(--muted-ink);
 
-  --accent: #d9d0b8;
+  --accent: var(--gold);
   --accent-foreground: #1b263b;
 
   --destructive: #c0392b;
@@ -29,7 +29,7 @@
 
   --border: rgba(27, 38, 59, 0.09);
   --input: rgba(27, 38, 59, 0.12);
-  --ring: #415a77;
+  --ring: var(--slate);
 
   --ink: #1b263b;
   --ink-deep: #11192a;
@@ -37,6 +37,22 @@
   --gold-deep: #c4b894;
   --sky: #aebbd0;
   --ice: #e3e5e9;
+  --slate: #415a77;
+  --slate-soft: #778da9;
+  --gold-tint: #efe9da;
+  --paper: #f6f7f9;
+  --muted-ink: #5c6b84;
+  --success: #14935c;
+  --success-ink: #0f6e44;
+  --success-soft: #e7f4ee;
+  --warning: #b7791f;
+  --warning-ink: #8a5a12;
+  --warning-soft: #fbf1dd;
+  --info: #2f6ca2;
+  --info-soft: #e4eef6;
+  --danger: #c0392b;
+  --danger-soft: #fbe9e7;
+  --ig-gradient: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
 
   --chart-1: #415a77;
   --chart-2: #aebbd0;
@@ -116,6 +132,12 @@
   --color-gold-deep: var(--gold-deep);
   --color-sky: var(--sky);
   --color-ice: var(--ice);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
