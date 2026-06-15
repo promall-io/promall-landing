@@ -53,6 +53,8 @@
   --danger: #c0392b;
   --danger-soft: #fbe9e7;
   --ig-gradient: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+  --ig-gradient-soft: linear-gradient(to left, rgba(249, 206, 52, 0.15), rgba(238, 42, 123, 0.15), rgba(98, 40, 215, 0.15));
+  --ig-pink: #f3a0c2;
 
   --chart-1: #415a77;
   --chart-2: #aebbd0;

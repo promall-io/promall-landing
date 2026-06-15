@@ -353,7 +353,7 @@ export function InstagramAiSection() {
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
           <Reveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[#f3a0c2]" style={{ background: "linear-gradient(to left, rgba(249,206,52,0.15), rgba(238,42,123,0.15), rgba(98,40,215,0.15))" }}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[var(--ig-pink)]" style={{ background: "var(--ig-gradient-soft)" }}>
               {t("badge")}
             </span>
           </Reveal>
