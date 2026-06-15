@@ -76,7 +76,7 @@ export function MacMenuBar() {
           <LanguageSwitcher />
           <a
             href="https://app.promall.io"
-            className="group hidden items-center gap-2 rounded-full bg-[rgba(27,38,59,0.85)] py-1.5 pe-4 ps-1.5 text-white backdrop-blur-md transition-colors duration-300 hover:bg-ink sm:flex"
+            className="group hidden items-center gap-2 rounded-full bg-ink/85 py-1.5 pe-4 ps-1.5 text-white backdrop-blur-md transition-colors duration-300 hover:bg-ink sm:flex"
           >
             <span className="flex items-center justify-center rounded-full bg-white/20 p-1">
               <ArrowUpRight
