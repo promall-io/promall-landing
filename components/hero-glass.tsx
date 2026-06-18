@@ -109,7 +109,7 @@ function DmGlassCard() {
         className="glass w-72 rounded-[1.6rem] border border-white/20 p-3"
       >
         <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
-          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-pink)" }}>
+          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
             <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
               <Instagram className="size-4 text-foreground" aria-hidden="true" />
             </span>

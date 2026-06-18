@@ -92,7 +92,7 @@ function ChatHeader() {
   return (
     <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-card px-4 pb-2.5 pt-11">
       <ChevronRight className="size-5 shrink-0 text-foreground" />
-      <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-pink)" }}>
+      <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
           ت
           <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-success" />
@@ -339,7 +339,7 @@ export function InstagramAiSection() {
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
           <Reveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[var(--ig-pink)]" style={{ background: "rgba(243,160,194,0.16)" }}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[var(--ig-pink)]" style={{ background: "var(--ig-gradient-soft)" }}>
               {t("badge")}
             </span>
           </Reveal>
