@@ -1,0 +1,2 @@
+en faq keys => ['noTech', 'withoutAi', 'howAi', 'instagramSafe', 'payments', 'print', 'switchPlans', 'support']
+en metadata.title => 'ProMall — Instagram store builder with an AI DM assistant'
