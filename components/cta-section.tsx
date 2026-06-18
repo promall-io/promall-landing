@@ -13,7 +13,7 @@ export function CTASection() {
     <section className="relative py-12 md:py-20">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <div className="bg-grain relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-ink via-primary/60 to-primary px-7 py-16 text-center shadow-ink md:px-14 md:py-24">
+          <div className="bg-grain relative overflow-hidden rounded-[2.5rem] bg-ink px-7 py-16 text-center shadow-ink md:px-14 md:py-24">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-sky/25 blur-3xl"

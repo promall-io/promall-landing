@@ -21,7 +21,7 @@ export function StatsSection() {
               index > 0 ? "md:border-s md:border-ink/10" : ""
             }`}
           >
-            <p className="text-gradient-ink text-balance text-2xl font-extrabold leading-tight tracking-tight md:text-3xl">
+            <p className="text-ink text-balance text-2xl font-extrabold leading-tight tracking-tight md:text-3xl">
               {t(`${key}.value`)}
             </p>
             <p className="mt-3 text-balance text-sm font-medium leading-6 text-muted-foreground md:text-base">

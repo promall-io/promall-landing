@@ -32,7 +32,7 @@ export function MacMenuBar() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-full border border-white/20 bg-card/60 py-1.5 pe-3.5 ps-1.5 backdrop-blur-md transition-colors duration-300 hover:bg-card/75"
+          className="glass flex items-center gap-2 rounded-full border border-white/20 py-1.5 pe-3.5 ps-1.5 transition-colors duration-300 hover:bg-card/75"
         >
           <span className="flex size-6 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-white">
             P
@@ -43,7 +43,7 @@ export function MacMenuBar() {
         </Link>
 
         <ul
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-card/55 px-1.5 py-1 backdrop-blur-md lg:flex"
+          className="glass absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 px-1.5 py-1 lg:flex"
           onMouseLeave={() => setHovered(null)}
         >
           {NAV_LINKS.map((link) => (
@@ -91,7 +91,7 @@ export function MacMenuBar() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("menuLabel")}
             aria-expanded={menuOpen}
-            className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-card/60 text-foreground backdrop-blur-md lg:hidden"
+            className="glass flex size-9 items-center justify-center rounded-full border border-white/20 text-foreground lg:hidden"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -105,7 +105,7 @@ export function MacMenuBar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 bg-card/80 p-2 shadow-card backdrop-blur-xl lg:hidden"
+            className="glass mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 p-2 shadow-card lg:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a

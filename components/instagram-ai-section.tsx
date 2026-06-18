@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   motion,
   useInView,
-  useMotionTemplate,
   useReducedMotion,
   useSpring,
 } from "framer-motion"
@@ -93,7 +92,7 @@ function ChatHeader() {
   return (
     <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-card px-4 pb-2.5 pt-11">
       <ChevronRight className="size-5 shrink-0 text-foreground" />
-      <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
+      <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-pink)" }}>
         <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
           ت
           <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-success" />
@@ -115,7 +114,7 @@ function Composer() {
   return (
     <div className="shrink-0 bg-card px-3 pb-1.5 pt-2">
       <div className="flex items-center gap-2 rounded-full border border-border bg-background py-1.5 pe-3 ps-1.5">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-ink">
+        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary">
           <Camera className="size-4 text-white" />
         </span>
         <span className="flex-1 text-[11px] text-muted-foreground">پیام...</span>
@@ -163,7 +162,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       className={
         message.from === "customer"
           ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-ice/80 px-3.5 py-2 text-[12.5px] leading-6 text-foreground"
-          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-gradient-to-bl from-primary to-ink px-3.5 py-2 text-[12.5px] leading-6 text-white"
+          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-primary px-3.5 py-2 text-[12.5px] leading-6 text-white"
       }
     >
       {message.text}
@@ -181,9 +180,6 @@ function PhoneChat() {
 
   const rotateX = useSpring(0, { stiffness: 140, damping: 18 })
   const rotateY = useSpring(0, { stiffness: 140, damping: 18 })
-  const glareX = useSpring(50, { stiffness: 140, damping: 20 })
-  const glareY = useSpring(20, { stiffness: 140, damping: 20 })
-  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.16), transparent 55%)`
 
   useEffect(() => {
     if (!inView) return
@@ -237,14 +233,10 @@ function PhoneChat() {
         const ny = (event.clientY - rect.top) / rect.height - 0.5
         rotateY.set(nx * -10)
         rotateX.set(ny * 8)
-        glareX.set(50 + nx * 80)
-        glareY.set(20 + ny * 60)
       }}
       onPointerLeave={() => {
         rotateX.set(0)
         rotateY.set(0)
-        glareX.set(50)
-        glareY.set(20)
       }}
     >
       <motion.div
@@ -256,7 +248,7 @@ function PhoneChat() {
         <span className="absolute -left-[3px] top-[226px] h-14 w-[3px] rounded-l-md bg-ink" />
         <span className="absolute -right-[3px] top-[176px] h-20 w-[3px] rounded-r-md bg-ink" />
 
-        <div className="shadow-ink relative aspect-[10/21] w-full rounded-[3.2rem] bg-gradient-to-b from-ink via-ink-deep to-ink p-[3px]">
+        <div className="shadow-ink relative aspect-[10/21] w-full rounded-[3.2rem] bg-ink p-[3px]">
           <div className="h-full w-full rounded-[calc(3.2rem-3px)] bg-ink-deep p-[7px]">
             <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.6rem] bg-card">
               <DynamicIsland />
@@ -279,12 +271,6 @@ function PhoneChat() {
               </div>
 
               <Composer />
-
-              <motion.div
-                aria-hidden="true"
-                style={{ backgroundImage: glare }}
-                className="pointer-events-none absolute inset-0 z-30 rounded-[2.6rem]"
-              />
             </div>
           </div>
         </div>
@@ -353,7 +339,7 @@ export function InstagramAiSection() {
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
           <Reveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[var(--ig-pink)]" style={{ background: "var(--ig-gradient-soft)" }}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-[var(--ig-pink)]" style={{ background: "rgba(243,160,194,0.16)" }}>
               {t("badge")}
             </span>
           </Reveal>

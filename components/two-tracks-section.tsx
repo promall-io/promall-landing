@@ -63,7 +63,7 @@ export function TwoTracksSection() {
                   transition={{ duration: 0.35, ease: EASE }}
                   className={`flex h-full flex-col rounded-[2rem] border p-8 md:p-10 ${
                     track.accent
-                      ? "border-ink bg-gradient-to-b from-ink to-ink-deep text-white shadow-ink"
+                      ? "border-ink bg-ink text-white shadow-ink"
                       : "border-border bg-card shadow-card"
                   }`}
                 >

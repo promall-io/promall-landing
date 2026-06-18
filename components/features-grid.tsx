@@ -78,7 +78,7 @@ export function FeaturesGrid() {
                   transition={{ duration: 0.35, ease: EASE }}
                   className={`flex h-full flex-col rounded-3xl border p-7 ${
                     cell.accent
-                      ? "border-ink bg-gradient-to-br from-ink to-ink-deep text-white shadow-ink"
+                      ? "border-ink bg-ink text-white shadow-ink"
                       : "border-border bg-card shadow-soft transition-colors duration-300 hover:border-ink/20"
                   }`}
                 >

@@ -29,7 +29,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       type="button"
       onClick={toggle}
       aria-label={dark ? "حالت روشن" : "حالت تیره"}
-      className={`inline-flex size-9 items-center justify-center rounded-full border border-border bg-card/60 text-foreground backdrop-blur-md transition-colors duration-300 hover:bg-accent/60 ${className}`}
+      className={`glass inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors duration-300 hover:bg-accent/60 ${className}`}
     >
       {mounted && dark ? (
         <Sun className="size-[18px]" aria-hidden="true" />

@@ -91,7 +91,7 @@ export function PricingSection() {
                 <div
                   className={`relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-500 ${
                     popular
-                      ? "border-ink bg-gradient-to-b from-ink to-ink-deep text-white shadow-ink md:-translate-y-3"
+                      ? "border-ink bg-ink text-white shadow-ink md:-translate-y-3"
                       : "border-border bg-card hover:-translate-y-1 hover:shadow-card"
                   }`}
                 >

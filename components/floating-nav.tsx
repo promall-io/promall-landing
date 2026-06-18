@@ -61,7 +61,7 @@ export function FloatingNav() {
       <motion.div
         aria-hidden="true"
         style={{ scaleX: progress }}
-        className="fixed inset-x-0 top-0 z-[60] h-[2.5px] origin-left bg-gradient-to-r from-ink via-primary to-gold-deep rtl:origin-right"
+        className="fixed inset-x-0 top-0 z-[60] h-[2.5px] origin-left bg-primary rtl:origin-right"
       />
       <AnimatePresence>
         {visible ? (
@@ -72,7 +72,7 @@ export function FloatingNav() {
             transition={{ type: "spring", stiffness: 280, damping: 28 }}
             className="fixed inset-x-0 top-3 z-50 flex justify-center px-3"
           >
-            <div className="glass-nav flex items-center gap-0.5 rounded-full border border-white/60 p-1.5 shadow-card">
+            <div className="glass flex items-center gap-0.5 rounded-full border border-white/60 p-1.5 shadow-card">
               <a
                 href="#"
                 onClick={(event) => {
@@ -116,7 +116,7 @@ export function FloatingNav() {
                           <motion.span
                             layoutId="float-nav-active"
                             transition={PILL_SPRING}
-                            className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-ink shadow-soft"
+                            className="absolute inset-0 rounded-full bg-primary shadow-soft"
                           />
                         ) : null}
                         <span className="relative">{t(`nav.${link.key}`)}</span>
@@ -128,7 +128,7 @@ export function FloatingNav() {
 
               <a
                 href="https://app.promall.io"
-                className="btn-shimmer ms-1 hidden items-center gap-1.5 rounded-full bg-gradient-to-l from-primary to-ink px-4 py-2 text-[12px] font-bold text-white transition-transform duration-300 hover:scale-[1.03] sm:flex"
+                className="btn-shimmer ms-1 hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[12px] font-bold text-white transition-transform duration-300 hover:scale-[1.03] sm:flex"
               >
                 {t("cta")}
                 <ArrowUpRight

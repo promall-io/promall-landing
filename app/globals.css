@@ -52,8 +52,6 @@
   --info-soft: #e4eef6;
   --danger: #c0392b;
   --danger-soft: #fbe9e7;
-  --ig-gradient: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
-  --ig-gradient-soft: linear-gradient(to left, rgba(249, 206, 52, 0.15), rgba(238, 42, 123, 0.15), rgba(98, 40, 215, 0.15));
   --ig-pink: #f3a0c2;
 
   --chart-1: #415a77;
@@ -194,16 +192,16 @@
   scrollbar-color: rgba(27, 38, 59, 0.18) transparent;
 }
 
-.glass-nav {
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.55),
-      rgba(255, 255, 255, 0) 42%
-    ),
-    rgba(246, 247, 249, 0.5);
-  backdrop-filter: blur(28px) saturate(185%);
-  -webkit-backdrop-filter: blur(28px) saturate(185%);
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .dark .glass {
+    background: rgba(24, 35, 58, 0.6);
+  }
 }
 
 .shadow-soft {
@@ -228,13 +226,6 @@
   box-shadow:
     0 12px 32px -8px rgba(17, 25, 42, 0.45),
     0 32px 80px -24px rgba(17, 25, 42, 0.4);
-}
-
-.text-gradient-ink {
-  background: linear-gradient(160deg, #1b263b 30%, #415a77 75%, #778da9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .bg-grain {
@@ -311,13 +302,7 @@
   position: absolute;
   inset-block: 0;
   width: 40%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  animation: shimmer-sweep 3.2s ease-in-out infinite;
+  background: transparent;
 }
 
 .spotlight-card {
@@ -331,11 +316,7 @@
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.4s ease;
-  background: radial-gradient(
-    280px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(65, 90, 119, 0.1),
-    transparent 65%
-  );
+  background: transparent;
   pointer-events: none;
 }
 
@@ -360,49 +341,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-@property --dock-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.dock-aura {
-  position: relative;
-}
-
-.dock-aura::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 9999px;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--dock-angle),
-    transparent 0deg,
-    rgba(65, 90, 119, 0.55) 40deg,
-    transparent 110deg,
-    transparent 180deg,
-    rgba(196, 184, 148, 0.6) 230deg,
-    transparent 300deg
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: dock-aura-spin 7s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes dock-aura-spin {
-  to {
-    --dock-angle: 360deg;
-  }
-}
-
 .scrollbar-none {
   scrollbar-width: none;
 }
@@ -414,9 +352,6 @@ html.lenis body {
 .ghost-numeral {
   font-weight: 800;
   line-height: 1;
-  background: linear-gradient(180deg, rgba(27, 38, 59, 0.12), rgba(27, 38, 59, 0.015));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: rgba(27, 38, 59, 0.07);
   user-select: none;
 }

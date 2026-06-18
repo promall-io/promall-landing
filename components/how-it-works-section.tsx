@@ -33,7 +33,7 @@ export function HowItWorksSection() {
         <div className="relative">
           <motion.div
             aria-hidden="true"
-            className="absolute inset-x-[16%] top-10 hidden h-px origin-right bg-gradient-to-l from-transparent via-primary/30 to-transparent md:block rtl:origin-left"
+            className="absolute inset-x-[16%] top-10 hidden h-px origin-right bg-primary/20 md:block rtl:origin-left"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: "-100px" }}

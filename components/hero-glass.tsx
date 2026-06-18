@@ -38,9 +38,6 @@ function VideoBackdrop() {
       >
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_48%_at_50%_36%,rgba(246,247,249,0.5),transparent_72%)]" />
-      <div className="absolute inset-x-0 top-0 h-[24%] bg-gradient-to-b from-background/72 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-background/55 to-transparent" />
     </>
   )
 }
@@ -109,10 +106,10 @@ function DmGlassCard() {
     >
       <div
         ref={cardRef}
-        className="w-72 rounded-[1.6rem] border border-white/20 bg-white/30 p-3 backdrop-blur-2xl"
+        className="glass w-72 rounded-[1.6rem] border border-white/20 p-3"
       >
         <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
-          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
+          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-pink)" }}>
             <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
               <Instagram className="size-4 text-foreground" aria-hidden="true" />
             </span>
@@ -165,7 +162,7 @@ function BottomLeftCard() {
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
-      className="absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] bg-white/30 p-4 backdrop-blur-xl md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
+      className="glass absolute bottom-28 right-4 z-20 flex w-fit min-w-[150px] flex-col gap-2 rounded-[1.4rem] p-4 md:bottom-6 md:left-6 md:right-auto lg:bottom-10 lg:left-10 lg:min-w-[190px] lg:gap-3 lg:rounded-[2rem] lg:p-5"
     >
       <div>
         <p className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
@@ -329,7 +326,7 @@ export function HeroGlass() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-card/60 px-4 py-2 backdrop-blur-md"
+              className="glass mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 px-4 py-2"
             >
               <Sparkles className="size-4 text-muted-foreground" aria-hidden="true" />
               <span className="text-[13px] font-semibold text-muted-foreground md:text-[14px]">
@@ -343,7 +340,7 @@ export function HeroGlass() {
               <StaggeredWords
                 text={t("titleLine2")}
                 baseDelay={0.45}
-                className="text-gradient-ink"
+                className="text-ink"
               />
             </h1>
 

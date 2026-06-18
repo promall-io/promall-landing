@@ -75,7 +75,7 @@ export default async function PrivacyPolicyPage() {
         </div>
 
         {/* Introduction */}
-        <div className="bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8 mb-12">
+        <div className="glass rounded-3xl border border-border/50 p-8 mb-12">
           <p className="text-foreground/90 leading-relaxed">
             {t("introduction")}
           </p>
@@ -87,7 +87,7 @@ export default async function PrivacyPolicyPage() {
             <section
               key={section.id}
               id={section.id}
-              className="bg-card/30 backdrop-blur-sm rounded-3xl border border-border/50 p-8 hover:border-primary/30 transition-colors"
+              className="glass rounded-3xl border border-border/50 p-8 hover:border-primary/30 transition-colors"
             >
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/15 flex items-center justify-center flex-shrink-0">

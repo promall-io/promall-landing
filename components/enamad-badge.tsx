@@ -33,8 +33,8 @@ export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
       >
         <div
           className={`
-            relative ${sizeClasses[size]} rounded-2xl overflow-hidden
-            bg-background/50 backdrop-blur-sm border border-border/50 p-2
+            glass relative ${sizeClasses[size]} rounded-2xl overflow-hidden
+            border border-border/50 p-2
             transition-all duration-300
             group-hover:border-primary/50 group-hover:shadow-glow-primary group-hover:scale-105
           `}

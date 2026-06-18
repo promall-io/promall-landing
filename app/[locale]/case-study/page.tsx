@@ -51,7 +51,7 @@ const CSS = `
 .cs .pm-tag--active{ background:var(--ink); color:#fff; border-color:var(--ink); }
 
 .cs{margin: 0; font-family: var(--font-fa); color: var(--text-body);
-    background: linear-gradient(180deg, #f8f5ef, #f1ece2);}
+    background: #f4efe5;}
 .cs .wrap{max-width: 1080px; margin: 0 auto; padding: 0 28px;}
 .cs section{padding: 72px 0;}
 .cs .eyebrow{display: inline-flex; align-items: center; gap: 7px; font: var(--fw-bold) 13px/1 var(--font-fa);
@@ -61,22 +61,18 @@ const CSS = `
 .cs .lead{font: var(--fw-medium) 17px/2 var(--font-fa); color: var(--text-muted); margin: 14px 0 0; max-width: 620px;}
 .cs .hero{position: relative; overflow: hidden; padding: 0;}
 .cs .hero__bg{position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(46% 60% at 84% 8%, rgba(196,184,148,0.5), transparent 60%),
-      radial-gradient(50% 60% at 10% 30%, rgba(65,90,119,0.32), transparent 60%),
-      radial-gradient(60% 50% at 50% 105%, rgba(174,187,208,0.4), transparent 65%),
-      linear-gradient(180deg, #f6f7f9, #eef1f5);}
+    background: var(--paper);}
 .cs .hero__in{position: relative; z-index: 2; padding: 96px 0 84px; text-align: center;}
 .cs .hero__brand{display: inline-flex; align-items: center; gap: 11px; margin-bottom: 26px;}
 .cs .hero__brand .m{width: 40px; height: 40px; border-radius: 12px; background: var(--ink); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft);}
 .cs .hero__brand .m img{width: 22px;}
 .cs .hero__brand b{font: var(--fw-bold) 22px/1 var(--font-fa); color: var(--ink);}
 .cs h1{font: var(--fw-extrabold) 50px/1.5 var(--font-fa); color: var(--ink); margin: 20px auto 0; max-width: 820px; letter-spacing: -0.02em; text-wrap: balance;}
-.cs h1 .grad{background: linear-gradient(220deg,#1b263b 20%,#415a77 60%,#aebbd0 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;}
+.cs h1 .grad{color: var(--slate);}
 .cs .hero__sub{font: var(--fw-medium) 19px/2 var(--font-fa); color: rgba(27,38,59,0.72); margin: 24px auto 0; max-width: 580px; text-wrap: pretty;}
 .cs .chips{display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px;}
-.cs .chip{display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.62); border: 1px solid var(--glass-border);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 9px 15px; border-radius: var(--radius-full);
+.cs .chip{display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.6); border: 1px solid var(--border-subtle);
+    -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); padding: 9px 15px; border-radius: var(--radius-full);
     font: var(--fw-semibold) 13.5px/1 var(--font-fa); color: var(--ink);}
 .cs .chip .ic{font-size: 17px; color: var(--slate);}
 .cs .meta{display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-subtle);
@@ -154,9 +150,9 @@ const CSS = `
 .cs .wf__stats span{height: 42px; border-radius: 8px; background: #e7ebf1; border: 1px dashed #c3ccd8;}
 .cs .wf__cols{display: grid; grid-template-columns: 1.6fr 1fr; gap: 8px; flex: 1;}
 .cs .wf__cols span{border-radius: 10px; background: #e7ebf1; border: 1px dashed #c3ccd8;}
-.cs section.warm{background: linear-gradient(180deg, #faf6ee, #f4eddf);}
+.cs section.warm{background: var(--gold-tint);}
 .cs .store{margin-top: 40px; border-radius: var(--radius-3xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: var(--white);}
-.cs .store__cover{height: 120px; background: radial-gradient(70% 150% at 16% 0%, rgba(217,208,184,0.95), transparent 60%), linear-gradient(120deg, #e9dec6, #cbbd97);}
+.cs .store__cover{height: 120px; background: var(--gold);}
 .cs .store__head{display: flex; align-items: flex-end; gap: 16px; padding: 0 26px 18px; margin-top: -36px; position: relative;}
 .cs .store__av{width: 78px; height: 78px; border-radius: 22px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font: var(--fw-bold) 27px/1 var(--font-fa); border: 4px solid var(--white); box-shadow: var(--shadow-soft); flex: none;}
 .cs .store__meta{flex: 1; padding-bottom: 4px; min-width: 0;}
