@@ -2,9 +2,9 @@
 
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { Plus } from "@/components/icons"
-import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
+import { Collapse, EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 const FAQ_KEYS = [
   "manageShop",
@@ -68,21 +68,11 @@ export function FAQSection() {
                       <Plus className="size-4" />
                     </motion.span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {open ? (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: EASE }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-2xl pb-7 leading-8 text-muted-foreground">
-                          {t(`items.${key}.answer`)}
-                        </p>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
+                  <Collapse open={open}>
+                    <p className="max-w-2xl pb-7 leading-8 text-muted-foreground">
+                      {t(`items.${key}.answer`)}
+                    </p>
+                  </Collapse>
                 </div>
               </StaggerItem>
             )

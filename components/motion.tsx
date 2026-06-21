@@ -1,9 +1,11 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { motion, useReducedMotion, useSpring, type Variants } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion, useSpring, type Variants } from "framer-motion"
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+export const COLLAPSE_TRANSITION = { duration: 0.4, ease: EASE } as const
 
 function useRevealVariants(distance = 28): Variants {
   const reduced = useReducedMotion()
@@ -174,5 +176,34 @@ export function Magnetic({
     >
       {children}
     </motion.div>
+  )
+}
+
+type CollapseProps = {
+  open: boolean
+  children: ReactNode
+  className?: string
+  id?: string
+}
+
+export function Collapse({ open, children, className, id }: CollapseProps) {
+  const reduced = useReducedMotion()
+  return (
+    <AnimatePresence initial={false}>
+      {open ? (
+        <motion.div
+          id={id}
+          key="collapse"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={reduced ? { duration: 0 } : COLLAPSE_TRANSITION}
+          style={{ overflow: "hidden" }}
+          className={className}
+        >
+          {children}
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   )
 }
