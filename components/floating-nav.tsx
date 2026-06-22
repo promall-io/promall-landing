@@ -11,7 +11,7 @@ import {
   useSpring,
 } from "framer-motion"
 import { ArrowUpRight } from "@/components/icons"
-import { LogoTile } from "@/components/logo-mark"
+import { LogoMark } from "@/components/logo-mark"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
 const NAV_LINKS = [
@@ -83,7 +83,7 @@ export function FloatingNav() {
                 aria-label={t("brand")}
                 className="me-1 hidden size-8 items-center justify-center transition-transform duration-300 hover:scale-105 sm:flex"
               >
-                <LogoTile size={32} />
+                <LogoMark size={24} tone="ink" />
               </a>
 
               <ul

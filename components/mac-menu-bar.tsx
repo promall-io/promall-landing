@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Menu, X } from "@/components/icons"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { LogoTile } from "@/components/logo-mark"
+import { LogoMark } from "@/components/logo-mark"
 import { EASE } from "@/components/motion"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
@@ -32,10 +32,10 @@ export function MacMenuBar() {
       >
         <Link
           href="/"
-          className="glass flex items-center gap-2 rounded-full border border-white/20 py-1.5 pe-3.5 ps-1.5 transition-colors duration-300 hover:bg-card/75"
+          className="glass flex items-center gap-2.5 rounded-full border border-white/20 py-1.5 pe-4 ps-3.5 transition-colors duration-300 hover:bg-card/75"
         >
-          <LogoTile size={28} />
-          <span className="text-[14px] font-bold tracking-tight text-foreground">
+          <LogoMark size={22} tone="ink" />
+          <span className="text-[15px] font-extrabold tracking-tight text-foreground">
             {t("brand")}
           </span>
         </Link>
