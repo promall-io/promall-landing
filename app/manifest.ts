@@ -14,9 +14,15 @@ export default function manifest(): MetadataRoute.Manifest {
     dir: "rtl",
     icons: [
       {
-        src: "/brand/favicon.png",
+        src: "/brand/icon.svg",
         sizes: "any",
         type: "image/svg+xml",
+        purpose: "any",
+      },
+      {
+        src: "/brand/favicon.png",
+        sizes: "any",
+        type: "image/png",
         purpose: "any",
       },
     ],

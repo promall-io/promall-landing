@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { EnamadBadge } from "@/components/enamad-badge"
+import { LogoMark } from "@/components/logo-mark"
 
 const PRODUCT_LINKS = [
   { key: "features", href: "#features" },
@@ -26,8 +27,8 @@ export function FooterSection() {
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-ink text-sm font-bold text-white">
-                P
+              <span className="flex size-9 items-center justify-center rounded-xl bg-ink">
+                <LogoMark size={18} tone="white" />
               </span>
               <span className="text-lg font-bold tracking-tight text-foreground">
                 {t("brand")}

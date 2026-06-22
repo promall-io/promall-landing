@@ -1,0 +1,13 @@
+<svg width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pm-app-bg" x1="0" y1="0" x2="104" y2="104" gradientUnits="userSpaceOnUse" gradientTransform="rotate(155 52 52)">
+      <stop stop-color="#27344c"/>
+      <stop offset="1" stop-color="#11192a"/>
+    </linearGradient>
+  </defs>
+  <rect width="104" height="104" rx="26" fill="url(#pm-app-bg)"/>
+  <g transform="translate(28 25) scale(0.082)">
+    <path d="M 190 42 L 392 42 A 150 150 0 0 1 538 192 L 538 300 C 538 372 496 426 410 456 L 214 458 L 398 268 L 402 248 C 402 210 398 192 378 182 L 120 176 C 92 175 78 170 70 162 L 190 42 Z" fill="#f3f5f8"/>
+    <path d="M 42 246 Q 42 234 54 234 L 179 234 Q 191 234 191 246 L 191 468 L 44 616 L 42 612 L 42 246 Z" fill="#d9d0b8"/>
+  </g>
+</svg>

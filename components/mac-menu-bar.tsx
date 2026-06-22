@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Menu, X } from "@/components/icons"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { LogoTile } from "@/components/logo-mark"
 import { EASE } from "@/components/motion"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
@@ -34,10 +34,8 @@ export function MacMenuBar() {
           href="/"
           className="glass flex items-center gap-2 rounded-full border border-white/20 py-1.5 pe-3.5 ps-1.5 transition-colors duration-300 hover:bg-card/75"
         >
-          <span className="flex size-6 items-center justify-center rounded-full bg-ink text-[11px] font-bold text-white">
-            P
-          </span>
-          <span className="text-[13px] font-bold tracking-tight text-foreground">
+          <LogoTile size={28} />
+          <span className="text-[14px] font-bold tracking-tight text-foreground">
             {t("brand")}
           </span>
         </Link>
@@ -72,7 +70,6 @@ export function MacMenuBar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <LanguageSwitcher />
           <a
             href="https://app.promall.io"

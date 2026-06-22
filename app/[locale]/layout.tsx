@@ -49,16 +49,13 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f7f9" },
-    { media: "(prefers-color-scheme: dark)", color: "#11192a" },
-  ],
-  colorScheme: "light dark",
+  themeColor: "#f6f7f9",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
 
-const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);var e=document.documentElement;if(d){e.classList.add('dark');e.style.colorScheme='dark';}}catch(e){}})();`;
+const THEME_INIT_SCRIPT = `(function(){try{var e=document.documentElement;e.classList.remove('dark');e.style.colorScheme='light';}catch(e){}})();`;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -107,7 +104,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: metadata.description,
     },
     icons: {
-      icon: "/brand/favicon.png",
+      icon: [
+        { url: "/brand/icon.svg", type: "image/svg+xml" },
+        { url: "/brand/favicon.png", type: "image/png" },
+      ],
     },
   };
 }
