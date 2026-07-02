@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -161,6 +160,7 @@
   }
 
   html {
+    position: relative;
     scroll-behavior: smooth;
     font-family: var(--font-sans);
   }
@@ -169,6 +169,30 @@
     background: rgba(65, 90, 119, 0.18);
     color: #1b263b;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  inset-inline-start: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 ::-webkit-scrollbar {
@@ -261,16 +285,6 @@
   }
 }
 
-@keyframes marquee-scroll {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee-scroll 36s linear infinite;
-}
-
 @keyframes slow-float {
   0%,
   100% {
@@ -303,27 +317,21 @@
   content: "";
   position: absolute;
   inset-block: 0;
+  left: 0;
   width: 40%;
-  background: transparent;
-}
-
-.spotlight-card {
-  position: relative;
-}
-
-.spotlight-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  background: transparent;
   pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: translateX(-150%) skewX(-18deg);
 }
 
-.spotlight-card:hover::before {
-  opacity: 1;
+.btn-shimmer:hover::after,
+.btn-shimmer:focus-visible::after {
+  animation: shimmer-sweep 0.9s ease;
 }
 
 html.lenis,

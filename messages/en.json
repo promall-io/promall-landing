@@ -12,7 +12,8 @@
       "faq": "FAQ"
     },
     "cta": "Open Dashboard",
-    "menuLabel": "Menu"
+    "menuLabel": "Menu",
+    "skipToContent": "Skip to main content"
   },
   "hero": {
     "badge": "An AI salesperson, always in your DMs",

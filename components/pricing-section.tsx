@@ -43,6 +43,7 @@ export function PricingSection() {
                   <button
                     key={option}
                     type="button"
+                    aria-pressed={selected}
                     onClick={() => setAnnual(option === "annual")}
                     className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-300 ${
                       selected ? "text-white" : "text-muted-foreground"

@@ -22,16 +22,7 @@ const inter = Inter({
 });
 
 const estedaad = localFont({
-  src: [
-    {
-      path: "../../public/fonts/estedaad.woff2",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/estedaad.ttf",
-      style: "normal",
-    },
-  ],
+  src: "../../public/fonts/estedaad.woff2",
   display: "swap",
   variable: "--font-estedaad",
   adjustFontFallback: "Arial",
@@ -128,6 +119,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={dir}
+      style={{ colorScheme: "light" }}
       className={
         locale === "fa" ? `${estedaad.variable} font-sans` : inter.variable
       }

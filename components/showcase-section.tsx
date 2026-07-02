@@ -82,7 +82,10 @@ function PanelContent({ panel }: { panel: Panel }) {
   return (
     <div className="grid w-full items-center gap-10 md:grid-cols-2 md:gap-6">
       <div className="relative">
-        <span className="ghost-numeral pointer-events-none absolute -top-24 start-0 text-[7rem] md:-top-36 md:text-[11rem]">
+        <span
+          aria-hidden="true"
+          className="ghost-numeral pointer-events-none absolute -top-24 start-0 text-[7rem] md:-top-36 md:text-[11rem]"
+        >
           {t(`panels.${panel.key}.number`)}
         </span>
         <h3 className="relative text-balance text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-5xl">

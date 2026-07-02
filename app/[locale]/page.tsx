@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FloatingNav } from "@/components/floating-nav";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { HeroGlass } from "@/components/hero-glass";
@@ -23,11 +23,16 @@ export default async function LandingPage({ params }: Props) {
 
   setRequestLocale(locale);
 
+  const t = await getTranslations("header");
+
   return (
     <div className="min-h-screen bg-background">
+      <a href="#main" className="skip-link">
+        {t("skipToContent")}
+      </a>
       <SmoothScrollProvider />
       <FloatingNav />
-      <main>
+      <main id="main">
         <HeroGlass />
         <MarqueeBand />
         <ShowcaseSection />

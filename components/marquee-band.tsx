@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import {
   motion,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -16,11 +17,30 @@ import {
 
 const BASE_VELOCITY = -2.4
 
+function MarqueeRow({ items, hidden }: { items: string[]; hidden?: boolean }) {
+  return (
+    <span className="flex items-center" aria-hidden={hidden || undefined}>
+      {items.map((item, index) => (
+        <span
+          key={`${item}-${index}`}
+          className="flex items-center gap-10 px-10 text-[13px] font-semibold text-muted-foreground"
+        >
+          {item}
+          <span aria-hidden="true" className="text-[9px] text-gold-deep/60">
+            ✦
+          </span>
+        </span>
+      ))}
+    </span>
+  )
+}
+
 export function MarqueeBand() {
   const t = useTranslations("marquee")
   const reduced = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(containerRef, { margin: "120px" })
   const items = t.raw("items") as string[]
-  const row = [...items, ...items]
 
   const baseX = useMotionValue(0)
   const { scrollY } = useScroll()
@@ -40,7 +60,7 @@ export function MarqueeBand() {
   const directionRef = useRef(1)
 
   useAnimationFrame((_, delta) => {
-    if (reduced) return
+    if (reduced || !inView) return
     const factor = velocityFactor.get()
     if (factor < 0) directionRef.current = -1
     else if (factor > 0) directionRef.current = 1
@@ -51,21 +71,17 @@ export function MarqueeBand() {
   })
 
   return (
-    <div className="relative z-10 overflow-hidden bg-background">
+    <div
+      ref={containerRef}
+      className="relative z-10 overflow-hidden bg-background"
+    >
       <div dir="ltr" className="overflow-hidden whitespace-nowrap py-7">
         <motion.div
           style={reduced ? {} : { x, skewX }}
           className="flex w-max items-center will-change-transform"
         >
-          {row.map((item, index) => (
-            <span
-              key={`${item}-${index}`}
-              className="flex items-center gap-10 px-10 text-[13px] font-semibold text-muted-foreground transition-colors duration-300 hover:text-muted-foreground"
-            >
-              {item}
-              <span className="text-[9px] text-gold-deep/60">✦</span>
-            </span>
-          ))}
+          <MarqueeRow items={items} />
+          <MarqueeRow items={items} hidden />
         </motion.div>
       </div>
     </div>

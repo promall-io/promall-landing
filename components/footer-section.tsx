@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { EnamadBadge } from "@/components/enamad-badge"
 import { LogoMark } from "@/components/logo-mark"
+import { scrollToSection } from "@/lib/smooth-scroll"
 
 const PRODUCT_LINKS = [
   { key: "features", href: "#features" },
@@ -48,6 +49,10 @@ export function FooterSection() {
                 <li key={link.key}>
                   <a
                     href={link.href}
+                    onClick={(event) => {
+                      event.preventDefault()
+                      scrollToSection(link.href)
+                    }}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {t(`links.${link.key}`)}

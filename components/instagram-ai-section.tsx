@@ -173,7 +173,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 function PhoneChat() {
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(containerRef, { once: true, margin: "-120px" })
+  const inView = useInView(containerRef, { margin: "-80px" })
   const reduced = useReducedMotion()
   const [step, setStep] = useState(0)
   const [typing, setTyping] = useState(false)
@@ -182,7 +182,10 @@ function PhoneChat() {
   const rotateY = useSpring(0, { stiffness: 140, damping: 18 })
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView) {
+      setTyping(false)
+      return
+    }
     if (reduced) {
       setStep(SCRIPT.length)
       return
@@ -311,22 +314,26 @@ const BULLETS: { key: string; icon: LucideIcon }[] = [
 export function InstagramAiSection() {
   const t = useTranslations("instagram")
   const reduced = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+  const inView = useInView(sectionRef, { margin: "160px" })
+  const animating = inView && !reduced
 
   return (
     <section
+      ref={sectionRef}
       id="instagram-ai"
       className="bg-grain relative overflow-hidden bg-ink-deep py-24 md:py-32"
     >
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl"
-        animate={reduced ? {} : { opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
+        animate={animating ? { opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] } : {}}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-48 right-0 size-96 rounded-full bg-gold/10 blur-3xl"
-        animate={reduced ? {} : { opacity: [0.6, 1, 0.6], x: [0, -40, 0] }}
+        animate={animating ? { opacity: [0.6, 1, 0.6], x: [0, -40, 0] } : {}}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
       />
       <span
@@ -362,9 +369,7 @@ export function InstagramAiSection() {
               aria-hidden="true"
               className={`absolute hidden select-none rounded-2xl border border-white/10 bg-white/10 px-3.5 py-2.5 text-xl shadow-card backdrop-blur md:block ${reaction.className}`}
               animate={
-                reduced
-                  ? {}
-                  : { y: [0, -16, 0], rotate: [0, 6, -4, 0] }
+                animating ? { y: [0, -16, 0], rotate: [0, 6, -4, 0] } : {}
               }
               transition={{
                 duration: reaction.duration,

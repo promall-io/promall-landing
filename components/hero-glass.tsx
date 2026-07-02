@@ -1,11 +1,14 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { useTranslations } from "next-intl"
-import { motion, useReducedMotion } from "framer-motion"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion"
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -24,20 +27,43 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260428_193507_4286c423-2fd9-4efd-92bd-91a939453fc1.mp4"
 
 function VideoBackdrop() {
+  const [enabled, setEnabled] = useState(false)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const connection = (
+      navigator as Navigator & { connection?: { saveData?: boolean } }
+    ).connection
+    if (reduced || connection?.saveData) return
+    setEnabled(true)
+  }, [])
+
   return (
     <>
-      <div className="absolute inset-0 bg-background" />
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-[68%_center] lg:object-center"
-      >
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 70% 8%, var(--sky) 0%, var(--ice) 40%, var(--paper) 75%)",
+        }}
+      />
+      {enabled ? (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onCanPlay={() => setReady(true)}
+          className={`absolute inset-0 h-full w-full object-cover object-[68%_center] transition-opacity duration-700 ease-out lg:object-center ${
+            ready ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <source src={VIDEO_SRC} type="video/mp4" />
+        </video>
+      ) : null}
     </>
   )
 }
@@ -80,22 +106,6 @@ function StaggeredWords({
 
 function DmGlassCard() {
   const t = useTranslations("hero.dm")
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduced || !cardRef.current) return
-    const tween = gsap.to(cardRef.current, {
-      y: -14,
-      duration: 5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    })
-    return () => {
-      tween.kill()
-    }
-  }, [])
 
   return (
     <motion.div
@@ -104,50 +114,49 @@ function DmGlassCard() {
       transition={{ duration: 0.9, ease: EASE, delay: 1.05 }}
       className="absolute right-10 top-[26%] z-20 hidden xl:block"
     >
-      <div
-        ref={cardRef}
-        className="glass w-72 rounded-[1.6rem] border border-white/20 p-3"
-      >
-        <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
-          <span className="rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
-            <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
-              <Instagram className="size-4 text-foreground" aria-hidden="true" />
+      <div className="animate-slow-float">
+        <div className="glass w-72 rounded-[1.6rem] border border-white/20 p-3">
+          <div className="flex items-center gap-2.5 px-1 pb-2.5 pt-1">
+            <span className="rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
+              <span className="flex size-8 items-center justify-center rounded-full border-2 border-white bg-ice">
+                <Instagram className="size-4 text-foreground" aria-hidden="true" />
+              </span>
             </span>
-          </span>
-          <div className="min-w-0">
-            <p className="truncate text-xs font-bold text-foreground">{t("shopName")}</p>
-            <p className="text-[10px] font-medium text-[var(--success-ink)]">
-              {t("status")}
-            </p>
-          </div>
-        </div>
-        <div className="space-y-2 rounded-[1.1rem] bg-card/70 p-2.5">
-          <div className="flex items-center gap-2.5 rounded-xl bg-card p-2 shadow-soft">
-            <Image
-              src={PRODUCT_IMAGE}
-              alt={t("productAlt")}
-              width={48}
-              height={48}
-              className="size-12 rounded-lg object-cover"
-            />
             <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold text-foreground">
-                {t("productName")}
-              </p>
-              <p className="text-[10px] font-semibold text-muted-foreground">
-                {t("productPrice")}
+              <p className="truncate text-xs font-bold text-foreground">{t("shopName")}</p>
+              <p className="text-[10px] font-medium text-[var(--success-ink)]">
+                {t("status")}
               </p>
             </div>
           </div>
-          <div className="w-fit max-w-[88%] rounded-xl rounded-ss-sm bg-ice/90 px-3 py-1.5 text-[11px] text-foreground">
-            {t("customer")}
-          </div>
-          <div className="ms-auto w-fit max-w-[88%] rounded-xl rounded-se-sm bg-ink px-3 py-1.5 text-[11px] leading-5 text-white">
-            {t("reply")}
-          </div>
-          <div className="flex w-fit items-center gap-1.5 rounded-full border border-success/30 bg-success-soft px-2.5 py-1 text-[10px] font-semibold text-[var(--success-ink)]">
-            <BadgeCheck className="size-3.5" aria-hidden="true" />
-            {t("confirmed")}
+          <div className="space-y-2 rounded-[1.1rem] bg-card/70 p-2.5">
+            <div className="flex items-center gap-2.5 rounded-xl bg-card p-2 shadow-soft">
+              <Image
+                src={PRODUCT_IMAGE}
+                alt={t("productAlt")}
+                width={48}
+                height={48}
+                className="size-12 rounded-lg object-cover"
+              />
+              <div className="min-w-0">
+                <p className="truncate text-[11px] font-bold text-foreground">
+                  {t("productName")}
+                </p>
+                <p className="text-[10px] font-semibold text-muted-foreground">
+                  {t("productPrice")}
+                </p>
+              </div>
+            </div>
+            <div className="w-fit max-w-[88%] rounded-xl rounded-ss-sm bg-ice/90 px-3 py-1.5 text-[11px] text-foreground">
+              {t("customer")}
+            </div>
+            <div className="ms-auto w-fit max-w-[88%] rounded-xl rounded-se-sm bg-ink px-3 py-1.5 text-[11px] leading-5 text-white">
+              {t("reply")}
+            </div>
+            <div className="flex w-fit items-center gap-1.5 rounded-full border border-success/30 bg-success-soft px-2.5 py-1 text-[10px] font-semibold text-[var(--success-ink)]">
+              <BadgeCheck className="size-3.5" aria-hidden="true" />
+              {t("confirmed")}
+            </div>
           </div>
         </div>
       </div>
@@ -239,7 +248,7 @@ function BottomRightCutout() {
         <span className="text-[16px] font-extrabold tracking-tight text-foreground md:text-[20px]">
           {t("cutoutTitle")}
         </span>
-        <span className="flex items-center gap-1 text-muted-foreground transition-colors duration-300 group-hover:text-muted-foreground">
+        <span className="flex items-center gap-1 text-muted-foreground transition-colors duration-300 group-hover:text-foreground/70">
           <span className="text-[12px] font-medium md:text-[14px]">
             {t("cutoutSub")}
           </span>
@@ -255,68 +264,41 @@ function BottomRightCutout() {
 
 export function HeroGlass() {
   const t = useTranslations("hero")
+  const reduced = useReducedMotion()
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const windowRef = useRef<HTMLElement>(null)
-  const backdropRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduced) return
-
-    gsap.registerPlugin(ScrollTrigger)
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        windowRef.current,
-        { scale: 0.965, opacity: 0, y: 18 },
-        { scale: 1, opacity: 1, y: 0, duration: 1.1, ease: "power3.out" },
-      )
-      gsap.fromTo(
-        backdropRef.current,
-        { scale: 1.16 },
-        { scale: 1, duration: 1.8, ease: "power2.out" },
-      )
-      gsap.to(backdropRef.current, {
-        yPercent: 10,
-        scale: 1.08,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      })
-      gsap.to(contentRef.current, {
-        yPercent: -6,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      })
-    }, wrapperRef)
-
-    return () => ctx.revert()
-  }, [])
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ["start start", "end start"],
+  })
+  const backdropY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
+  const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 1.08])
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"])
 
   return (
-    <div ref={wrapperRef} className="h-[100svh] w-full p-2 md:p-2.5">
-      <section
-        ref={windowRef}
+    <div ref={wrapperRef} className="relative h-[100svh] w-full p-2 md:p-2.5">
+      <motion.section
+        initial={reduced ? false : { scale: 0.965, opacity: 0, y: 18 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, ease: EASE }}
         className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-[1.25rem] shadow-[0_18px_60px_-24px_rgba(17,25,42,0.4)] md:rounded-[1.75rem]"
       >
-        <div
-          ref={backdropRef}
+        <motion.div
+          style={reduced ? undefined : { y: backdropY, scale: backdropScale }}
           className="absolute inset-0 will-change-transform"
         >
-          <VideoBackdrop />
-        </div>
+          <motion.div
+            initial={reduced ? false : { scale: 1.16 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.8, ease: EASE }}
+            className="absolute inset-0"
+          >
+            <VideoBackdrop />
+          </motion.div>
+        </motion.div>
 
-        <div
-          ref={contentRef}
+        <motion.div
+          style={reduced ? undefined : { y: contentY }}
           className="relative z-10 flex h-full w-full flex-col items-center"
         >
           <MacMenuBar />
@@ -353,12 +335,12 @@ export function HeroGlass() {
               {t("description")}
             </motion.p>
           </div>
-        </div>
+        </motion.div>
 
         <DmGlassCard />
         <BottomLeftCard />
         <BottomRightCutout />
-      </section>
+      </motion.section>
     </div>
   )
 }

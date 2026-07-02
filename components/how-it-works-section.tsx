@@ -46,7 +46,10 @@ export function HowItWorksSection() {
             {STEPS.map((step) => (
               <StaggerItem key={step.key} className="relative text-center">
                 <div className="relative mx-auto mb-2 flex h-28 items-end justify-center">
-                  <span className="ghost-numeral pointer-events-none absolute inset-x-0 -top-2 text-[6.5rem]">
+                  <span
+                    aria-hidden="true"
+                    className="ghost-numeral pointer-events-none absolute inset-x-0 -top-2 text-[6.5rem]"
+                  >
                     {t(`steps.${step.key}.number`)}
                   </span>
                   <span className="relative flex size-14 items-center justify-center rounded-2xl bg-card shadow-card">

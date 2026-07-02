@@ -8,6 +8,8 @@ declare global {
 
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
 
+const ANCHOR_OFFSET = -96
+
 export function scrollToSection(hash: string) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const lenis = window.__lenis
@@ -28,6 +30,7 @@ export function scrollToSection(hash: string) {
     lenis.scrollTo(target, {
       duration: 1.6,
       easing: easeOutExpo,
+      offset: ANCHOR_OFFSET,
     })
   } else {
     target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" })

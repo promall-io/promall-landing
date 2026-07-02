@@ -47,6 +47,7 @@ export function FAQSection() {
                     type="button"
                     onClick={() => setOpenKey(open ? null : key)}
                     aria-expanded={open}
+                    aria-controls={`faq-panel-${key}`}
                     className="group flex w-full items-center justify-between gap-4 py-6 text-start"
                   >
                     <span
@@ -68,7 +69,7 @@ export function FAQSection() {
                       <Plus className="size-4" />
                     </motion.span>
                   </button>
-                  <Collapse open={open}>
+                  <Collapse open={open} id={`faq-panel-${key}`}>
                     <p className="max-w-2xl pb-7 leading-8 text-muted-foreground">
                       {t(`items.${key}.answer`)}
                     </p>
