@@ -38,6 +38,12 @@ export async function StructuredData({ locale }: Props) {
     sameAs: ["https://instagram.com/promall.io"],
     inLanguage,
     description: tMeta("description"),
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "support@promall.io",
+      availableLanguage: ["fa", "en"],
+    },
   };
 
   const website = {
@@ -59,13 +65,23 @@ export async function StructuredData({ locale }: Props) {
     operatingSystem: "Web browser, Windows",
     inLanguage,
     description: tMeta("description"),
-    offers: {
-      "@type": "Offer",
-      price: "2000000",
-      priceCurrency: "IRR",
-      name: locale === "fa" ? "پلن حرفه‌ای (ماهانه)" : "Professional (monthly)",
-      availability: "https://schema.org/InStock",
-    },
+    offers: [
+      {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "IRR",
+        name: locale === "fa" ? "تست ۱۰ روزه رایگان" : "10-day free trial",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        price: "2000000",
+        priceCurrency: "IRR",
+        name:
+          locale === "fa" ? "پلن حرفه‌ای (ماهانه)" : "Professional (monthly)",
+        availability: "https://schema.org/InStock",
+      },
+    ],
     featureList:
       locale === "fa"
         ? [

@@ -69,11 +69,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: metadata.description,
     applicationName: "ProMall",
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       googleBot: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
       },
     },
     alternates: {

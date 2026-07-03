@@ -58,7 +58,7 @@ export default function OpengraphImage() {
             }}
           >
             Build your online store, sell by hand with one clean payment link —
-            or let the AI sell at scale. Even at midnight.
+            or let the AI sell at scale with your real prices and stock.
           </div>
         </div>
 
