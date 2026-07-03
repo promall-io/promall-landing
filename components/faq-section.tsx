@@ -12,6 +12,7 @@ const FAQ_KEYS = [
   "noTech",
   "howAi",
   "instagramSafe",
+  "accounting",
   "payments",
   "switchPlans",
   "support",

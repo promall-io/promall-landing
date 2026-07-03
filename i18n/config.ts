@@ -3,6 +3,8 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'fa';
 
+export const indexedLocales: readonly Locale[] = ['fa'];
+
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   fa: 'فارسی',

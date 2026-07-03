@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import {
   locales,
   defaultLocale,
+  indexedLocales,
   localeDirection,
   type Locale,
 } from "@/i18n/config";
@@ -57,28 +58,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `${SITE_URL}${localePath || "/"}`;
 
   const languages: Record<string, string> = {};
-  for (const candidate of locales) {
+  for (const candidate of indexedLocales) {
     const path = candidate === defaultLocale ? "/" : `/${candidate}`;
     languages[candidate] = `${SITE_URL}${path}`;
   }
   languages["x-default"] = languages[defaultLocale];
+
+  const isIndexable = indexedLocales.includes(locale as Locale);
 
   return {
     metadataBase: new URL(SITE_URL),
     title: metadata.title,
     description: metadata.description,
     applicationName: "ProMall",
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
-    },
+    robots: isIndexable
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        }
+      : {
+          index: false,
+          follow: false,
+          googleBot: {
+            index: false,
+            follow: false,
+          },
+        },
     alternates: {
       canonical,
       languages,

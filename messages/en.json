@@ -324,6 +324,10 @@
         "question": "Is connecting Instagram safe?",
         "answer": "Yes, rest assured. The connection is made in a few clicks through Meta's official gateway, and your token is stored encrypted. You can disconnect anytime you want."
       },
+      "accounting": {
+        "question": "Does ProMall replace an accounting app for my online shop?",
+        "answer": "For day-to-day shop bookkeeping, yes: sales, real profit after returns and cancellations, and your inventory value are always up to date — no late-night spreadsheet sessions. And for your accountant or official ledger, you export Excel and PDF reports with one click."
+      },
       "payments": {
         "question": "How do customers pay?",
         "answer": "You have two methods: an online bank gateway (ZarinPal, Zibal, BitPay) and card-to-card with receipt upload. The online gateway confirms the payment itself and the order is approved; for card-to-card, the customer sends the receipt and you approve it with one click in your panel."

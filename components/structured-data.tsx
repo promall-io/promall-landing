@@ -9,6 +9,7 @@ const FAQ_KEYS = [
   "withoutAi",
   "howAi",
   "instagramSafe",
+  "accounting",
   "payments",
   "print",
   "switchPlans",
@@ -92,7 +93,7 @@ export async function StructuredData({ locale }: Props) {
             "مدیریت سفارش، مرجوعی و لینک پرداخت",
             "درگاه پرداخت ایرانی و کارت‌به‌کارت",
             "چاپ خودکار فاکتور روی پرینتر مغازه",
-            "گزارش فروش، سود و مشتری",
+            "حسابداری آنلاین شاپ: گزارش فروش، سود و مشتری",
           ]
         : [
             "Instagram DM AI sales agent",
