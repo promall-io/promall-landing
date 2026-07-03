@@ -11,9 +11,49 @@
       "pricing": "Pricing",
       "faq": "FAQ"
     },
-    "cta": "Open Dashboard",
+    "cta": "Request a Demo",
     "menuLabel": "Menu",
     "skipToContent": "Skip to main content"
+  },
+  "demo": {
+    "metaTitle": "Request a Demo | ProMall",
+    "metaDescription": "Leave your number and your shop's Instagram page — we'll prepare a personalized ProMall demo built around your own shop.",
+    "backHome": "Back to home",
+    "badge": "Personalized demo, completely free",
+    "titleLine1": "See ProMall live,",
+    "titleLine2": "with your own shop",
+    "subtitle": "Just your phone number and your shop's Instagram page — the ProMall team prepares a demo tailored to your shop and gives you a call.",
+    "formTitle": "Request a demo",
+    "formSubtitle": "Two fields, under half a minute.",
+    "phoneLabel": "Mobile number",
+    "phonePlaceholder": "0912 345 6789",
+    "phoneError": "Enter a valid Iranian mobile number, like 09123456789",
+    "instagramLabel": "Your shop's Instagram",
+    "instagramPlaceholder": "yourshop",
+    "instagramError": "Enter a valid Instagram handle — a full page link works too",
+    "submit": "Request a demo",
+    "submitting": "Submitting…",
+    "submitError": "Something went wrong — please try again in a moment.",
+    "privacyNote": "Your number is only used to arrange the demo. That's it.",
+    "successTitle": "Request received 🎉",
+    "successSubtitle": "We'll call you soon to walk through a demo built around your own shop.",
+    "successPhoneLabel": "Contact number",
+    "successHandleLabel": "Your shop page",
+    "successCta": "Back to home",
+    "steps": {
+      "call": {
+        "title": "A quick call",
+        "description": "We'll ring you within one business day."
+      },
+      "demo": {
+        "title": "A demo of your shop",
+        "description": "A real panel styled around your own shop — not a canned video."
+      },
+      "launch": {
+        "title": "Launch on the spot",
+        "description": "Love it? We set up your shop in the same session."
+      }
+    }
   },
   "hero": {
     "badge": "An AI salesperson, always in your DMs",

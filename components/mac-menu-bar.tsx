@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Menu, X } from "@/components/icons"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { LogoMark } from "@/components/logo-mark"
 import { EASE } from "@/components/motion"
+import { defaultLocale } from "@/i18n/config"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
 const NAV_LINKS = [
@@ -19,6 +20,8 @@ const NAV_LINKS = [
 
 export function MacMenuBar() {
   const t = useTranslations("header")
+  const locale = useLocale()
+  const demoHref = locale === defaultLocale ? "/demo" : `/${locale}/demo`
   const [menuOpen, setMenuOpen] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
 
@@ -80,8 +83,8 @@ export function MacMenuBar() {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <a
-            href="https://app.promall.io"
+          <Link
+            href={demoHref}
             className="group hidden items-center gap-2 rounded-full bg-ink/85 py-1.5 pe-4 ps-1.5 text-white backdrop-blur-md transition-colors duration-300 hover:bg-ink sm:flex"
           >
             <span className="flex items-center justify-center rounded-full bg-white/20 p-1">
@@ -91,7 +94,7 @@ export function MacMenuBar() {
               />
             </span>
             <span className="text-xs font-semibold">{t("cta")}</span>
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
@@ -127,12 +130,13 @@ export function MacMenuBar() {
                 {t(`nav.${link.key}`)}
               </a>
             ))}
-            <a
-              href="https://app.promall.io"
+            <Link
+              href={demoHref}
+              onClick={() => setMenuOpen(false)}
               className="mt-1 block rounded-xl bg-ink px-4 py-2.5 text-center text-[15px] font-semibold text-white"
             >
               {t("cta")}
-            </a>
+            </Link>
           </motion.div>
         ) : null}
       </AnimatePresence>

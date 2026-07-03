@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useTranslations } from "next-intl"
+import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
 import {
   AnimatePresence,
   motion,
@@ -12,6 +13,7 @@ import {
 } from "framer-motion"
 import { ArrowUpRight } from "@/components/icons"
 import { LogoMark } from "@/components/logo-mark"
+import { defaultLocale } from "@/i18n/config"
 import { scrollToSection } from "@/lib/smooth-scroll"
 
 const NAV_LINKS = [
@@ -27,6 +29,8 @@ const PILL_SPRING = { type: "spring", stiffness: 380, damping: 30 } as const
 
 export function FloatingNav() {
   const t = useTranslations("header")
+  const locale = useLocale()
+  const demoHref = locale === defaultLocale ? "/demo" : `/${locale}/demo`
   const reduced = useReducedMotion()
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28 })
@@ -127,8 +131,8 @@ export function FloatingNav() {
                 })}
               </ul>
 
-              <a
-                href="https://app.promall.io"
+              <Link
+                href={demoHref}
                 className="btn-shimmer ms-1 hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[12px] font-bold text-white transition-transform duration-300 hover:scale-[1.03] sm:flex"
               >
                 {t("cta")}
@@ -136,7 +140,7 @@ export function FloatingNav() {
                   className="size-3.5 rtl:-scale-x-100"
                   aria-hidden="true"
                 />
-              </a>
+              </Link>
             </div>
           </motion.nav>
         ) : null}
