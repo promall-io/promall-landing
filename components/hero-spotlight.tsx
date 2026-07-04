@@ -1,155 +1,332 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
+import Image from "next/image"
 import { useTranslations } from "next-intl"
-import { ArrowUpRight } from "@/components/icons"
 import { MacMenuBar } from "@/components/mac-menu-bar"
 
-const SPOTLIGHT_R = 260
+const BASE_IMAGE = "/brand/hero-bazaar-base.webp"
+const REVEAL_IMAGE = "/brand/hero-bazaar-reveal.webp"
+const REVEAL_IMAGE_SM = "/brand/hero-bazaar-reveal-sm.webp"
 
-const BASE_IMAGE = "/brand/hero-rain-base.webp"
-const REVEAL_IMAGE = "/brand/hero-rain-reveal.webp"
+const IMAGE_W = 2400
+const IMAGE_H = 1670
+const SPOTLIGHT_RADIUS = 260
+const SMOKE_SOURCE = { x: 0.406, y: 0.537 }
+const RAIN_WIND = 0.12
+const MAX_PUFFS = 36
 
-function RevealLayer({
-  image,
-  cursorX,
-  cursorY,
-}: {
-  image: string
-  cursorX: number
-  cursorY: number
-}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [maskUrl, setMaskUrl] = useState<string | null>(null)
+const RAIN_LAYERS = [
+  { density: 1 / 21000, len: [11, 17], speed: [640, 860], alpha: 0.11, width: 1 },
+  { density: 1 / 15000, len: [18, 27], speed: [1040, 1360], alpha: 0.16, width: 1.25 },
+  { density: 1 / 26000, len: [30, 46], speed: [1560, 1980], alpha: 0.22, width: 1.6 },
+] as const
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resize()
-    window.addEventListener("resize", resize)
-    return () => window.removeEventListener("resize", resize)
-  }, [])
+type Drop = { x: number; y: number; len: number; speed: number }
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas?.getContext("2d")
-    if (!canvas || !ctx) return
+type Puff = {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  age: number
+  ttl: number
+  size: number
+  growth: number
+  sway: number
+  swayFreq: number
+  phase: number
+}
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    const gradient = ctx.createRadialGradient(
-      cursorX,
-      cursorY,
-      0,
-      cursorX,
-      cursorY,
-      SPOTLIGHT_R,
-    )
-    gradient.addColorStop(0, "rgba(255,255,255,1)")
-    gradient.addColorStop(0.4, "rgba(255,255,255,1)")
-    gradient.addColorStop(0.6, "rgba(255,255,255,0.75)")
-    gradient.addColorStop(0.75, "rgba(255,255,255,0.4)")
-    gradient.addColorStop(0.88, "rgba(255,255,255,0.12)")
-    gradient.addColorStop(1, "rgba(255,255,255,0)")
-    ctx.fillStyle = gradient
-    ctx.beginPath()
-    ctx.arc(cursorX, cursorY, SPOTLIGHT_R, 0, Math.PI * 2)
-    ctx.fill()
-    setMaskUrl(canvas.toDataURL())
-  }, [cursorX, cursorY])
+const rand = (min: number, max: number) => min + Math.random() * (max - min)
 
-  return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ display: "none" }}
-        aria-hidden="true"
-      />
-      <div
-        className="hero-zoom absolute inset-0 z-30 bg-cover bg-center bg-no-repeat pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `url(${image})`,
-          opacity: maskUrl ? 1 : 0,
-          maskImage: maskUrl ? `url(${maskUrl})` : undefined,
-          WebkitMaskImage: maskUrl ? `url(${maskUrl})` : undefined,
-          maskSize: "100% 100%",
-          WebkitMaskSize: "100% 100%",
-        }}
-      />
-    </>
-  )
+function coverRect(imageW: number, imageH: number, canvasW: number, canvasH: number) {
+  const scale = Math.max(canvasW / imageW, canvasH / imageH)
+  const w = imageW * scale
+  const h = imageH * scale
+  return { x: (canvasW - w) / 2, y: (canvasH - h) / 2, w, h }
+}
+
+function createSmokeSprite() {
+  const sprite = document.createElement("canvas")
+  sprite.width = 160
+  sprite.height = 160
+  const ctx = sprite.getContext("2d")
+  if (!ctx) return sprite
+  const gradient = ctx.createRadialGradient(80, 80, 0, 80, 80, 80)
+  gradient.addColorStop(0, "rgba(218,227,242,0.62)")
+  gradient.addColorStop(0.4, "rgba(207,218,236,0.28)")
+  gradient.addColorStop(0.75, "rgba(197,210,232,0.09)")
+  gradient.addColorStop(1, "rgba(197,210,232,0)")
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, 160, 160)
+  return sprite
 }
 
 export function HeroSpotlight() {
   const t = useTranslations("hero")
-  const mouse = useRef({ x: -999, y: -999 })
-  const smooth = useRef({ x: -999, y: -999 })
-  const rafRef = useRef<number>()
-  const [cursorPos, setCursorPos] = useState({ x: -999, y: -999 })
+  const panelRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const onMouseMove = (event: MouseEvent) => {
-      mouse.current = { x: event.clientX, y: event.clientY }
-    }
-    window.addEventListener("mousemove", onMouseMove)
+    const panel = panelRef.current
+    const canvas = canvasRef.current
+    if (!panel || !canvas) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
 
-    const loop = () => {
-      smooth.current.x += (mouse.current.x - smooth.current.x) * 0.1
-      smooth.current.y += (mouse.current.y - smooth.current.y) * 0.1
-      setCursorPos({ x: smooth.current.x, y: smooth.current.y })
-      rafRef.current = requestAnimationFrame(loop)
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.75)
+    let width = 0
+    let height = 0
+    let raf = 0
+    let running = false
+    let last = performance.now()
+
+    const reveal = new window.Image()
+    let revealReady = false
+    reveal.onload = () => {
+      revealReady = true
     }
-    rafRef.current = requestAnimationFrame(loop)
+    reveal.src = window.innerWidth < 820 ? REVEAL_IMAGE_SM : REVEAL_IMAGE
+
+    const sprite = createSmokeSprite()
+    const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, strength: 0, target: 0 }
+    const puffs: Puff[] = []
+    let drops: Drop[][] = []
+    let smokeTimer = 0
+    let spawnEvery = 180
+
+    const spawnDrop = (layer: (typeof RAIN_LAYERS)[number]): Drop => ({
+      x: rand(-30, width + 30),
+      y: rand(-height * 0.15, height),
+      len: rand(layer.len[0], layer.len[1]),
+      speed: rand(layer.speed[0], layer.speed[1]),
+    })
+
+    const seedRain = () => {
+      drops = RAIN_LAYERS.map((layer) =>
+        Array.from({ length: Math.round(width * height * layer.density) }, () => spawnDrop(layer)),
+      )
+    }
+
+    const resize = () => {
+      const rect = panel.getBoundingClientRect()
+      width = rect.width
+      height = rect.height
+      canvas.width = Math.round(width * dpr)
+      canvas.height = Math.round(height * dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      seedRain()
+    }
+
+    const drawReveal = () => {
+      if (!revealReady || pointer.strength <= 0.015) return
+      const rect = coverRect(reveal.naturalWidth, reveal.naturalHeight, width, height)
+      const s = pointer.strength
+      ctx.save()
+      ctx.drawImage(reveal, rect.x, rect.y, rect.w, rect.h)
+      ctx.globalCompositeOperation = "destination-in"
+      const gradient = ctx.createRadialGradient(
+        pointer.x,
+        pointer.y,
+        0,
+        pointer.x,
+        pointer.y,
+        SPOTLIGHT_RADIUS,
+      )
+      gradient.addColorStop(0, `rgba(255,255,255,${s})`)
+      gradient.addColorStop(0.45, `rgba(255,255,255,${s})`)
+      gradient.addColorStop(0.62, `rgba(255,255,255,${0.8 * s})`)
+      gradient.addColorStop(0.78, `rgba(255,255,255,${0.45 * s})`)
+      gradient.addColorStop(0.9, `rgba(255,255,255,${0.14 * s})`)
+      gradient.addColorStop(1, "rgba(255,255,255,0)")
+      ctx.fillStyle = gradient
+      ctx.fillRect(0, 0, width, height)
+      ctx.restore()
+    }
+
+    const drawSmoke = (dt: number, now: number) => {
+      const rect = coverRect(IMAGE_W, IMAGE_H, width, height)
+      const emitterX = rect.x + SMOKE_SOURCE.x * rect.w
+      const emitterY = rect.y + SMOKE_SOURCE.y * rect.h
+
+      smokeTimer += dt * 1000
+      if (smokeTimer >= spawnEvery && puffs.length < MAX_PUFFS) {
+        smokeTimer = 0
+        spawnEvery = rand(150, 260)
+        puffs.push({
+          x: emitterX + rand(-7, 7),
+          y: emitterY + rand(-4, 2),
+          vx: rand(-11, -4),
+          vy: rand(-26, -15),
+          age: 0,
+          ttl: rand(5.5, 8.5),
+          size: rand(10, 16),
+          growth: rand(46, 72),
+          sway: rand(3.5, 8),
+          swayFreq: rand(0.5, 1.1),
+          phase: rand(0, Math.PI * 2),
+        })
+      }
+
+      ctx.save()
+      ctx.globalCompositeOperation = "screen"
+      for (let i = puffs.length - 1; i >= 0; i--) {
+        const puff = puffs[i]
+        puff.age += dt
+        const life = puff.age / puff.ttl
+        if (life >= 1) {
+          puffs.splice(i, 1)
+          continue
+        }
+        puff.x += (puff.vx + Math.sin(now * 0.001 * puff.swayFreq + puff.phase) * puff.sway) * dt
+        puff.y += puff.vy * dt
+        const size = puff.size + puff.growth * life
+        const fade = life < 0.18 ? life / 0.18 : 1 - (life - 0.18) / 0.82
+        ctx.globalAlpha = fade * 0.18
+        ctx.drawImage(sprite, puff.x - size / 2, puff.y - size * 0.62, size, size * 1.18)
+      }
+      ctx.restore()
+    }
+
+    const drawRain = (dt: number) => {
+      ctx.lineCap = "round"
+      RAIN_LAYERS.forEach((layer, index) => {
+        const list = drops[index]
+        if (!list) return
+        ctx.strokeStyle = `rgba(200,213,234,${layer.alpha})`
+        ctx.lineWidth = layer.width
+        ctx.beginPath()
+        for (const drop of list) {
+          drop.y += drop.speed * dt
+          drop.x += drop.speed * RAIN_WIND * dt
+          if (drop.y - drop.len > height) {
+            drop.y = rand(-60, -drop.len)
+            drop.x = rand(-30, width + 30)
+          }
+          if (drop.x - 40 > width) drop.x -= width + 80
+          ctx.moveTo(drop.x, drop.y)
+          ctx.lineTo(drop.x - drop.len * RAIN_WIND, drop.y - drop.len)
+        }
+        ctx.stroke()
+      })
+    }
+
+    const frame = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05)
+      last = now
+      pointer.strength += (pointer.target - pointer.strength) * 0.08
+      pointer.x += (pointer.tx - pointer.x) * 0.11
+      pointer.y += (pointer.ty - pointer.y) * 0.11
+      ctx.clearRect(0, 0, width, height)
+      drawReveal()
+      drawSmoke(dt, now)
+      drawRain(dt)
+      raf = requestAnimationFrame(frame)
+    }
+
+    const start = () => {
+      if (running) return
+      running = true
+      last = performance.now()
+      raf = requestAnimationFrame(frame)
+    }
+
+    const stop = () => {
+      running = false
+      cancelAnimationFrame(raf)
+    }
+
+    const onPointerMove = (event: PointerEvent) => {
+      const rect = panel.getBoundingClientRect()
+      pointer.tx = event.clientX - rect.left
+      pointer.ty = event.clientY - rect.top
+      if (pointer.x < -999) {
+        pointer.x = pointer.tx
+        pointer.y = pointer.ty
+      }
+      pointer.target = 1
+    }
+
+    const onPointerEnd = (event: PointerEvent) => {
+      if (event.type === "pointerup" && event.pointerType === "mouse") return
+      pointer.target = 0
+    }
+
+    panel.addEventListener("pointermove", onPointerMove)
+    panel.addEventListener("pointerleave", onPointerEnd)
+    panel.addEventListener("pointercancel", onPointerEnd)
+    panel.addEventListener("pointerup", onPointerEnd)
+
+    const observer = new IntersectionObserver(([entry]) =>
+      entry?.isIntersecting ? start() : stop(),
+    )
+    observer.observe(panel)
+
+    const resizeObserver = new ResizeObserver(resize)
+    resizeObserver.observe(panel)
+    resize()
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      stop()
+      observer.disconnect()
+      resizeObserver.disconnect()
+      panel.removeEventListener("pointermove", onPointerMove)
+      panel.removeEventListener("pointerleave", onPointerEnd)
+      panel.removeEventListener("pointercancel", onPointerEnd)
+      panel.removeEventListener("pointerup", onPointerEnd)
     }
   }, [])
 
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-[#0b1120] text-white">
-      <link rel="preload" as="image" href={BASE_IMAGE} />
-      <link rel="preload" as="image" href={REVEAL_IMAGE} />
-
+    <section className="relative bg-background p-2.5 sm:p-3.5 md:p-5">
       <div
-        className="hero-zoom absolute inset-0 bg-cover bg-center bg-no-repeat"
-        role="img"
-        aria-label={t("altBackground")}
-        style={{ backgroundImage: `url(${BASE_IMAGE})` }}
-      />
+        ref={panelRef}
+        className="relative flex h-[calc(100svh-20px)] flex-col overflow-hidden rounded-[22px] bg-[#0b1120] text-white sm:h-[calc(100svh-28px)] sm:rounded-[26px] md:h-[calc(100svh-40px)] md:rounded-[30px]"
+      >
+        <Image
+          src={BASE_IMAGE}
+          alt={t("altBackground")}
+          fill
+          priority
+          sizes="100vw"
+          quality={82}
+          className="object-cover object-center"
+        />
 
-      <RevealLayer image={REVEAL_IMAGE} cursorX={cursorPos.x} cursorY={cursorPos.y} />
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 z-30 h-full w-full"
+          aria-hidden="true"
+        />
 
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[35] h-[45%]"
-        aria-hidden="true"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(6,11,22,0.72), rgba(6,11,22,0))",
-        }}
-      />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-[35] h-28"
+          aria-hidden="true"
+          style={{
+            background: "linear-gradient(to bottom, rgba(6,11,22,0.55), rgba(6,11,22,0))",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[35] h-[36%]"
+          aria-hidden="true"
+          style={{
+            background: "linear-gradient(to top, rgba(6,11,22,0.68), rgba(6,11,22,0))",
+          }}
+        />
 
-      <MacMenuBar />
+        <MacMenuBar />
 
-      <div className="relative z-40 flex h-full flex-col">
-        <div className="flex flex-1 flex-col items-center justify-center px-6 pt-16 text-center">
-          <div
-            className="hero-anim hero-fade mb-5 flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md"
+        <div className="relative z-40 flex flex-1 flex-col items-center justify-center px-6 pt-16 text-center">
+          <p
+            className="hero-anim hero-fade text-[13px] font-bold text-white/75 md:text-sm"
             style={{ animationDelay: "0.15s" }}
           >
-            <span className="size-1.5 rounded-full bg-[var(--gold)]" aria-hidden="true" />
-            <span className="text-[13px] font-semibold text-white/85 md:text-[14px]">
-              {t("badge")}
-            </span>
-          </div>
+            {t("badge")}
+          </p>
 
-          <h1 className="text-balance text-4xl font-extrabold leading-[1.15] tracking-tight [text-shadow:0_2px_28px_rgba(4,8,16,0.55)] sm:text-5xl md:text-6xl lg:text-[72px] lg:leading-[1.1] xl:text-[76px]">
+          <h1 className="mt-4 text-balance text-[40px] font-extrabold leading-[1.14] tracking-tight [text-shadow:0_2px_28px_rgba(4,8,16,0.55)] sm:text-6xl md:text-7xl lg:text-[80px] lg:leading-[1.07] xl:text-[88px]">
             <span
               className="hero-anim hero-reveal block"
               style={{ animationDelay: "0.25s" }}
@@ -163,46 +340,32 @@ export function HeroSpotlight() {
               {t("titleLine2")}
             </span>
           </h1>
+
+          <p
+            className="hero-anim hero-fade mt-6 max-w-xl text-pretty text-[13px] font-medium leading-6 text-white/80 sm:text-sm sm:leading-7"
+            style={{ animationDelay: "0.6s" }}
+          >
+            {t("description")}
+          </p>
         </div>
 
-        <div className="flex flex-col gap-6 p-6 pb-8 md:flex-row md:items-end md:justify-between md:p-10">
+        <div className="relative z-40 flex items-end justify-between px-6 pb-6 md:px-9 md:pb-8">
           <div
-            className="hero-anim hero-fade max-w-md"
-            style={{ animationDelay: "0.7s" }}
-          >
-            <p className="text-pretty text-sm font-medium leading-7 text-white/80 md:text-base md:leading-8">
-              {t("description")}
-            </p>
-            <p className="mt-3 text-[12px] font-semibold text-white/55">
-              {t("note")}
-            </p>
-          </div>
-
-          <div
-            className="hero-anim hero-fade flex flex-col items-start gap-4 md:items-end"
+            className="hero-anim hero-fade flex items-center gap-3"
             style={{ animationDelay: "0.85s" }}
           >
-            <div className="md:text-end">
-              <p className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                {t("statValue")}
-              </p>
-              <p className="text-[11px] font-bold tracking-wider text-white/60 md:text-[12px]">
-                {t("statLabel")}
-              </p>
-            </div>
-            <a
-              href="https://app.promall.io"
-              className="group flex items-center gap-3 rounded-full bg-white py-2.5 pe-3 ps-6 text-[15px] font-extrabold text-[#11192a] transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              {t("ctaPrimary")}
-              <span className="flex size-8 items-center justify-center rounded-full bg-[#11192a]/10 transition-colors duration-300 group-hover:bg-[#11192a]/15">
-                <ArrowUpRight
-                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
-                  aria-hidden="true"
-                />
-              </span>
-            </a>
+            <span className="hero-scroll-line" aria-hidden="true" />
+            <span className="text-[11px] font-bold text-white/60 md:text-xs">
+              {t("scrollHint")}
+            </span>
           </div>
+          <p
+            className="hero-anim hero-fade text-[11px] font-bold text-white/60 md:text-xs"
+            style={{ animationDelay: "0.85s" }}
+            aria-hidden="true"
+          >
+            {t("pageIndex")}
+          </p>
         </div>
       </div>
     </section>
