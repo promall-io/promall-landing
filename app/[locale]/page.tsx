@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FloatingNav } from "@/components/floating-nav";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
-import { HeroGlass } from "@/components/hero-glass";
+import { HeroSpotlight } from "@/components/hero-spotlight";
 import { MarqueeBand } from "@/components/marquee-band";
 import { ShowcaseSection } from "@/components/showcase-section";
 import { TwoTracksSection } from "@/components/two-tracks-section";
@@ -33,7 +33,7 @@ export default async function LandingPage({ params }: Props) {
       <SmoothScrollProvider />
       <FloatingNav />
       <main id="main">
-        <HeroGlass />
+        <HeroSpotlight />
         <MarqueeBand />
         <ShowcaseSection />
         <TwoTracksSection />
