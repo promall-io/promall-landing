@@ -461,3 +461,51 @@ html.lenis body {
     animation: none;
   }
 }
+
+.hero-notch::before,
+.hero-notch::after,
+.hero-tab::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.hero-notch::before {
+  right: 100%;
+  background: radial-gradient(
+    circle 18.5px at 0 100%,
+    transparent 18px,
+    var(--background) 18.5px
+  );
+}
+
+.hero-notch::after {
+  left: 100%;
+  background: radial-gradient(
+    circle 18.5px at 100% 100%,
+    transparent 18px,
+    var(--background) 18.5px
+  );
+}
+
+.hero-tab::before {
+  right: 100%;
+  background: radial-gradient(
+    circle 18.5px at 0 100%,
+    transparent 18px,
+    var(--background) 18.5px
+  );
+}
+
+[dir="rtl"] .hero-tab::before {
+  right: auto;
+  left: 100%;
+  background: radial-gradient(
+    circle 18.5px at 100% 100%,
+    transparent 18px,
+    var(--background) 18.5px
+  );
+}

@@ -12,14 +12,14 @@ const REVEAL_IMAGE_SM = "/brand/hero-bazaar-reveal-sm.webp"
 const IMAGE_W = 2400
 const IMAGE_H = 1670
 const SPOTLIGHT_RADIUS = 260
-const SMOKE_SOURCE = { x: 0.406, y: 0.537 }
-const RAIN_WIND = 0.12
-const MAX_PUFFS = 36
+const EMBER = { x: 0.4145, y: 0.5305 }
+const RAIN_WIND = 0.08
+const MAX_PUFFS = 70
 
 const RAIN_LAYERS = [
-  { density: 1 / 21000, len: [11, 17], speed: [640, 860], alpha: 0.11, width: 1 },
-  { density: 1 / 15000, len: [18, 27], speed: [1040, 1360], alpha: 0.16, width: 1.25 },
-  { density: 1 / 26000, len: [30, 46], speed: [1560, 1980], alpha: 0.22, width: 1.6 },
+  { density: 1 / 34000, len: [9, 14], speed: [500, 680], alpha: 0.07, width: 0.8 },
+  { density: 1 / 24000, len: [14, 21], speed: [820, 1060], alpha: 0.1, width: 1 },
+  { density: 1 / 42000, len: [22, 34], speed: [1220, 1540], alpha: 0.14, width: 1.3 },
 ] as const
 
 type Drop = { x: number; y: number; len: number; speed: number }
@@ -36,9 +36,13 @@ type Puff = {
   sway: number
   swayFreq: number
   phase: number
+  peak: number
 }
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min)
+
+const WISP = { alpha: 0.38, growth: [20, 36] as const }
+const BILLOW = { alpha: 0.26, growth: [70, 120] as const }
 
 function coverRect(imageW: number, imageH: number, canvasW: number, canvasH: number) {
   const scale = Math.max(canvasW / imageW, canvasH / imageH)
@@ -54,13 +58,46 @@ function createSmokeSprite() {
   const ctx = sprite.getContext("2d")
   if (!ctx) return sprite
   const gradient = ctx.createRadialGradient(80, 80, 0, 80, 80, 80)
-  gradient.addColorStop(0, "rgba(218,227,242,0.62)")
-  gradient.addColorStop(0.4, "rgba(207,218,236,0.28)")
-  gradient.addColorStop(0.75, "rgba(197,210,232,0.09)")
-  gradient.addColorStop(1, "rgba(197,210,232,0)")
+  gradient.addColorStop(0, "rgba(220,228,242,0.6)")
+  gradient.addColorStop(0.4, "rgba(210,220,238,0.27)")
+  gradient.addColorStop(0.75, "rgba(200,212,234,0.09)")
+  gradient.addColorStop(1, "rgba(200,212,234,0)")
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, 160, 160)
   return sprite
+}
+
+function spawnPuff(x: number, y: number): Puff {
+  const wisp = Math.random() < 0.55
+  return wisp
+    ? {
+        x: x + rand(-3, 3),
+        y: y + rand(-3, 1),
+        vx: rand(-7, -2),
+        vy: rand(-40, -26),
+        age: 0,
+        ttl: rand(3.2, 5.2),
+        size: rand(5, 9),
+        growth: rand(WISP.growth[0], WISP.growth[1]),
+        sway: rand(1.5, 4),
+        swayFreq: rand(0.7, 1.4),
+        phase: rand(0, Math.PI * 2),
+        peak: WISP.alpha,
+      }
+    : {
+        x: x + rand(-6, 6),
+        y: y + rand(-6, 0),
+        vx: rand(-13, -5),
+        vy: rand(-20, -11),
+        age: 0,
+        ttl: rand(7, 11),
+        size: rand(13, 20),
+        growth: rand(BILLOW.growth[0], BILLOW.growth[1]),
+        sway: rand(5, 10),
+        swayFreq: rand(0.4, 0.9),
+        phase: rand(0, Math.PI * 2),
+        peak: BILLOW.alpha,
+      }
 }
 
 export function HeroSpotlight() {
@@ -92,10 +129,11 @@ export function HeroSpotlight() {
 
     const sprite = createSmokeSprite()
     const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, strength: 0, target: 0 }
+    const ember = { energy: 0.7, target: 0.8, shiftAt: 0 }
     const puffs: Puff[] = []
     let drops: Drop[][] = []
     let smokeTimer = 0
-    let spawnEvery = 180
+    let spawnEvery = 120
 
     const spawnDrop = (layer: (typeof RAIN_LAYERS)[number]): Drop => ({
       x: rand(-30, width + 30),
@@ -118,6 +156,15 @@ export function HeroSpotlight() {
       canvas.height = Math.round(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       seedRain()
+    }
+
+    const emberPoint = () => {
+      const rect = coverRect(IMAGE_W, IMAGE_H, width, height)
+      return {
+        x: rect.x + EMBER.x * rect.w,
+        y: rect.y + EMBER.y * rect.h,
+        k: Math.min(Math.max(rect.w / 1600, 0.6), 1.8),
+      }
     }
 
     const drawReveal = () => {
@@ -146,28 +193,59 @@ export function HeroSpotlight() {
       ctx.restore()
     }
 
+    const updateEmber = (dt: number, now: number) => {
+      if (now >= ember.shiftAt) {
+        ember.target = rand(0.4, 1)
+        ember.shiftAt = now + rand(260, 900)
+      }
+      ember.energy += (ember.target - ember.energy) * Math.min(1, dt * 7)
+    }
+
+    const drawEmberHalo = () => {
+      const { x, y, k } = emberPoint()
+      const e = ember.energy
+      const radius = (30 + 16 * e) * k
+      ctx.save()
+      ctx.globalCompositeOperation = "lighter"
+      const halo = ctx.createRadialGradient(x, y, 0, x, y, radius)
+      halo.addColorStop(0, `rgba(255,96,30,${0.3 * e})`)
+      halo.addColorStop(0.5, `rgba(255,62,20,${0.11 * e})`)
+      halo.addColorStop(1, "rgba(255,62,20,0)")
+      ctx.fillStyle = halo
+      ctx.beginPath()
+      ctx.arc(x, y, radius, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+
+    const drawEmberCore = () => {
+      const { x, y, k } = emberPoint()
+      const e = ember.energy
+      const jx = x + rand(-0.8, 0.8)
+      const jy = y + rand(-0.8, 0.8)
+      const radius = (6.5 + 3.5 * e) * k
+      ctx.save()
+      ctx.globalCompositeOperation = "lighter"
+      const core = ctx.createRadialGradient(jx, jy, 0, jx, jy, radius)
+      core.addColorStop(0, `rgba(255,232,180,${e})`)
+      core.addColorStop(0.35, `rgba(255,170,70,${0.75 * e})`)
+      core.addColorStop(0.7, `rgba(255,110,40,${0.3 * e})`)
+      core.addColorStop(1, "rgba(255,110,40,0)")
+      ctx.fillStyle = core
+      ctx.beginPath()
+      ctx.arc(jx, jy, radius, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+
     const drawSmoke = (dt: number, now: number) => {
-      const rect = coverRect(IMAGE_W, IMAGE_H, width, height)
-      const emitterX = rect.x + SMOKE_SOURCE.x * rect.w
-      const emitterY = rect.y + SMOKE_SOURCE.y * rect.h
+      const { x, y } = emberPoint()
 
       smokeTimer += dt * 1000
       if (smokeTimer >= spawnEvery && puffs.length < MAX_PUFFS) {
         smokeTimer = 0
-        spawnEvery = rand(150, 260)
-        puffs.push({
-          x: emitterX + rand(-7, 7),
-          y: emitterY + rand(-4, 2),
-          vx: rand(-11, -4),
-          vy: rand(-26, -15),
-          age: 0,
-          ttl: rand(5.5, 8.5),
-          size: rand(10, 16),
-          growth: rand(46, 72),
-          sway: rand(3.5, 8),
-          swayFreq: rand(0.5, 1.1),
-          phase: rand(0, Math.PI * 2),
-        })
+        spawnEvery = rand(80, 140)
+        puffs.push(spawnPuff(x, y - 3))
       }
 
       ctx.save()
@@ -183,8 +261,8 @@ export function HeroSpotlight() {
         puff.x += (puff.vx + Math.sin(now * 0.001 * puff.swayFreq + puff.phase) * puff.sway) * dt
         puff.y += puff.vy * dt
         const size = puff.size + puff.growth * life
-        const fade = life < 0.18 ? life / 0.18 : 1 - (life - 0.18) / 0.82
-        ctx.globalAlpha = fade * 0.18
+        const fade = life < 0.15 ? life / 0.15 : 1 - (life - 0.15) / 0.85
+        ctx.globalAlpha = fade * puff.peak
         ctx.drawImage(sprite, puff.x - size / 2, puff.y - size * 0.62, size, size * 1.18)
       }
       ctx.restore()
@@ -219,9 +297,12 @@ export function HeroSpotlight() {
       pointer.strength += (pointer.target - pointer.strength) * 0.08
       pointer.x += (pointer.tx - pointer.x) * 0.11
       pointer.y += (pointer.ty - pointer.y) * 0.11
+      updateEmber(dt, now)
       ctx.clearRect(0, 0, width, height)
       drawReveal()
+      drawEmberHalo()
       drawSmoke(dt, now)
+      drawEmberCore()
       drawRain(dt)
       raf = requestAnimationFrame(frame)
     }
@@ -280,7 +361,7 @@ export function HeroSpotlight() {
   }, [])
 
   return (
-    <section className="relative bg-background p-2.5 sm:p-3.5 md:p-5">
+    <section className="dark relative bg-background p-2.5 sm:p-3.5 md:p-5" style={{ colorScheme: "dark" }}>
       <div
         ref={panelRef}
         className="relative flex h-[calc(100svh-20px)] flex-col overflow-hidden rounded-[22px] bg-[#0b1120] text-white sm:h-[calc(100svh-28px)] sm:rounded-[26px] md:h-[calc(100svh-40px)] md:rounded-[30px]"
