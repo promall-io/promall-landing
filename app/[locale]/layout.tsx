@@ -14,6 +14,7 @@ import {
   type Locale,
 } from "@/i18n/config";
 import { StructuredData } from "@/components/structured-data";
+import { PageviewTracker } from "@/components/analytics/pageview-tracker";
 import "../globals.css";
 
 const inter = Inter({
@@ -156,6 +157,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           {children}
         </NextIntlClientProvider>
         <Analytics />
+        <PageviewTracker locale={locale} />
       </body>
     </html>
   );
