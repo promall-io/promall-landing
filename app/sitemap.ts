@@ -3,7 +3,7 @@ import { defaultLocale, indexedLocales } from "@/i18n/config";
 
 const SITE_URL = "https://promall.io";
 
-const ROUTES = ["", "/demo"] as const;
+const ROUTES = [""] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "ProMall — Instagram store builder with an AI DM assistant",
-    "description": "ProMall brings your products, orders, payments and inventory into one panel, builds your online store, and hands your Instagram DMs to an AI that answers with real prices and stock and closes the sale — even at midnight. Or sell by hand with one clean payment link. A clean, professional way to build an online store and run your Instagram boutique."
+    "description": "ProMall brings your products, orders, payments and inventory into one panel, builds your online store, and hands your Instagram DMs to an AI that answers with real prices and stock and closes the sale. Or sell by hand with one clean payment link — a clean, professional way to run your Instagram shop."
   },
   "header": {
     "brand": "ProMall",
@@ -59,7 +59,7 @@
     "badge": "An AI salesperson, always in your DMs",
     "titleLine1": "A salesperson who never sleeps,",
     "titleLine2": "right inside your Instagram DMs",
-    "description": "ProMall's AI answers with your store's real prices and stock and closes the order right in the DM — even at midnight. Prefer to do it yourself? Sell by hand with one clean payment link.",
+    "description": "Build your online store on ProMall and run it from one panel; when you're busy, the AI answers customers with your store's real prices and stock and closes the order right in the DM. Prefer to do it yourself? Sell by hand with one clean payment link.",
     "ctaPrimary": "Start for Free",
     "ctaSecondary": "See Smart DMs",
     "note": "No credit card · 10 days free to try · Fast, no technical skills",
@@ -86,7 +86,7 @@
   "stats": {
     "alwaysOn": {
       "value": "24/7",
-      "label": "your DMs get answered, even at midnight"
+      "label": "your DMs get answered, even at peak rush"
     },
     "dmToPay": {
       "value": "Payment link",
@@ -186,7 +186,7 @@
     "bullets": {
       "alwaysOn": {
         "title": "Instant replies, 24/7",
-        "description": "It understands what the customer means, not just the words; no message goes unanswered, and even at midnight the customer gets a complete reply."
+        "description": "It understands what the customer means, not just the words; no message goes unanswered, and the customer gets a full reply before they move on to the next page."
       },
       "grounded": {
         "title": "Connected to your real store data",
@@ -349,7 +349,7 @@
     }
   },
   "cta": {
-    "title": "Stop letting midnight sales burn away",
+    "title": "Every unanswered DM is a lost sale",
     "subtitle": "Start free today; build your store, send a clean payment link — or hand your DMs to an AI that never sleeps. 10 days free, no credit card.",
     "button": "Start for Free",
     "note": "No credit card · 10 days free · Cancel anytime"

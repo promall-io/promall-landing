@@ -29,9 +29,12 @@ export async function StructuredData({ locale }: Props) {
   const brandName = locale === "fa" ? "پرومال" : "ProMall";
   const altBrandName = locale === "fa" ? "ProMall" : "پرومال";
 
+  const organizationId = `${SITE_URL}/#organization`;
+  const websiteId = `${SITE_URL}/#website`;
+
   const organization = {
-    "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId,
     name: brandName,
     alternateName: altBrandName,
     url: SITE_URL,
@@ -48,18 +51,19 @@ export async function StructuredData({ locale }: Props) {
   };
 
   const website = {
-    "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": websiteId,
     name: brandName,
     url: SITE_URL,
     inLanguage,
-    publisher: { "@type": "Organization", name: brandName },
+    publisher: { "@id": organizationId },
   };
 
   const application = {
-    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: brandName,
+    url: SITE_URL,
+    publisher: { "@id": organizationId },
     applicationCategory: "BusinessApplication",
     applicationSubCategory:
       locale === "fa" ? "مدیریت آنلاین شاپ" : "Online shop management",
@@ -107,7 +111,6 @@ export async function StructuredData({ locale }: Props) {
   };
 
   const faqPage = {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
     inLanguage,
     mainEntity: FAQ_KEYS.map((key) => ({
@@ -121,7 +124,6 @@ export async function StructuredData({ locale }: Props) {
   };
 
   const service = {
-    "@context": "https://schema.org",
     "@type": "Service",
     name:
       locale === "fa"
@@ -131,13 +133,16 @@ export async function StructuredData({ locale }: Props) {
       locale === "fa"
         ? "نرم‌افزار مدیریت آنلاین شاپ"
         : "Online shop management software",
-    provider: { "@type": "Organization", name: brandName, url: SITE_URL },
+    provider: { "@id": organizationId },
     areaServed: "IR",
     inLanguage,
     description: tMeta("description"),
   };
 
-  const graph = [organization, website, application, service, faqPage];
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [organization, website, application, service, faqPage],
+  };
   const json = JSON.stringify(graph).replace(/</g, "\\u003c");
 
   return (

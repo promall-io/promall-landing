@@ -2,6 +2,7 @@ export const metadata = {
   title: "پرومال — مطالعه موردی سیستم طراحی",
   description:
     "مطالعه موردی سیستم طراحی پرومال: زبان بصری یکپارچه و فارسی‌محور برای پنل مدیریت فروشگاه، بازارگاه و وب‌سایت.",
+  robots: { index: false, follow: true },
 };
 
 const CSS = `
