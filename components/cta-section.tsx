@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl"
 import { ArrowLeft, ArrowRight } from "@/components/icons"
 import { Magnetic, Reveal } from "@/components/motion"
+import { APP_URL } from "@/lib/site"
 
 export function CTASection() {
   const t = useTranslations("cta")
@@ -33,7 +34,7 @@ export function CTASection() {
               <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Magnetic>
                   <a
-                    href="https://app.promall.io"
+                    href={APP_URL}
                     className="btn-shimmer group inline-flex items-center gap-2 rounded-full bg-card px-10 py-4 text-lg font-bold text-foreground shadow-card transition-colors duration-300 hover:bg-gold"
                   >
                     {t("button")}

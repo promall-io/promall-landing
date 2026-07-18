@@ -10,6 +10,7 @@ import {
   Stagger,
   StaggerItem,
 } from "@/components/motion"
+import { APP_URL } from "@/lib/site"
 
 type Track = {
   key: "byHand" | "byAi"
@@ -19,7 +20,7 @@ type Track = {
 }
 
 const TRACKS: Track[] = [
-  { key: "byHand", href: "https://app.promall.io", accent: false, icon: Link2 },
+  { key: "byHand", href: APP_URL, accent: false, icon: Link2 },
   { key: "byAi", href: "#instagram-ai", accent: true, icon: Sparkles },
 ]
 

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { AnimatePresence, motion } from "framer-motion"
 import { Check } from "@/components/icons"
 import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
+import { APP_URL } from "@/lib/site"
 
 const PLAN_KEYS = ["free", "professional", "enterprise"] as const
 
@@ -157,7 +158,7 @@ export function PricingSection() {
                   </ul>
 
                   <a
-                    href="https://app.promall.io"
+                    href={APP_URL}
                     className={`mt-8 block rounded-full py-3 text-center text-sm font-semibold transition-all duration-300 ${
                       popular
                         ? "bg-gold text-foreground hover:bg-gold-deep"

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { EnamadBadge } from "@/components/enamad-badge"
 import { LogoMark } from "@/components/logo-mark"
 import { scrollToSection } from "@/lib/smooth-scroll"
+import { APP_URL } from "@/lib/site"
 
 const PRODUCT_LINKS = [
   { key: "features", href: "#features" },
@@ -14,7 +15,7 @@ const PRODUCT_LINKS = [
 ] as const
 
 const COMPANY_LINKS = [
-  { key: "app", href: "https://app.promall.io", external: true },
+  { key: "app", href: APP_URL, external: true },
   { key: "privacy", href: "/privacy", external: false },
   { key: "terms", href: "/terms", external: false },
 ] as const

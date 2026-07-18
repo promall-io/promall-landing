@@ -14,6 +14,7 @@ import {
   type Locale,
 } from "@/i18n/config";
 import { StructuredData } from "@/components/structured-data";
+import { SITE_URL } from "@/lib/site";
 import { PageviewTracker } from "@/components/analytics/pageview-tracker";
 import "../globals.css";
 
@@ -34,8 +35,6 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-
-const SITE_URL = "https://promall.io";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/api-config";
 
-const API_BASE_URL = process.env.PROMALL_API_URL ?? "https://api.promall.io";
 const PROXY_SECRET = process.env.WEB_ANALYTICS_PROXY_SECRET;
 const UPSTREAM_TIMEOUT_MS = 3_000;
 

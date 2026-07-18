@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
-
-const SITE_URL = "https://promall.io";
+import { SITE_URL } from "@/lib/site";
 
 const FAQ_KEYS = [
   "manageShop",

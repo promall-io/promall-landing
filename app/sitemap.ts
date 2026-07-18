@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { defaultLocale, indexedLocales } from "@/i18n/config";
-
-const SITE_URL = "https://promall.io";
+import { SITE_URL } from "@/lib/site";
 
 const ROUTES = [""] as const;
 
