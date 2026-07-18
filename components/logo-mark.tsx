@@ -10,7 +10,7 @@ const STEM_PATH =
 
 const INK_BOWL = "var(--ink)"
 const INK_STEM = "var(--gold-deep)"
-const WHITE_BOWL = "#f3f5f8"
+const WHITE_BOWL = "var(--cream)"
 const WHITE_STEM = "var(--gold)"
 
 type Props = {

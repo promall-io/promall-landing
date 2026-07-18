@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "ProMall — Instagram store builder with an AI DM assistant",
-    "description": "ProMall brings your products, orders, payments and inventory into one panel, builds your online store, and hands your Instagram DMs to an AI that answers with real prices and stock and closes the sale. Or sell by hand with one clean payment link — a clean, professional way to run your Instagram shop."
+    "title": "ProMall — Instagram shop management with an AI DM assistant",
+    "description": "ProMall is online shop management for Instagram sellers: an AI answers your DMs with real prices and stock and closes the sale with a payment link, while products, orders, inventory and reports live in one panel. Or sell by hand with one clean payment link. 10 days free, no credit card."
   },
   "header": {
     "brand": "ProMall",
@@ -56,14 +56,15 @@
     }
   },
   "hero": {
+    "wordmark": "ProMall",
     "badge": "An AI salesperson, always in your DMs",
     "titleLine1": "A salesperson who never sleeps,",
     "titleLine2": "right inside your Instagram DMs",
     "description": "Build your online store on ProMall and run it from one panel; when you're busy, the AI answers customers with your store's real prices and stock and closes the order right in the DM. Prefer to do it yourself? Sell by hand with one clean payment link.",
     "ctaPrimary": "Start for Free",
     "ctaSecondary": "See Smart DMs",
-    "note": "No credit card · 10 days free to try · Fast, no technical skills",
-    "kicker": "The Instagram store builder for the new generation of Iranian businesses",
+    "note": "10 days free to try · No card, no commitment · No technical skills needed",
+    "kicker": "Online shop management and an Instagram store builder, for the new generation of Iranian businesses",
     "statValue": "24/7",
     "statLabel": "your DMs get answered",
     "statAction": "See Smart DMs",
@@ -135,6 +136,9 @@
   "bento": {
     "badge": "Everything you need",
     "title": "Everything an online store needs, right here",
+    "titleLine1": "Everything you need to run your online shop",
+    "titleLine2": "is right here, in one panel",
+    "learnMore": "Learn more",
     "subtitle": "From the first product you add to your end-of-month sales report — it's all in one store management panel, exactly the way an Iranian business needs it.",
     "cells": {
       "instagramAi": {
@@ -349,6 +353,7 @@
     }
   },
   "cta": {
+    "kicker": "It's time",
     "title": "Every unanswered DM is a lost sale",
     "subtitle": "Start free today; build your store, send a clean payment link — or hand your DMs to an AI that never sleeps. 10 days free, no credit card.",
     "button": "Start for Free",
@@ -400,6 +405,7 @@
     ]
   },
   "showcase": {
+    "kicker": "ProMall in action",
     "heading": "See what it can do",
     "scrollHint": "Keep scrolling",
     "panels": {
@@ -421,7 +427,9 @@
       "insight": {
         "number": "04",
         "title": "Numbers talk, not guesses",
-        "description": "Real sales, real profit, your best sellers and VIP customers are right in front of you the moment they happen, in Tehran time — reports that speak a merchant's language, with exports you can take away."
+        "description": "Real sales, real profit, your best sellers and VIP customers are right in front of you the moment they happen, in Tehran time — reports that speak a merchant's language, with exports you can take away.",
+        "chipSample": "Sample report",
+        "chipLive": "Live sales trend"
       }
     }
   },

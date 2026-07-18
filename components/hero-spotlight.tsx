@@ -2,8 +2,15 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
+import { motion, useReducedMotion } from "framer-motion"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ArrowCta, EASE_CINEMA, WordsPullUp } from "@/components/cinema"
 import { MacMenuBar } from "@/components/mac-menu-bar"
+import { defaultLocale } from "@/i18n/config"
+
+gsap.registerPlugin(ScrollTrigger)
 
 const BASE_IMAGE = "/brand/hero-bazaar-base.webp"
 const REVEAL_IMAGE = "/brand/hero-bazaar-reveal.webp"
@@ -102,8 +109,33 @@ function spawnPuff(x: number, y: number): Puff {
 
 export function HeroSpotlight() {
   const t = useTranslations("hero")
+  const locale = useLocale()
+  const reduced = useReducedMotion()
+  const demoHref = locale === defaultLocale ? "/demo" : `/${locale}/demo`
+  const isFa = locale === "fa"
   const panelRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const wordmarkRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const panel = panelRef.current
+    const wordmark = wordmarkRef.current
+    if (!panel || !wordmark) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const ctx = gsap.context(() => {
+      gsap.to(wordmark, {
+        y: 64,
+        ease: "none",
+        scrollTrigger: {
+          trigger: panel,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      })
+    }, panel)
+    return () => ctx.revert()
+  }, [])
 
   useEffect(() => {
     const panel = panelRef.current
@@ -361,10 +393,10 @@ export function HeroSpotlight() {
   }, [])
 
   return (
-    <section className="dark relative bg-background p-2.5 sm:p-3.5 md:p-5" style={{ colorScheme: "dark" }}>
+    <section className="dark relative bg-background p-3 sm:p-4 md:p-6" style={{ colorScheme: "dark" }}>
       <div
         ref={panelRef}
-        className="relative flex h-[calc(100svh-20px)] flex-col overflow-hidden rounded-[22px] bg-[#0b1120] text-white sm:h-[calc(100svh-28px)] sm:rounded-[26px] md:h-[calc(100svh-40px)] md:rounded-[30px]"
+        className="relative flex h-[calc(100svh-24px)] flex-col overflow-hidden rounded-2xl bg-black text-cream sm:h-[calc(100svh-32px)] md:h-[calc(100svh-48px)] md:rounded-[2rem]"
       >
         <Image
           src={BASE_IMAGE}
@@ -383,70 +415,102 @@ export function HeroSpotlight() {
         />
 
         <div
+          className="noise-overlay pointer-events-none absolute inset-0 z-[34] opacity-[0.7] mix-blend-overlay"
+          aria-hidden="true"
+        />
+
+        <div
           className="pointer-events-none absolute inset-x-0 top-0 z-[35] h-28"
           aria-hidden="true"
           style={{
-            background: "linear-gradient(to bottom, rgba(6,11,22,0.55), rgba(6,11,22,0))",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0))",
           }}
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[35] h-[36%]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[35] h-[46%]"
           aria-hidden="true"
           style={{
-            background: "linear-gradient(to top, rgba(6,11,22,0.68), rgba(6,11,22,0))",
+            background: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0))",
           }}
         />
 
         <MacMenuBar />
 
-        <div className="relative z-40 flex flex-1 flex-col items-center justify-center px-6 pt-16 text-center">
-          <p
-            className="hero-anim hero-fade text-[13px] font-bold text-white/75 md:text-sm"
-            style={{ animationDelay: "0.15s" }}
-          >
-            {t("badge")}
-          </p>
-
-          <h1 className="mt-4 text-balance text-[40px] font-extrabold leading-[1.14] tracking-tight [text-shadow:0_2px_28px_rgba(4,8,16,0.55)] sm:text-6xl md:text-7xl lg:text-[80px] lg:leading-[1.07] xl:text-[88px]">
-            <span
-              className="hero-anim hero-reveal block"
-              style={{ animationDelay: "0.25s" }}
-            >
-              {t("titleLine1")}
-            </span>
-            <span
-              className="hero-anim hero-reveal block text-[var(--gold)]"
-              style={{ animationDelay: "0.42s" }}
-            >
-              {t("titleLine2")}
-            </span>
-          </h1>
-
-          <p
-            className="hero-anim hero-fade mt-6 max-w-xl text-pretty text-[13px] font-medium leading-6 text-white/80 sm:text-sm sm:leading-7"
-            style={{ animationDelay: "0.6s" }}
-          >
-            {t("description")}
-          </p>
-        </div>
-
-        <div className="relative z-40 flex items-end justify-between px-6 pb-6 md:px-9 md:pb-8">
+        <div className="absolute inset-x-0 bottom-0 z-40 px-6 pb-6 md:px-10 md:pb-10">
           <div
-            className="hero-anim hero-fade flex items-center gap-3"
+            className="hero-anim hero-fade mb-6 flex items-end justify-between md:mb-8"
             style={{ animationDelay: "0.85s" }}
           >
-            <span className="hero-scroll-line" aria-hidden="true" />
-            <span className="text-[11px] font-bold text-white/60 md:text-xs">
-              {t("scrollHint")}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="hero-scroll-line" aria-hidden="true" />
+              <span className="text-[11px] font-bold text-cream/60 md:text-xs">
+                {t("scrollHint")}
+              </span>
+            </div>
+            <p
+              className="text-[11px] font-bold text-cream/60 md:text-xs"
+              aria-hidden="true"
+            >
+              {t("pageIndex")}
+            </p>
           </div>
-          <p
-            className="hero-anim hero-fade text-[11px] font-bold text-white/60 md:text-xs"
-            style={{ animationDelay: "0.85s" }}
-            aria-hidden="true"
-          >
-            {t("pageIndex")}
-          </p>
+
+          <div className="grid grid-cols-12 items-end gap-x-6 gap-y-8">
+            <div ref={wordmarkRef} className="order-2 col-span-12 md:order-1 md:col-span-8">
+              <WordsPullUp
+                as="h1"
+                text={t("wordmark")}
+                showAsterisk
+                delay={0.2}
+                className={`block font-bold leading-[0.85] tracking-[-0.02em] text-[#E1E0CC] ${
+                  isFa
+                    ? "text-[26vw] sm:text-[24vw] md:text-[22vw] lg:text-[20vw] xl:text-[19vw]"
+                    : "text-[24vw] sm:text-[21vw] md:text-[15vw] lg:text-[14vw] xl:text-[13vw]"
+                }`}
+              />
+            </div>
+
+            <div className="order-1 col-span-12 flex flex-col items-start gap-4 md:order-2 md:col-span-4 md:pb-4">
+              <p
+                className={`text-[10px] font-bold text-gold sm:text-xs ${isFa ? "" : "tracking-widest"}`}
+              >
+                {t("badge")}
+              </p>
+              <p className="text-sm font-semibold leading-snug md:text-lg" style={{ color: "#E1E0CC" }}>
+                {t("titleLine1")} {t("titleLine2")}
+              </p>
+              <motion.p
+                initial={{ opacity: 0, y: reduced ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: EASE_CINEMA, delay: 0.5 }}
+                className="text-pretty text-xs leading-snug text-primary/70 sm:text-sm md:text-base"
+              >
+                {t("description")}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: reduced ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: EASE_CINEMA, delay: 0.65 }}
+                className="flex flex-wrap items-center gap-3"
+              >
+                <ArrowCta href={demoHref} label={t("ctaPrimary")} size="lg" />
+                <ArrowCta
+                  href="#instagram-ai"
+                  label={t("ctaSecondary")}
+                  variant="outline"
+                  size="lg"
+                />
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, ease: EASE_CINEMA, delay: 0.8 }}
+                className="text-[11px] leading-relaxed text-muted-cream"
+              >
+                {t("note")}
+              </motion.p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

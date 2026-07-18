@@ -1,50 +1,48 @@
 "use client"
 
 import { useLocale, useTranslations } from "next-intl"
-import { ArrowLeft, ArrowRight } from "@/components/icons"
+import { ArrowCta, WordsPullUpMultiStyle } from "@/components/cinema"
 import { Magnetic, Reveal } from "@/components/motion"
 import { APP_URL } from "@/lib/site"
 
 export function CTASection() {
   const t = useTranslations("cta")
   const locale = useLocale()
-  const ArrowIcon = locale === "fa" ? ArrowLeft : ArrowRight
 
   return (
-    <section className="relative py-12 md:py-20">
-      <div className="mx-auto max-w-6xl px-5">
+    <section className="relative overflow-hidden bg-background py-28 md:py-44">
+      <div
+        aria-hidden="true"
+        className="bg-noise opacity-[0.15] pointer-events-none absolute inset-0"
+      />
+      <div className="relative mx-auto max-w-5xl px-5 text-center">
         <Reveal>
-          <div className="bg-grain relative overflow-hidden rounded-[2.5rem] bg-ink px-7 py-16 text-center shadow-ink md:px-14 md:py-24">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-sky/25 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-32 right-10 size-80 rounded-full bg-gold/15 blur-3xl"
-            />
-
-            <div className="relative mx-auto max-w-2xl">
-              <h2 className="text-balance text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
-                {t("title")}
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-pretty text-lg leading-8 text-white/70">
-                {t("subtitle")}
-              </p>
-              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Magnetic>
-                  <a
-                    href={APP_URL}
-                    className="btn-shimmer group inline-flex items-center gap-2 rounded-full bg-card px-10 py-4 text-lg font-bold text-foreground shadow-card transition-colors duration-300 hover:bg-gold"
-                  >
-                    {t("button")}
-                    <ArrowIcon className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
-                  </a>
-                </Magnetic>
-              </div>
-              <p className="mt-6 text-sm text-white/55">{t("note")}</p>
-            </div>
+          <span
+            className={`mb-6 inline-block text-[10px] font-bold text-gold sm:text-xs ${
+              locale === "fa" ? "" : "tracking-widest"
+            }`}
+          >
+            {t("kicker")}
+          </span>
+        </Reveal>
+        <WordsPullUpMultiStyle
+          as="h2"
+          justify="center"
+          segments={[{ text: t("title") }]}
+          className="text-balance text-5xl font-medium leading-[0.95] text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+        />
+        <Reveal delay={0.15}>
+          <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-8 text-muted-cream sm:text-lg">
+            {t("subtitle")}
+          </p>
+        </Reveal>
+        <Reveal delay={0.25}>
+          <div className="mt-11 flex justify-center">
+            <Magnetic>
+              <ArrowCta href={APP_URL} label={t("button")} size="lg" />
+            </Magnetic>
           </div>
+          <p className="mt-7 text-xs text-muted-cream sm:text-sm">{t("note")}</p>
         </Reveal>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Inter } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -24,6 +24,14 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-instrument",
+});
+
 const estedaad = localFont({
   src: "../../public/fonts/estedaad.woff2",
   display: "swap",
@@ -41,13 +49,13 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#11192a",
-  colorScheme: "light",
+  themeColor: "#000000",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
 
-const THEME_INIT_SCRIPT = `(function(){try{var e=document.documentElement;e.classList.remove('dark');e.style.colorScheme='light';}catch(e){}})();`;
+const THEME_INIT_SCRIPT = `(function(){try{var e=document.documentElement;e.style.colorScheme='dark';}catch(e){}})();`;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -134,22 +142,14 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={dir}
-      style={{ colorScheme: "light" }}
+      style={{ colorScheme: "dark" }}
       className={
-        locale === "fa" ? `${estedaad.variable} font-sans` : inter.variable
+        locale === "fa"
+          ? `${estedaad.variable} ${instrument.variable} font-sans`
+          : `${inter.variable} ${instrument.variable}`
       }
     >
-      <body
-        className={locale === "fa" ? "font-sans antialiased" : "antialiased"}
-        style={
-          locale === "en"
-            ? {
-                fontFamily:
-                  'var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-              }
-            : undefined
-        }
-      >
+      <body className="font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>

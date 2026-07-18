@@ -23,7 +23,6 @@ export function MacMenuBar() {
   const locale = useLocale()
   const demoHref = locale === defaultLocale ? "/demo" : `/${locale}/demo`
   const [menuOpen, setMenuOpen] = useState(false)
-  const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
     if (!menuOpen) return
@@ -36,64 +35,17 @@ export function MacMenuBar() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
-      <motion.nav
-        initial={{ opacity: 0, y: -18 }}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
-        className="hero-notch absolute left-1/2 top-0 hidden -translate-x-1/2 items-center rounded-b-[18px] bg-background py-1.5 pe-2 ps-4 lg:flex"
+        className="hidden items-center justify-between px-6 py-4 md:px-9 lg:flex"
       >
-        <Link href="/" className="me-2 flex items-center gap-2 border-e border-border pe-4">
-          <LogoMark size={20} tone="auto" />
-          <span className="text-[14px] font-extrabold tracking-tight text-foreground">
+        <Link href="/" className="flex items-center gap-2 opacity-90 transition-opacity duration-300 hover:opacity-100">
+          <LogoMark size={20} tone="ink" />
+          <span className="text-[13px] font-extrabold tracking-tight text-cream">
             {t("brand")}
           </span>
-        </Link>
-
-        <ul className="flex items-center gap-0.5" onMouseLeave={() => setHovered(null)}>
-          {NAV_LINKS.map((link) => (
-            <li key={link.key} className="relative">
-              <a
-                href={link.href}
-                onClick={(event) => {
-                  event.preventDefault()
-                  scrollToSection(link.href)
-                }}
-                onMouseEnter={() => setHovered(link.key)}
-                onFocus={() => setHovered(link.key)}
-                className="relative block rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-muted-foreground transition-colors duration-300 hover:text-foreground"
-              >
-                {hovered === link.key ? (
-                  <motion.span
-                    layoutId="nav-hover-pill"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    className="absolute inset-0 rounded-full bg-foreground/[0.08]"
-                  />
-                ) : null}
-                <span className="relative">{t(`nav.${link.key}`)}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
-
-      <motion.div
-        initial={{ opacity: 0, y: -18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASE, delay: 0.42 }}
-        className="hero-tab absolute end-0 top-0 hidden items-center gap-2 rounded-es-[18px] bg-background pb-2 pe-3 ps-2.5 pt-2 lg:flex"
-      >
-        <LanguageSwitcher />
-        <Link
-          href={demoHref}
-          className="group flex items-center gap-2 rounded-full bg-foreground py-1.5 pe-4 ps-1.5 text-background transition-opacity duration-300 hover:opacity-90"
-        >
-          <span className="flex items-center justify-center rounded-full bg-background/20 p-1">
-            <ArrowUpRight
-              className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
-              aria-hidden="true"
-            />
-          </span>
-          <span className="text-xs font-semibold">{t("cta")}</span>
         </Link>
       </motion.div>
 
@@ -105,10 +57,10 @@ export function MacMenuBar() {
       >
         <Link
           href="/"
-          className="glass flex items-center gap-2.5 rounded-full border border-white/20 py-1.5 pe-4 ps-3.5"
+          className="glass flex items-center gap-2.5 rounded-full border border-cream/15 py-1.5 pe-4 ps-3.5"
         >
-          <LogoMark size={22} tone="auto" />
-          <span className="text-[15px] font-extrabold tracking-tight text-foreground">
+          <LogoMark size={22} tone="ink" />
+          <span className="text-[15px] font-extrabold tracking-tight text-cream">
             {t("brand")}
           </span>
         </Link>
@@ -120,7 +72,7 @@ export function MacMenuBar() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("menuLabel")}
             aria-expanded={menuOpen}
-            className="glass flex size-9 items-center justify-center rounded-full border border-white/20 text-foreground"
+            className="glass flex size-9 items-center justify-center rounded-full border border-cream/15 text-cream"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -134,7 +86,7 @@ export function MacMenuBar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="glass mx-4 mt-2 space-y-1 rounded-2xl border border-white/20 p-2 shadow-card lg:hidden"
+            className="glass mx-4 mt-2 space-y-1 rounded-2xl border border-cream/15 p-2 shadow-card lg:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
@@ -145,7 +97,7 @@ export function MacMenuBar() {
                   setMenuOpen(false)
                   scrollToSection(link.href)
                 }}
-                className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-foreground transition-colors hover:bg-foreground/5"
+                className="block rounded-xl px-4 py-2.5 text-[15px] font-medium text-cream transition-colors hover:bg-cream/5"
               >
                 {t(`nav.${link.key}`)}
               </a>
@@ -153,9 +105,10 @@ export function MacMenuBar() {
             <Link
               href={demoHref}
               onClick={() => setMenuOpen(false)}
-              className="mt-1 block rounded-xl bg-foreground px-4 py-2.5 text-center text-[15px] font-semibold text-background"
+              className="mt-1 flex items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-[15px] font-semibold text-black"
             >
               {t("cta")}
+              <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden="true" />
             </Link>
           </motion.div>
         ) : null}

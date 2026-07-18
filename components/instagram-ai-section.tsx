@@ -23,7 +23,8 @@ import {
   Video,
   type LucideIcon,
 } from "@/components/icons"
-import { AnimatedTitle, EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
+import { ScrollWordsReveal, WordsPullUpMultiStyle } from "@/components/cinema"
+import { EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
 
 type ChatMessage = {
   from: "customer" | "ai"
@@ -82,8 +83,8 @@ function TypingBubble() {
 
 function DynamicIsland() {
   return (
-    <div className="pointer-events-none absolute left-1/2 top-2.5 z-20 flex h-[25px] w-[88px] -translate-x-1/2 items-center justify-end rounded-full bg-black pe-2.5">
-      <span className="size-[9px] rounded-full bg-ink-deep ring-1 ring-white/10" />
+    <div className="pointer-events-none absolute left-1/2 top-2.5 z-20 flex h-[25px] w-[88px] -translate-x-1/2 items-center justify-end rounded-full bg-black ring-1 ring-cream/10 pe-2.5">
+      <span className="size-[9px] rounded-full bg-ice ring-1 ring-cream/15" />
     </div>
   )
 }
@@ -93,9 +94,9 @@ function ChatHeader() {
     <div className="flex shrink-0 items-center gap-2.5 border-b border-border bg-card px-4 pb-2.5 pt-11">
       <ChevronRight className="size-5 shrink-0 text-foreground" />
       <span className="shrink-0 rounded-full p-[2px]" style={{ background: "var(--ig-gradient)" }}>
-        <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-white bg-ice text-xs font-bold text-primary">
+        <span className="relative flex size-9 items-center justify-center rounded-full border-2 border-card bg-ice text-xs font-bold text-primary">
           ت
-          <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-white bg-success" />
+          <span className="absolute -bottom-px -left-px size-2.5 rounded-full border-2 border-card bg-success" />
         </span>
       </span>
       <div className="min-w-0 flex-1">
@@ -115,7 +116,7 @@ function Composer() {
     <div className="shrink-0 bg-card px-3 pb-1.5 pt-2">
       <div className="flex items-center gap-2 rounded-full border border-border bg-background py-1.5 pe-3 ps-1.5">
         <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary">
-          <Camera className="size-4 text-white" />
+          <Camera className="size-4 text-primary-foreground" />
         </span>
         <span className="flex-1 text-[11px] text-muted-foreground">پیام...</span>
         <Mic className="size-4 text-muted-foreground" />
@@ -145,7 +146,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         </div>
         <div className="flex items-center justify-between px-3.5 py-2.5">
           <span className="text-[11px] font-bold text-foreground">۱٬۲۸۰٬۰۰۰ تومان</span>
-          <span className="rounded-full bg-ink px-3 py-1 text-[10px] font-semibold text-white">
+          <span className="rounded-full bg-primary px-3 py-1 text-[10px] font-semibold text-primary-foreground">
             پرداخت آنلاین
           </span>
         </div>
@@ -161,8 +162,8 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       transition={{ duration: 0.45, ease: EASE }}
       className={
         message.from === "customer"
-          ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-ice/80 px-3.5 py-2 text-[12.5px] leading-6 text-foreground"
-          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-primary px-3.5 py-2 text-[12.5px] leading-6 text-white"
+          ? "w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tr-md bg-panel px-3.5 py-2 text-[12.5px] leading-6 text-cream"
+          : "mr-auto w-fit max-w-[82%] shrink-0 rounded-2xl rounded-tl-md bg-primary px-3.5 py-2 text-[12.5px] leading-6 text-primary-foreground"
       }
     >
       {message.text}
@@ -286,7 +287,7 @@ function PhoneChat() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-[var(--success-ink)] shadow-card"
+            className="absolute -bottom-5 left-1/2 flex w-max -translate-x-1/2 items-center gap-2 rounded-full border border-cream/10 bg-card px-4 py-2 text-xs font-bold text-[var(--success-ink)] shadow-card"
           >
             <BadgeCheck className="size-4" />
             بدون اینکه تو کاری کنی، انجام شد
@@ -322,12 +323,13 @@ export function InstagramAiSection() {
     <section
       ref={sectionRef}
       id="instagram-ai"
-      className="bg-grain relative overflow-hidden bg-ink-deep py-24 md:py-32"
+      className="relative overflow-hidden bg-background py-24 md:py-32"
     >
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl"
-        animate={animating ? { opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] } : {}}
+        className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        style={{ background: "var(--ig-gradient)" }}
+        animate={animating ? { opacity: [0.14, 0.26, 0.14], scale: [1, 1.08, 1] } : {}}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
@@ -336,9 +338,13 @@ export function InstagramAiSection() {
         animate={animating ? { opacity: [0.6, 1, 0.6], x: [0, -40, 0] } : {}}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
       />
+      <div
+        aria-hidden="true"
+        className="bg-noise opacity-[0.15] pointer-events-none absolute inset-0"
+      />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-16 select-none text-center text-[13vw] font-extrabold leading-none text-white/[0.035]"
+        className="pointer-events-none absolute inset-x-0 top-16 select-none text-center text-[13vw] font-extrabold leading-none text-cream/[0.04]"
       >
         {t("ghost")}
       </span>
@@ -350,16 +356,16 @@ export function InstagramAiSection() {
               {t("badge")}
             </span>
           </Reveal>
-          <AnimatedTitle
+          <WordsPullUpMultiStyle
             as="h2"
-            text={t("title")}
-            className="text-balance text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl"
+            segments={[{ text: t("title") }]}
+            justify="center"
+            className="text-3xl font-bold leading-[0.95] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
           />
-          <Reveal as="p" delay={0.16} className="mt-6">
-            <span className="text-pretty text-lg leading-9 text-white/60">
-              {t("subtitle")}
-            </span>
-          </Reveal>
+          <ScrollWordsReveal
+            text={t("subtitle")}
+            className="mx-auto mt-6 max-w-3xl text-pretty text-lg leading-9 text-cream"
+          />
         </div>
 
         <div className="relative pb-10">
@@ -367,7 +373,7 @@ export function InstagramAiSection() {
             <motion.span
               key={reaction.emoji}
               aria-hidden="true"
-              className={`absolute hidden select-none rounded-2xl border border-white/10 bg-white/10 px-3.5 py-2.5 text-xl shadow-card backdrop-blur md:block ${reaction.className}`}
+              className={`absolute hidden select-none rounded-2xl border border-cream/10 bg-panel/80 px-3.5 py-2.5 text-xl shadow-card backdrop-blur md:block ${reaction.className}`}
               animate={
                 animating ? { y: [0, -16, 0], rotate: [0, 6, -4, 0] } : {}
               }
@@ -396,15 +402,15 @@ export function InstagramAiSection() {
               <motion.div
                 whileHover={reduced ? {} : { y: -6 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="h-full rounded-3xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.09]"
+                className="h-full rounded-2xl border border-cream/5 bg-panel p-6 transition-colors duration-300 hover:border-cream/15"
               >
-                <span className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-white/10 text-gold">
+                <span className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-gold/10 text-gold">
                   <bullet.icon variant="bold" className="size-5" />
                 </span>
-                <h3 className="font-bold text-white">
+                <h3 className="font-bold text-cream">
                   {t(`bullets.${bullet.key}.title`)}
                 </h3>
-                <p className="mt-2 text-sm leading-7 text-white/55">
+                <p className="mt-2 text-sm leading-7 text-muted-cream">
                   {t(`bullets.${bullet.key}.description`)}
                 </p>
               </motion.div>

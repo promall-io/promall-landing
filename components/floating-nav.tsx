@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import {
-  AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
@@ -12,6 +11,7 @@ import {
   useSpring,
 } from "framer-motion"
 import { ArrowUpRight } from "@/components/icons"
+import { LanguageSwitcher } from "@/components/language-switcher"
 import { LogoMark } from "@/components/logo-mark"
 import { defaultLocale } from "@/i18n/config"
 import { scrollToSection } from "@/lib/smooth-scroll"
@@ -35,12 +35,12 @@ export function FloatingNav() {
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28 })
 
-  const [visible, setVisible] = useState(false)
+  const [docked, setDocked] = useState(false)
   const [active, setActive] = useState<LinkKey | null>(null)
   const [hovered, setHovered] = useState<LinkKey | null>(null)
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setVisible(latest > window.innerHeight * 0.6)
+    setDocked(latest > window.innerHeight * 0.6)
   })
 
   useEffect(() => {
@@ -66,85 +66,92 @@ export function FloatingNav() {
       <motion.div
         aria-hidden="true"
         style={{ scaleX: progress }}
-        className="fixed inset-x-0 top-0 z-[60] h-[2.5px] origin-left bg-primary rtl:origin-right"
+        className="fixed inset-x-0 top-0 z-[60] h-[2.5px] origin-left bg-gold rtl:origin-right"
       />
-      <AnimatePresence>
-        {visible ? (
-          <motion.nav
-            initial={reduced ? { opacity: 0 } : { y: -72, opacity: 0 }}
-            animate={reduced ? { opacity: 1 } : { y: 0, opacity: 1 }}
-            exit={reduced ? { opacity: 0 } : { y: -72, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 280, damping: 28 }}
-            className="fixed inset-x-0 top-3 z-50 flex justify-center px-3"
+      <div
+        className={`fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ${
+          docked
+            ? "top-3 px-3"
+            : "top-0 max-lg:pointer-events-none max-lg:opacity-0"
+        }`}
+      >
+        <motion.nav
+          initial={reduced ? { opacity: 0 } : { y: -64, opacity: 0 }}
+          animate={reduced ? { opacity: 1 } : { y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 280, damping: 28 }}
+          className={`flex items-center gap-3 px-4 py-2 transition-all duration-500 md:gap-6 md:px-8 ${
+            docked
+              ? "glass rounded-full border border-cream/10 shadow-card"
+              : "rounded-b-2xl bg-black md:rounded-b-3xl"
+          }`}
+        >
+          <a
+            href="#"
+            onClick={(event) => {
+              event.preventDefault()
+              scrollToSection("#")
+            }}
+            aria-label={t("brand")}
+            className="hidden size-8 items-center justify-center transition-transform duration-300 hover:scale-105 sm:flex"
           >
-            <div className="glass flex items-center gap-0.5 rounded-full border border-white/60 p-1.5 shadow-card">
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault()
-                  scrollToSection("#")
-                }}
-                aria-label={t("brand")}
-                className="me-1 hidden size-8 items-center justify-center transition-transform duration-300 hover:scale-105 sm:flex"
-              >
-                <LogoMark size={24} tone="ink" />
-              </a>
+            <LogoMark size={22} tone="ink" />
+          </a>
 
-              <ul
-                className="flex items-center"
-                onMouseLeave={() => setHovered(null)}
-              >
-                {NAV_LINKS.map((link) => {
-                  const isActive = active === link.key
-                  return (
-                    <li key={link.key} className="relative">
-                      <a
-                        href={`#${link.id}`}
-                        onClick={(event) => {
-                          event.preventDefault()
-                          scrollToSection(`#${link.id}`)
-                        }}
-                        onMouseEnter={() => setHovered(link.key)}
-                        onFocus={() => setHovered(link.key)}
-                        className={`relative block rounded-full px-3 py-2 text-[12px] font-semibold transition-colors duration-300 sm:px-4 sm:text-[13px] ${
-                          isActive ? "text-white" : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        {hovered === link.key && !isActive ? (
-                          <motion.span
-                            layoutId="float-nav-hover"
-                            transition={PILL_SPRING}
-                            className="absolute inset-0 rounded-full bg-ink/[0.06]"
-                          />
-                        ) : null}
-                        {isActive ? (
-                          <motion.span
-                            layoutId="float-nav-active"
-                            transition={PILL_SPRING}
-                            className="absolute inset-0 rounded-full bg-primary shadow-soft"
-                          />
-                        ) : null}
-                        <span className="relative">{t(`nav.${link.key}`)}</span>
-                      </a>
-                    </li>
-                  )
-                })}
-              </ul>
+          <ul
+            className="flex items-center gap-3 sm:gap-6 md:gap-12"
+            onMouseLeave={() => setHovered(null)}
+          >
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.key
+              return (
+                <li key={link.key} className="relative">
+                  <a
+                    href={`#${link.id}`}
+                    onClick={(event) => {
+                      event.preventDefault()
+                      scrollToSection(`#${link.id}`)
+                    }}
+                    onMouseEnter={() => setHovered(link.key)}
+                    onFocus={() => setHovered(link.key)}
+                    className={`relative block py-2 text-[12px] font-semibold transition-colors duration-300 sm:text-[13px] ${
+                      isActive ? "text-gold" : "text-cream/80 hover:text-cream"
+                    }`}
+                  >
+                    {t(`nav.${link.key}`)}
+                    {hovered === link.key && !isActive ? (
+                      <motion.span
+                        layoutId="float-nav-hover"
+                        transition={PILL_SPRING}
+                        className="absolute inset-x-0 bottom-1 h-px bg-cream/30"
+                      />
+                    ) : null}
+                    {isActive ? (
+                      <motion.span
+                        layoutId="float-nav-active"
+                        transition={PILL_SPRING}
+                        className="absolute inset-x-0 bottom-1 h-px bg-gold"
+                      />
+                    ) : null}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
 
-              <Link
-                href={demoHref}
-                className="btn-shimmer ms-1 hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[12px] font-bold text-white transition-transform duration-300 hover:scale-[1.03] sm:flex"
-              >
-                {t("cta")}
-                <ArrowUpRight
-                  className="size-3.5 rtl:-scale-x-100"
-                  aria-hidden="true"
-                />
-              </Link>
-            </div>
-          </motion.nav>
-        ) : null}
-      </AnimatePresence>
+          <Link
+            href={demoHref}
+            className="btn-shimmer hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[12px] font-bold text-black transition-transform duration-300 hover:scale-[1.03] sm:flex"
+          >
+            {t("cta")}
+            <ArrowUpRight
+              className="size-3.5 rtl:-scale-x-100"
+              aria-hidden="true"
+            />
+          </Link>
+
+          <LanguageSwitcher />
+        </motion.nav>
+      </div>
     </>
   )
 }

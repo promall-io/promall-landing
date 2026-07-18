@@ -23,11 +23,14 @@ function MarqueeRow({ items, hidden }: { items: string[]; hidden?: boolean }) {
       {items.map((item, index) => (
         <span
           key={`${item}-${index}`}
-          className="flex items-center gap-10 px-10 text-[13px] font-semibold text-muted-foreground"
+          className="flex items-center gap-10 px-10 text-[13px] font-semibold text-cream/75"
         >
           {item}
-          <span aria-hidden="true" className="text-[9px] text-gold-deep/60">
-            ✦
+          <span
+            aria-hidden="true"
+            className="translate-y-[0.2em] text-[15px] leading-none text-gold"
+          >
+            *
           </span>
         </span>
       ))}
@@ -73,8 +76,12 @@ export function MarqueeBand() {
   return (
     <div
       ref={containerRef}
-      className="relative z-10 overflow-hidden bg-background"
+      className="relative z-10 overflow-hidden border-y border-border bg-background"
     >
+      <div
+        aria-hidden="true"
+        className="bg-noise pointer-events-none absolute inset-0 opacity-[0.15]"
+      />
       <div dir="ltr" className="overflow-hidden whitespace-nowrap py-7">
         <motion.div
           style={reduced ? {} : { x, skewX }}

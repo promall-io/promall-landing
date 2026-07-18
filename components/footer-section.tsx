@@ -24,25 +24,29 @@ export function FooterSection() {
   const t = useTranslations("footer")
 
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-16">
+    <footer className="relative overflow-hidden border-t border-cream/10 bg-background">
+      <div
+        aria-hidden="true"
+        className="bg-noise opacity-[0.15] pointer-events-none absolute inset-0"
+      />
+      <div className="relative mx-auto max-w-6xl px-5 py-14 md:py-16">
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-ink">
-                <LogoMark size={18} tone="white" />
+              <span className="flex size-9 items-center justify-center rounded-xl bg-panel">
+                <LogoMark size={18} tone="ink" />
               </span>
-              <span className="text-lg font-bold tracking-tight text-foreground">
+              <span className="text-lg font-bold text-cream">
                 {t("brand")}
               </span>
             </div>
-            <p className="mt-4 max-w-sm text-pretty text-sm leading-7 text-muted-foreground">
+            <p className="mt-4 max-w-sm text-pretty text-sm leading-7 text-muted-cream">
               {t("description")}
             </p>
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="mb-4 text-sm font-bold text-foreground">
+            <h3 className="mb-4 text-sm font-bold text-cream">
               {t("columns.product")}
             </h3>
             <ul className="space-y-2.5">
@@ -54,7 +58,7 @@ export function FooterSection() {
                       event.preventDefault()
                       scrollToSection(link.href)
                     }}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-sm text-muted-cream transition-colors hover:text-cream"
                   >
                     {t(`links.${link.key}`)}
                   </a>
@@ -64,7 +68,7 @@ export function FooterSection() {
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="mb-4 text-sm font-bold text-foreground">
+            <h3 className="mb-4 text-sm font-bold text-cream">
               {t("columns.company")}
             </h3>
             <ul className="space-y-2.5">
@@ -73,14 +77,14 @@ export function FooterSection() {
                   {link.external ? (
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-muted-cream transition-colors hover:text-cream"
                     >
                       {t(`links.${link.key}`)}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-muted-cream transition-colors hover:text-cream"
                     >
                       {t(`links.${link.key}`)}
                     </Link>
@@ -91,7 +95,7 @@ export function FooterSection() {
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="mb-4 text-sm font-bold text-foreground">
+            <h3 className="mb-4 text-sm font-bold text-cream">
               {t("columns.trust")}
             </h3>
             <EnamadBadge size="md" />
@@ -100,14 +104,14 @@ export function FooterSection() {
 
         <p
           aria-hidden="true"
-          className="ghost-numeral pointer-events-none mt-16 select-none text-center text-[clamp(4.5rem,17vw,15rem)] tracking-tight"
+          className="ghost-numeral pointer-events-none mt-16 select-none text-center text-[clamp(5rem,19vw,17rem)]"
         >
           {t("brand")}
         </p>
 
-        <div className="-mt-4 flex flex-col items-center justify-between gap-4 border-t border-border pt-7 sm:flex-row md:-mt-8">
-          <p className="text-sm text-muted-foreground">{t("copyright")}</p>
-          <p className="text-sm text-muted-foreground">{t("madeIn")}</p>
+        <div className="-mt-4 flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-7 sm:flex-row md:-mt-8">
+          <p className="text-sm text-muted-cream">{t("copyright")}</p>
+          <p className="text-sm text-muted-cream">{t("madeIn")}</p>
         </div>
       </div>
     </footer>

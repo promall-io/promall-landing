@@ -12,6 +12,7 @@
   "dependencies": {
     "@vercel/analytics": "latest",
     "framer-motion": "latest",
+    "gsap": "^3.15.0",
     "lenis": "^1.3.23",
     "next": "14.2.25",
     "next-intl": "^4.5.7",

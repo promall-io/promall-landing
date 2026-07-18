@@ -31,20 +31,20 @@ export function ChatMini() {
     <div dir="rtl" className="flex h-full flex-col justify-end gap-2.5">
       <motion.div
         {...bubble(0.1)}
-        className="w-fit max-w-[85%] rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-foreground"
+        className="w-fit max-w-[85%] rounded-2xl rounded-tr-md bg-panel px-4 py-2.5 text-sm text-foreground"
       >
         سلام! این شومیز ساتن مشکی موجوده؟
       </motion.div>
       <motion.div
         {...bubble(0.5)}
-        className="mr-auto w-fit max-w-[85%] rounded-2xl rounded-tl-md bg-primary px-4 py-2.5 text-sm leading-6 text-white"
+        className="mr-auto w-fit max-w-[85%] rounded-2xl rounded-tl-md bg-primary px-4 py-2.5 text-sm leading-6 text-black"
       >
         سلام 👋 آره موجوده! شومیز ساتن مشکی ۸۹۰٬۰۰۰ تومن. همین الان برات
         بذارمش کنار؟
       </motion.div>
       <motion.div
         {...bubble(0.9)}
-        className="flex w-fit items-center gap-2 rounded-2xl rounded-tr-md bg-ice/80 px-4 py-2.5 text-sm text-foreground"
+        className="flex w-fit items-center gap-2 rounded-2xl rounded-tr-md bg-panel px-4 py-2.5 text-sm text-foreground"
       >
         آره لطفاً
         <TypingDots />
@@ -76,7 +76,7 @@ export function OrdersMini() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: EASE, delay: index * 0.12 }}
-          className="flex items-center justify-between rounded-xl border border-border bg-card px-3.5 py-2.5"
+          className="flex items-center justify-between rounded-xl border border-border bg-panel px-3.5 py-2.5"
         >
           <span className="text-xs font-semibold text-foreground">{order.name}</span>
           <span
@@ -93,7 +93,7 @@ export function OrdersMini() {
 export function PaymentMini() {
   return (
     <div dir="rtl" className="space-y-2">
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-panel px-3.5 py-3">
         <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <CreditCard className="size-4" />
         </span>
@@ -103,8 +103,8 @@ export function PaymentMini() {
         </div>
         <ShieldCheck className="size-4 text-success" />
       </div>
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
-        <span className="flex size-8 items-center justify-center rounded-lg bg-gold/40 text-gold-deep">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-panel px-3.5 py-3">
+        <span className="flex size-8 items-center justify-center rounded-lg bg-gold/15 text-gold">
           <BadgeCheck className="size-4" />
         </span>
         <div className="flex-1">
@@ -125,7 +125,7 @@ export function ReportsMini() {
         <motion.div
           key={index}
           className={`flex-1 rounded-t-lg ${
-            index === REPORT_BARS.length - 1 ? "bg-primary" : "bg-ice"
+            index === REPORT_BARS.length - 1 ? "bg-gold" : "bg-cream/10"
           }`}
           initial={{ height: 0 }}
           whileInView={{ height: `${value}%` }}
@@ -158,7 +158,7 @@ export function InventoryMini() {
               <span className="text-muted-foreground">{`٪${row.level}`}</span>
             )}
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-ice/70">
+          <div className="h-1.5 overflow-hidden rounded-full bg-cream/10">
             <motion.div
               className={`h-full rounded-full ${row.tone}`}
               initial={{ width: 0 }}
@@ -176,7 +176,7 @@ export function InventoryMini() {
 export function PrintMini() {
   return (
     <div dir="rtl" className="flex items-start gap-3">
-      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-ink text-white">
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-cream text-black">
         <Printer className="size-5" />
       </span>
       <div className="w-full max-w-[150px] overflow-hidden">
@@ -185,7 +185,7 @@ export function PrintMini() {
           whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 1, ease: EASE, delay: 0.3 }}
-          className="rounded-b-lg border border-dashed border-border bg-card px-3 py-2.5 text-[9px] leading-5 text-muted-foreground shadow-soft"
+          className="rounded-b-lg border border-dashed border-border bg-panel px-3 py-2.5 text-[9px] leading-5 text-muted-foreground shadow-soft"
         >
           <p className="font-bold text-foreground">فاکتور #۱۰۸۶</p>
           <p>مانتو کتان کرم × ۱</p>

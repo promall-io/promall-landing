@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { useState } from "react"
 import { useTranslations } from "next-intl"
 
 interface EnamadBadgeProps {
@@ -16,6 +16,8 @@ const sizeClasses = {
 
 export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
   const t = useTranslations("enamad")
+  const [loaded, setLoaded] = useState(false)
+  const [failed, setFailed] = useState(false)
   const ENAMAD_ID = "650462"
   const ENAMAD_CODE = "b6cJOzpyayyExJwFHb8LSZv4ZdAJ24MB"
   const trustSealUrl = `https://trustseal.enamad.ir/?id=${ENAMAD_ID}&Code=${ENAMAD_CODE}`
@@ -28,26 +30,39 @@ export function EnamadBadge({ className = "", size = "md" }: EnamadBadgeProps) {
         target="_blank"
         rel="noopener noreferrer"
         href={trustSealUrl}
-        className="group relative block"
+        className="group relative block w-fit rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         aria-label={t("label")}
       >
         <div
-          className={`
-            glass relative ${sizeClasses[size]} rounded-2xl overflow-hidden
-            border border-border/50 p-2
-            transition-all duration-300
-            group-hover:border-primary/50 group-hover:shadow-glow-primary group-hover:scale-105
-          `}
+          className={`relative ${sizeClasses[size]} overflow-hidden rounded-2xl border border-cream/10 bg-panel p-2 transition-all duration-300 group-hover:scale-[1.03] group-hover:border-gold/40`}
         >
-          <Image
-            src={logoUrl}
-            alt={t("altText")}
-            width={100}
-            height={100}
-            sizes="(max-width: 768px) 80px, 144px"
-            className="w-full h-full object-contain"
-            priority={false}
-          />
+          <div
+            className={`flex h-full w-full items-center justify-center rounded-xl p-1.5 transition-colors duration-300 ${
+              loaded ? "bg-white" : "bg-panel"
+            }`}
+          >
+            {!failed ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoUrl}
+                alt={t("altText")}
+                width={100}
+                height={100}
+                loading="lazy"
+                referrerPolicy="origin"
+                onLoad={() => setLoaded(true)}
+                onError={() => setFailed(true)}
+                className={`h-full w-full object-contain transition-opacity duration-300 ${
+                  loaded ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ) : null}
+            {!loaded ? (
+              <span className="absolute inset-0 flex items-center justify-center px-2 text-center text-[10px] font-bold leading-tight text-cream/40">
+                {t("label")}
+              </span>
+            ) : null}
+          </div>
         </div>
       </a>
     </div>

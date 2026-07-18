@@ -18,6 +18,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { LogoMark } from "@/components/logo-mark"
 import { ConfettiBurst } from "@/components/confetti-burst"
 import { Collapse, EASE, Reveal, Stagger, StaggerItem } from "@/components/motion"
+import { ArrowCta, WordsPullUp } from "@/components/cinema"
 import { defaultLocale } from "@/i18n/config"
 import {
   groupIranMobile,
@@ -42,6 +43,25 @@ type FieldErrors = {
   instagram?: boolean
 }
 
+function SubmitArrow({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={`${className ?? ""} rtl:-scale-x-100`}
+    >
+      <path
+        d="M5 12h14m0 0-6-6m6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function DemoRequestExperience() {
   const t = useTranslations("demo")
   const tHeader = useTranslations("header")
@@ -57,6 +77,7 @@ export function DemoRequestExperience() {
 
   const homeHref = locale === defaultLocale ? "/" : `/${locale}`
   const localizeDigits = (value: string) => (locale === "fa" ? toPersianDigits(value) : value)
+  const kickerTracking = locale === "fa" ? "" : "tracking-widest"
 
   const handlePhoneChange = (value: string) => {
     const english = toEnglishDigits(value)
@@ -120,19 +141,10 @@ export function DemoRequestExperience() {
   }
 
   return (
-    <div className="bg-grain relative flex min-h-[100svh] flex-col overflow-hidden bg-background">
+    <div className="relative flex min-h-[100svh] flex-col overflow-hidden bg-background">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-[26rem] w-[44rem] -translate-x-1/2 rounded-full bg-sky/30 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="animate-slow-float pointer-events-none absolute -bottom-48 -left-24 size-[28rem] rounded-full bg-gold/25 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-32 top-1/3 size-96 rounded-full blur-3xl"
-        style={{ background: "rgba(119, 141, 169, 0.14)" }}
+        className="bg-noise opacity-[0.15] pointer-events-none absolute inset-0"
       />
 
       <ConfettiBurst active={status === "success"} />
@@ -140,10 +152,10 @@ export function DemoRequestExperience() {
       <header className="relative z-10 flex items-center justify-between px-4 py-3.5 md:px-7 md:py-4">
         <Link
           href={homeHref}
-          className="glass flex items-center gap-2.5 rounded-full border border-white/60 py-1.5 pe-4 ps-3.5 shadow-soft transition-colors duration-300 hover:bg-card/75"
+          className="flex items-center gap-2.5 rounded-full border border-cream/15 bg-card py-1.5 pe-4 ps-3.5 transition-colors duration-300 hover:border-cream/30"
         >
           <LogoMark size={22} tone="ink" />
-          <span className="text-[15px] font-extrabold tracking-tight text-foreground">
+          <span className="text-[15px] font-extrabold tracking-tight text-cream">
             {tHeader("brand")}
           </span>
         </Link>
@@ -151,7 +163,7 @@ export function DemoRequestExperience() {
           <LanguageSwitcher />
           <Link
             href={homeHref}
-            className="glass flex items-center gap-1.5 rounded-full border border-white/60 px-4 py-1.5 text-[12px] font-semibold text-muted-foreground shadow-soft transition-colors duration-300 hover:bg-card/75 hover:text-foreground"
+            className="flex items-center gap-1.5 rounded-full border border-cream/15 px-4 py-1.5 text-[12px] font-semibold text-muted-cream transition-colors duration-300 hover:border-cream/30 hover:text-cream"
           >
             <ArrowLeft className="size-3.5 rtl:-scale-x-100" aria-hidden="true" />
             {t("backHome")}
@@ -163,24 +175,30 @@ export function DemoRequestExperience() {
         <div className="grid w-full items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <div className="text-center lg:text-start">
             <Reveal>
-              <div className="glass mx-auto flex w-fit items-center gap-2 rounded-full border border-white/60 px-4 py-2 shadow-soft lg:mx-0">
-                <Sparkles className="size-4 text-muted-foreground" aria-hidden="true" />
-                <span className="text-[13px] font-semibold text-muted-foreground">
-                  {t("badge")}
-                </span>
-              </div>
+              <span
+                className={`inline-flex items-center gap-2 text-[10px] font-bold text-gold sm:text-xs ${kickerTracking}`}
+              >
+                <Sparkles className="size-4" aria-hidden="true" />
+                {t("badge")}
+              </span>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.15] tracking-tight text-foreground sm:text-5xl lg:text-[56px] lg:leading-[1.1]">
-                {t("titleLine1")}
-                <br />
-                <span className="text-primary">{t("titleLine2")}</span>
-              </h1>
-            </Reveal>
+            <h1
+              className="mt-6 text-balance text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
+              style={{ color: "#E1E0CC" }}
+            >
+              <WordsPullUp as="span" className="block" text={t("titleLine1")} delay={0.08} />
+              <WordsPullUp
+                as="span"
+                className="block text-gold"
+                text={t("titleLine2")}
+                delay={0.3}
+                showAsterisk
+              />
+            </h1>
 
             <Reveal delay={0.16}>
-              <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground sm:text-lg lg:mx-0">
+              <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-8 text-cream/70 sm:text-lg lg:mx-0">
                 {t("subtitle")}
               </p>
             </Reveal>
@@ -201,10 +219,10 @@ export function DemoRequestExperience() {
           </div>
 
           <Reveal delay={0.12} distance={36}>
-            <div className="glass relative overflow-hidden rounded-[2rem] border border-white/70 p-6 shadow-float sm:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] bg-card p-6 sm:p-8">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -top-24 right-0 h-48 w-72 rounded-full bg-sky/25 blur-3xl"
+                className="bg-noise opacity-[0.15] pointer-events-none absolute inset-0"
               />
 
               <AnimatePresence mode="wait" initial={false}>
@@ -217,10 +235,10 @@ export function DemoRequestExperience() {
                     className="relative flex flex-col items-center py-6 text-center"
                   >
                     <SuccessCheck />
-                    <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+                    <h2 className="mt-6 text-2xl font-bold tracking-tight text-cream sm:text-3xl">
                       {t("successTitle")}
                     </h2>
-                    <p className="mt-3 max-w-sm text-pretty text-[15px] leading-7 text-muted-foreground">
+                    <p className="mt-3 max-w-sm text-pretty text-[15px] leading-7 text-muted-cream">
                       {t("successSubtitle")}
                     </p>
 
@@ -237,13 +255,12 @@ export function DemoRequestExperience() {
                       />
                     </div>
 
-                    <Link
+                    <ArrowCta
                       href={homeHref}
-                      className="btn-shimmer mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-3 text-[14px] font-bold text-white transition-transform duration-300 hover:scale-[1.02]"
-                    >
-                      {t("successCta")}
-                      <ArrowLeft className="size-4 rtl:-scale-x-100" aria-hidden="true" />
-                    </Link>
+                      label={t("successCta")}
+                      size="lg"
+                      className="mt-8"
+                    />
                   </motion.div>
                 ) : (
                   <motion.form
@@ -255,10 +272,10 @@ export function DemoRequestExperience() {
                     className="relative space-y-5"
                   >
                     <div className="space-y-1">
-                      <h2 className="text-xl font-extrabold tracking-tight text-foreground">
+                      <h2 className="text-xl font-bold tracking-tight text-cream">
                         {t("formTitle")}
                       </h2>
-                      <p className="text-[13px] leading-6 text-muted-foreground">
+                      <p className="text-[13px] leading-6 text-muted-cream">
                         {t("formSubtitle")}
                       </p>
                     </div>
@@ -291,7 +308,7 @@ export function DemoRequestExperience() {
                         onChange={(event) => handlePhoneChange(event.target.value)}
                         aria-invalid={errors.phone || undefined}
                         aria-describedby={errors.phone ? "demo-phone-error" : undefined}
-                        className="w-full bg-transparent text-[16px] font-semibold tracking-wide text-foreground outline-none placeholder:font-medium placeholder:text-muted-foreground/50"
+                        className="w-full bg-transparent text-[16px] font-semibold tracking-wide text-cream outline-none placeholder:font-medium placeholder:text-muted-cream/60"
                       />
                     </Field>
 
@@ -314,7 +331,7 @@ export function DemoRequestExperience() {
                         onChange={(event) => handleInstagramChange(event.target.value)}
                         aria-invalid={errors.instagram || undefined}
                         aria-describedby={errors.instagram ? "demo-instagram-error" : undefined}
-                        className="w-full bg-transparent text-[16px] font-semibold tracking-wide text-foreground outline-none placeholder:font-medium placeholder:text-muted-foreground/50"
+                        className="w-full bg-transparent text-[16px] font-semibold tracking-wide text-cream outline-none placeholder:font-medium placeholder:text-muted-cream/60"
                       />
                     </Field>
 
@@ -332,25 +349,22 @@ export function DemoRequestExperience() {
                       type="submit"
                       disabled={status === "submitting"}
                       whileTap={reduced ? undefined : { scale: 0.98 }}
-                      className="btn-shimmer flex w-full items-center justify-center gap-2.5 rounded-2xl bg-ink px-6 py-4 text-[15px] font-bold text-white transition-[background-color,transform] duration-300 hover:bg-ink-deep disabled:cursor-wait disabled:opacity-80"
+                      className="group flex w-full items-center justify-between gap-2 rounded-full bg-primary py-2 ps-6 pe-2 text-[15px] font-semibold text-black transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-wait disabled:opacity-80"
                     >
-                      {status === "submitting" ? (
-                        <>
+                      <span>{status === "submitting" ? t("submitting") : t("submit")}</span>
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-cream transition-transform duration-300 group-hover:scale-110">
+                        {status === "submitting" ? (
                           <span
                             aria-hidden="true"
-                            className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
+                            className="size-4 animate-spin rounded-full border-2 border-cream/30 border-t-cream"
                           />
-                          {t("submitting")}
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="size-4" aria-hidden="true" />
-                          {t("submit")}
-                        </>
-                      )}
+                        ) : (
+                          <SubmitArrow className="h-4 w-4 sm:h-5 sm:w-5" />
+                        )}
+                      </span>
                     </motion.button>
 
-                    <p className="flex items-center justify-center gap-1.5 text-center text-[12px] font-medium text-muted-foreground">
+                    <p className="flex items-center justify-center gap-1.5 text-center text-[12px] font-medium text-muted-cream">
                       <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
                       {t("privacyNote")}
                     </p>
@@ -398,19 +412,19 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="mb-2 flex items-center gap-1.5 text-[13px] font-bold text-foreground"
+        className="mb-2 flex items-center gap-1.5 text-[13px] font-bold text-cream"
       >
-        <Icon className="size-4 text-muted-foreground" aria-hidden="true" />
+        <Icon className="size-4 text-muted-cream" aria-hidden="true" />
         {label}
       </label>
       <div
         dir="ltr"
-        className={`flex items-center gap-0 rounded-2xl border bg-card/80 px-4 py-3.5 shadow-soft transition-[border-color,box-shadow] duration-300 focus-within:border-primary/50 focus-within:shadow-card ${
-          error ? "border-destructive/50" : "border-border"
+        className={`flex items-center gap-0 rounded-2xl border bg-black px-4 py-3.5 transition-colors duration-300 focus-within:border-gold ${
+          error ? "border-destructive/60" : "border-cream/15"
         }`}
       >
         {prefix ? (
-          <span className="me-0.5 select-none text-[14px] font-medium text-muted-foreground/60">
+          <span className="me-0.5 select-none text-[14px] font-medium text-muted-cream/60">
             {prefix}
           </span>
         ) : null}
@@ -439,16 +453,18 @@ function StepRow({
   localizeDigits: (value: string) => string
 }) {
   return (
-    <div className="glass flex items-start gap-4 rounded-2xl border border-white/60 p-4 text-start shadow-soft">
-      <span className="relative flex size-11 shrink-0 items-center justify-center rounded-xl bg-ink/[0.05]">
-        <Icon className="size-5 text-primary" aria-hidden="true" />
-        <span className="absolute -end-1 -top-1 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-ink text-[10px] font-bold text-white">
-          {localizeDigits(String(index + 1))}
-        </span>
+    <div className="flex items-start gap-4 rounded-2xl bg-panel p-4 text-start">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-black/40">
+        <Icon className="size-5 text-gold" aria-hidden="true" />
       </span>
-      <span className="flex flex-col gap-0.5">
-        <span className="text-[14px] font-bold text-foreground">{title}</span>
-        <span className="text-[13px] leading-6 text-muted-foreground">{description}</span>
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span className="flex items-baseline gap-2">
+          <span className="text-[11px] font-extrabold text-muted-cream">
+            {localizeDigits(String(index + 1).padStart(2, "0"))}
+          </span>
+          <span className="text-[14px] font-bold text-cream">{title}</span>
+        </span>
+        <span className="text-[13px] leading-6 text-cream/60">{description}</span>
       </span>
     </div>
   )
@@ -464,12 +480,12 @@ function SummaryRow({
   value: string
 }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-border bg-card/80 px-4 py-3 shadow-soft">
-      <span className="flex items-center gap-2 text-[13px] font-semibold text-muted-foreground">
+    <div className="flex items-center justify-between rounded-2xl border border-cream/10 bg-black/40 px-4 py-3">
+      <span className="flex items-center gap-2 text-[13px] font-semibold text-muted-cream">
         <Icon className="size-4" aria-hidden="true" />
         {label}
       </span>
-      <span dir="ltr" className="text-[14px] font-bold tracking-wide text-foreground">
+      <span dir="ltr" className="text-[14px] font-bold tracking-wide text-cream">
         {value}
       </span>
     </div>
