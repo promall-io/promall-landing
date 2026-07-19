@@ -404,6 +404,15 @@
       "A clean payment link for customers"
     ]
   },
+  "dashboard": {
+    "kicker": "THE PROMALL PANEL",
+    "heading": "Your whole shop, in one frame",
+    "description": "This isn't a screenshot — it's the panel itself. Orders, inventory, smart DMs and live sales reports, all in one place, on any device.",
+    "note": "It's a live demo — scroll it, switch tabs from the sidebar, and hit the green dot to go fullscreen",
+    "fullscreenEnter": "View the demo fullscreen",
+    "fullscreenExit": "Exit fullscreen",
+    "windowAlt": "Preview of the ProMall admin panel: shop dashboard with daily sales stats, weekly sales chart, smart Instagram DM, recent orders and inventory status"
+  },
   "showcase": {
     "kicker": "ProMall in action",
     "heading": "See what it can do",

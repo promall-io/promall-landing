@@ -3,6 +3,7 @@ import { FloatingNav } from "@/components/floating-nav";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { HeroSpotlight } from "@/components/hero-spotlight";
 import { MarqueeBand } from "@/components/marquee-band";
+import { DashboardShowcase } from "@/components/dashboard-showcase";
 import { ShowcaseSection } from "@/components/showcase-section";
 import { TwoTracksSection } from "@/components/two-tracks-section";
 import { InstagramAiSection } from "@/components/instagram-ai-section";
@@ -35,6 +36,7 @@ export default async function LandingPage({ params }: Props) {
       <main id="main">
         <HeroSpotlight />
         <MarqueeBand />
+        <DashboardShowcase />
         <ShowcaseSection />
         <TwoTracksSection />
         <InstagramAiSection />
