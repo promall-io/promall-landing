@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "پنل مدیریت آنلاین شاپ و فروشگاه‌ساز اینستاگرام با هوش مصنوعی؛ مدیریت محصول، سفارش، پرداخت و انبار، همه تو یه پنل.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#f6f7f9",
+    background_color: "#080d17",
+    theme_color: "#080d17",
     lang: "fa",
     dir: "rtl",
     icons: [

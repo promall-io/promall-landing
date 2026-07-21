@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react"
 import { useReducedMotion } from "framer-motion"
 
 const COLORS = [
-  "#e1e0cc",
+  "#f3f5f8",
   "#d9d0b8",
   "#c4b894",
-  "#cfcdb6",
-  "#8f8e80",
-  "#f3f2e6",
+  "#aebbd0",
+  "#8b99b3",
+  "#d7deea",
 ]
 
 const DURATION_MS = 2600

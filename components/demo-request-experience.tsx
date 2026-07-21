@@ -349,10 +349,10 @@ export function DemoRequestExperience() {
                       type="submit"
                       disabled={status === "submitting"}
                       whileTap={reduced ? undefined : { scale: 0.98 }}
-                      className="group flex w-full items-center justify-between gap-2 rounded-full bg-primary py-2 ps-6 pe-2 text-[15px] font-semibold text-black transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-wait disabled:opacity-80"
+                      className="group flex w-full items-center justify-between gap-2 rounded-full bg-primary py-2 ps-6 pe-2 text-[15px] font-semibold text-primary-foreground transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-wait disabled:opacity-80"
                     >
                       <span>{status === "submitting" ? t("submitting") : t("submit")}</span>
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-cream transition-transform duration-300 group-hover:scale-110">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#11192a] text-cream transition-transform duration-300 group-hover:scale-110">
                         {status === "submitting" ? (
                           <span
                             aria-hidden="true"
@@ -419,7 +419,7 @@ function Field({
       </label>
       <div
         dir="ltr"
-        className={`flex items-center gap-0 rounded-2xl border bg-black px-4 py-3.5 transition-colors duration-300 focus-within:border-gold ${
+        className={`flex items-center gap-0 rounded-2xl border bg-background px-4 py-3.5 transition-colors duration-300 focus-within:border-gold ${
           error ? "border-destructive/60" : "border-cream/15"
         }`}
       >

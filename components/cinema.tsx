@@ -249,7 +249,7 @@ export function ArrowCta({
       href={href}
       className={`group inline-flex items-center gap-2 rounded-full font-semibold transition-all duration-300 hover:gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
         isCream
-          ? "bg-primary text-black"
+          ? "bg-primary text-primary-foreground"
           : "border border-cream/25 bg-black/40 text-cream backdrop-blur-sm hover:border-cream/50"
       } ${
         size === "lg"
@@ -260,7 +260,7 @@ export function ArrowCta({
       <span>{label}</span>
       <span
         className={`flex items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 ${
-          isCream ? "bg-black text-cream" : "bg-cream text-black"
+          isCream ? "bg-[#11192a] text-cream" : "bg-cream text-[#11192a]"
         } ${size === "lg" ? "h-9 w-9 sm:h-10 sm:w-10" : "h-7 w-7 sm:h-8 sm:w-8"}`}
       >
         <ArrowGlyph className={size === "lg" ? "h-4 w-4 sm:h-5 sm:w-5" : "h-3.5 w-3.5 sm:h-4 sm:w-4"} />

@@ -121,7 +121,7 @@ function DemoShell({
       ref={shellRef}
       className={
         expanded
-          ? `flex h-full w-full flex-col bg-[#0a0a09] p-2.5 sm:p-4 md:p-6 ${overlay ? "fixed inset-0 z-[100]" : ""}`
+          ? `flex h-full w-full flex-col bg-[#0a1120] p-2.5 sm:p-4 md:p-6 ${overlay ? "fixed inset-0 z-[100]" : ""}`
           : "relative"
       }
     >

@@ -52,7 +52,7 @@ export default async function OpengraphImage({ params }: Props) {
               width: "20px",
               height: "20px",
               borderRadius: "9999px",
-              background: "#e7b850",
+              background: "#d9d0b8",
             }}
           />
           <div style={{ fontSize: "40px", fontWeight: 800 }}>{EN.brand}</div>
@@ -106,7 +106,7 @@ export default async function OpengraphImage({ params }: Props) {
               </div>
             ))}
           </div>
-          <div style={{ fontSize: "30px", fontWeight: 700, color: "#e7b850" }}>
+          <div style={{ fontSize: "30px", fontWeight: 700, color: "#d9d0b8" }}>
             promall.io
           </div>
         </div>

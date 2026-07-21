@@ -396,7 +396,7 @@ export function HeroSpotlight() {
     <section className="dark relative bg-background p-3 sm:p-4 md:p-6" style={{ colorScheme: "dark" }}>
       <div
         ref={panelRef}
-        className="relative flex h-[calc(100svh-24px)] flex-col overflow-hidden rounded-2xl bg-black text-cream sm:h-[calc(100svh-32px)] md:h-[calc(100svh-48px)] md:rounded-[2rem]"
+        className="relative flex h-[calc(100svh-24px)] flex-col overflow-hidden rounded-2xl bg-background text-cream sm:h-[calc(100svh-32px)] md:h-[calc(100svh-48px)] md:rounded-[2rem]"
       >
         <Image
           src={BASE_IMAGE}

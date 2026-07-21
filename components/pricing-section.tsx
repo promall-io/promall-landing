@@ -69,7 +69,7 @@ export function PricingSection() {
                         <span
                           className={`rounded-full px-2 py-px text-[10px] font-bold ${
                             selected
-                              ? "bg-black text-gold"
+                              ? "bg-[#11192a] text-gold"
                               : "bg-gold/15 text-gold"
                           }`}
                         >

@@ -82,7 +82,7 @@ export function FloatingNav() {
           className={`flex items-center gap-3 px-4 py-2 transition-all duration-500 md:gap-6 md:px-8 ${
             docked
               ? "glass rounded-full border border-cream/10 shadow-card"
-              : "rounded-b-2xl bg-black md:rounded-b-3xl"
+              : "rounded-b-2xl bg-background md:rounded-b-3xl"
           }`}
         >
           <a
