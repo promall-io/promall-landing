@@ -59,7 +59,11 @@ export async function POST(request: Request) {
       cache: "no-store",
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     });
-  } catch {}
+  } catch (error) {
+    console.error("[track] Upstream analytics forward failed", {
+      message: error instanceof Error ? error.message : String(error),
+    });
+  }
 
   return new NextResponse(null, { status: 204 });
 }
