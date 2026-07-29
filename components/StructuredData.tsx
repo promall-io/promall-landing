@@ -5,10 +5,20 @@ type FaqCategory = {
   items: Array<{ question: string; answer: string }>;
 };
 
+type FeatureTab = {
+  label: string;
+  caption: string;
+};
+
+const RIALS_PER_TOMAN = 10;
+const LOWEST_MONTHLY_TOMANS = 199_000;
+const HIGHEST_MONTHLY_TOMANS = 999_000;
+
 export async function StructuredData({ locale }: { locale: string }) {
   const tMeta = await getTranslations({ locale, namespace: 'metadata' });
   const tFaq = await getTranslations({ locale, namespace: 'sections.faq' });
   const tPricing = await getTranslations({ locale, namespace: 'sections.pricing' });
+  const tFeatures = await getTranslations({ locale, namespace: 'sections.features' });
 
   const isFa = locale === 'fa';
   const pageUrl = isFa ? SITE_URL : `${SITE_URL}/${locale}`;
@@ -17,8 +27,9 @@ export async function StructuredData({ locale }: { locale: string }) {
   const websiteId = `${SITE_URL}/#website`;
 
   const categories = tFaq.raw('categories') as FaqCategory[];
-  const freePlan = (tPricing.raw('plans') as Array<{ id: string; name: string }>).find(
-    (plan) => plan.id === 'starter',
+  const plans = tPricing.raw('plans') as Array<{ id: string; name: string }>;
+  const featureList = (tFeatures.raw('tabs') as FeatureTab[]).map(
+    (tab) => `${tab.label} — ${tab.caption}`,
   );
 
   const graph = [
@@ -36,6 +47,8 @@ export async function StructuredData({ locale }: { locale: string }) {
       },
       description: tMeta('description'),
       sameAs: ['https://instagram.com/promall.io'],
+      areaServed: { '@type': 'Country', name: 'IR' },
+      knowsLanguage: ['fa', 'en'],
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'customer support',
@@ -58,18 +71,30 @@ export async function StructuredData({ locale }: { locale: string }) {
       url: SITE_URL,
       description: tMeta('description'),
       applicationCategory: 'BusinessApplication',
+      applicationSubCategory: isFa ? 'مدیریت آنلاین شاپ' : 'Online shop management',
       operatingSystem: 'Web',
       inLanguage,
       publisher: { '@id': organizationId },
       image: `${SITE_URL}${isFa ? '/og.png' : '/og-en.png'}`,
+      featureList,
+      audience: {
+        '@type': 'BusinessAudience',
+        name: isFa ? 'فروشگاه‌های اینستاگرامی و آنلاین شاپ‌ها' : 'Instagram and online shops',
+        geographicArea: { '@type': 'Country', name: 'IR' },
+      },
       offers: {
-        '@type': 'Offer',
-        name: freePlan?.name,
-        price: '0',
+        '@type': 'AggregateOffer',
+        offerCount: plans.length,
         priceCurrency: 'IRR',
+        lowPrice: LOWEST_MONTHLY_TOMANS * RIALS_PER_TOMAN,
+        highPrice: HIGHEST_MONTHLY_TOMANS * RIALS_PER_TOMAN,
         availability: 'https://schema.org/InStock',
         url: `${pageUrl}#pricing`,
+        eligibleCustomerType: 'https://schema.org/Business',
       },
+      isAccessibleForFree: false,
+      termsOfService: `${SITE_URL}/terms`,
+      privacyPolicy: `${SITE_URL}/privacy`,
     },
     {
       '@type': 'FAQPage',

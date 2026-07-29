@@ -244,7 +244,7 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
           <span className="pa-sidebar-profile-avatar">ت</span>
           <div style={{ flex: 1, minWidth: 0, textAlign: "start" }}>
             <p className="pa-sidebar-profile-name">ترمه محمدی</p>
-            <p className="pa-sidebar-profile-meta">رئیس · مزون ترمه</p>
+            <p className="pa-sidebar-profile-meta">مالک · مزون ترمه</p>
           </div>
           <span className="pa-sidebar-logout">
             <PaIcon name="ArrowRightOnRectangleIcon" />

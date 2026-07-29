@@ -1,39 +1,66 @@
 {
   "metadata": {
-    "title": "ProMall — the AI agent that sells in your Instagram DMs",
-    "description": "ProMall answers your shop's Instagram DMs, places orders, and runs your whole store from one panel."
+    "title": "Online shop management with AI DM replies | ProMall",
+    "description": "ProMall is the panel that runs your online shop: AI answers your Instagram DMs, places orders and invoices, and keeps products, stock, customers and sales reports in one place.",
+    "keywords": [
+      "online shop management",
+      "Instagram shop panel",
+      "automatic Instagram DM replies",
+      "AI sales assistant",
+      "order and invoice management",
+      "inventory management",
+      "sales reports",
+      "ProMall"
+    ]
   },
   "announcement": {
-    "text": "New: automatic DM replies with live pricing and stock",
+    "text": "New: automatic comment and DM replies with live pricing and stock",
     "ariaLabel": "Announcement"
   },
   "nav": {
     "brand": "ProMall",
     "links": [
-      { "label": "Features", "href": "#features" },
-      { "label": "About", "href": "#about" },
-      { "label": "Pricing", "href": "#pricing" },
-      { "label": "FAQ", "href": "#faq" }
+      {
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "label": "Benefits",
+        "href": "#about"
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      }
     ],
-    "cta": "Get started",
+    "cta": "Free demo",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
     "skipToContent": "Skip to main content"
   },
   "sections": {
     "hero": {
-      "title": "The AI agent that turns DMs into orders",
-      "subtitle": "Customers ask, they get the right answer with real pricing and stock, and the order is placed right there.",
-      "primaryCta": "Get started",
+      "title": "Run your online shop without living in your DMs",
+      "subtitle": "AI answers your Instagram DMs and comments, orders and invoices are created for you, and products, stock, customers and sales reports all sit in one panel.",
+      "primaryCta": "Get a free demo",
       "playLabel": "Play the intro video",
       "dashboard": {
-        "alt": "Live preview of the ProMall shop dashboard"
+        "alt": "ProMall online shop management panel: sales dashboard, orders, products and stock"
       },
       "mockup": {
         "greeting": "Welcome back",
         "prompt": "What can I do for you today?",
         "placeholder": "Ask anything. Type @ for products and / for commands",
-        "tabs": ["Inbox", "Orders", "Products", "Reports"],
+        "tabs": [
+          "Inbox",
+          "Orders",
+          "Products",
+          "Reports"
+        ],
         "suggestions": [
           "Check stock for the cream coat in size 38",
           "Send the customer an invoice and add a tracking code"
@@ -41,63 +68,67 @@
       }
     },
     "intro": {
-      "eyebrow": "Intro",
-      "lead": "ProMall is an AI agent that turns a DM thread into an order — accurate answers, invoice closed in seconds.",
+      "eyebrow": "What ProMall is",
+      "lead": "ProMall is an online shop management panel with an AI assistant built in: the customer asks in the DM, gets the right answer, and the order is placed right there.",
       "paragraphs": [
-        "It connects to your products, stock and prices, keeps track of what the customer said across the whole conversation, and never quotes the wrong number.",
-        "From replying to placing orders and chasing shipments, it handles the repetitive work so you can focus on growing the shop."
+        "It is wired to your own products, prices and stock, so it never invents a number or quotes the wrong price.",
+        "Everything that piles up after the sale — invoices, stock, customers, tracking codes and sales reports — lives in that same panel."
       ],
-      "logosLabel": "Shops running on ProMall"
+      "logosLabel": "From fashion and beauty to home decor and accessories"
     },
     "instagram": {
-      "eyebrow": "Instagram DMs",
-      "titleLead": "It answers the DM",
-      "titleTrail": "and closes the sale",
-      "description": "This is exactly what happens in your inbox — from the customer's first question to the moment they pay.",
+      "eyebrow": "Smart DMs",
+      "titleLead": "Your Instagram DMs",
+      "titleTrail": "get answered and turned into orders",
+      "description": "This is exactly what happens in the DM — from the customer's first question to the moment the money lands, without you typing a word.",
       "chrome": {
         "contact": "Maryam Karimi",
-        "presence": "Active 2m ago",
+        "presence": "Active 2 minutes ago",
         "avatarInitial": "M",
         "autoReply": "ProMall is handling this conversation",
         "dayStamp": "9:41",
         "composer": "Message...",
         "seen": "Seen",
-        "liveLabel": "A real sales conversation, hands off"
+        "liveLabel": "A real sales conversation, hands-free"
       },
       "steps": [
         {
-          "title": "The customer asks in the DM",
-          "description": "Whatever hour the message lands, nobody is left waiting for a reply."
+          "title": "The customer messages at any hour",
+          "description": "Midnight or a public holiday, nobody waits for a reply."
         },
         {
-          "title": "It answers from your own stock",
-          "description": "Price and availability come straight from your panel, so the number is never wrong."
+          "title": "The answer comes from your own stock",
+          "description": "Prices and availability are read from your panel, so the numbers are never wrong."
         },
         {
           "title": "Invoice and payment link",
-          "description": "It builds the order and sends the payment link right there in the thread."
+          "description": "It creates the order and sends the payment link right inside the DM."
         },
         {
-          "title": "Order placed and tracked",
-          "description": "Once paid, the order is recorded and the customer gets the shipping update."
+          "title": "Order placed, tracking sent",
+          "description": "Once paid, the order lands in your panel and the customer gets a tracking code."
         }
       ],
       "script": [
         {
           "from": "customer",
           "step": 0,
-          "text": "Hi! Is the cream linen coat still in stock in size 38?"
+          "text": "Hi! Is the cream linen coat in size 38 available?"
         },
         {
           "from": "assistant",
           "step": 1,
-          "text": "Hi 🌿 Yes, it's in stock! Light fabric, long cut — 1,280,000 T. Want the cream, or should I send the black one too?"
+          "text": "Hi 🌿 Yes, it's in stock! Light fabric, long cut — 1,280,000 Toman. Want the cream one, or should I show you the black too?"
         },
-        { "from": "customer", "step": 1, "text": "Cream please, just one 🙏" },
+        {
+          "from": "customer",
+          "step": 1,
+          "text": "The cream one. One please 🙏"
+        },
         {
           "from": "assistant",
           "step": 2,
-          "text": "Done! One cream linen coat, size 38 — 1,280,000 T total. Sending the payment link right here 👇"
+          "text": "Done! One cream linen coat, size 38 — 1,280,000 Toman total. Here's your payment link 👇"
         },
         {
           "from": "assistant",
@@ -105,255 +136,351 @@
           "card": {
             "title": "Order #1087",
             "meta": "1 × Cream linen coat · Size 38",
-            "price": "1,280,000 T",
+            "price": "1,280,000 Toman",
             "action": "Pay online"
           }
         },
-        { "from": "customer", "step": 3, "text": "Paid ✅" },
+        {
+          "from": "customer",
+          "step": 3,
+          "text": "Paid ✅"
+        },
         {
           "from": "assistant",
           "step": 3,
-          "text": "All set 🎉 Your order is confirmed and ships tomorrow. I'll drop the tracking code here too 🌿"
+          "text": "All set 🎉 Your order is confirmed and ships tomorrow. I'll send the tracking code right here 🌿"
         },
-        { "from": "customer", "step": 3, "text": "Thank you, that was easy 😍" }
+        {
+          "from": "customer",
+          "step": 3,
+          "text": "Thanks, that was easy 😍"
+        }
       ]
     },
     "features": {
-      "eyebrow": "Core features",
-      "titleLead": "One panel",
-      "titleTrail": "to run your entire shop",
-      "description": "ProMall turns conversation into work — from the customer's first question to the parcel going out.",
+      "eyebrow": "Features",
+      "titleLead": "Online shop management",
+      "titleTrail": "from the DM to the warehouse, in one panel",
+      "description": "ProMall turns what the customer says into work done — from the first question to the moment the parcel ships.",
       "prevLabel": "Previous",
       "nextLabel": "Next",
       "tabs": [
         {
           "id": "chat",
-          "label": "Conversation",
-          "caption": "Customers ask, ProMall replies in your own voice.",
+          "label": "Smart DMs",
+          "caption": "The customer asks, ProMall answers in your tone and from your own stock.",
           "image": "/mockups/feature-ask.jpg",
-          "alt": "The ProMall DM panel: the AI answering a customer's question with price and stock"
+          "alt": "Automatic Instagram DM reply in the ProMall panel with live price and stock"
         },
         {
           "id": "product",
-          "label": "Product match",
-          "caption": "It recommends the right product with live price and stock from your own catalogue.",
+          "label": "Products & stock",
+          "caption": "Price, variants and availability in one place — plus alerts before you run out.",
           "image": "/mockups/feature-verify.jpg",
-          "alt": "The shop's product catalogue in ProMall with live price and stock"
+          "alt": "Online shop product and inventory management in the ProMall panel"
         },
         {
           "id": "order",
-          "label": "Order",
-          "caption": "It builds the basket, totals it up and places the order.",
+          "label": "Orders & invoices",
+          "caption": "It closes the cart, issues the invoice and sends the payment-gateway link.",
           "image": "/mockups/feature-execute.jpg",
-          "alt": "Building an order in the ProMall panel with the selected items and the total"
+          "alt": "Creating an order and invoice for an online shop in the ProMall panel"
         },
         {
           "id": "report",
-          "label": "Reports",
-          "caption": "See what sold, where customers dropped off, and what to fix.",
+          "label": "Sales reports",
+          "caption": "See what sold, who bought it and where you are losing money.",
           "image": "/mockups/feature-measure.jpg",
-          "alt": "The ProMall sales dashboard with revenue, orders, best sellers and the weekly trend"
+          "alt": "ProMall online shop sales report with revenue, orders and best sellers"
         }
       ]
     },
     "why": {
       "eyebrow": "Why ProMall",
-      "titleLead": "One agent",
-      "titleTrail": "for answers, orders and growth",
-      "description": "Shop knowledge, customer history and execution all live in one place.",
+      "titleLead": "Three things that",
+      "titleTrail": "change how your shop runs",
+      "description": "Your own stock, an official Instagram connection, and work that gets done inside the conversation.",
       "prevLabel": "Previous",
       "nextLabel": "Next",
       "cards": [
         {
-          "title": "Shared memory",
-          "description": "Products, stock and team knowledge in one place.",
+          "title": "Everything from your own stock",
+          "description": "Products, variants, prices and availability — one source of truth for every answer.",
           "illustration": "/illustrations/iso-layers.svg"
         },
         {
-          "title": "Answers you can trust",
-          "description": "Price and stock come from your panel, never from a guess.",
+          "title": "Official Instagram connection",
+          "description": "Connected through Meta's official API, not an unofficial bot.",
           "illustration": "/illustrations/iso-key.svg"
         },
         {
-          "title": "Instant action",
-          "description": "Orders, invoices and tracking, straight from the chat.",
+          "title": "Orders, right inside the DM",
+          "description": "Invoice and payment link without ever leaving the chat.",
           "illustration": "/illustrations/iso-dial.svg"
         }
       ]
     },
     "about": {
       "eyebrow": "What you get",
-      "titleLead": "Ask a question",
-      "titleTrail": "and get the work finished",
-      "description": "ProMall helps customers get the right answer, gets orders placed, and shows you where you are losing money.",
+      "titleLead": "One message comes in,",
+      "titleTrail": "you get the finished work",
+      "description": "Customers get the right answer, orders place themselves, and you can see where the money is leaking.",
       "cards": [
         {
-          "eyebrow": "Shared memory",
-          "title": "Products, stock and inventory value in one place",
-          "description": "Everything the customer needs is read from your own catalogue, so every answer starts out correct.",
-          "footnote": "One source of truth for every reply",
+          "eyebrow": "Stock & products",
+          "title": "Prices and availability always right",
+          "description": "Every answer is read from your own stock, so \"it was available, now it's gone\" stops happening.",
+          "footnote": "One source of truth for every answer",
           "image": "/mockups/about-context.jpg",
-          "alt": "The ProMall inventory page with per-product stock and total inventory value"
+          "alt": "Online shop inventory page in ProMall with per-product stock and total stock value"
         },
         {
-          "eyebrow": "Instant action",
-          "title": "Turn the conversation into an order and an invoice",
-          "description": "No bouncing between Instagram and your panel — the work moves forward right there in the DM.",
+          "eyebrow": "Orders & invoices",
+          "title": "Turn the conversation into a paid order",
+          "description": "No jumping between Instagram and the panel — the work moves forward inside the DM.",
           "footnote": "From message to payment, without switching",
           "image": "/mockups/about-action.jpg",
-          "alt": "The list of placed orders with customer name, amount and shipping status"
+          "alt": "Online shop order list with customer name, amount and shipping status in ProMall"
         },
         {
-          "eyebrow": "Full visibility",
+          "eyebrow": "Customers & reports",
           "title": "See who bought and who is drifting away",
-          "description": "Order count, total spend and last purchase for every customer, in one place.",
-          "footnote": "Decide on numbers, not hunches",
+          "description": "Order count, lifetime spend and last purchase for every customer, in one view.",
+          "footnote": "Decisions from numbers, not guesses",
           "image": "/mockups/about-trends.jpg",
-          "alt": "The ProMall customers panel with order count, total spend and last purchase"
+          "alt": "ProMall customer list with order count and total spend per customer"
         }
       ]
     },
     "integrations": {
       "eyebrow": "Integrations",
-      "titleLead": "It connects to every tool",
-      "titleTrail": "you already work with",
-      "description": "Instagram, payment gateways, shipping and your warehouse — ProMall sits in the middle and moves the work along.",
+      "titleLead": "It connects to everything",
+      "titleTrail": "your shop already runs on",
+      "description": "Instagram DMs and comments, payment gateways, SMS, your stock and tracking codes — ProMall sits in the middle and moves the work forward.",
       "hubLabel": "ProMall",
-      "nodes": ["Instagram", "Telegram", "Payments", "Post", "Tipax", "Warehouse", "Accounting"],
+      "nodes": [
+        "Instagram DMs",
+        "Comments & stories",
+        "Payment gateway",
+        "SMS",
+        "Post & Tipax",
+        "Stock & inventory",
+        "Sales reports"
+      ],
       "features": [
-        { "title": "Source connect", "description": "Products, stock and pricing from your own panel.", "icon": "plug" },
-        { "title": "Automatic execution", "description": "Orders and invoices with no manual step.", "icon": "bolt" },
-        { "title": "Approval gate", "description": "Sensitive actions wait for your approval.", "icon": "shield" },
-        { "title": "Audit and insights", "description": "Every change is logged and traceable.", "icon": "trend" }
+        {
+          "title": "Official Meta connection",
+          "description": "Your page connects through the official API, not a bot.",
+          "icon": "plug"
+        },
+        {
+          "title": "Runs on its own",
+          "description": "Invoices, payment links and orders with no manual work.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Sensitive actions need you",
+          "description": "Discounts and cancellations only happen with your approval.",
+          "icon": "shield"
+        },
+        {
+          "title": "Everything is logged",
+          "description": "Every change in the panel is recorded and traceable.",
+          "icon": "trend"
+        }
       ]
     },
     "changelog": {
       "eyebrow": "Changelog",
-      "titleLead": "New features,",
+      "titleLead": "New capabilities,",
       "titleTrail": "fixes and improvements",
-      "linkLabel": "See all updates",
+      "linkLabel": "All updates",
       "entries": [
         {
-          "title": "Saved answers",
-          "description": "Save any good ProMall reply so the same tone and accuracy come back next time.",
-          "date": "Mar 23, 2026"
+          "title": "Product carousel in DMs",
+          "description": "ProMall sends several suggested products as swipeable cards so the customer can pick right there.",
+          "date": "24 July 2026"
         },
         {
-          "title": "Price attribution v2",
-          "description": "Every price now shows which product and which warehouse it was read from.",
-          "date": "Mar 4, 2026"
+          "title": "Comment-to-DM automation",
+          "description": "Anyone who comments on your post automatically gets a DM — ready for giveaways and discount codes too.",
+          "date": "10 July 2026"
+        },
+        {
+          "title": "Multi-warehouse and stock reservation",
+          "description": "Stock is tracked per warehouse and items stay reserved until the customer pays.",
+          "date": "21 June 2026"
         },
         {
           "title": "Team roles and permissions",
-          "description": "Decide which part of the shop each teammate can reach.",
-          "date": "Feb 10, 2026"
-        },
-        {
-          "title": "Store actions",
-          "description": "ProMall can now create orders and change shipment status directly in the panel.",
-          "date": "Jan 20, 2026"
+          "description": "Decide exactly which part of the shop each teammate can reach.",
+          "date": "29 May 2026"
         }
       ]
     },
     "numbers": {
       "eyebrow": "Numbers",
-      "titleLead": "Every answer and every order",
-      "titleTrail": "adds up to growth",
+      "titleLead": "Numbers you feel",
+      "titleTrail": "in the first week",
       "cards": [
         {
-          "value": "3.4",
-          "unit": "×",
-          "description": "Faster replies across your shop's DMs.",
-          "tag": "Response time",
+          "value": "24",
+          "unit": "hours",
+          "description": "Your DMs get answered around the clock, even while you sleep.",
+          "tag": "Never closed",
           "image": "/landscape/hill-back.png"
         },
         {
-          "value": "4.8",
-          "unit": "M",
-          "description": "Messages, orders and invoices processed by ProMall.",
-          "tag": "Work handled",
+          "value": "10",
+          "unit": "minutes",
+          "description": "From connecting your page to the first automatic reply.",
+          "tag": "Setup",
           "image": "/landscape/hill-mid.png"
         }
       ],
       "stats": [
-        { "value": "−42%", "description": "Less time spent replying by hand.", "icon": "gauge" },
-        { "value": "+68%", "description": "Of DMs turn into orders.", "icon": "checkCircle" },
-        { "value": "12k+", "description": "Products and orders connected.", "icon": "spark" },
-        { "value": "8 hrs", "description": "Freed up per teammate every week.", "icon": "clock" }
+        {
+          "value": "10 days",
+          "description": "Try the whole panel for free, then decide.",
+          "icon": "gauge"
+        },
+        {
+          "value": "100%",
+          "description": "Prices and availability come straight from your stock, never a guess.",
+          "icon": "checkCircle"
+        },
+        {
+          "value": "No VPN",
+          "description": "Replies go out from our servers, even if your own connection drops.",
+          "icon": "spark"
+        },
+        {
+          "value": "10 seconds",
+          "description": "From the customer's message to an answer, usually under 10 seconds.",
+          "icon": "clock"
+        }
       ]
     },
     "pricing": {
       "eyebrow": "Pricing",
-      "titleLead": "Clear plans",
-      "titleTrail": "that scale with you",
-      "linkLabel": "Compare plans",
-      "yearlyLabel": "Yearly",
+      "titleLead": "Transparent pricing,",
+      "titleTrail": "with a 10-day free trial",
+      "linkLabel": "Compare all plans",
+      "yearlyLabel": "Yearly, 20% cheaper",
       "monthlyLabel": "Monthly",
       "plans": [
         {
           "id": "starter",
           "name": "Starter",
-          "price": "Free",
-          "yearlyPrice": "Free",
-          "period": "",
-          "description": "For small shops just getting started.",
-          "cta": "Get started",
-          "meta": ["Team members: up to 3", "AI replies / mo: 200", "Integrations: 2"],
+          "price": "199K",
+          "yearlyPrice": "159K",
+          "period": "Toman / month",
+          "description": "For small shops that are just getting going.",
+          "cta": "Get a free demo",
+          "meta": [
+            "100 products",
+            "300 orders / month",
+            "2 users"
+          ],
           "featured": false,
-          "hasToggle": false,
+          "hasToggle": true,
           "features": [
-            { "label": "Price and stock attribution", "included": true },
-            { "label": "Conversation history", "included": false },
-            { "label": "Telegram notifications", "included": false },
-            { "label": "API access", "included": false }
+            {
+              "label": "Orders, invoices and payment gateway",
+              "included": true
+            },
+            {
+              "label": "AI assistant for DMs",
+              "included": false
+            },
+            {
+              "label": "Custom domain and API",
+              "included": false
+            },
+            {
+              "label": "Real-time reports and phone support",
+              "included": false
+            }
           ]
         },
         {
-          "id": "growth",
-          "name": "Growth",
-          "price": "490K",
-          "yearlyPrice": "390K",
-          "period": "Toman / mo",
-          "description": "For shops with a busy inbox.",
-          "cta": "Get started",
-          "meta": ["Team members: unlimited", "AI replies / mo: 5,000", "Integrations: unlimited"],
+          "id": "professional",
+          "name": "Professional",
+          "price": "499K",
+          "yearlyPrice": "399K",
+          "period": "Toman / month",
+          "description": "For shops with a busy DM inbox.",
+          "cta": "Get a free demo",
+          "meta": [
+            "500 products",
+            "1,500 orders / month",
+            "500 AI conversations"
+          ],
           "featured": true,
           "hasToggle": true,
           "features": [
-            { "label": "Price and stock attribution", "included": true },
-            { "label": "Conversation history", "included": true },
-            { "label": "Telegram notifications", "included": true },
-            { "label": "API access", "included": false }
+            {
+              "label": "Orders, invoices and payment gateway",
+              "included": true
+            },
+            {
+              "label": "AI assistant for DMs",
+              "included": true
+            },
+            {
+              "label": "Custom domain and API",
+              "included": true
+            },
+            {
+              "label": "Real-time reports and phone support",
+              "included": false
+            }
           ]
         },
         {
-          "id": "pro",
-          "name": "Pro",
-          "price": "990K",
-          "yearlyPrice": "790K",
-          "period": "Toman / mo",
-          "description": "For brands with several branches and a support team.",
-          "cta": "Get started",
-          "meta": ["Team members: unlimited", "AI replies / mo: unlimited", "Integrations: unlimited"],
+          "id": "business",
+          "name": "Business",
+          "price": "999K",
+          "yearlyPrice": "799K",
+          "period": "Toman / month",
+          "description": "For brands with several pages and a support team.",
+          "cta": "Get a free demo",
+          "meta": [
+            "2,000 products",
+            "5,000 orders / month",
+            "3 Instagram accounts"
+          ],
           "featured": false,
           "hasToggle": true,
           "features": [
-            { "label": "Price and stock attribution", "included": true },
-            { "label": "Conversation history", "included": true },
-            { "label": "Telegram notifications", "included": true },
-            { "label": "API access", "included": true }
+            {
+              "label": "Orders, invoices and payment gateway",
+              "included": true
+            },
+            {
+              "label": "AI assistant for DMs",
+              "included": true
+            },
+            {
+              "label": "Custom domain and API",
+              "included": true
+            },
+            {
+              "label": "Real-time reports and phone support",
+              "included": true
+            }
           ]
         }
       ]
     },
     "faq": {
       "eyebrow": "FAQ",
-      "titleLead": "Answers to the questions",
-      "titleTrail": "we get asked most",
-      "description": "How ProMall works, what it connects to, and what changes for you day to day.",
+      "titleLead": "Answers to what",
+      "titleTrail": "people ask us most",
+      "description": "How ProMall runs your online shop, what it connects to, and what changes day to day.",
       "contact": {
-        "title": "Got questions?",
-        "description": "If your answer isn't here, tell our team. We reply fast.",
+        "title": "Still have a question?",
+        "description": "If the answer isn't here, tell our team. We reply fast.",
         "cta": "Email us"
       },
       "categories": [
@@ -363,19 +490,19 @@
           "items": [
             {
               "question": "What exactly does ProMall do?",
-              "answer": "It answers your shop's Instagram DMs, recommends the right product with real price and stock, and places the order right there."
+              "answer": "ProMall is an online shop management panel: AI answers your Instagram DMs and comments, suggests the right product with real pricing and stock, places the order and issues the invoice, and keeps your inventory, customers and sales reports in one place."
+            },
+            {
+              "question": "My shop is Instagram-only, no website. Is it still useful?",
+              "answer": "That is exactly what it was built for. You add your products to ProMall and sell through DMs; later you can connect a custom domain if you want one."
             },
             {
               "question": "How long does setup take?",
-              "answer": "Under ten minutes. Connect your Instagram page, import your products, and you're done."
+              "answer": "Under ten minutes. Connect your Instagram page, import your products, done — no code and no technical knowledge needed."
             },
             {
-              "question": "Do I need technical knowledge?",
-              "answer": "No. Everything happens in the panel and you never write any code."
-            },
-            {
-              "question": "Is there a free plan?",
-              "answer": "Yes. The Starter plan is free and enough to try ProMall out."
+              "question": "Can I try it first?",
+              "answer": "Yes. You get the whole panel free for 10 days. Plans start at 199,000 Toman per month, yearly billing is 20% cheaper, and the AI DM assistant is included from the Professional plan up."
             }
           ]
         },
@@ -384,75 +511,83 @@
           "label": "AI",
           "items": [
             {
-              "question": "How do I know the answers are right?",
-              "answer": "ProMall reads price and stock from your own panel, so it never invents a number."
+              "question": "How do I know the answers are correct?",
+              "answer": "ProMall reads prices and stock from your own panel, so it never makes a number up. If something is out of stock, it says so."
             },
             {
               "question": "Can I change its tone?",
-              "answer": "Yes. You set the tone, the boundaries, and the things it must never say."
+              "answer": "Yes. You set the tone, the limits, and the things it must never say — you can even tell it never to offer a discount."
             },
             {
               "question": "What if it doesn't know an answer?",
-              "answer": "Instead of guessing, it hands the conversation to you and lets you know."
+              "answer": "Instead of guessing, it hands the conversation over to you and lets you know."
+            },
+            {
+              "question": "Does it reply to post comments too?",
+              "answer": "Yes. You can have everyone who comments on a post get an automatic DM — the same flow powers giveaways and discount codes."
             }
           ]
         },
         {
           "id": "security",
-          "label": "Integrations & security",
+          "label": "Connection & security",
           "items": [
             {
+              "question": "Could my page get blocked?",
+              "answer": "No. The connection uses Meta's official API, not an unofficial bot — the same route Instagram provides for businesses to reply to customers."
+            },
+            {
+              "question": "Do I need a VPN for replies to work?",
+              "answer": "No. Replies are sent from ProMall's servers, so customers get an answer even if your phone is off or your connection drops."
+            },
+            {
+              "question": "Where is my customer data stored?",
+              "answer": "On servers inside Iran, and you decide which part of the panel each teammate can reach."
+            },
+            {
               "question": "What does it connect to?",
-              "answer": "Instagram, Telegram, Iranian payment gateways, Post and Tipax, and your own warehouse system."
-            },
-            {
-              "question": "Is customer data safe?",
-              "answer": "Data is stored on servers in Iran and you decide what each teammate can reach."
-            },
-            {
-              "question": "Can I block sensitive actions?",
-              "answer": "Yes. Things like discounts or cancelling an order can require your approval."
+              "answer": "Instagram DMs and comments, Iranian payment gateways, SMS, and your own stock — Post and Tipax tracking codes are recorded on the order and sent to the customer."
             }
           ]
         }
       ]
     },
     "testimonials": {
-      "eyebrow": "Testimonials",
+      "eyebrow": "Shop owners",
       "titleLead": "What shop owners",
       "titleTrail": "say about ProMall",
-      "description": "Shops that handed their busy inbox to ProMall and got their time back.",
+      "description": "Online shops that handed their busy DM inbox to ProMall and got their day back.",
       "prevLabel": "Previous",
       "nextLabel": "Next",
       "items": [
         {
-          "quote": "I used to spend every morning answering DMs. Now ProMall replies and I just approve the finished orders.",
+          "quote": "I used to spend every morning answering DMs. Now ProMall answers and I just approve the orders it prepared.",
           "name": "Sara Mohammadi",
-          "role": "Owner, Termeh",
+          "role": "Termeh fashion house, Tehran",
           "avatar": "/avatars/a1.jpg"
         },
         {
-          "quote": "Wrong prices were our biggest problem. Since it connected to the warehouse it hasn't quoted a wrong number once.",
+          "quote": "Wrong prices were our biggest pain. Since it's wired to our stock, it hasn't quoted a single wrong number.",
           "name": "Amir Rezaei",
-          "role": "Founder, DigiStyle",
+          "role": "Accessories shop, Karaj",
           "avatar": "/avatars/a2.jpg"
         },
         {
-          "quote": "We sell at night and on weekends now, because nobody is left waiting for a reply.",
+          "quote": "We sell at midnight and on weekends now, because nobody is left waiting for a reply.",
           "name": "Negin Kazemi",
-          "role": "Brand manager, Nila",
+          "role": "Nila beauty brand, Shiraz",
           "avatar": "/avatars/a3.jpg"
         },
         {
-          "quote": "I halved my support team and replies still got three times faster.",
+          "quote": "We had two people on DMs. Now one person checks orders and replies go out three times faster.",
           "name": "Pouya Ahmadi",
-          "role": "Head of ops, Raha",
+          "role": "Raha shoes, Mashhad",
           "avatar": "/avatars/a4.jpg"
         },
         {
-          "quote": "The reports showed exactly where customers dropped off. That one change lifted our sales.",
+          "quote": "The reports showed us exactly where customers dropped off. That one change lifted our sales.",
           "name": "Maryam Sadeghi",
-          "role": "Head of sales, Ava",
+          "role": "Ava apparel, Isfahan",
           "avatar": "/avatars/a5.jpg"
         }
       ]
@@ -460,37 +595,40 @@
     "blog": {
       "eyebrow": "Blog",
       "titleLead": "Ideas, experience",
-      "titleTrail": "and things that actually work",
-      "linkLabel": "Visit the blog",
+      "titleTrail": "and the things that actually work",
+      "linkLabel": "Go to the blog",
       "posts": [
         {
-          "title": "How fast DM replies double your sales",
-          "category": "Sales",
-          "date": "Feb 28, 2026",
+          "title": "Running an Instagram online shop without hiring a DM operator",
+          "category": "Guide",
+          "date": "23 July 2026",
           "image": "/blog/post-1.jpg",
           "href": "#"
         },
         {
-          "title": "What a wrong price in a DM really costs you",
-          "category": "Guide",
-          "date": "Feb 21, 2026",
+          "title": "What quoting the wrong price in a DM really costs you",
+          "category": "Sales",
+          "date": "11 July 2026",
           "image": "/blog/post-2.jpg",
           "href": "#"
         },
         {
-          "title": "From customer message to tracking code in under two minutes",
+          "title": "From the customer's message to a tracking code in under two minutes",
           "category": "Product",
-          "date": "Feb 14, 2026",
+          "date": "26 June 2026",
           "image": "/blog/post-3.jpg",
           "href": "#"
         }
       ]
     },
     "cta": {
-      "title": "Get started today",
-      "description": "ProMall is quick to set up — under ten minutes until your first DM gets answered automatically.",
-      "primaryCta": "Request a demo",
-      "badges": ["Secure payments", "Hosted in Iran"]
+      "title": "Hand your shop to ProMall",
+      "description": "See a free demo built with your own products. Setup takes under ten minutes and the first 10 days are free.",
+      "primaryCta": "Get a free demo",
+      "badges": [
+        "Official Instagram connection",
+        "Hosted in Iran"
+      ]
     }
   },
   "footer": {
@@ -499,69 +637,99 @@
       {
         "title": "Product",
         "links": [
-          { "label": "Homepage", "href": "/" },
-          { "label": "Features", "href": "#features" },
-          { "label": "Pricing", "href": "#pricing" },
-          { "label": "Get started", "href": "/demo" }
+          {
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "label": "Features",
+            "href": "#features"
+          },
+          {
+            "label": "Pricing",
+            "href": "#pricing"
+          },
+          {
+            "label": "Free demo",
+            "href": "/demo"
+          }
         ]
       },
       {
         "title": "Company",
         "links": [
-          { "label": "About", "href": "#about" },
-          { "label": "Careers", "href": "#" },
-          { "label": "Blog", "href": "#" }
+          {
+            "label": "About ProMall",
+            "href": "#about"
+          },
+          {
+            "label": "Careers",
+            "href": "#"
+          },
+          {
+            "label": "Blog",
+            "href": "#"
+          }
         ]
       },
       {
         "title": "Legal",
         "links": [
-          { "label": "Terms of use", "href": "/terms" },
-          { "label": "Privacy policy", "href": "/privacy" },
-          { "label": "Cookie policy", "href": "#" }
+          {
+            "label": "Terms of Service",
+            "href": "/terms"
+          },
+          {
+            "label": "Privacy Policy",
+            "href": "/privacy"
+          },
+          {
+            "label": "Cookies",
+            "href": "#"
+          }
         ]
       }
     ],
-    "copyright": "© ProMall, 2026. All rights reserved.",
-    "socialLabel": "Social links"
+    "copyright": "© ProMall 2026. All rights reserved.",
+    "socialLabel": "Social networks"
   },
   "demo": {
-    "metaTitle": "Request a Demo | ProMall",
-    "metaDescription": "Leave your number and your shop's Instagram page — we'll prepare a personalized ProMall demo built around your own shop.",
+    "metaTitle": "Free online shop management demo | ProMall",
+    "metaDescription": "Leave your number and your shop's Instagram handle, and we'll prepare a ProMall demo built around your own shop.",
     "backHome": "Back to home",
-    "badge": "Personalized demo, completely free",
+    "badge": "Personal demo, completely free",
     "titleLine1": "See ProMall live,",
     "titleLine2": "with your own shop",
-    "subtitle": "Just your phone number and your shop's Instagram page — the ProMall team prepares a demo tailored to your shop and gives you a call.",
+    "subtitle": "Just your number and your shop's Instagram handle. The ProMall team prepares a demo with your own products and calls you.",
     "formTitle": "Request a demo",
-    "formSubtitle": "Two fields, under half a minute.",
+    "formSubtitle": "Two fields, under thirty seconds.",
     "phoneLabel": "Mobile number",
     "phonePlaceholder": "0912 345 6789",
-    "phoneError": "Enter a valid Iranian mobile number, like 09123456789",
-    "instagramLabel": "Your shop's Instagram",
+    "phoneError": "Enter a valid Iranian mobile number, e.g. 09123456789",
+    "instagramLabel": "Your shop's Instagram handle",
     "instagramPlaceholder": "yourshop",
-    "instagramError": "Enter a valid Instagram handle — a full page link works too",
-    "submit": "Request a demo",
+    "instagramError": "Enter a valid handle — a full profile link works too",
+    "submit": "Get a free demo",
     "submitting": "Submitting…",
-    "submitError": "Something went wrong — please try again in a moment.",
-    "privacyNote": "Your number is only used to arrange the demo. That's it.",
+    "submitError": "Something went wrong. Please try again in a moment.",
+    "privacyNote": "Your number is only used to arrange the demo. Nothing else.",
     "successTitle": "Request received 🎉",
-    "successSubtitle": "We'll call you soon to walk through a demo built around your own shop.",
-    "successPhoneLabel": "Contact number",
-    "successHandleLabel": "Your shop page",
+    "successSubtitle": "The ProMall team will call you shortly to walk through a demo of your own shop.",
+    "successPhoneLabel": "Phone number",
+    "successHandleLabel": "Your shop's handle",
     "successCta": "Back to home",
     "steps": {
       "call": {
-        "title": "A quick call",
-        "description": "We'll ring you within one business day."
+        "title": "We call you fast",
+        "description": "Someone from ProMall calls you within one working day."
       },
       "demo": {
-        "title": "A demo of your shop",
-        "description": "A real panel styled around your own shop — not a canned video."
+        "title": "A demo made for your shop",
+        "description": "You see a real panel with your own shop's look, not a canned video."
       },
       "launch": {
-        "title": "Launch on the spot",
-        "description": "Love it? We set up your shop in the same session."
+        "title": "Go live in the same session",
+        "description": "Like what you see? We build your shop on that same call."
       }
     }
   },

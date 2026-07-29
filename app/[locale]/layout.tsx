@@ -50,6 +50,8 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: t('title'),
     description: t('description'),
+    keywords: t.raw('keywords') as string[],
+    applicationName: locale === 'fa' ? 'پرومال' : 'ProMall',
     alternates: {
       canonical: locale === 'fa' ? '/' : `/${locale}`,
       languages: Object.fromEntries(locales.map((item) => [item, item === 'fa' ? '/' : `/${item}`])),

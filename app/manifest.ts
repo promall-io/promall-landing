@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'ProMall — پرومال',
     short_name: 'ProMall',
     description:
-      'پرومال دایرکت‌های فروشگاهت رو خودش جواب می‌ده، سفارش ثبت می‌کنه و کل فروشگاه اینستاگرامیت رو یکجا می‌چرخونه.',
+      'پنل مدیریت آنلاین شاپ؛ دایرکت اینستاگرامت رو با هوش مصنوعی جواب می‌ده، سفارش و فاکتور ثبت می‌کنه و محصول، انبار و گزارش فروش رو یه‌جا نگه می‌داره.',
     start_url: '/',
     display: 'standalone',
     background_color: '#080d17',
