@@ -207,7 +207,7 @@ const PRODUCTS = [
 
 function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: PaTab) => void }) {
   return (
-    <aside className="pa-sidebar">
+    <div className="pa-sidebar">
       <span className="pa-sidebar-highlight" />
       <span className="pa-sidebar-overlay" />
       <div className="pa-sidebar-brand">
@@ -217,7 +217,7 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
           <p className="pa-sidebar-brand-sub">پنل فروشگاه</p>
         </div>
       </div>
-      <nav className="pa-sidebar-nav">
+      <div className="pa-sidebar-nav">
         {NAV_GROUPS.map((group) => (
           <div key={group.label} className="pa-sidebar-group">
             <p className="pa-sidebar-section-label">{group.label}</p>
@@ -241,7 +241,7 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
             </div>
           </div>
         ))}
-      </nav>
+      </div>
       <div className="pa-sidebar-footer">
         <div className="pa-sidebar-profile">
           <span className="pa-sidebar-profile-avatar">ت</span>
@@ -258,7 +258,7 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
           جمع کردن
         </span>
       </div>
-    </aside>
+    </div>
   )
 }
 
@@ -268,13 +268,7 @@ const TAB_TITLES: Record<PaTab, string | null> = {
   products: "محصولات",
 }
 
-function WindowHeader({
-  activeTab,
-  onToggleFullscreen,
-}: {
-  activeTab: PaTab
-  onToggleFullscreen?: () => void
-}) {
+function WindowHeader({ activeTab }: { activeTab: PaTab }) {
   const title = TAB_TITLES[activeTab]
   return (
     <div className="pa-header">
@@ -307,14 +301,6 @@ function WindowHeader({
         <span className="pa-header-icon-btn">
           <PaIcon name="MoonIcon" />
         </span>
-        <button
-          type="button"
-          onClick={onToggleFullscreen}
-          aria-label="تمام‌صفحه"
-          className="pa-header-icon-btn"
-        >
-          <PaIcon name="ArrowsPointingOutIcon" />
-        </button>
       </div>
     </div>
   )
@@ -322,7 +308,7 @@ function WindowHeader({
 
 function HeroBanner() {
   return (
-    <section className="pm-hero">
+    <div className="pm-hero">
       <span className="pm-hero__glow" />
       <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 28 }}>
         <div style={{ minWidth: 0, flex: 1 }}>
@@ -330,9 +316,9 @@ function HeroBanner() {
             <PaIcon name="SparklesIcon" variant="bold" />
             خوش آمدی، ترمه
           </span>
-          <h3 className="pm-hero__title" style={{ color: "#fff" }}>
+          <p className="pm-hero__title" style={{ color: "#fff" }}>
             بیا کارهای امروزت رو تموم کنیم 🌿
-          </h3>
+          </p>
           <p className="pm-hero__sub">{"یکشنبه، ۲۸ تیر ۱۴۰۵‏ · ‏۹ مورد نیاز به رسیدگی داره"}</p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
@@ -381,7 +367,7 @@ function HeroBanner() {
           <PaIcon name="ChevronLeftIcon" className="pm-hero__tile-chev" />
         </span>
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -551,7 +537,7 @@ function OrdersAndLowStock() {
 
 function DashboardPane() {
   return (
-    <div className="pa-pane">
+    <div className="pa-pane" data-lenis-prevent>
       <HeroBanner />
       <KpiRow />
       <SalesAndTopProducts />
@@ -562,7 +548,7 @@ function DashboardPane() {
 
 function OrdersPane() {
   return (
-    <div className="pa-pane">
+    <div className="pa-pane" data-lenis-prevent>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
           <div className="pm-dash-card__title" style={{ fontSize: 20 }}>سفارشات</div>
@@ -606,7 +592,7 @@ function OrdersPane() {
 
 function ProductsPane() {
   return (
-    <div className="pa-pane">
+    <div className="pa-pane" data-lenis-prevent>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
           <div className="pm-dash-card__title" style={{ fontSize: 20 }}>محصولات</div>
@@ -658,13 +644,7 @@ function ProductsPane() {
   )
 }
 
-export function AppReplica({
-  fill = false,
-  onToggleFullscreen,
-}: {
-  fill?: boolean
-  onToggleFullscreen?: () => void
-}) {
+export function AppReplica({ label }: { label: string }) {
   const hostRef = useRef<HTMLDivElement>(null)
   const [layout, setLayout] = useState({ scale: 0, x: 0, y: 0 })
   const [activeTab, setActiveTab] = useState<PaTab>("dashboard")
@@ -690,12 +670,9 @@ export function AppReplica({
   return (
     <div
       ref={hostRef}
-      aria-label="پیش‌نمایش زنده پنل مدیریت پرومال"
-      style={
-        fill
-          ? { position: "relative", width: "100%", height: "100%", overflow: "hidden" }
-          : { position: "relative", width: "100%", aspectRatio: `${NATIVE_W} / ${NATIVE_H}`, overflow: "hidden" }
-      }
+      role="group"
+      aria-label={label}
+      style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}
     >
       <div
         className="pmapp"
@@ -707,19 +684,19 @@ export function AppReplica({
       >
         <Sidebar activeTab={activeTab} onSelect={setActiveTab} />
 
-        <main className="pa-window">
+        <div className="pa-window">
           <span className="pa-window-border" />
           <span className="pa-window-highlight" />
           <span className="pa-window-glow" />
           <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0, position: "relative", zIndex: 10, height: "100%" }}>
-            <WindowHeader activeTab={activeTab} onToggleFullscreen={onToggleFullscreen} />
+            <WindowHeader activeTab={activeTab} />
             <div className="pa-content">
               {activeTab === "dashboard" ? <DashboardPane key="dashboard" /> : null}
               {activeTab === "orders" ? <OrdersPane key="orders" /> : null}
               {activeTab === "products" ? <ProductsPane key="products" /> : null}
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   )

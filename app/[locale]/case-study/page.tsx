@@ -7,7 +7,7 @@ export const metadata = {
 
 const CSS = `
 .cs{
-  --font-fa: var(--font-estedaad), "SF Pro Display", system-ui, sans-serif;
+  --font-fa: var(--font-estedad), "SF Pro Display", system-ui, sans-serif;
   --font-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   --ink:#f3f5f8; --ink-deep:#f8fafc; --cream:#f3f5f8; --slate:#8b99b3; --slate-soft:#6f7d96; --sky:#aebbd0;
   --gold:#d9d0b8; --gold-deep:#c4b894; --gold-tint:rgba(217,208,184,0.1);

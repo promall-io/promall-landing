@@ -1,53 +1,52 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { FloatingNav } from "@/components/floating-nav";
-import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
-import { HeroSpotlight } from "@/components/hero-spotlight";
-import { MarqueeBand } from "@/components/marquee-band";
-import { DashboardShowcase } from "@/components/dashboard-showcase";
-import { ShowcaseSection } from "@/components/showcase-section";
-import { TwoTracksSection } from "@/components/two-tracks-section";
-import { InstagramAiSection } from "@/components/instagram-ai-section";
-import { FeaturesGrid } from "@/components/features-grid";
-import { StatsSection } from "@/components/stats-section";
-import { HowItWorksSection } from "@/components/how-it-works-section";
-import { PricingSection } from "@/components/pricing-section";
-import { FAQSection } from "@/components/faq-section";
-import { CTASection } from "@/components/cta-section";
-import { FooterSection } from "@/components/footer-section";
+import { setRequestLocale } from 'next-intl/server';
+import { locales } from '@/i18n/config';
+import { Nav } from '@/components/Nav';
+import { StructuredData } from '@/components/StructuredData';
+import { Footer } from '@/components/Footer';
+import { Hero } from '@/components/sections/Hero';
+import { Intro } from '@/components/sections/Intro';
+import { InstagramDemo } from '@/components/sections/InstagramDemo';
+import { Features } from '@/components/sections/Features';
+import { Why } from '@/components/sections/Why';
+import { About } from '@/components/sections/About';
+import { Integrations } from '@/components/sections/Integrations';
+import { Changelog } from '@/components/sections/Changelog';
+import { Numbers } from '@/components/sections/Numbers';
+import { Pricing } from '@/components/sections/Pricing';
+import { Faq } from '@/components/sections/Faq';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { Blog } from '@/components/sections/Blog';
+import { Cta } from '@/components/sections/Cta';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-export default async function LandingPage({ params }: Props) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-
   setRequestLocale(locale);
 
-  const t = await getTranslations("header");
-
   return (
-    <div className="min-h-screen bg-background">
-      <a href="#main" className="skip-link">
-        {t("skipToContent")}
-      </a>
-      <SmoothScrollProvider />
-      <FloatingNav />
+    <>
+      <StructuredData locale={locale} />
+      <Nav />
       <main id="main">
-        <HeroSpotlight />
-        <MarqueeBand />
-        <DashboardShowcase />
-        <ShowcaseSection />
-        <TwoTracksSection />
-        <InstagramAiSection />
-        <FeaturesGrid />
-        <StatsSection />
-        <HowItWorksSection />
-        <PricingSection />
-        <FAQSection />
-        <CTASection />
+        <Hero />
+        <Intro />
+        <InstagramDemo />
+        <Features />
+        <Why />
+        <About />
+        <Integrations />
+        <Changelog />
+        <Numbers />
+        <Pricing />
+        <Faq />
+        <Testimonials />
+        <Blog />
+        <Cta />
       </main>
-      <FooterSection />
-    </div>
+      <Footer />
+    </>
   );
 }

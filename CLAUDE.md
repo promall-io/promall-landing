@@ -1,30 +1,43 @@
 # CLAUDE.md — promall-landing (Next.js 14 + React 19, Vercel)
 
-Public marketing/landing site — own git repo (`promall-landing.git`), **not** the dashboard (that's `promall-ui`). App Router, next-intl (fa+en, RTL), Tailwind v4, animation-heavy (framer-motion + gsap + lenis). No backend/DB — server work lives in two `app/api` route handlers.
+Public marketing site — own git repo (`promall-landing.git`), **not** the dashboard (that's `promall-ui`). App Router, next-intl (fa+en, RTL), Tailwind v4, framer-motion + lenis. No DB — server work lives in two `app/api` route handlers that proxy to `promall-api`.
 
 - DON'T comment — self-documenting via clear naming. Generated code ships to prod: type-safe, lint-clean.
-- No fixed-port mandate (landing doesn't cross-wire like api/ui): `npm run dev` (Next default `:3000`). Rarely run locally in the umbrella workflow.
+- No fixed-port mandate: `npm run dev` (Next default `:3000`); this codebase is usually run on `-p 4531`.
 
 ## Commands & Quality
 
-- `npm run dev` | `build` | `start` | `lint` | `lint:fix` (`next lint`). No test script.
-- **`.npmrc` has `legacy-peer-deps=true` — REQUIRED**; `npm install` fails without it (React 19 peer ranges).
-- **Build gates on lint + types**: `next.config.mjs` sets `eslint.ignoreDuringBuilds:false` and `typescript.ignoreBuildErrors:false` — a lint warning or TS error **fails `next build`** (and the Vercel deploy). Run `lint` before pushing.
+- `npm run dev` | `build` | `start` | `lint` | `lint:fix`. No test script.
+- **`.npmrc` has `legacy-peer-deps=true` — REQUIRED** (React 19 peer ranges); `npm install` fails without it.
+- **Build gates on lint + types**: `next.config.mjs` sets `eslint.ignoreDuringBuilds:false` and `typescript.ignoreBuildErrors:false` — a lint warning or TS error **fails `next build`** and the Vercel deploy.
 
 ## Deploy
 
-Vercel, **auto-deploys on push to `main`**. No `vercel.json`; config is `next.config.mjs`. Security headers set there (HSTS preload, `X-Frame-Options: DENY`, nosniff, referrer-policy); images restricted to avif/webp with one remote host (`trustseal.enamad.ir` — Iranian eNamad trust seal). `poweredByHeader:false`.
+Vercel, **auto-deploys on push to `main`**. No `vercel.json`. Security headers in `next.config.mjs`; images restricted to avif/webp with one remote host (`trustseal.enamad.ir`).
+
+## Backend wiring (do not break)
+
+Every conversion path ends at `promall-api`. Both route handlers read `PROMALL_API_URL` (default `https://api.promall.io`) via `lib/api-config.ts` — never `process.env` inline.
+
+- `app/api/demo-request` → `POST {API}/demo-requests` (public, throttled 5/60s). Normalizes with `lib/demo-form.ts` (Persian/Arabic digits, `+98`/`0098` prefixes, `@handle` and full IG URLs) and returns 422 without calling upstream when either field is invalid. `source` is `landing` / `landing-en`.
+- `app/api/track` → `POST {API}/web-analytics/events`, fired by `components/PageviewTracker.tsx` (production only, `sendBeacon` with a `fetch` fallback). Forwards client IP/UA/country headers only when `WEB_ANALYTICS_PROXY_SECRET` is set. Always answers 204 — analytics must never surface an error to a visitor.
+- All primary CTAs (nav, hero, pricing plans, closing CTA, footer) point at `/demo` via `localeHref(locale, DEMO_PATH)` from `lib/routes.ts`. **Use that helper for any `/`-prefixed link** — `localePrefix: 'as-needed'` means a bare `/demo` sends `en` visitors to the fa page.
 
 ## i18n & Routing
 
-- `i18n/config.ts` — `locales = ['en','fa']`, `defaultLocale = 'fa'`, `localeDirection` (fa = RTL). **Only `fa` is in `indexedLocales`** (SEO: en is not indexed).
-- `middleware.ts` — next-intl, `localePrefix: 'as-needed'` (no `/fa` prefix on default), `localeDetection: false`. Matcher excludes `api`, `_next`, `_vercel`, files.
-- Messages in `messages/{en,fa}.json`; request config `i18n/request.ts`.
-- Pages under `app/[locale]/` (`case-study`, `demo`, `privacy`, `terms`). Server routes: `app/api/demo-request` (demo form intake → main API via `lib/api-config.ts` + `lib/demo-form.ts`), `app/api/track` (analytics).
-- `lib/`: `api-config.ts`, `demo-form.ts`, `site.ts` (site metadata/constants), `smooth-scroll.ts` (lenis wiring).
+- `i18n/config.ts` — `locales = ['en','fa']`, `defaultLocale = 'fa'`, fa = RTL. **Only `fa` is in `indexedLocales`.**
+- `middleware.ts` — next-intl, `localePrefix: 'as-needed'`, `localeDetection: false`; matcher excludes `api`, `_next`, `_vercel`, files.
+- **`app/[locale]/layout.tsx` passes `messages={{}}` to `NextIntlClientProvider`** — client components CANNOT call `useTranslations()`. Resolve strings in the server component and pass them down as props (see `Features` → `FeaturesTabs`, `InstagramDemo` → `InstagramThread`).
+- Pages: `/` , `/demo`, `/privacy`, `/terms`, `/case-study` (all but `/` are `noindex`, so the sitemap lists only `/`).
 
-## Styling & Copy
+## Styling
 
-- Tailwind **v4** (`@import "tailwindcss"` in `app/globals.css`; PostCSS via `@tailwindcss/postcss`) — no `tailwind.config.js`. Theme = CSS variables in `:root`, a cinematic **dark** palette matching the dashboard's app theme: ink-blue surfaces (`--background:#080d17`, `--card:#18233a`), `--gold:#d9d0b8`, cream/sky text tokens. Style via these tokens — flat, no gradient/glossy "AI-template" look.
+- Tailwind **v4** (`@import "tailwindcss"`), no `tailwind.config.js`. Theme = CSS variables in `app/globals.css`: `--pw-*` (Powder-derived layout/palette: ink-blue surfaces, `--pw-gold`, cream/sky text), plus `--pw-success` / `--pw-danger`.
+- `pw-*` utility classes MUST live in `@layer components` or Tailwind's cascade wins over them.
+- Flat, token-driven surfaces — no gradient/glossy "AI-template" look. **Sanctioned exception:** the `--ig-*` tokens (Instagram gradient bubble + story ring) are real Instagram values and are scoped to the DM mockup only.
+- Scroll reveals are CSS-driven (`.pw-reveal` + `IntersectionObserver` in `components/Reveal.tsx`), not framer-motion.
+
+## Copy
+
 - **Persian brand is always «پرومال»** — never Latin "ProMall" in fa copy (domains/emails stay Latin).
-- **fa copy is intentionally colloquial** — spoken/street tone. Do NOT formalize it. Exception: legal pages (`privacy`, `terms`) stay formal.
+- **fa copy is intentionally colloquial** — spoken/street tone. Do NOT formalize it. Exception: `privacy` and `terms` stay formal.
