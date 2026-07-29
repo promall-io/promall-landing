@@ -432,6 +432,22 @@
       0 0 5px 1.5px rgba(255, 255, 255, 0.7),
       0 0 12px 4px rgba(255, 255, 255, 0.22);
   }
+
+  .pw-pricing-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 24px;
+  }
+}
+
+/* column count follows the plan count the API returns, so adding a tier in
+   billing does not need a landing change */
+@media (min-width: 811px) {
+  .pw-pricing-grid {
+    grid-template-columns: repeat(var(--pw-pricing-columns, 3), minmax(0, 1fr));
+    gap: 0;
+  }
 }
 
 /* the sky sits deeper than the parallax hills, so it lags the scroll instead of

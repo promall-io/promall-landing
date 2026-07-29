@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { fetchPlanCatalog, monthlyRialRange } from '@/lib/plans';
 import { SITE_URL } from '@/lib/site';
 
 type FaqCategory = {
@@ -10,14 +11,9 @@ type FeatureTab = {
   caption: string;
 };
 
-const RIALS_PER_TOMAN = 10;
-const LOWEST_MONTHLY_TOMANS = 199_000;
-const HIGHEST_MONTHLY_TOMANS = 999_000;
-
 export async function StructuredData({ locale }: { locale: string }) {
   const tMeta = await getTranslations({ locale, namespace: 'metadata' });
   const tFaq = await getTranslations({ locale, namespace: 'sections.faq' });
-  const tPricing = await getTranslations({ locale, namespace: 'sections.pricing' });
   const tFeatures = await getTranslations({ locale, namespace: 'sections.features' });
 
   const isFa = locale === 'fa';
@@ -27,7 +23,8 @@ export async function StructuredData({ locale }: { locale: string }) {
   const websiteId = `${SITE_URL}/#website`;
 
   const categories = tFaq.raw('categories') as FaqCategory[];
-  const plans = tPricing.raw('plans') as Array<{ id: string; name: string }>;
+  const catalog = await fetchPlanCatalog();
+  const priceRange = monthlyRialRange(catalog);
   const featureList = (tFeatures.raw('tabs') as FeatureTab[]).map(
     (tab) => `${tab.label} — ${tab.caption}`,
   );
@@ -84,10 +81,9 @@ export async function StructuredData({ locale }: { locale: string }) {
       },
       offers: {
         '@type': 'AggregateOffer',
-        offerCount: plans.length,
+        offerCount: catalog.plans.length,
         priceCurrency: 'IRR',
-        lowPrice: LOWEST_MONTHLY_TOMANS * RIALS_PER_TOMAN,
-        highPrice: HIGHEST_MONTHLY_TOMANS * RIALS_PER_TOMAN,
+        ...(priceRange ? { lowPrice: priceRange.low, highPrice: priceRange.high } : {}),
         availability: 'https://schema.org/InStock',
         url: `${pageUrl}#pricing`,
         eligibleCustomerType: 'https://schema.org/Business',

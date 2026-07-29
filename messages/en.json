@@ -364,114 +364,35 @@
     "pricing": {
       "eyebrow": "Pricing",
       "titleLead": "Transparent pricing,",
-      "titleTrail": "with a 10-day free trial",
+      "titleTrail": "with a {days}-day free trial",
       "linkLabel": "Compare all plans",
-      "yearlyLabel": "Yearly, 20% cheaper",
+      "yearlyLabel": "Yearly, {percent}% cheaper",
       "monthlyLabel": "Monthly",
-      "plans": [
-        {
-          "id": "starter",
-          "name": "Starter",
-          "price": "199K",
-          "yearlyPrice": "159K",
-          "period": "Toman / month",
-          "description": "For small shops that are just getting going.",
-          "cta": "Get a free demo",
-          "meta": [
-            "100 products",
-            "300 orders / month",
-            "2 users"
-          ],
-          "featured": false,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "Orders, invoices and payment gateway",
-              "included": true
-            },
-            {
-              "label": "AI assistant for DMs",
-              "included": false
-            },
-            {
-              "label": "Custom domain and API",
-              "included": false
-            },
-            {
-              "label": "Real-time reports and phone support",
-              "included": false
-            }
-          ]
-        },
-        {
-          "id": "professional",
-          "name": "Professional",
-          "price": "499K",
-          "yearlyPrice": "399K",
-          "period": "Toman / month",
-          "description": "For shops with a busy DM inbox.",
-          "cta": "Get a free demo",
-          "meta": [
-            "500 products",
-            "1,500 orders / month",
-            "500 AI conversations"
-          ],
-          "featured": true,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "Orders, invoices and payment gateway",
-              "included": true
-            },
-            {
-              "label": "AI assistant for DMs",
-              "included": true
-            },
-            {
-              "label": "Custom domain and API",
-              "included": true
-            },
-            {
-              "label": "Real-time reports and phone support",
-              "included": false
-            }
-          ]
-        },
-        {
-          "id": "business",
-          "name": "Business",
-          "price": "999K",
-          "yearlyPrice": "799K",
-          "period": "Toman / month",
-          "description": "For brands with several pages and a support team.",
-          "cta": "Get a free demo",
-          "meta": [
-            "2,000 products",
-            "5,000 orders / month",
-            "3 Instagram accounts"
-          ],
-          "featured": false,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "Orders, invoices and payment gateway",
-              "included": true
-            },
-            {
-              "label": "AI assistant for DMs",
-              "included": true
-            },
-            {
-              "label": "Custom domain and API",
-              "included": true
-            },
-            {
-              "label": "Real-time reports and phone support",
-              "included": true
-            }
-          ]
-        }
-      ]
+      "period": "Toman / month",
+      "priceThousands": "{value}K",
+      "customPrice": "Custom pricing",
+      "cta": "Get a free demo",
+      "unlimited": "Unlimited",
+      "metaProducts": "{value} products",
+      "metaOrders": "{value} orders / month",
+      "metaUsers": "{value} users",
+      "descriptions": {
+        "STARTER": "For small shops that are just getting going.",
+        "PROFESSIONAL": "For shops with busy DMs.",
+        "BUSINESS": "For brands running several pages and a support team.",
+        "ENTERPRISE": "For large brands that need everything tailored."
+      },
+      "featureRows": {
+        "orders": "Orders, invoices and payment gateway",
+        "instagramAi": "AI assistant for DMs",
+        "domainApi": "Custom domain and API",
+        "realtimeSupport": "Real-time reports and phone support"
+      },
+      "enterprise": {
+        "unlimitedLabel": "Unlimited products, orders and users",
+        "slaLabel": "{value}% SLA",
+        "cta": "Contact sales"
+      }
     },
     "faq": {
       "eyebrow": "FAQ",

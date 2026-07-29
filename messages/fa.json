@@ -366,114 +366,35 @@
     "pricing": {
       "eyebrow": "تعرفه‌ها",
       "titleLead": "تعرفه‌ی شفاف،",
-      "titleTrail": "با ۱۰ روز تست رایگان",
+      "titleTrail": "با {days} روز تست رایگان",
       "linkLabel": "مقایسه‌ی کامل پلن‌ها",
-      "yearlyLabel": "سالانه، ۲۰٪ ارزون‌تر",
+      "yearlyLabel": "سالانه، {percent}٪ ارزون‌تر",
       "monthlyLabel": "ماهانه",
-      "plans": [
-        {
-          "id": "starter",
-          "name": "استارتر",
-          "price": "۱۹۹ هزار",
-          "yearlyPrice": "۱۵۹ هزار",
-          "period": "تومان / ماه",
-          "description": "برای شاپ‌های کوچیکی که تازه راه افتادن.",
-          "cta": "دمو رایگان بگیر",
-          "meta": [
-            "۱۰۰ محصول",
-            "۳۰۰ سفارش در ماه",
-            "۲ کاربر"
-          ],
-          "featured": false,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "سفارش، فاکتور و درگاه پرداخت",
-              "included": true
-            },
-            {
-              "label": "دستیار هوش مصنوعی دایرکت",
-              "included": false
-            },
-            {
-              "label": "دامنه اختصاصی و API",
-              "included": false
-            },
-            {
-              "label": "گزارش لحظه‌ای و پشتیبانی تلفنی",
-              "included": false
-            }
-          ]
-        },
-        {
-          "id": "professional",
-          "name": "حرفه‌ای",
-          "price": "۴۹۹ هزار",
-          "yearlyPrice": "۳۹۹ هزار",
-          "period": "تومان / ماه",
-          "description": "برای شاپ‌هایی که دایرکتشون شلوغه.",
-          "cta": "دمو رایگان بگیر",
-          "meta": [
-            "۵۰۰ محصول",
-            "۱۵۰۰ سفارش در ماه",
-            "۵۰۰ دایرکت هوشمند"
-          ],
-          "featured": true,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "سفارش، فاکتور و درگاه پرداخت",
-              "included": true
-            },
-            {
-              "label": "دستیار هوش مصنوعی دایرکت",
-              "included": true
-            },
-            {
-              "label": "دامنه اختصاصی و API",
-              "included": true
-            },
-            {
-              "label": "گزارش لحظه‌ای و پشتیبانی تلفنی",
-              "included": false
-            }
-          ]
-        },
-        {
-          "id": "business",
-          "name": "کسب‌وکار",
-          "price": "۹۹۹ هزار",
-          "yearlyPrice": "۷۹۹ هزار",
-          "period": "تومان / ماه",
-          "description": "برای برندهایی که چند پیج و تیم پشتیبانی دارن.",
-          "cta": "دمو رایگان بگیر",
-          "meta": [
-            "۲۰۰۰ محصول",
-            "۵۰۰۰ سفارش در ماه",
-            "۳ پیج اینستاگرام"
-          ],
-          "featured": false,
-          "hasToggle": true,
-          "features": [
-            {
-              "label": "سفارش، فاکتور و درگاه پرداخت",
-              "included": true
-            },
-            {
-              "label": "دستیار هوش مصنوعی دایرکت",
-              "included": true
-            },
-            {
-              "label": "دامنه اختصاصی و API",
-              "included": true
-            },
-            {
-              "label": "گزارش لحظه‌ای و پشتیبانی تلفنی",
-              "included": true
-            }
-          ]
-        }
-      ]
+      "period": "تومان / ماه",
+      "priceThousands": "{value} هزار",
+      "customPrice": "قیمت سفارشی",
+      "cta": "دمو رایگان بگیر",
+      "unlimited": "نامحدود",
+      "metaProducts": "{value} محصول",
+      "metaOrders": "{value} سفارش در ماه",
+      "metaUsers": "{value} کاربر",
+      "descriptions": {
+        "STARTER": "برای شاپ‌های کوچیکی که تازه راه افتادن.",
+        "PROFESSIONAL": "برای شاپ‌هایی که دایرکتشون شلوغه.",
+        "BUSINESS": "برای برندهایی که چند پیج و تیم پشتیبانی دارن.",
+        "ENTERPRISE": "برای برندهای بزرگی که همه‌چی رو سفارشی می‌خوان."
+      },
+      "featureRows": {
+        "orders": "سفارش، فاکتور و درگاه پرداخت",
+        "instagramAi": "دستیار هوش مصنوعی دایرکت",
+        "domainApi": "دامنه اختصاصی و API",
+        "realtimeSupport": "گزارش لحظه‌ای و پشتیبانی تلفنی"
+      },
+      "enterprise": {
+        "unlimitedLabel": "محصول، سفارش و کاربر نامحدود",
+        "slaLabel": "SLA {value}٪",
+        "cta": "تماس بگیرید"
+      }
     },
     "faq": {
       "eyebrow": "سوالای پرتکرار",

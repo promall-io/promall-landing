@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { CheckIcon, CrossIcon } from '@/components/icons';
@@ -173,7 +173,10 @@ export function PricingCards({
   const priceFade = { duration: reduceMotion ? 0 : 0.25, ease: REVEAL_EASE };
 
   return (
-    <div className="grid grid-cols-1 items-stretch gap-6 min-[811px]:grid-cols-3 min-[811px]:gap-0">
+    <div
+      className="pw-pricing-grid"
+      style={{ '--pw-pricing-columns': plans.length } as CSSProperties}
+    >
       {plans.map((plan, index) => (
         <PlanCard
           key={plan.id}
