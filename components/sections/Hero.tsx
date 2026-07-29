@@ -31,7 +31,12 @@ export async function Hero() {
         </Reveal>
 
         <Reveal delay={0.04}>
-          <h1 className="pw-h1 mx-auto max-w-[20ch] text-balance">{t('title')}</h1>
+          <h1 className="pw-h1 mx-auto max-w-[22ch] text-balance max-[380px]:text-[1.9rem]">
+            <span className={locale === 'fa' ? 'block whitespace-nowrap' : 'block'}>
+              {t('titleLead')}
+            </span>
+            <span className="block">{t('titleTrail')}</span>
+          </h1>
         </Reveal>
 
         <Reveal delay={0.08}>

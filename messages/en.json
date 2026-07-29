@@ -44,8 +44,9 @@
   },
   "sections": {
     "hero": {
-      "title": "Run your online shop without living in your DMs",
-      "subtitle": "AI answers your Instagram DMs and comments, orders and invoices are created for you, and products, stock, customers and sales reports all sit in one panel.",
+      "titleLead": "Online shop management",
+      "titleTrail": "that answers the DM and takes the order for you",
+      "subtitle": "Without living in your DMs — AI replies to Instagram DMs and comments, invoices are created for you, and products, stock, customers and sales reports all sit in one panel.",
       "primaryCta": "Get a free demo",
       "playLabel": "Play the intro video",
       "dashboard": {
