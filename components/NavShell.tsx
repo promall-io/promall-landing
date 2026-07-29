@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CloseIcon, MenuIcon, ProMallMark } from '@/components/icons';
+import { NavScrim } from '@/components/NavScrim';
 import { revealStyle, useRevealState } from '@/components/Reveal';
 import type { NavLink } from '@/types/content';
 
@@ -69,7 +70,7 @@ export function NavShell({
         style={NAV_REVEAL_STYLE}
         className="pw-reveal pw-section fixed top-0 start-0 end-0 z-50"
       >
-        <div aria-hidden className="pw-nav-scrim" />
+        <NavScrim />
 
         <div className="pw-container relative flex h-12 items-center justify-between">
           <Link

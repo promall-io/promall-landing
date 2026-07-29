@@ -9,7 +9,7 @@ import { HeroLandscape } from '@/components/sections/HeroLandscape';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 
 const SKY_GRADIENT =
-  'radial-gradient(200% 83% at 50% 0, var(--pw-slate) 0%, var(--pw-slate-light) 42%, var(--pw-rose) 100%)';
+  'radial-gradient(200% 83% at 50% 0, var(--pw-black) 0%, var(--pw-slate-light) 42%, var(--pw-gold-deep) 100%)';
 
 export async function Hero() {
   const t = await getTranslations('sections.hero');

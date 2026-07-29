@@ -10,6 +10,10 @@ import type { FeatureTab } from '@/types/content';
 
 const PANEL_ID = 'features-stage';
 
+const STAGE_SOURCE_WIDTH = 2048;
+const STAGE_SIZES = `(max-width: 810px) 100vw, ${STAGE_SOURCE_WIDTH}px`;
+const STAGE_QUALITY = 88;
+
 const tabId = (id: string) => `features-tab-${id}`;
 
 type FeaturesTabsProps = {
@@ -116,7 +120,8 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
               src={active.image}
               alt={active.alt}
               fill
-              sizes="(max-width: 810px) 100vw, 1080px"
+              sizes={STAGE_SIZES}
+              quality={STAGE_QUALITY}
               priority={false}
               className="object-cover"
             />

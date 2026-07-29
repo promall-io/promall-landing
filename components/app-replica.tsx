@@ -1,11 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { PA_BOLD, PA_LINEAR, type PaIconName } from "./app-replica-icons"
 import "./app-replica.css"
-
-const NATIVE_W = 1280
-const NATIVE_H = 860
 
 type PaTab = "dashboard" | "orders" | "products"
 
@@ -645,43 +642,11 @@ function ProductsPane() {
 }
 
 export function AppReplica({ label }: { label: string }) {
-  const hostRef = useRef<HTMLDivElement>(null)
-  const [layout, setLayout] = useState({ scale: 0, x: 0, y: 0 })
   const [activeTab, setActiveTab] = useState<PaTab>("dashboard")
 
-  useEffect(() => {
-    const host = hostRef.current
-    if (!host) return
-    const observer = new ResizeObserver(([entry]) => {
-      if (!entry) return
-      const { width, height } = entry.contentRect
-      if (!width || !height) return
-      const scale = Math.min(width / NATIVE_W, height / NATIVE_H)
-      setLayout({
-        scale,
-        x: (width - NATIVE_W * scale) / 2,
-        y: (height - NATIVE_H * scale) / 2,
-      })
-    })
-    observer.observe(host)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div
-      ref={hostRef}
-      role="group"
-      aria-label={label}
-      style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}
-    >
-      <div
-        className="pmapp"
-        style={{
-          transform: `translate(${layout.x}px, ${layout.y}px) scale(${layout.scale || 1})`,
-          transformOrigin: "top left",
-          visibility: layout.scale ? "visible" : "hidden",
-        }}
-      >
+    <div role="group" aria-label={label} className="pmapp-fit">
+      <div className="pmapp">
         <Sidebar activeTab={activeTab} onSelect={setActiveTab} />
 
         <div className="pa-window">

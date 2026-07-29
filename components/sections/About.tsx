@@ -4,6 +4,10 @@ import { SectionHeading } from '@/components/ui/Primitives';
 import { Reveal } from '@/components/Reveal';
 import type { AboutCard } from '@/types/content';
 
+const CARD_SOURCE_WIDTH = 1080;
+const CARD_SIZES = `(max-width: 810px) 100vw, ${CARD_SOURCE_WIDTH}px`;
+const CARD_QUALITY = 88;
+
 function CrosshairGlyph() {
   return (
     <svg
@@ -53,7 +57,8 @@ function AboutStackCard({ card, index }: { card: AboutCard; index: number }) {
             src={card.image}
             alt={card.alt}
             fill
-            sizes="(max-width: 810px) 100vw, 540px"
+            sizes={CARD_SIZES}
+            quality={CARD_QUALITY}
             className="object-cover"
           />
         </div>

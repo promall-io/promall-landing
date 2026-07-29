@@ -16,8 +16,9 @@ type Hill = {
   height: number;
   travel: number;
   minHeight: number;
-  priority?: boolean;
 };
+
+const HILL_QUALITY = 85;
 
 const BACKDROP_HILLS: Hill[] = [
   {
@@ -26,7 +27,6 @@ const BACKDROP_HILLS: Hill[] = [
     height: 909,
     travel: 24,
     minHeight: 260,
-    priority: true,
   },
   {
     src: '/landscape/hill-mid.png',
@@ -55,7 +55,7 @@ function HillLayer({
   still: boolean;
 }) {
   const travel = still ? 0 : hill.travel;
-  const y = useTransform(progress, [0, 1], [-travel, 0]);
+  const y = useTransform(progress, (value) => Math.round((value - 1) * travel));
 
   return (
     <motion.div className="absolute inset-x-0" style={{ bottom: -travel, y }}>
@@ -65,7 +65,8 @@ function HillLayer({
         width={hill.width}
         height={hill.height}
         sizes="100vw"
-        priority={hill.priority}
+        quality={HILL_QUALITY}
+        priority
         className="h-auto w-full object-cover"
         style={{ minHeight: hill.minHeight }}
       />

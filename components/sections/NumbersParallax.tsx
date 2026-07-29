@@ -45,7 +45,8 @@ export function NumbersParallax() {
             alt=""
             width={cloud.width}
             height={cloud.height}
-            sizes="(max-width: 810px) 60vw, 520px"
+            sizes="(max-width: 810px) 60vw, 1040px"
+            quality={88}
             className="h-auto w-full"
           />
         </motion.div>

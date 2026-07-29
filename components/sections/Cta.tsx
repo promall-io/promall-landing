@@ -118,6 +118,7 @@ export async function Cta() {
         width={1600}
         height={349}
         sizes="100vw"
+        quality={85}
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full object-cover"
       />
     </section>
