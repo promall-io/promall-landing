@@ -326,6 +326,174 @@
       rgba(0, 0, 0, 0) 100%
     );
   }
+
+  .pw-starfield {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: clamp(420px, 58vh, 780px);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 46%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 46%, transparent 100%);
+    animation: pw-starfield-in 1.4s var(--pw-ease) 0.2s both;
+  }
+
+  .pw-starfield::before {
+    content: '';
+    position: absolute;
+    inset: -12% -4% 20%;
+    background:
+      radial-gradient(58% 46% at 20% 6%, rgba(126, 158, 224, 0.14), transparent 72%),
+      radial-gradient(46% 40% at 76% 16%, rgba(217, 208, 184, 0.09), transparent 74%);
+    filter: blur(24px);
+  }
+
+  .pw-starfield-layer {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+
+  .pw-star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--pw-star-color, #fff);
+    opacity: 0;
+    box-shadow: 0 0 2.5px 0.5px color-mix(in srgb, var(--pw-star-color, #fff) 55%, transparent);
+    animation: pw-twinkle 5.5s ease-in-out infinite;
+  }
+
+  .pw-star-cool {
+    --pw-star-color: #d9e7ff;
+  }
+
+  .pw-star-gold {
+    --pw-star-color: #f6ecd4;
+  }
+
+  .pw-star-glint::before,
+  .pw-star-glint::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pw-star-glint::before {
+    width: 10px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+
+  .pw-star-glint::after {
+    width: 1px;
+    height: 10px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+
+  .pw-star-blaze {
+    box-shadow:
+      0 0 7px 1.5px color-mix(in srgb, var(--pw-star-color, #fff) 55%, transparent),
+      0 0 16px 5px color-mix(in srgb, var(--pw-star-color, #fff) 18%, transparent);
+  }
+
+  .pw-comet {
+    position: absolute;
+    width: 96px;
+    height: 2.5px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.22) 46%,
+      rgba(255, 255, 255, 0.55) 78%,
+      rgba(255, 255, 255, 0.88) 100%
+    );
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    opacity: 0;
+    transform-origin: right center;
+    pointer-events: none;
+    animation: pw-comet 32s linear infinite;
+  }
+
+  .pw-comet::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 2px;
+    height: 2px;
+    margin-top: -1px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+      0 0 5px 1.5px rgba(255, 255, 255, 0.7),
+      0 0 12px 4px rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* the sky sits deeper than the parallax hills, so it lags the scroll instead of
+   tracking it — progressive enhancement, browsers without scroll timelines just
+   keep the field static */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pw-starfield-layer {
+      animation: pw-star-parallax linear both;
+      animation-timeline: scroll();
+      animation-range: 0 100vh;
+    }
+  }
+}
+
+@keyframes pw-starfield-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pw-star-parallax {
+  to {
+    transform: translate3d(0, 56px, 0);
+  }
+}
+
+@keyframes pw-twinkle {
+  0%,
+  100% {
+    opacity: calc(var(--pw-star-max, 0.7) * 0.32);
+  }
+  50% {
+    opacity: var(--pw-star-max, 0.7);
+  }
+}
+
+@keyframes pw-comet {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(var(--pw-comet-x) * -0.12), calc(var(--pw-comet-y) * -0.12), 0)
+      rotate(var(--pw-comet-angle)) scaleX(0.4);
+  }
+  0.8% {
+    opacity: 1;
+  }
+  4.2% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 0;
+    transform: translate3d(var(--pw-comet-x), var(--pw-comet-y), 0) rotate(var(--pw-comet-angle))
+      scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--pw-comet-x), var(--pw-comet-y), 0) rotate(var(--pw-comet-angle))
+      scaleX(1);
+  }
 }
 
 @keyframes pw-reveal-in {
@@ -415,5 +583,24 @@ html.lenis body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .pw-starfield {
+    opacity: 1;
+  }
+
+  .pw-starfield-layer {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .pw-star {
+    animation: none !important;
+    opacity: 0.5;
+  }
+
+  .pw-comet {
+    animation: none !important;
+    opacity: 0;
   }
 }

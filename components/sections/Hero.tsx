@@ -6,6 +6,7 @@ import { CircleButton } from '@/components/ui/Primitives';
 import { Reveal } from '@/components/Reveal';
 import { HeroDashboard } from '@/components/HeroDashboard';
 import { HeroLandscape } from '@/components/sections/HeroLandscape';
+import { HeroStarfield } from '@/components/sections/HeroStarfield';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 
 const SKY_GRADIENT =
@@ -21,6 +22,7 @@ export async function Hero() {
       className="pw-section relative isolate overflow-hidden"
       style={{ backgroundImage: SKY_GRADIENT }}
     >
+      <HeroStarfield />
       <HeroLandscape />
 
       <div className="pw-container relative z-10 pt-[120px] text-center">
