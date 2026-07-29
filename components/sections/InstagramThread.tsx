@@ -6,6 +6,33 @@ import { REVEAL_EASE } from '@/components/Reveal';
 import { localizeDigits } from '@/lib/demo-form';
 import type { DmMessage, DmStep, DmThreadChrome } from '@/types/content';
 
+const DEVICE_BUTTONS = [
+  {
+    key: 'silent',
+    className: '-left-[2px] rounded-l-full',
+    top: 114,
+    height: 20,
+  },
+  {
+    key: 'volume-up',
+    className: '-left-[2px] rounded-l-full',
+    top: 150,
+    height: 40,
+  },
+  {
+    key: 'volume-down',
+    className: '-left-[2px] rounded-l-full',
+    top: 202,
+    height: 40,
+  },
+  {
+    key: 'power',
+    className: '-right-[2px] rounded-r-full',
+    top: 165,
+    height: 66,
+  },
+];
+
 const CUSTOMER_DELAY = 1400;
 const TYPING_LEAD = 550;
 const TYPING_DURATION = 1250;
@@ -111,10 +138,7 @@ function ThreadHeader({ chrome }: { chrome: DmThreadChrome }) {
     <div className="flex shrink-0 items-center gap-3 border-b border-[var(--ig-separator)] px-3 pb-2.5">
       <BackGlyph className="shrink-0 text-[var(--ig-text)] rtl:-scale-x-100" />
 
-      <span
-        className="shrink-0 rounded-full p-[2px]"
-        style={{ backgroundImage: 'var(--ig-ring)' }}
-      >
+      <span className="shrink-0 rounded-full p-[2px]" style={{ backgroundImage: 'var(--ig-ring)' }}>
         <span className="flex size-[34px] items-center justify-center rounded-full border-2 border-[var(--ig-canvas)] bg-[var(--ig-separator)] text-[13px] font-semibold text-[var(--ig-text)]">
           {chrome.avatarInitial}
         </span>
@@ -307,7 +331,10 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
     if (!node) {
       return;
     }
-    node.scrollTo({ top: node.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
+    node.scrollTo({
+      top: node.scrollHeight,
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
   }, [shown, typing, reduceMotion]);
 
   return (
@@ -315,39 +342,50 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
       ref={stageRef}
       className="grid grid-cols-1 items-center gap-14 min-[811px]:grid-cols-[minmax(0,306px)_minmax(0,440px)] min-[811px]:justify-between min-[811px]:gap-10"
     >
-      <div className="mx-auto w-full max-w-[306px]">
-        <div className="relative rounded-[44px] bg-[#05070c] p-[3px] ring-1 ring-[var(--pw-line)] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
-          <div
-            dir={locale === 'fa' ? 'rtl' : 'ltr'}
-            className="relative flex aspect-[306/640] w-full flex-col overflow-hidden rounded-[41px] bg-[var(--ig-canvas)]"
-          >
+      <div className="mx-auto w-full max-w-[300px]">
+        <div className="relative">
+          {DEVICE_BUTTONS.map((button) => (
             <span
+              key={button.key}
               aria-hidden
-              className="absolute start-1/2 top-[9px] z-20 h-[26px] w-[86px] -translate-x-1/2 rounded-full bg-black rtl:translate-x-1/2"
+              className={`absolute w-[3px] bg-[var(--pw-surface-3)] ${button.className}`}
+              style={{ top: button.top, height: button.height }}
             />
-            <StatusBar clock={chrome.dayStamp} />
-            <ThreadHeader chrome={chrome} />
-            <AutoReplyStrip label={chrome.autoReply} />
+          ))}
 
+          <div className="relative rounded-[42px] bg-[var(--pw-surface-2)] p-[6px] ring-1 ring-[var(--pw-line-strong)] shadow-[0_30px_70px_-30px_rgba(0,0,0,0.75)]">
             <div
-              ref={scrollRef}
-              className="pw-ig-scroll flex flex-1 flex-col gap-1.5 overflow-y-auto px-3 py-3"
+              dir={locale === 'fa' ? 'rtl' : 'ltr'}
+              className="relative flex aspect-[393/852] w-full flex-col overflow-hidden rounded-[36px] bg-[var(--ig-canvas)] ring-1 ring-inset ring-white/[0.06]"
             >
-              <span className="mt-auto" aria-hidden />
-              <AnimatePresence initial={false}>
-                {script.slice(0, shown).map((message, index) => (
-                  <Bubble key={`${message.step}-${index}`} message={message} />
-                ))}
-                {typing ? <TypingBubble key="typing" /> : null}
-              </AnimatePresence>
-              {shown >= script.length ? (
-                <span className="ms-auto shrink-0 pt-0.5 text-[10px] text-[var(--ig-text-secondary)]">
-                  {chrome.seen}
-                </span>
-              ) : null}
-            </div>
+              <span
+                aria-hidden
+                className="absolute left-1/2 top-[8px] z-20 h-[26px] w-[92px] -translate-x-1/2 rounded-full bg-black"
+              />
+              <StatusBar clock={chrome.dayStamp} />
+              <ThreadHeader chrome={chrome} />
+              <AutoReplyStrip label={chrome.autoReply} />
 
-            <Composer placeholder={chrome.composer} />
+              <div
+                ref={scrollRef}
+                className="pw-ig-scroll flex flex-1 flex-col gap-1.5 overflow-y-auto px-3 py-3"
+              >
+                <span className="mt-auto" aria-hidden />
+                <AnimatePresence initial={false}>
+                  {script.slice(0, shown).map((message, index) => (
+                    <Bubble key={`${message.step}-${index}`} message={message} />
+                  ))}
+                  {typing ? <TypingBubble key="typing" /> : null}
+                </AnimatePresence>
+                {shown >= script.length ? (
+                  <span className="ms-auto shrink-0 pt-0.5 text-[10px] text-[var(--ig-text-secondary)]">
+                    {chrome.seen}
+                  </span>
+                ) : null}
+              </div>
+
+              <Composer placeholder={chrome.composer} />
+            </div>
           </div>
         </div>
 
@@ -377,7 +415,10 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
               key={step.title}
               className="relative"
               animate={{ opacity: active ? 1 : 0.32 }}
-              transition={{ duration: reduceMotion ? 0 : 0.5, ease: REVEAL_EASE }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.5,
+                ease: REVEAL_EASE,
+              }}
             >
               <span
                 aria-hidden

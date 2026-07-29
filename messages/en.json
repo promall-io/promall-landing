@@ -131,28 +131,28 @@
           "label": "Conversation",
           "caption": "Customers ask, ProMall replies in your own voice.",
           "image": "/mockups/feature-ask.jpg",
-          "alt": "ProMall conversation panel with ready-made reply suggestions"
+          "alt": "The ProMall DM panel: the AI answering a customer's question with price and stock"
         },
         {
           "id": "product",
           "label": "Product match",
           "caption": "It recommends the right product with live price and stock from your own catalogue.",
           "image": "/mockups/feature-verify.jpg",
-          "alt": "Product recommendation with the source of price and stock"
+          "alt": "The shop's product catalogue in ProMall with live price and stock"
         },
         {
           "id": "order",
           "label": "Order",
-          "caption": "It builds the invoice, sends the payment link and places the order.",
+          "caption": "It builds the basket, totals it up and places the order.",
           "image": "/mockups/feature-execute.jpg",
-          "alt": "Creating an order and invoice straight from the conversation"
+          "alt": "Building an order in the ProMall panel with the selected items and the total"
         },
         {
           "id": "report",
           "label": "Reports",
           "caption": "See what sold, where customers dropped off, and what to fix.",
           "image": "/mockups/feature-measure.jpg",
-          "alt": "Sales and response performance dashboard"
+          "alt": "The ProMall sales dashboard with revenue, orders, best sellers and the weekly trend"
         }
       ]
     },
@@ -189,11 +189,11 @@
       "cards": [
         {
           "eyebrow": "Shared memory",
-          "title": "Products, stock and pricing in one place",
+          "title": "Products, stock and inventory value in one place",
           "description": "Everything the customer needs is read from your own catalogue, so every answer starts out correct.",
           "footnote": "One source of truth for every reply",
           "image": "/mockups/about-context.jpg",
-          "alt": "Shop products and stock connected to the DM conversation"
+          "alt": "The ProMall inventory page with per-product stock and total inventory value"
         },
         {
           "eyebrow": "Instant action",
@@ -201,15 +201,15 @@
           "description": "No bouncing between Instagram and your panel — the work moves forward right there in the DM.",
           "footnote": "From message to payment, without switching",
           "image": "/mockups/about-action.jpg",
-          "alt": "Creating an order with customer, priority and notes"
+          "alt": "The list of placed orders with customer name, amount and shipping status"
         },
         {
           "eyebrow": "Full visibility",
-          "title": "See what sold and where customers dropped off",
-          "description": "Question patterns, conversion rate and your most-asked products, every week.",
+          "title": "See who bought and who is drifting away",
+          "description": "Order count, total spend and last purchase for every customer, in one place.",
           "footnote": "Decide on numbers, not hunches",
           "image": "/mockups/about-trends.jpg",
-          "alt": "Sales trend dashboard with weekly insights"
+          "alt": "The ProMall customers panel with order count, total spend and last purchase"
         }
       ]
     },
