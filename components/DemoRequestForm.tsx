@@ -1,19 +1,31 @@
 'use client';
 
-import { useState, type FormEvent, type ReactNode } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { REVEAL_EASE } from '@/components/Reveal';
 import { ArrowRightIcon, ShieldIcon } from '@/components/icons';
 import {
+  DEMO_REQUEST,
+  DEMO_REQUEST_ERROR_CODES,
   groupIranMobile,
   localizeDigits,
   normalizeInstagramHandle,
   normalizeIranMobile,
-  toEnglishDigits,
+  normalizeVerificationCode,
+  RESEND_SECONDS_TOKEN,
+  sanitizeInstagramInput,
+  sanitizePhoneInput,
+  sanitizeVerificationCodeInput,
+  type DemoRequestErrorCode,
 } from '@/lib/demo-form';
-
-const INSTAGRAM_URL_PREFIX = /^(?:https?:\/\/)?(?:www\.)?instagram\.com\//i;
 
 export type DemoFormLabels = {
   formTitle: string;
@@ -24,8 +36,21 @@ export type DemoFormLabels = {
   instagramLabel: string;
   instagramPlaceholder: string;
   instagramError: string;
+  sendCode: string;
+  sendingCode: string;
+  codeTitle: string;
+  codeSubtitle: string;
+  codeLabel: string;
+  codePlaceholder: string;
+  codeError: string;
+  codeExpiredError: string;
+  editPhone: string;
+  resend: string;
+  resendCountdown: string;
   submit: string;
   submitting: string;
+  rateLimitError: string;
+  sendFailedError: string;
   submitError: string;
   privacyNote: string;
   successTitle: string;
@@ -35,9 +60,11 @@ export type DemoFormLabels = {
   successCta: string;
 };
 
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+type FormStep = 'details' | 'code' | 'success';
 
-type FieldErrors = { phone?: boolean; instagram?: boolean };
+type FormStatus = 'idle' | 'pending';
+
+type FieldErrors = { phone?: boolean; instagram?: boolean; code?: boolean };
 
 function Field({
   id,
@@ -88,6 +115,17 @@ function SummaryRow({ label, value }: { label: string; value: ReactNode }) {
   );
 }
 
+function FormAlert({ message }: { message: string }) {
+  return (
+    <p
+      role="alert"
+      className="rounded-2xl bg-[rgba(229,115,106,0.1)] px-4 py-3 text-sm text-[var(--pw-danger)]"
+    >
+      {message}
+    </p>
+  );
+}
+
 function SuccessMark() {
   const reduceMotion = useReducedMotion();
 
@@ -118,42 +156,112 @@ type DemoRequestFormProps = {
 
 export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormProps) {
   const reduceMotion = useReducedMotion();
+  const mountedAtRef = useRef(0);
+  const codeInputRef = useRef<HTMLInputElement>(null);
 
   const [phone, setPhone] = useState('');
   const [instagram, setInstagram] = useState('');
+  const [code, setCode] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [step, setStep] = useState<FormStep>('details');
   const [status, setStatus] = useState<FormStatus>('idle');
-  const [submitted, setSubmitted] = useState<{ phone: string; instagram: string } | null>(null);
+  const [alertCode, setAlertCode] = useState<DemoRequestErrorCode | null>(null);
+  const [resendIn, setResendIn] = useState(0);
+  const [submitted, setSubmitted] = useState<{ phone: string; instagram: string } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    mountedAtRef.current = Date.now();
+  }, []);
+
+  useEffect(() => {
+    if (resendIn <= 0) {
+      return;
+    }
+    const timer = window.setTimeout(() => setResendIn((seconds) => seconds - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [resendIn]);
+
+  const alertMessage = (() => {
+    switch (alertCode) {
+      case DEMO_REQUEST_ERROR_CODES.TOO_MANY_REQUESTS:
+        return labels.rateLimitError;
+      case DEMO_REQUEST_ERROR_CODES.SEND_FAILED:
+        return labels.sendFailedError;
+      case DEMO_REQUEST_ERROR_CODES.CODE_EXPIRED:
+        return labels.codeExpiredError;
+      case null:
+        return null;
+      default:
+        return labels.submitError;
+    }
+  })();
+
+  const postJson = useCallback(
+    async (url: string, payload: Record<string, unknown>) => {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...payload,
+          honeypot,
+          elapsedMs: Date.now() - mountedAtRef.current,
+        }),
+      });
+      const body: unknown = await response.json().catch(() => null);
+      const errorCode = (body as { code?: DemoRequestErrorCode } | null)?.code;
+      return { ok: response.ok, errorCode: errorCode ?? null };
+    },
+    [honeypot],
+  );
 
   const handlePhoneChange = (value: string) => {
-    const english = toEnglishDigits(value);
-    const hasPlus = english.trimStart().startsWith('+');
-    const digits = english.replace(/\D/g, '').slice(0, hasPlus ? 12 : 11);
-    setPhone(hasPlus ? `+${digits}` : digits);
+    setPhone(sanitizePhoneInput(value));
     if (errors.phone) {
       setErrors((previous) => ({ ...previous, phone: false }));
     }
   };
 
   const handleInstagramChange = (value: string) => {
-    const handle = toEnglishDigits(value)
-      .trim()
-      .replace(INSTAGRAM_URL_PREFIX, '')
-      .replace(/^@+/, '')
-      .split(/[/?#\s]/)[0]
-      .toLowerCase()
-      .replace(/[^a-z0-9._]/g, '')
-      .slice(0, 30);
-    setInstagram(handle);
+    setInstagram(sanitizeInstagramInput(value));
     if (errors.instagram) {
       setErrors((previous) => ({ ...previous, instagram: false }));
     }
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleCodeChange = (value: string) => {
+    setCode(sanitizeVerificationCodeInput(value));
+    if (errors.code) {
+      setErrors((previous) => ({ ...previous, code: false }));
+    }
+  };
+
+  const requestCode = async (normalizedPhone: string) => {
+    setStatus('pending');
+    setAlertCode(null);
+    try {
+      const { ok, errorCode } = await postJson('/api/demo-request/verification', {
+        phoneNumber: normalizedPhone,
+      });
+      if (!ok) {
+        setAlertCode(errorCode ?? DEMO_REQUEST_ERROR_CODES.SEND_FAILED);
+        return false;
+      }
+      setResendIn(DEMO_REQUEST.FALLBACK_RESEND_AFTER_SECONDS);
+      return true;
+    } catch {
+      setAlertCode(DEMO_REQUEST_ERROR_CODES.SEND_FAILED);
+      return false;
+    } finally {
+      setStatus('idle');
+    }
+  };
+
+  const handleDetailsSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (status === 'submitting') {
+    if (status === 'pending') {
       return;
     }
 
@@ -165,37 +273,85 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
       return;
     }
 
-    if (honeypot) {
-      setSubmitted({ phone: normalizedPhone, instagram: normalizedHandle });
-      setStatus('success');
+    if (await requestCode(normalizedPhone)) {
+      setCode('');
+      setStep('code');
+      window.setTimeout(() => codeInputRef.current?.focus(), 0);
+    }
+  };
+
+  const handleResend = async () => {
+    const normalizedPhone = normalizeIranMobile(phone);
+    if (status === 'pending' || resendIn > 0 || !normalizedPhone) {
+      return;
+    }
+    await requestCode(normalizedPhone);
+  };
+
+  const handleCodeSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (status === 'pending') {
       return;
     }
 
-    setStatus('submitting');
-    try {
-      const response = await fetch('/api/demo-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phoneNumber: normalizedPhone,
-          instagramHandle: normalizedHandle,
-          locale,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`demo request failed: ${response.status}`);
-      }
-      setSubmitted({ phone: normalizedPhone, instagram: normalizedHandle });
-      setStatus('success');
-    } catch {
-      setStatus('error');
+    const normalizedPhone = normalizeIranMobile(phone);
+    const normalizedHandle = normalizeInstagramHandle(instagram);
+    const normalizedCode = normalizeVerificationCode(code);
+    setErrors({ code: !normalizedCode });
+
+    if (!normalizedPhone || !normalizedHandle || !normalizedCode) {
+      return;
     }
+
+    setStatus('pending');
+    setAlertCode(null);
+    try {
+      const { ok, errorCode } = await postJson('/api/demo-request', {
+        phoneNumber: normalizedPhone,
+        instagramHandle: normalizedHandle,
+        verificationCode: normalizedCode,
+        locale,
+      });
+
+      if (!ok) {
+        if (errorCode === DEMO_REQUEST_ERROR_CODES.CODE_INVALID) {
+          setErrors({ code: true });
+        } else {
+          setAlertCode(errorCode ?? DEMO_REQUEST_ERROR_CODES.SUBMIT_FAILED);
+        }
+        return;
+      }
+
+      setSubmitted({ phone: normalizedPhone, instagram: normalizedHandle });
+      setStep('success');
+    } catch {
+      setAlertCode(DEMO_REQUEST_ERROR_CODES.SUBMIT_FAILED);
+    } finally {
+      setStatus('idle');
+    }
+  };
+
+  const backToDetails = () => {
+    setStep('details');
+    setAlertCode(null);
+    setErrors({});
   };
 
   return (
     <div className="pw-card p-7 min-[391px]:p-9">
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        value={honeypot}
+        onChange={(event) => setHoneypot(event.target.value)}
+        className="hidden"
+      />
+
       <AnimatePresence mode="wait" initial={false}>
-        {status === 'success' && submitted ? (
+        {step === 'success' && submitted ? (
           <motion.div
             key="success"
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
@@ -222,30 +378,95 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
               {labels.successCta}
             </Link>
           </motion.div>
+        ) : step === 'code' ? (
+          <motion.form
+            key="code"
+            noValidate
+            onSubmit={handleCodeSubmit}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: REVEAL_EASE }}
+            className="flex flex-col gap-6"
+          >
+            <div>
+              <h2 className="pw-h3">{labels.codeTitle}</h2>
+              <p className="pw-small mt-2">
+                {labels.codeSubtitle}{' '}
+                <span dir="ltr" className="pw-num text-[var(--pw-cream)]">
+                  {localizeDigits(groupIranMobile(normalizeIranMobile(phone) ?? phone), locale)}
+                </span>
+              </p>
+              <button
+                type="button"
+                onClick={backToDetails}
+                className="pw-link pw-micro mt-2 inline-flex"
+              >
+                {labels.editPhone}
+              </button>
+            </div>
+
+            <Field
+              id="demo-code"
+              label={labels.codeLabel}
+              error={errors.code ? labels.codeError : null}
+            >
+              <input
+                id="demo-code"
+                ref={codeInputRef}
+                type="text"
+                dir="ltr"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder={labels.codePlaceholder}
+                value={localizeDigits(code, locale)}
+                onChange={(event) => handleCodeChange(event.target.value)}
+                aria-invalid={errors.code || undefined}
+                aria-describedby={errors.code ? 'demo-code-error' : undefined}
+                className="pw-num w-full bg-transparent text-center text-lg tracking-[0.4em] text-[var(--pw-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--pw-text-faint)]"
+              />
+            </Field>
+
+            {alertMessage ? <FormAlert message={alertMessage} /> : null}
+
+            <button
+              type="submit"
+              disabled={status === 'pending'}
+              className="pw-button pw-button-primary w-full gap-2 disabled:cursor-wait disabled:opacity-70"
+            >
+              {status === 'pending' ? labels.submitting : labels.submit}
+              <ArrowRightIcon width={17} height={17} className="rtl:-scale-x-100" />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resendIn > 0 || status === 'pending'}
+              className="pw-link pw-micro text-center disabled:cursor-default disabled:opacity-60"
+            >
+              {resendIn > 0
+                ? labels.resendCountdown.replace(
+                    RESEND_SECONDS_TOKEN,
+                    localizeDigits(String(resendIn), locale),
+                  )
+                : labels.resend}
+            </button>
+          </motion.form>
         ) : (
           <motion.form
-            key="form"
+            key="details"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleDetailsSubmit}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: REVEAL_EASE }}
+            transition={{ duration: 0.35, ease: REVEAL_EASE }}
             className="flex flex-col gap-6"
           >
             <div>
               <h2 className="pw-h3">{labels.formTitle}</h2>
               <p className="pw-small mt-2">{labels.formSubtitle}</p>
             </div>
-
-            <input
-              type="text"
-              name="company"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden
-              value={honeypot}
-              onChange={(event) => setHoneypot(event.target.value)}
-              className="hidden"
-            />
 
             <Field
               id="demo-phone"
@@ -289,21 +510,14 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
               />
             </Field>
 
-            {status === 'error' ? (
-              <p
-                role="alert"
-                className="rounded-2xl bg-[rgba(229,115,106,0.1)] px-4 py-3 text-sm text-[var(--pw-danger)]"
-              >
-                {labels.submitError}
-              </p>
-            ) : null}
+            {alertMessage ? <FormAlert message={alertMessage} /> : null}
 
             <button
               type="submit"
-              disabled={status === 'submitting'}
+              disabled={status === 'pending'}
               className="pw-button pw-button-primary w-full gap-2 disabled:cursor-wait disabled:opacity-70"
             >
-              {status === 'submitting' ? labels.submitting : labels.submit}
+              {status === 'pending' ? labels.sendingCode : labels.sendCode}
               <ArrowRightIcon width={17} height={17} className="rtl:-scale-x-100" />
             </button>
 

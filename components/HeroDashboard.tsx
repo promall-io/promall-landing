@@ -12,7 +12,7 @@ export function HeroDashboard({ alt }: { alt: string }) {
         }}
       />
 
-      <div className="overflow-hidden rounded-[18px] ring-1 ring-[var(--pw-line)]">
+      <div className="overflow-hidden rounded-[18px]">
         <div className="relative aspect-[1280/860] w-full">
           <AppReplica label={alt} />
         </div>
