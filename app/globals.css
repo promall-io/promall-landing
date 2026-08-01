@@ -182,6 +182,11 @@
     letter-spacing: -0.03em;
   }
 
+  [lang='fa'] .pw-num {
+    font-family: var(--font-body);
+    letter-spacing: normal;
+  }
+
   .pw-button {
     display: inline-flex;
     align-items: center;
