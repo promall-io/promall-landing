@@ -616,7 +616,9 @@
       }
     ],
     "copyright": "© ProMall 2026. All rights reserved.",
-    "socialLabel": "Social networks"
+    "socialLabel": "Social networks",
+    "enamadLabel": "ProMall e-Namad trust seal",
+    "enamadAlt": "ProMall e-Namad trust seal"
   },
   "demo": {
     "metaTitle": "Free online shop management demo",

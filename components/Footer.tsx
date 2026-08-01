@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { localeHref } from '@/lib/routes';
+import { EnamadSeal } from '@/components/EnamadSeal';
 import {
   InstagramIcon,
   LinkedinIcon,
@@ -36,13 +37,17 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
     <footer className="pw-section">
       <div className="pw-container pt-16 pb-16">
         <div className="flex flex-col gap-14 min-[810px]:flex-row min-[810px]:justify-between">
-          <Link
-            href={localeHref(locale, '/')}
-            aria-label={t('brand')}
-            className="pw-link inline-flex shrink-0 text-[var(--pw-text-dim)]"
-          >
-            <ProMallMark size={28} />
-          </Link>
+          <div className="flex flex-col items-start gap-10">
+            <Link
+              href={localeHref(locale, '/')}
+              aria-label={t('brand')}
+              className="pw-link inline-flex shrink-0 text-[var(--pw-text-dim)]"
+            >
+              <ProMallMark size={28} />
+            </Link>
+
+            <EnamadSeal label={t('enamadLabel')} alt={t('enamadAlt')} />
+          </div>
 
           <div className="flex flex-col gap-12 min-[810px]:flex-row min-[810px]:gap-24">
             {columns.map((column, columnIndex) => {
