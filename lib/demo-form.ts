@@ -101,7 +101,7 @@ export function normalizeInstagramHandle(value: string): string | null {
   const withoutUrl = toEnglishDigits(value).trim().replace(INSTAGRAM_URL_PREFIX, '');
   const handle = withoutUrl
     .replace(/^@+/, '')
-    .split(/[/?#\s]/)[0]
+    .split(/[/?#]/)[0]
     .toLowerCase();
 
   if (!INSTAGRAM_HANDLE_PATTERN.test(handle)) {
