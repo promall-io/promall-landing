@@ -1,17 +1,43 @@
 {
   "metadata": {
-    "title": "Online shop management with AI DM replies | ProMall",
-    "description": "ProMall is the panel that runs your online shop: AI answers your Instagram DMs, places orders and invoices, and keeps products, stock, customers and sales reports in one place.",
+    "title": "Online Shop Management | Orders, Stock & DM Replies — ProMall",
+    "description": "ProMall is the panel that runs your online shop: AI answers your Instagram DMs, places orders and invoices, and keeps products, stock, customers and sales reports in one place. 10 days free.",
     "keywords": [
       "online shop management",
+      "online shop management panel",
+      "ecommerce management software",
       "Instagram shop panel",
+      "instagram shop management",
       "automatic Instagram DM replies",
       "AI sales assistant",
       "order and invoice management",
       "inventory management",
+      "customer loyalty",
       "sales reports",
       "ProMall"
     ]
+  },
+  "blog": {
+    "metaTitle": "Online Shop Management Guides",
+    "metaDescription": "Practical guides on running an online shop: orders and invoices, inventory, automated Instagram DM replies and sales reporting.",
+    "keywords": [
+      "online shop management guides",
+      "instagram shop tips",
+      "ecommerce operations",
+      "inventory management",
+      "dm automation"
+    ],
+    "eyebrow": "Blog",
+    "title": "The online shop management guide",
+    "description": "Everything it takes to run an online shop — from DMs and orders to inventory, customers and sales reports.",
+    "homeLabel": "Home",
+    "blogLabel": "Blog",
+    "breadcrumbLabel": "Breadcrumb",
+    "featuredLabel": "Featured",
+    "readingTime": "{minutes} min read",
+    "publishedLabel": "Published",
+    "relatedTitle": "Related reading",
+    "backToBlog": "Back to the blog"
   },
   "announcement": {
     "text": "New: automatic comment and DM replies with live pricing and stock",
@@ -35,6 +61,10 @@
       {
         "label": "FAQ",
         "href": "#faq"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
       }
     ],
     "cta": "Free demo",
@@ -518,30 +548,7 @@
       "eyebrow": "Blog",
       "titleLead": "Ideas, experience",
       "titleTrail": "and the things that actually work",
-      "linkLabel": "Go to the blog",
-      "posts": [
-        {
-          "title": "Running an Instagram online shop without hiring a DM operator",
-          "category": "Guide",
-          "date": "23 July 2026",
-          "image": "/blog/post-1.jpg",
-          "href": "#"
-        },
-        {
-          "title": "What quoting the wrong price in a DM really costs you",
-          "category": "Sales",
-          "date": "11 July 2026",
-          "image": "/blog/post-2.jpg",
-          "href": "#"
-        },
-        {
-          "title": "From the customer's message to a tracking code in under two minutes",
-          "category": "Product",
-          "date": "26 June 2026",
-          "image": "/blog/post-3.jpg",
-          "href": "#"
-        }
-      ]
+      "linkLabel": "Go to the blog"
     },
     "cta": {
       "title": "Hand your shop to ProMall",
@@ -586,11 +593,11 @@
           },
           {
             "label": "Careers",
-            "href": "#"
+            "href": "mailto:support@promall.io"
           },
           {
             "label": "Blog",
-            "href": "#"
+            "href": "/blog"
           }
         ]
       },
@@ -604,10 +611,6 @@
           {
             "label": "Privacy Policy",
             "href": "/privacy"
-          },
-          {
-            "label": "Cookies",
-            "href": "#"
           }
         ]
       }
@@ -616,7 +619,7 @@
     "socialLabel": "Social networks"
   },
   "demo": {
-    "metaTitle": "Free online shop management demo | ProMall",
+    "metaTitle": "Free online shop management demo",
     "metaDescription": "Leave your number and your shop's Instagram handle, and we'll prepare a ProMall demo built around your own shop.",
     "backHome": "Back to home",
     "badge": "Personal demo, completely free",

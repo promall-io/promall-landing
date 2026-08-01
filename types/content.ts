@@ -79,14 +79,6 @@ export type Testimonial = {
   avatar: string;
 };
 
-export type BlogPost = {
-  title: string;
-  category: string;
-  date: string;
-  image: string;
-  href: string;
-};
-
 export type DmOrderCard = {
   title: string;
   meta: string;
