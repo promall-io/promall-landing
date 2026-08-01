@@ -64,7 +64,7 @@ export function useRevealArmed() {
 type RevealPhase = 'idle' | 'pending' | 'in';
 
 export function useRevealState<T extends HTMLElement>(): {
-  ref: RefObject<T>;
+  ref: RefObject<T | null>;
   dataReveal: 'pending' | 'in' | undefined;
 } {
   const ref = useRef<T>(null);
