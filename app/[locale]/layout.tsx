@@ -8,7 +8,8 @@ import { getTranslations } from 'next-intl/server';
 import { locales, localeDirection, indexedLocales, type Locale } from '@/i18n/config';
 import { SmoothScroll } from '@/components/SmoothScroll';
 import { PageviewTracker } from '@/components/PageviewTracker';
-import { SITE_URL } from '@/lib/site';
+import { absoluteUrl, languageAlternates, SITE_NAME, SITE_URL } from '@/lib/site';
+import { GOOGLE_SITE_VERIFICATION } from '@/lib/seo-config';
 import '../globals.css';
 
 const inter = Inter({
@@ -46,22 +47,45 @@ export async function generateMetadata({
     alt: t('title'),
   };
 
+  const siteName = locale === 'fa' ? SITE_NAME.fa : SITE_NAME.en;
+
   return {
     metadataBase: new URL(SITE_URL),
-    title: t('title'),
+    title: {
+      default: t('title'),
+      template: `%s | ${siteName}`,
+    },
     description: t('description'),
     keywords: t.raw('keywords') as string[],
-    applicationName: locale === 'fa' ? 'پرومال' : 'ProMall',
+    applicationName: siteName,
+    category: locale === 'fa' ? 'مدیریت آنلاین شاپ' : 'Online shop management',
+    authors: [{ name: siteName, url: SITE_URL }],
+    creator: siteName,
+    publisher: siteName,
+    formatDetection: { telephone: false, address: false, email: false },
     alternates: {
-      canonical: locale === 'fa' ? '/' : `/${locale}`,
-      languages: Object.fromEntries(locales.map((item) => [item, item === 'fa' ? '/' : `/${item}`])),
+      canonical: absoluteUrl(locale, '/'),
+      languages: languageAlternates('/'),
     },
-    robots: isIndexed ? { index: true, follow: true } : { index: false, follow: true },
+    robots: isIndexed
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+          },
+        }
+      : { index: false, follow: true },
+    verification: GOOGLE_SITE_VERIFICATION ? { google: GOOGLE_SITE_VERIFICATION } : undefined,
     openGraph: {
       type: 'website',
-      siteName: locale === 'fa' ? 'پرومال' : 'ProMall',
+      siteName,
       locale: locale === 'fa' ? 'fa_IR' : 'en_US',
-      url: locale === 'fa' ? SITE_URL : `${SITE_URL}/${locale}`,
+      url: absoluteUrl(locale, '/'),
       title: t('title'),
       description: t('description'),
       images: [ogImage],

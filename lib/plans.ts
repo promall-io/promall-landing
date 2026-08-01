@@ -2,6 +2,9 @@ import { API_BASE_URL } from '@/lib/api-config';
 import type { PricingPlan } from '@/types/content';
 
 const PLANS_REVALIDATE_SECONDS = 3600;
+const PLANS_REQUEST_TIMEOUT_MS = 10_000;
+const PLANS_FETCH_ATTEMPTS = 3;
+const PLANS_RETRY_BASE_DELAY_MS = 500;
 const HIDDEN_PLAN_IDS = new Set(['TEST']);
 const MONTHLY_CYCLE = 'MONTHLY';
 const YEARLY_CYCLE = 'YEARLY';
@@ -116,17 +119,49 @@ function findCycle(plan: ApiPlan, cycle: string): ApiPlanPricing | undefined {
   return plan.pricing.find((entry) => entry.cycle === cycle);
 }
 
-export async function fetchPlanCatalog(): Promise<PlanCatalog> {
-  const response = await fetch(`${API_BASE_URL}/billing/plans`, {
-    headers: { accept: 'application/json' },
-    next: { revalidate: PLANS_REVALIDATE_SECONDS },
-  });
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function requestPlansOnce(): Promise<unknown> {
+  const response = await Promise.race([
+    fetch(`${API_BASE_URL}/billing/plans`, {
+      headers: { accept: 'application/json' },
+      next: { revalidate: PLANS_REVALIDATE_SECONDS },
+    }),
+    delay(PLANS_REQUEST_TIMEOUT_MS).then(() => {
+      throw new Error(`Plans request timed out after ${PLANS_REQUEST_TIMEOUT_MS}ms`);
+    }),
+  ]);
 
   if (!response.ok) {
     throw new Error(`Plans request failed with ${response.status}`);
   }
 
-  const { plans, trialDays } = unwrapPlansPayload(await response.json());
+  return response.json();
+}
+
+async function requestPlans(): Promise<unknown> {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= PLANS_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      return await requestPlansOnce();
+    } catch (error) {
+      lastError = error;
+
+      if (attempt < PLANS_FETCH_ATTEMPTS) {
+        await delay(PLANS_RETRY_BASE_DELAY_MS * attempt);
+      }
+    }
+  }
+
+  const reason = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new Error(`Plans request failed after ${PLANS_FETCH_ATTEMPTS} attempts: ${reason}`);
+}
+
+export async function fetchPlanCatalog(): Promise<PlanCatalog> {
+  const { plans, trialDays } = unwrapPlansPayload(await requestPlans());
   const visible = plans
     .filter((plan) => !HIDDEN_PLAN_IDS.has(plan.id))
     .sort((first, second) => first.order - second.order);
@@ -169,6 +204,12 @@ export function monthlyTomanRange(catalog: PlanCatalog): { low: number; high: nu
   }
 
   return { low: Math.min(...prices), high: Math.max(...prices) };
+}
+
+export function planMonthlyRial(plan: ApiPlan): number | null {
+  const price = findCycle(plan, MONTHLY_CYCLE)?.finalPrice ?? CUSTOM_PRICE;
+
+  return price > CUSTOM_PRICE ? price * RIALS_PER_TOMAN : null;
 }
 
 export function monthlyRialRange(catalog: PlanCatalog): { low: number; high: number } | null {

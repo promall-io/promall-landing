@@ -17,11 +17,20 @@ const socialChannels = [
   { name: 'X', href: 'https://x.com/promall_io', Icon: XIcon },
 ];
 
-export async function Footer() {
+export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolean } = {}) {
   const t = await getTranslations('footer');
   const locale = await getLocale();
   const columns = t.raw('columns') as FooterColumn[];
-  const resolveHref = (href: string) => (href.startsWith('/') ? localeHref(locale, href) : href);
+  const homeHref = localeHref(locale, '/');
+  const resolveHref = (href: string) => {
+    if (href.startsWith('/')) {
+      return localeHref(locale, href);
+    }
+    if (href.startsWith('#')) {
+      return anchorsToHome ? `${homeHref}${href}` : href;
+    }
+    return href;
+  };
 
   return (
     <footer className="pw-section">
@@ -45,20 +54,26 @@ export async function Footer() {
                     {column.title}
                   </p>
                   <ul className="mt-6 flex flex-col gap-[14px]">
-                    {column.links.map((link, linkIndex) => (
-                      <li key={link.label}>
-                        <Link
-                          href={resolveHref(link.href)}
-                          className={
-                            columnIndex === 0 && linkIndex === 0
-                              ? 'pw-link text-sm text-[var(--pw-cream)]'
-                              : 'pw-link text-sm text-[var(--pw-text-dim)]'
-                          }
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
+                    {column.links.map((link, linkIndex) => {
+                      const className =
+                        columnIndex === 0 && linkIndex === 0
+                          ? 'pw-link text-sm text-[var(--pw-cream)]'
+                          : 'pw-link text-sm text-[var(--pw-text-dim)]';
+
+                      return (
+                        <li key={link.label}>
+                          {link.href.startsWith('mailto:') ? (
+                            <a href={link.href} className={className}>
+                              {link.label}
+                            </a>
+                          ) : (
+                            <Link href={resolveHref(link.href)} className={className}>
+                              {link.label}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </nav>
               );

@@ -1,4 +1,4 @@
-# CLAUDE.md — promall-landing (Next.js 14 + React 19, Vercel)
+# CLAUDE.md — promall-landing (Next.js 15 + React 19, Vercel)
 
 Public marketing site — own git repo (`promall-landing.git`), **not** the dashboard (that's `promall-ui`). App Router, next-intl (fa+en, RTL), Tailwind v4, framer-motion + lenis. No DB — server work lives in two `app/api` route handlers that proxy to `promall-api`.
 
@@ -28,7 +28,9 @@ Every conversion path ends at `promall-api`. Both route handlers read `PROMALL_A
 - `i18n/config.ts` — `locales = ['en','fa']`, `defaultLocale = 'fa'`, fa = RTL. **Only `fa` is in `indexedLocales`.**
 - `middleware.ts` — next-intl, `localePrefix: 'as-needed'`, `localeDetection: false`; matcher excludes `api`, `_next`, `_vercel`, files.
 - **`app/[locale]/layout.tsx` passes `messages={{}}` to `NextIntlClientProvider`** — client components CANNOT call `useTranslations()`. Resolve strings in the server component and pass them down as props (see `Features` → `FeaturesTabs`, `InstagramDemo` → `InstagramThread`).
-- Pages: `/` , `/demo`, `/privacy`, `/terms`, `/case-study` (all but `/` are `noindex`, so the sitemap lists only `/`).
+- Pages: `/`, `/blog`, `/blog/[slug]`, `/demo`, `/privacy`, `/terms`, `/case-study`. Only `/`, `/blog` and the articles are indexable; the sitemap lists exactly those, for `fa` only.
+- **Blog content lives in `content/blog.{fa,en}.ts`** as typed `Article[]` (`types/blog.ts`), read through `lib/blog.ts` — not in `messages/*.json`. Adding an article to `content/blog.fa.ts` automatically adds it to the sitemap, the `/blog` index, the homepage Blog section and the JSON-LD `ItemList`. Both locales must expose the same slugs.
+- SEO helpers live in `lib/site.ts` (`absoluteUrl`, `languageAlternates` — hreflang covers `indexedLocales` only) and `components/StructuredData.tsx` / `components/blog/BlogStructuredData.tsx`.
 
 ## Styling
 
