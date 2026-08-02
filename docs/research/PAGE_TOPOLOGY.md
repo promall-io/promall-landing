@@ -55,7 +55,7 @@ Every section opens with a pill: dot + label, `background: #171717d9`, radius fu
 | — | Announcement bar | 96 (fixed) | marquee | Fixed pill, infinite horizontal marquee |
 | — | Nav | 48 (fixed) | static + mobile drawer | Logo left, centred links, CTA right; collapses to hamburger <1200px |
 | 1 | Hero | 1314 | appear + parallax | Dusk gradient sky, 3 layered hill PNGs, headline, dual CTA, app mockup card overlapping hills |
-| 2 | Intro | 1114 | scroll-reveal text | Left-aligned paragraphs; dimmed paragraphs, logo row at bottom |
+| 2 | Intro | 1114 | scroll-reveal text | Centered lead + 2-up supporting paragraphs (the dimming and logo row were removed) |
 | 3 | Features | 1329 | **click-driven tabs** | 4 tabs (Ask/Verify/Execute/Measure) + prev/next arrows over a mockup frame + caption |
 | 4 | Why | 1204 | **drag/arrow carousel** | 3+ cards with isometric line-art SVG, prev/next + progress rail |
 | 5 | About | 2630 | **sticky stacked cards** | 3 cards × 628px, `position: sticky; top: 120px` — cards stack as you scroll |
@@ -64,7 +64,7 @@ Every section opens with a pill: dot + label, `background: #171717d9`, radius fu
 | 8 | Numbers | 1607 | parallax | Two offset landscape stat cards (3.4×, 4.8M) with drifting cloud PNGs; 4-up metric row |
 | 9 | Pricing | 1330 | **toggle (monthly/yearly)** | 3 plans, middle raised & lighter, teal toggle, check/cross feature rows |
 | 10 | FAQ | 1274 | **category tabs + accordion** | Left category rail + "Got Questions?" card, right accordion list |
-| 11 | Testimonials | 1242 | **carousel** | One quote at a time, portrait right, prev/next + dots |
+| 11 | ~~Testimonials~~ | — | — | Removed from the page; component, copy and avatars deleted |
 | 12 | Blog | 1033 | static | 3 post cards, image + title + category · date |
 | 13 | CTA | 910 | static | Left copy + trust badges, right app mockup, dunes PNG at bottom |
 | 14 | Footer | 438 | static | Logo + 3 link columns, hairline, copyright + social icons |

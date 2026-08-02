@@ -534,7 +534,7 @@ function OrdersAndLowStock() {
 
 function DashboardPane() {
   return (
-    <div className="pa-pane" data-lenis-prevent>
+    <div className="pa-pane">
       <HeroBanner />
       <KpiRow />
       <SalesAndTopProducts />
@@ -545,7 +545,7 @@ function DashboardPane() {
 
 function OrdersPane() {
   return (
-    <div className="pa-pane" data-lenis-prevent>
+    <div className="pa-pane">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
           <div className="pm-dash-card__title" style={{ fontSize: 20 }}>سفارشات</div>
@@ -589,7 +589,7 @@ function OrdersPane() {
 
 function ProductsPane() {
   return (
-    <div className="pa-pane" data-lenis-prevent>
+    <div className="pa-pane">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
           <div className="pm-dash-card__title" style={{ fontSize: 20 }}>محصولات</div>

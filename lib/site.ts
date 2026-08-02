@@ -20,7 +20,6 @@ export const SITE_SECTIONS = [
   'numbers',
   'pricing',
   'faq',
-  'testimonials',
   'blog',
   'cta',
 ] as const;

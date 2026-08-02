@@ -262,14 +262,6 @@
     animation: pw-ig-typing 1.2s ease-in-out infinite;
   }
 
-  .pw-ig-scroll {
-    scrollbar-width: none;
-  }
-
-  .pw-ig-scroll::-webkit-scrollbar {
-    display: none;
-  }
-
   .pw-nav-scrim {
     position: absolute;
     inset-inline: 0;

@@ -368,7 +368,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
 
               <div
                 ref={scrollRef}
-                className="pw-ig-scroll flex flex-1 flex-col gap-1.5 overflow-y-auto px-3 py-3"
+                className="flex flex-1 flex-col gap-1.5 overflow-hidden px-3 py-3"
               >
                 <span className="mt-auto" aria-hidden />
                 <AnimatePresence initial={false}>

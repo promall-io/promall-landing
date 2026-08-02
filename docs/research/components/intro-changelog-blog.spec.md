@@ -9,18 +9,16 @@ Interaction model: **all three static** — reveal on scroll only. No client JS 
 
 ## Intro (h ≈ 1114)
 
-Left-aligned (start-aligned) column, **not** full width — text block starts at the container
-start and runs to ~46% width. Everything inside `pw-container`, `padding-top: 180px`.
+Centered column inside `pw-container`, `padding-top: 180px`, `text-align: center`.
 
 - `EyebrowPill` with `intro.eyebrow`.
-- Lead paragraph: 22px / line-height 1.6 / `var(--pw-cream)`, max-width ~34ch, margin-top 28px.
-- Then `intro.paragraphs[]`: same size, `color: var(--pw-text-faint)` (noticeably dimmer than
-  the lead — this contrast is the whole point of the section), gap 28px between them.
-- Logo row at the bottom, margin-top ~120px: 6 evenly-spaced placeholder marks at
-  `opacity: 0.35`, height 24px, `filter: grayscale(1)`. Render them as simple inline SVG
-  shapes you define locally in this file (abstract marks — do **not** invent real brand logos).
-  Label the row with `intro.logosLabel` in a visually-hidden heading.
-- Reveal each paragraph with a 0.08s stagger.
+- Lead: the section `h2` (`pw-h2`), `max-width: 28ch`, `text-wrap: balance`, margin-top 36px.
+- Then `intro.paragraphs[]` as a 2-column grid (1 column ≤720px), margin-top 64px,
+  `max-width: 820px`: 16px / line-height 1.9 / `var(--pw-text)`, each under a `var(--pw-line)`
+  hairline (`border-top`, `padding-top: 28px`).
+- No logo row and no scroll-linked dimming — the earlier placeholder marks and the
+  `opacity: 0.25` inactive-paragraph effect were both removed as unreadable filler.
+- Reveal each block with a 0.08s stagger.
 
 ---
 

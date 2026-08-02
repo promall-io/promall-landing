@@ -21,8 +21,9 @@ site at `scrollY 1313`: para 1 `opacity 1`, paras 2–3 `opacity 0.25`.
 > A one-shot `IntersectionObserver` reveal can never reproduce this — the effect must
 > re-evaluate on every scroll frame, in both directions.
 
-Implemented as `components/ScrollHighlight.tsx` (rAF-throttled scroll listener,
-`transition: opacity 0.4s var(--pw-ease)`).
+Was implemented as `components/ScrollHighlight.tsx` (rAF-throttled scroll listener,
+`transition: opacity 0.4s var(--pw-ease)`). **Removed** — holding two of three paragraphs
+at `opacity: 0.25` made the Intro copy unreadable; that section is now static centered text.
 
 **Reduced-motion fallback:** all blocks render at `opacity: 1` (no dimming). Bailing out
 of the effect early would freeze the initial frame and leave 2 of 3 paragraphs stuck at
@@ -173,5 +174,5 @@ Inactive colour stays on the `--pw-text-faint` token (brand-consistent).
   produced no movement while a synthetic `pointerdown/move/up` sequence worked. Test
   drag UIs by dispatching `PointerEvent`s, not with the drag action.
 - This Chrome profile has **`prefers-reduced-motion: reduce` enabled**, which disables
-  Lenis, the CSS reveals and `ScrollHighlight`. Any visual QA here shows the
-  reduced-motion fallback, not the real thing.
+  Lenis and the CSS reveals. Any visual QA here shows the reduced-motion fallback, not
+  the real thing.

@@ -72,6 +72,9 @@
     "menuClose": "Close menu",
     "skipToContent": "Skip to main content"
   },
+  "localeSwitcher": {
+    "label": "Change language"
+  },
   "sections": {
     "hero": {
       "titleLead": "Online shop management",
@@ -104,8 +107,7 @@
       "paragraphs": [
         "It is wired to your own products, prices and stock, so it never invents a number or quotes the wrong price.",
         "Everything that piles up after the sale — invoices, stock, customers, tracking codes and sales reports — lives in that same panel."
-      ],
-      "logosLabel": "From fashion and beauty to home decor and accessories"
+      ]
     },
     "instagram": {
       "eyebrow": "Smart DMs",
@@ -501,46 +503,6 @@
               "answer": "Instagram DMs and comments, Iranian payment gateways, SMS, and your own stock — Post and Tipax tracking codes are recorded on the order and sent to the customer."
             }
           ]
-        }
-      ]
-    },
-    "testimonials": {
-      "eyebrow": "Shop owners",
-      "titleLead": "What shop owners",
-      "titleTrail": "say about ProMall",
-      "description": "Online shops that handed their busy DM inbox to ProMall and got their day back.",
-      "prevLabel": "Previous",
-      "nextLabel": "Next",
-      "items": [
-        {
-          "quote": "I used to spend every morning answering DMs. Now ProMall answers and I just approve the orders it prepared.",
-          "name": "Sara Mohammadi",
-          "role": "Termeh fashion house, Tehran",
-          "avatar": "/avatars/a1.jpg"
-        },
-        {
-          "quote": "Wrong prices were our biggest pain. Since it's wired to our stock, it hasn't quoted a single wrong number.",
-          "name": "Amir Rezaei",
-          "role": "Accessories shop, Karaj",
-          "avatar": "/avatars/a2.jpg"
-        },
-        {
-          "quote": "We sell at midnight and on weekends now, because nobody is left waiting for a reply.",
-          "name": "Negin Kazemi",
-          "role": "Nila beauty brand, Shiraz",
-          "avatar": "/avatars/a3.jpg"
-        },
-        {
-          "quote": "We had two people on DMs. Now one person checks orders and replies go out three times faster.",
-          "name": "Pouya Ahmadi",
-          "role": "Raha shoes, Mashhad",
-          "avatar": "/avatars/a4.jpg"
-        },
-        {
-          "quote": "The reports showed us exactly where customers dropped off. That one change lifted our sales.",
-          "name": "Maryam Sadeghi",
-          "role": "Ava apparel, Isfahan",
-          "avatar": "/avatars/a5.jpg"
         }
       ]
     },

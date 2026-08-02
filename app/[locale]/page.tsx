@@ -14,7 +14,6 @@ import { Changelog } from '@/components/sections/Changelog';
 import { Numbers } from '@/components/sections/Numbers';
 import { Pricing } from '@/components/sections/Pricing';
 import { Faq } from '@/components/sections/Faq';
-import { Testimonials } from '@/components/sections/Testimonials';
 import { Blog } from '@/components/sections/Blog';
 import { Cta } from '@/components/sections/Cta';
 
@@ -42,7 +41,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Numbers />
         <Pricing />
         <Faq />
-        <Testimonials />
         <Blog />
         <Cta />
       </main>

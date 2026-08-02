@@ -26,7 +26,10 @@ Every conversion path ends at `promall-api`. Both route handlers read `PROMALL_A
 ## i18n & Routing
 
 - `i18n/config.ts` — `locales = ['en','fa']`, `defaultLocale = 'fa'`, fa = RTL. **Only `fa` is in `indexedLocales`.**
-- `middleware.ts` — next-intl, `localePrefix: 'as-needed'`, `localeDetection: false`; matcher excludes `api`, `_next`, `_vercel`, files.
+- `middleware.ts` — next-intl, `localePrefix: 'as-needed'`, `localeDetection: false`; matcher excludes `api`, `_next`, `_vercel`, files. Wrapped by a **geo gate**: an unprefixed path whose detected locale isn't `fa` gets a `307` to `/en…` (`Cache-Control: no-store` — a cached redirect would trap users who switch back to fa).
+- **Locale detection** (`lib/geo-locale.ts`, priority order): crawler UA → always `fa` · `NEXT_LOCALE` cookie → wins · geo country header (`x-vercel-ip-country`, `cf-ipcountry`, `cloudfront-viewer-country`, `x-geo-country`; `IR`→fa, else en) · `accept-language` · `en`. **Every crawler sees the fa site at `/`** so the indexed surface stays fa-only.
+  - Only `sec-fetch-dest` distinguishes a real navigation from a prefetch — Next strips both the `RSC` header and the `_rsc` query param before middleware, so neither can be used as a guard. A missing header counts as a navigation (pre-16.4 Safari).
+  - The middleware never writes the cookie; `components/LocaleSwitcher.tsx` writes it client-side before navigating. That keeps responses cacheable and makes an explicit choice the only thing that sets it.
 - **`app/[locale]/layout.tsx` passes `messages={{}}` to `NextIntlClientProvider`** — client components CANNOT call `useTranslations()`. Resolve strings in the server component and pass them down as props (see `Features` → `FeaturesTabs`, `InstagramDemo` → `InstagramThread`).
 - Pages: `/`, `/blog`, `/blog/[slug]`, `/demo`, `/privacy`, `/terms`, `/case-study`. Only `/`, `/blog` and the articles are indexable; the sitemap lists exactly those, for `fa` only.
 - **Blog content lives in `content/blog.{fa,en}.ts`** as typed `Article[]` (`types/blog.ts`), read through `lib/blog.ts` — not in `messages/*.json`. Adding an article to `content/blog.fa.ts` automatically adds it to the sitemap, the `/blog` index, the homepage Blog section and the JSON-LD `ItemList`. Both locales must expose the same slugs.

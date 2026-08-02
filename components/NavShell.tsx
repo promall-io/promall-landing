@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CloseIcon, MenuIcon, ProMallMark } from '@/components/icons';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { NavScrim } from '@/components/NavScrim';
 import { revealStyle, useRevealState } from '@/components/Reveal';
 import type { NavLink } from '@/types/content';
@@ -19,6 +20,7 @@ type NavShellProps = {
   menuOpenLabel: string;
   menuCloseLabel: string;
   skipToContent: string;
+  languageLabel: string;
 };
 
 export function NavShell({
@@ -30,6 +32,7 @@ export function NavShell({
   menuOpenLabel,
   menuCloseLabel,
   skipToContent,
+  languageLabel,
 }: NavShellProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -95,6 +98,10 @@ export function NavShell({
 
           <div className="relative z-10 flex items-center gap-2">
             <div className="hidden min-[1200px]:block">
+              <LocaleSwitcher label={languageLabel} />
+            </div>
+
+            <div className="hidden min-[1200px]:block">
               <Link href={ctaHref} className="pw-button h-9!">
                 {cta}
               </Link>
@@ -138,6 +145,8 @@ export function NavShell({
         <Link href={ctaHref} onClick={closeMenu} className="pw-button">
           {cta}
         </Link>
+
+        <LocaleSwitcher label={languageLabel} />
       </div>
     </>
   );

@@ -72,13 +72,6 @@ export type FaqCategory = {
   items: { question: string; answer: string }[];
 };
 
-export type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  avatar: string;
-};
-
 export type DmOrderCard = {
   title: string;
   meta: string;

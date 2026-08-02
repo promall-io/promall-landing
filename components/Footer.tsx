@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { localeHref } from '@/lib/routes';
 import { EnamadSeal } from '@/components/EnamadSeal';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import {
   InstagramIcon,
   LinkedinIcon,
@@ -20,6 +21,7 @@ const socialChannels = [
 
 export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolean } = {}) {
   const t = await getTranslations('footer');
+  const tLocaleSwitcher = await getTranslations('localeSwitcher');
   const locale = await getLocale();
   const columns = t.raw('columns') as FooterColumn[];
   const homeHref = localeHref(locale, '/');
@@ -89,7 +91,10 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
         <div className="pw-rail mt-14" />
 
         <div className="mt-14 flex flex-col gap-8 min-[810px]:flex-row min-[810px]:items-center min-[810px]:justify-between">
-          <p className="pw-micro">{t('copyright')}</p>
+          <div className="flex flex-col gap-6 min-[810px]:flex-row min-[810px]:items-center min-[810px]:gap-8">
+            <p className="pw-micro">{t('copyright')}</p>
+            <LocaleSwitcher label={tLocaleSwitcher('label')} />
+          </div>
 
           <ul aria-label={t('socialLabel')} className="flex items-center gap-6">
             {socialChannels.map(({ name, href, Icon }) => (

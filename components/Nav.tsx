@@ -5,6 +5,7 @@ import type { NavLink } from '@/types/content';
 
 export async function Nav({ anchorsToHome = false }: { anchorsToHome?: boolean } = {}) {
   const t = await getTranslations('nav');
+  const tLocaleSwitcher = await getTranslations('localeSwitcher');
   const locale = await getLocale();
   const homeHref = localeHref(locale, '/');
 
@@ -28,6 +29,7 @@ export async function Nav({ anchorsToHome = false }: { anchorsToHome?: boolean }
       menuOpenLabel={t('menuOpen')}
       menuCloseLabel={t('menuClose')}
       skipToContent={t('skipToContent')}
+      languageLabel={tLocaleSwitcher('label')}
     />
   );
 }

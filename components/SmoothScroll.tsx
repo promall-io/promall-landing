@@ -13,6 +13,7 @@ export function SmoothScroll() {
       smoothWheel: true,
       anchors: true,
       autoToggle: true,
+      allowNestedScroll: true,
     });
 
     let frame = 0;
