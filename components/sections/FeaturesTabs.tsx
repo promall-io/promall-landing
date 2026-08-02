@@ -70,6 +70,7 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
         role="tablist"
         aria-orientation="horizontal"
         onKeyDown={handleTablistKeyDown}
+        data-lenis-prevent-wheel
         className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:grid min-[811px]:grid-cols-4 min-[811px]:gap-0 min-[811px]:overflow-visible"
       >
         {tabs.map((tab, index) => {

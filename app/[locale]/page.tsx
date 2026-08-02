@@ -25,6 +25,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const hasScreenshotSections = locale === 'fa';
+
   return (
     <>
       <StructuredData locale={locale} />
@@ -33,9 +35,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Hero />
         <Intro />
         <InstagramDemo />
-        <Features />
+        {hasScreenshotSections ? <Features /> : null}
         <Why />
-        <About />
+        {hasScreenshotSections ? <About /> : null}
         <Integrations />
         <Changelog />
         <Numbers />

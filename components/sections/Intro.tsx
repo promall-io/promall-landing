@@ -9,7 +9,7 @@ export async function Intro() {
   return (
     <section id="intro" className="pw-section">
       <div className="pw-container pw-section-top flex flex-col items-center text-center">
-        <Reveal spring>
+        <Reveal spring distance={0} duration={0.5}>
           <EyebrowPill label={t('eyebrow')} />
         </Reveal>
 

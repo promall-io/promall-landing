@@ -1,4 +1,7 @@
-export const metadata = {
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
   title: { absolute: "پرومال — مطالعه موردی سیستم طراحی" },
   description:
     "مطالعه موردی سیستم طراحی پرومال: زبان بصری یکپارچه و فارسی‌محور برای پنل مدیریت فروشگاه، بازارگاه و وب‌سایت.",
@@ -489,7 +492,17 @@ const BODY = `
 
 `;
 
-export default function CaseStudyPage() {
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  if (locale !== 'fa') {
+    notFound();
+  }
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />

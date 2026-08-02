@@ -105,7 +105,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       '@type': 'Organization',
       '@id': organizationId,
       name: brand,
-      alternateName: isFa ? SITE_NAME.en : SITE_NAME.fa,
+      ...(isFa ? { alternateName: SITE_NAME.en } : {}),
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
@@ -172,7 +172,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       publisher: { '@id': organizationId },
       image: ogImage,
       screenshot: ogImage,
-      featureList,
+      ...(isFa ? { featureList } : {}),
       keywords: (tMeta.raw('keywords') as string[]).join(', '),
       audience: {
         '@type': 'BusinessAudience',
@@ -211,19 +211,23 @@ export async function StructuredData({ locale }: { locale: string }) {
         })),
       },
     },
-    {
-      '@type': 'ItemList',
-      '@id': `${pageUrl}#features`,
-      name: `${tFeatures('titleLead')} ${tFeatures('titleTrail')}`,
-      itemListOrder: 'https://schema.org/ItemListOrderAscending',
-      numberOfItems: featureTabs.length,
-      itemListElement: featureTabs.map((tab, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        name: tab.label,
-        description: tab.caption,
-      })),
-    },
+    ...(isFa
+      ? [
+          {
+            '@type': 'ItemList',
+            '@id': `${pageUrl}#features`,
+            name: `${tFeatures('titleLead')} ${tFeatures('titleTrail')}`,
+            itemListOrder: 'https://schema.org/ItemListOrderAscending',
+            numberOfItems: featureTabs.length,
+            itemListElement: featureTabs.map((tab, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: tab.label,
+              description: tab.caption,
+            })),
+          },
+        ]
+      : []),
     {
       '@type': 'HowTo',
       '@id': `${pageUrl}#howto`,

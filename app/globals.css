@@ -44,10 +44,31 @@
   --pw-stack: 64px;
 
   --pw-ease: cubic-bezier(0.44, 0, 0.56, 1);
+  --pw-spring: cubic-bezier(0.33, 0.62, 0.05, 1);
 
   --font-display: var(--font-estedad), var(--font-inter), sans-serif;
   --font-body: var(--font-estedad), var(--font-inter), sans-serif;
   --font-mono: var(--font-fragment), ui-monospace, monospace;
+}
+
+@supports (animation-timing-function: linear(0, 1)) {
+  :root {
+    --pw-spring: linear(
+      0 0%,
+      0.0151 2%,
+      0.0788 5%,
+      0.1694 8%,
+      0.3039 12%,
+      0.4652 17%,
+      0.6264 23%,
+      0.7638 30%,
+      0.8832 40%,
+      0.9523 52%,
+      0.9863 68%,
+      0.9963 84%,
+      0.999 100%
+    );
+  }
 }
 
 @theme inline {
@@ -240,9 +261,16 @@
   }
 
   .pw-reveal[data-reveal='in'] {
-    animation: pw-reveal-in var(--pw-reveal-duration, 1s) var(--pw-ease) both;
+    animation: pw-reveal-in var(--pw-reveal-duration, 1s) var(--pw-reveal-ease, var(--pw-ease)) both;
     animation-delay: var(--pw-reveal-delay, 0s);
     will-change: opacity, transform;
+  }
+
+  .pw-hill {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    animation: pw-hill-in 1s var(--pw-spring) both;
   }
 
   .pw-marquee {
@@ -513,6 +541,17 @@
   from {
     opacity: 0;
     transform: translate3d(0, var(--pw-reveal-distance, 36px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pw-hill-in {
+  from {
+    opacity: var(--pw-hill-opacity, 1);
+    transform: translate3d(0, var(--pw-hill-rise, 0px), 0);
   }
   to {
     opacity: 1;

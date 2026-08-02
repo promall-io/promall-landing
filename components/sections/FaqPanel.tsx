@@ -31,7 +31,10 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
   return (
     <div className="grid grid-cols-1 gap-8 min-[811px]:grid-cols-[380px_1fr] min-[811px]:gap-12">
       <div className="contents min-[811px]:flex min-[811px]:min-w-0 min-[811px]:flex-col">
-        <div className="order-1 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:sticky min-[811px]:top-[120px] min-[811px]:flex-col min-[811px]:overflow-visible">
+        <div
+          data-lenis-prevent-wheel
+          className="order-1 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:sticky min-[811px]:top-[120px] min-[811px]:flex-col min-[811px]:overflow-visible"
+        >
           {categories.map((category) => {
             const isActive = category.id === active.id;
 

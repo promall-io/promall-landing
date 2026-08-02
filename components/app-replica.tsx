@@ -2,9 +2,18 @@
 
 import { useState } from "react"
 import { PA_BOLD, PA_LINEAR, type PaIconName } from "./app-replica-icons"
+import {
+  REPLICA_COPY,
+  type ReplicaCopy,
+  type ReplicaKpiId,
+  type ReplicaOrderStatus,
+} from "./app-replica-copy"
+import type { Locale } from "@/i18n/config"
 import "./app-replica.css"
 
 type PaTab = "dashboard" | "orders" | "products"
+
+const MIRRORED_ICONS: readonly PaIconName[] = ["ChevronLeftIcon", "ArrowRightOnRectangleIcon"]
 
 function PaIcon({
   name,
@@ -16,10 +25,11 @@ function PaIcon({
   className?: string
 }) {
   const svg = variant === "bold" ? PA_BOLD[name] : PA_LINEAR[name]
+  const mirrored = MIRRORED_ICONS.includes(name) ? " pa-icon--mirror" : ""
   return (
     <span
       aria-hidden="true"
-      className={`pa-icon ${className ?? ""}`}
+      className={`pa-icon${mirrored} ${className ?? ""}`}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   )
@@ -49,90 +59,48 @@ function PaLogo({ size = 32 }: { size?: number }) {
 type NavItem = { label: string; icon: PaIconName; tab?: PaTab }
 type NavGroup = { label: string; items: NavItem[] }
 
-const NAV_GROUPS: NavGroup[] = [
-  {
-    label: "فروشگاه",
-    items: [
-      { label: "داشبورد", icon: "Squares2X2Icon", tab: "dashboard" },
-      { label: "سفارشات", icon: "QueueListIcon", tab: "orders" },
-      { label: "محصولات", icon: "CubeIcon", tab: "products" },
-      { label: "دسته‌ها", icon: "RectangleStackIcon" },
-      { label: "انبارداری", icon: "CubeTransparentIcon" },
-    ],
-  },
-  {
-    label: "رشد",
-    items: [
-      { label: "مشتریان", icon: "UsersIcon" },
-      { label: "کدهای تخفیف", icon: "TagIcon" },
-      { label: "کمپین", icon: "SpeakerIcon" },
-      { label: "گزارشات", icon: "ChartBarIcon" },
-      { label: "دستیار هوش مصنوعی", icon: "SparklesIcon" },
-    ],
-  },
-  {
-    label: "حساب",
-    items: [
-      { label: "تنظیمات", icon: "Cog6ToothIcon" },
-      { label: "اشتراک", icon: "CreditCardIcon" },
-    ],
-  },
-]
+function navGroups(copy: ReplicaCopy): NavGroup[] {
+  return [
+    {
+      label: copy.navGroups.shop,
+      items: [
+        { label: copy.nav.dashboard, icon: "Squares2X2Icon", tab: "dashboard" },
+        { label: copy.nav.orders, icon: "QueueListIcon", tab: "orders" },
+        { label: copy.nav.products, icon: "CubeIcon", tab: "products" },
+        { label: copy.nav.categories, icon: "RectangleStackIcon" },
+        { label: copy.nav.inventory, icon: "CubeTransparentIcon" },
+      ],
+    },
+    {
+      label: copy.navGroups.growth,
+      items: [
+        { label: copy.nav.customers, icon: "UsersIcon" },
+        { label: copy.nav.discountCodes, icon: "TagIcon" },
+        { label: copy.nav.campaigns, icon: "SpeakerIcon" },
+        { label: copy.nav.reports, icon: "ChartBarIcon" },
+        { label: copy.nav.aiAssistant, icon: "SparklesIcon" },
+      ],
+    },
+    {
+      label: copy.navGroups.account,
+      items: [
+        { label: copy.nav.settings, icon: "Cog6ToothIcon" },
+        { label: copy.nav.subscription, icon: "CreditCardIcon" },
+      ],
+    },
+  ]
+}
 
-const KPIS: Array<{
-  label: string
-  value: string
-  unit?: string
-  icon: PaIconName
-  iconBg: string
-  iconFg: string
-  delta?: string
-  note?: string
-}> = [
+const KPI_VISUALS: Array<{ id: ReplicaKpiId; icon: PaIconName; iconBg: string; iconFg: string }> = [
+  { id: "revenue", icon: "WalletIcon", iconBg: "var(--gold-soft)", iconFg: "var(--gold)" },
+  { id: "orders", icon: "ShoppingCartIcon", iconBg: "var(--info-soft)", iconFg: "var(--info)" },
+  { id: "customers", icon: "UsersIcon", iconBg: "var(--success-soft)", iconFg: "var(--success-ink)" },
   {
-    label: "درآمد کل",
-    value: "۸۴٬۲۵۰٬۰۰۰",
-    unit: "تومان",
-    icon: "WalletIcon",
-    iconBg: "var(--gold-soft)",
-    iconFg: "var(--gold)",
-    delta: "۱۸٪",
-  },
-  {
-    label: "کل سفارشات",
-    value: "۱۲۶",
-    icon: "ShoppingCartIcon",
-    iconBg: "var(--info-soft)",
-    iconFg: "var(--info)",
-    note: "۹۸ تکمیل شده",
-  },
-  {
-    label: "مشتریان",
-    value: "۸۹",
-    icon: "UsersIcon",
-    iconBg: "var(--success-soft)",
-    iconFg: "var(--success-ink)",
-    note: "۱۴ مشتری جدید",
-  },
-  {
-    label: "میانگین سفارش",
-    value: "۶۶۸٬۰۰۰",
-    unit: "تومان",
+    id: "averageOrder",
     icon: "ChartBarIcon",
     iconBg: "var(--warning-soft)",
     iconFg: "var(--warning-ink)",
-    note: "نرخ تکمیل: ۷۸٪",
   },
-]
-
-const WEEK_BARS = [
-  { value: "۸۵۰هزار", pct: 24, day: "ش" },
-  { value: "۱٫۲م", pct: 34, day: "ی" },
-  { value: "۹۸۰هزار", pct: 28, day: "د" },
-  { value: "۱٫۶م", pct: 46, day: "س" },
-  { value: "۱٫۴م", pct: 40, day: "چ" },
-  { value: "۲٫۹م", pct: 83, day: "پ" },
-  { value: "۳٫۵م", pct: 100, day: "ج" },
 ]
 
 const RANK_BADGES = [
@@ -143,66 +111,28 @@ const RANK_BADGES = [
   { bg: "var(--slate-soft)", fg: "#ffffff" },
 ]
 
-const TOP_PRODUCTS = [
-  { name: "مانتو کتان کرم", revenue: "۲۴٬۸۰۰٬۰۰۰ تومان", sold: "۳۲ فروش", pct: 100 },
-  { name: "شومیز ساتن مشکی", revenue: "۱۸٬۲۰۰٬۰۰۰ تومان", sold: "۲۶ فروش", pct: 73 },
-  { name: "شال نخی طوسی", revenue: "۱۲٬۶۰۰٬۰۰۰ تومان", sold: "۴۱ فروش", pct: 51 },
-  { name: "سارافون لینن", revenue: "۹٬۸۰۰٬۰۰۰ تومان", sold: "۱۴ فروش", pct: 40 },
-  { name: "دامن پلیسه", revenue: "۷٬۲۰۰٬۰۰۰ تومان", sold: "۱۹ فروش", pct: 29 },
-]
+const ORDER_STATUS_TONE: Record<ReplicaOrderStatus, string> = {
+  confirmed: "pm-opill--success",
+  processing: "pm-opill--info",
+  shipped: "pm-opill--brand",
+  completed: "pm-opill--success",
+  awaitingPayment: "pm-opill--warning",
+  cancelled: "pm-opill--danger",
+}
 
-type OrderRow = { id: string; name: string; amount: string; status: string; tone: string }
+const ORDER_STAT_TONES = ["", "pa-stat__value--warning", "pa-stat__value--success", ""]
 
-const RECENT_ORDERS: OrderRow[] = [
-  { id: "#۱۰۸۷", name: "غزل محمدی", amount: "۱٬۲۸۰٬۰۰۰ تومان", status: "تایید شده", tone: "pm-opill--success" },
-  { id: "#۱۰۸۶", name: "سارا احمدی", amount: "۸۹۰٬۰۰۰ تومان", status: "در حال پردازش", tone: "pm-opill--info" },
-  { id: "#۱۰۸۵", name: "نگار کریمی", amount: "۲٬۱۴۰٬۰۰۰ تومان", status: "ارسال شده", tone: "pm-opill--brand" },
-  { id: "#۱۰۸۴", name: "مریم رضایی", amount: "۶۴۰٬۰۰۰ تومان", status: "تکمیل شده", tone: "pm-opill--success" },
-  { id: "#۱۰۸۳", name: "الهام موسوی", amount: "۱٬۷۵۰٬۰۰۰ تومان", status: "در انتظار پرداخت", tone: "pm-opill--warning" },
-]
+type OrderRow = { id: string; name: string; amount: string; status: ReplicaOrderStatus }
 
-const ALL_ORDERS: OrderRow[] = [
-  ...RECENT_ORDERS,
-  { id: "#۱۰۸۲", name: "آیدا شریفی", amount: "۹۶۰٬۰۰۰ تومان", status: "تکمیل شده", tone: "pm-opill--success" },
-  { id: "#۱۰۸۱", name: "رها کاظمی", amount: "۲٬۸۶۰٬۰۰۰ تومان", status: "ارسال شده", tone: "pm-opill--brand" },
-  { id: "#۱۰۸۰", name: "ستاره امیری", amount: "۵۴۰٬۰۰۰ تومان", status: "لغو شده", tone: "pm-opill--danger" },
-  { id: "#۱۰۷۹", name: "مهسا نادری", amount: "۱٬۱۲۰٬۰۰۰ تومان", status: "تکمیل شده", tone: "pm-opill--success" },
-  { id: "#۱۰۷۸", name: "پریسا جلالی", amount: "۷۸۰٬۰۰۰ تومان", status: "تکمیل شده", tone: "pm-opill--success" },
-  { id: "#۱۰۷۷", name: "شقایق طاهری", amount: "۱٬۹۶۰٬۰۰۰ تومان", status: "ارسال شده", tone: "pm-opill--brand" },
-  { id: "#۱۰۷۶", name: "یاسمن قاسمی", amount: "۸۵۰٬۰۰۰ تومان", status: "تکمیل شده", tone: "pm-opill--success" },
-]
-
-const ORDER_STATS = [
-  { label: "کل سفارشات", value: "۱۲۶" },
-  { label: "در انتظار ارسال", value: "۳", tone: "pa-stat__value--warning" },
-  { label: "تکمیل شده", value: "۹۸", tone: "pa-stat__value--success" },
-  { label: "میانگین سفارش", value: "۶۶۸٬۰۰۰" },
-]
-
-const ORDER_FILTERS = ["همه", "در انتظار پرداخت", "تایید شده", "در حال پردازش", "ارسال شده", "تکمیل شده"]
-
-const LOW_STOCK = [
-  { name: "شال نخی طوسی", sku: "SH-TU-01", qty: "۲ عدد", critical: true },
-  { name: "مانتو کتان کرم — سایز ۳۸", sku: "MK-CRM-38", qty: "۴ عدد", critical: true },
-  { name: "شومیز ساتن مشکی", sku: "SM-SB-01", qty: "۵ عدد", critical: false },
-  { name: "روسری ابریشم گلدار", sku: "RA-GL-02", qty: "۶ عدد", critical: false },
-]
-
-const PRODUCTS = [
-  { name: "مانتو کتان کرم", meta: "۳ تنوع · MK-CRM", price: "۱٬۲۸۰٬۰۰۰ تومان", stock: "۲۴ عدد", active: true },
-  { name: "شومیز ساتن مشکی", meta: "۲ تنوع · SM-SB", price: "۸۹۰٬۰۰۰ تومان", stock: "۵ عدد", active: true },
-  { name: "شال نخی طوسی", meta: "۱ تنوع · SH-TU", price: "۴۲۰٬۰۰۰ تومان", stock: "۲ عدد", active: true },
-  { name: "سارافون لینن", meta: "۴ تنوع · SF-LN", price: "۹۸۰٬۰۰۰ تومان", stock: "۱۸ عدد", active: true },
-  { name: "کت تک لینن", meta: "۲ تنوع · KT-LN", price: "۱٬۸۴۰٬۰۰۰ تومان", stock: "۹ عدد", active: true },
-  { name: "دامن پلیسه", meta: "۲ تنوع · DP-PL", price: "۷۶۰٬۰۰۰ تومان", stock: "۳۱ عدد", active: true },
-  { name: "پیراهن نخی راه‌راه", meta: "۳ تنوع · PN-RR", price: "۹۲۰٬۰۰۰ تومان", stock: "۱۴ عدد", active: true },
-  { name: "شلوار پارچه‌ای مشکی", meta: "۲ تنوع · SP-MK", price: "۱٬۱۶۰٬۰۰۰ تومان", stock: "۲۲ عدد", active: true },
-  { name: "تاپ کبریتی", meta: "۱ تنوع · TP-KB", price: "۴۸۰٬۰۰۰ تومان", stock: "۲۷ عدد", active: true },
-  { name: "کیف دوشی چرم", meta: "۱ تنوع · KF-CH", price: "۲٬۴۰۰٬۰۰۰ تومان", stock: "۷ عدد", active: true },
-  { name: "روسری ابریشم گلدار", meta: "۱ تنوع · RA-GL", price: "۶۴۰٬۰۰۰ تومان", stock: "۶ عدد", active: false },
-]
-
-function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: PaTab) => void }) {
+function Sidebar({
+  copy,
+  activeTab,
+  onSelect,
+}: {
+  copy: ReplicaCopy
+  activeTab: PaTab
+  onSelect: (tab: PaTab) => void
+}) {
   return (
     <div className="pa-sidebar">
       <span className="pa-sidebar-highlight" />
@@ -210,12 +140,12 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
       <div className="pa-sidebar-brand">
         <PaLogo size={32} />
         <div style={{ minWidth: 0 }}>
-          <p className="pa-sidebar-brand-name">پرومال</p>
-          <p className="pa-sidebar-brand-sub">پنل فروشگاه</p>
+          <p className="pa-sidebar-brand-name">{copy.brand.name}</p>
+          <p className="pa-sidebar-brand-sub">{copy.brand.sub}</p>
         </div>
       </div>
       <div className="pa-sidebar-nav">
-        {NAV_GROUPS.map((group) => (
+        {navGroups(copy).map((group) => (
           <div key={group.label} className="pa-sidebar-group">
             <p className="pa-sidebar-section-label">{group.label}</p>
             <div className="pa-sidebar-items">
@@ -241,10 +171,10 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
       </div>
       <div className="pa-sidebar-footer">
         <div className="pa-sidebar-profile">
-          <span className="pa-sidebar-profile-avatar">ت</span>
+          <span className="pa-sidebar-profile-avatar">{copy.profile.avatar}</span>
           <div style={{ flex: 1, minWidth: 0, textAlign: "start" }}>
-            <p className="pa-sidebar-profile-name">ترمه محمدی</p>
-            <p className="pa-sidebar-profile-meta">مالک · مزون ترمه</p>
+            <p className="pa-sidebar-profile-name">{copy.profile.name}</p>
+            <p className="pa-sidebar-profile-meta">{copy.profile.meta}</p>
           </div>
           <span className="pa-sidebar-logout">
             <PaIcon name="ArrowRightOnRectangleIcon" />
@@ -252,27 +182,21 @@ function Sidebar({ activeTab, onSelect }: { activeTab: PaTab; onSelect: (tab: Pa
         </div>
         <span className="pa-sidebar-collapse">
           <PaIcon name="ChevronLeftIcon" />
-          جمع کردن
+          {copy.profile.collapse}
         </span>
       </div>
     </div>
   )
 }
 
-const TAB_TITLES: Record<PaTab, string | null> = {
-  dashboard: null,
-  orders: "سفارشات",
-  products: "محصولات",
-}
-
-function WindowHeader({ activeTab }: { activeTab: PaTab }) {
-  const title = TAB_TITLES[activeTab]
+function WindowHeader({ copy, activeTab }: { copy: ReplicaCopy; activeTab: PaTab }) {
+  const title = activeTab === "dashboard" ? null : copy.tabTitles[activeTab]
   return (
     <div className="pa-header">
       <div className="pa-header-cluster">
         <span className="pa-header-primary-btn">
           <PaIcon name="PlusIcon" />
-          <span>سفارش جدید</span>
+          <span>{copy.header.newOrder}</span>
         </span>
         <span className="pa-header-icon-btn">
           <PaIcon name="ChatBubbleDirectIcon" />
@@ -283,8 +207,8 @@ function WindowHeader({ activeTab }: { activeTab: PaTab }) {
           <span className="pa-header-title">{title}</span>
         ) : (
           <>
-            <span className="pa-header-greeting">صبح بخیر، ترمه</span>
-            <span className="pa-header-date">یکشنبه، ۲۸ تیر ۱۴۰۵</span>
+            <span className="pa-header-greeting">{copy.header.greeting}</span>
+            <span className="pa-header-date">{copy.header.date}</span>
           </>
         )}
       </div>
@@ -303,7 +227,13 @@ function WindowHeader({ activeTab }: { activeTab: PaTab }) {
   )
 }
 
-function HeroBanner() {
+const HERO_TILE_ICONS: Array<{ icon: PaIconName; tone: string }> = [
+  { icon: "ArchiveBoxIcon", tone: "pm-hero__tile-icon--gold" },
+  { icon: "ChatBubbleDirectIcon", tone: "pm-hero__tile-icon--mint" },
+  { icon: "ExclamationTriangleIcon", tone: "pm-hero__tile-icon--rose" },
+]
+
+function HeroBanner({ copy }: { copy: ReplicaCopy }) {
   return (
     <div className="pm-hero">
       <span className="pm-hero__glow" />
@@ -311,21 +241,21 @@ function HeroBanner() {
         <div style={{ minWidth: 0, flex: 1 }}>
           <span className="pm-hero__eyebrow">
             <PaIcon name="SparklesIcon" variant="bold" />
-            خوش آمدی، ترمه
+            {copy.hero.eyebrow}
           </span>
           <p className="pm-hero__title" style={{ color: "#fff" }}>
-            بیا کارهای امروزت رو تموم کنیم 🌿
+            {copy.hero.title}
           </p>
-          <p className="pm-hero__sub">{"یکشنبه، ۲۸ تیر ۱۴۰۵‏ · ‏۹ مورد نیاز به رسیدگی داره"}</p>
+          <p className="pm-hero__sub">{copy.hero.sub}</p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
           <span className="pm-hero__cta pm-hero__cta--gold">
             <PaIcon name="QueueListIcon" variant="bold" />
-            رسیدگی به سفارش‌ها
+            {copy.hero.primaryCta}
           </span>
           <span className="pm-hero__cta pm-hero__cta--ghost">
             <PaIcon name="PlusCircleIcon" />
-            سفارش جدید
+            {copy.hero.secondaryCta}
           </span>
         </div>
       </div>
@@ -333,92 +263,78 @@ function HeroBanner() {
         className="pm-hero__divider"
         style={{ position: "relative", marginTop: 20, paddingTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}
       >
-        <span className="pm-hero__tile">
-          <span className="pm-hero__tile-icon pm-hero__tile-icon--gold">
-            <PaIcon name="ArchiveBoxIcon" variant="bold" />
+        {copy.hero.tiles.map((tile, index) => (
+          <span key={tile.label} className="pm-hero__tile">
+            <span className={`pm-hero__tile-icon ${HERO_TILE_ICONS[index]!.tone}`}>
+              <PaIcon name={HERO_TILE_ICONS[index]!.icon} variant="bold" />
+            </span>
+            <span style={{ minWidth: 0, flex: 1 }}>
+              <span className="pm-hero__tile-value">{tile.value}</span>
+              <span className="pm-hero__tile-label">{tile.label}</span>
+            </span>
+            <PaIcon name="ChevronLeftIcon" className="pm-hero__tile-chev" />
           </span>
-          <span style={{ minWidth: 0, flex: 1 }}>
-            <span className="pm-hero__tile-value">۳ سفارش</span>
-            <span className="pm-hero__tile-label">در انتظار ارسال</span>
-          </span>
-          <PaIcon name="ChevronLeftIcon" className="pm-hero__tile-chev" />
-        </span>
-        <span className="pm-hero__tile">
-          <span className="pm-hero__tile-icon pm-hero__tile-icon--mint">
-            <PaIcon name="ChatBubbleDirectIcon" variant="bold" />
-          </span>
-          <span style={{ minWidth: 0, flex: 1 }}>
-            <span className="pm-hero__tile-value">۲ پیام</span>
-            <span className="pm-hero__tile-label">بی‌پاسخ در دایرکت</span>
-          </span>
-          <PaIcon name="ChevronLeftIcon" className="pm-hero__tile-chev" />
-        </span>
-        <span className="pm-hero__tile">
-          <span className="pm-hero__tile-icon pm-hero__tile-icon--rose">
-            <PaIcon name="ExclamationTriangleIcon" variant="bold" />
-          </span>
-          <span style={{ minWidth: 0, flex: 1 }}>
-            <span className="pm-hero__tile-value">۴ کالا</span>
-            <span className="pm-hero__tile-label">رو به اتمام موجودی</span>
-          </span>
-          <PaIcon name="ChevronLeftIcon" className="pm-hero__tile-chev" />
-        </span>
+        ))}
       </div>
     </div>
   )
 }
 
-function KpiRow() {
+function KpiRow({ copy }: { copy: ReplicaCopy }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, flex: "none" }}>
-      {KPIS.map((kpi) => (
-        <div key={kpi.label} className="pm-kpi">
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-            <span className="pm-kpi__label">{kpi.label}</span>
-            <span className="pm-kpi__icon" style={{ background: kpi.iconBg, color: kpi.iconFg }}>
-              <PaIcon name={kpi.icon} variant="bold" />
-            </span>
-          </div>
-          <p className="pm-kpi__value">
-            {kpi.value}
-            {kpi.unit ? <span className="pm-kpi__unit">{kpi.unit}</span> : null}
-          </p>
-          {kpi.delta ? (
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span
-                className="pm-kpi__delta"
-                style={{ background: "var(--success-soft)", color: "var(--success-ink)" }}
-              >
-                <PaIcon name="ArrowTrendingUpIcon" />
-                <span>{kpi.delta}</span>
+      {KPI_VISUALS.map((visual) => {
+        const kpi = copy.kpis[visual.id]
+
+        return (
+          <div key={visual.id} className="pm-kpi">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+              <span className="pm-kpi__label">{kpi.label}</span>
+              <span className="pm-kpi__icon" style={{ background: visual.iconBg, color: visual.iconFg }}>
+                <PaIcon name={visual.icon} variant="bold" />
               </span>
-              <span className="pm-kpi__note">نسبت به ماه قبل</span>
             </div>
-          ) : (
-            <p className="pm-kpi__note">{kpi.note}</p>
-          )}
-        </div>
-      ))}
+            <p className="pm-kpi__value">
+              {kpi.value}
+              {kpi.unit ? <span className="pm-kpi__unit">{kpi.unit}</span> : null}
+            </p>
+            {kpi.delta ? (
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span
+                  className="pm-kpi__delta"
+                  style={{ background: "var(--success-soft)", color: "var(--success-ink)" }}
+                >
+                  <PaIcon name="ArrowTrendingUpIcon" />
+                  <span>{kpi.delta}</span>
+                </span>
+                <span className="pm-kpi__note">{copy.kpiDeltaNote}</span>
+              </div>
+            ) : (
+              <p className="pm-kpi__note">{kpi.note}</p>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
 
-function SalesAndTopProducts() {
+function SalesAndTopProducts({ copy }: { copy: ReplicaCopy }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 20, flex: "none" }}>
       <div className="pm-dash-card" style={{ gridColumn: "span 7", padding: 20 }}>
         <div style={{ marginBottom: 20, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
           <div>
-            <div className="pm-dash-card__title">روند فروش این هفته</div>
-            <div className="pm-dash-card__sub">مجموع ۱۲٬۴۸۰٬۰۰۰ تومان</div>
+            <div className="pm-dash-card__title">{copy.sales.title}</div>
+            <div className="pm-dash-card__sub">{copy.sales.sub}</div>
           </div>
           <span className="pm-kpi__delta" style={{ background: "var(--success-soft)", color: "var(--success-ink)" }}>
             <PaIcon name="ArrowTrendingUpIcon" />
-            ۱۲٪ رشد هفتگی
+            {copy.sales.badge}
           </span>
         </div>
         <div style={{ display: "flex", height: 208, alignItems: "flex-end", justifyContent: "space-between", gap: 12 }}>
-          {WEEK_BARS.map((bar) => (
+          {copy.sales.bars.map((bar) => (
             <div
               key={bar.day}
               style={{ display: "flex", height: "100%", flex: 1, flexDirection: "column", alignItems: "center", justifyContent: "flex-end", gap: 8 }}
@@ -433,13 +349,13 @@ function SalesAndTopProducts() {
 
       <div className="pm-dash-card" style={{ gridColumn: "span 5", padding: 20 }}>
         <div className="pm-dash-card__title" style={{ marginBottom: 16 }}>
-          پرفروش‌ترین محصولات
+          {copy.topProducts.title}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {TOP_PRODUCTS.map((item, index) => (
+          {copy.topProducts.items.map((item, index) => (
             <div key={item.name} style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <span className="pm-rank" style={{ background: RANK_BADGES[index]!.bg, color: RANK_BADGES[index]!.fg }}>
-                {["۱", "۲", "۳", "۴", "۵"][index]}
+                {copy.topProducts.ranks[index]}
               </span>
               <div style={{ minWidth: 0, flex: 1 }}>
                 <div className="pm-tp-name">{item.name}</div>
@@ -459,23 +375,23 @@ function SalesAndTopProducts() {
   )
 }
 
-function OrdersTable({ rows }: { rows: OrderRow[] }) {
+function OrdersTable({ copy, rows }: { copy: ReplicaCopy; rows: OrderRow[] }) {
   return (
     <>
       <div className="pm-otable-head">
-        <span className="pm-th">سفارش</span>
-        <span className="pm-th">مشتری</span>
-        <span className="pm-th">مبلغ</span>
-        <span className="pm-th">وضعیت</span>
+        <span className="pm-th">{copy.orderColumns.order}</span>
+        <span className="pm-th">{copy.orderColumns.customer}</span>
+        <span className="pm-th">{copy.orderColumns.amount}</span>
+        <span className="pm-th">{copy.orderColumns.status}</span>
       </div>
       {rows.map((order) => (
         <div key={order.id} className="pm-otable-row">
           <span className="pm-td pm-td--id">{order.id}</span>
           <span className="pm-td pm-td--name">{order.name}</span>
           <span className="pm-td pm-td--amount">{order.amount}</span>
-          <span className={`pm-opill ${order.tone}`}>
+          <span className={`pm-opill ${ORDER_STATUS_TONE[order.status]}`}>
             <span className="pm-opill__dot" />
-            {order.status}
+            {copy.orderStatuses[order.status]}
           </span>
         </div>
       ))}
@@ -483,29 +399,29 @@ function OrdersTable({ rows }: { rows: OrderRow[] }) {
   )
 }
 
-function OrdersAndLowStock() {
+function OrdersAndLowStock({ copy }: { copy: ReplicaCopy }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 20, flex: "none" }}>
       <div className="pm-dash-card" style={{ gridColumn: "span 7", overflow: "hidden" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 20px 12px" }}>
-          <div className="pm-dash-card__title">سفارش‌های اخیر</div>
+          <div className="pm-dash-card__title">{copy.recentOrders.title}</div>
           <span className="pm-view-all">
-            مشاهده همه
+            {copy.recentOrders.viewAll}
             <PaIcon name="ChevronLeftIcon" />
           </span>
         </div>
-        <OrdersTable rows={RECENT_ORDERS} />
+        <OrdersTable copy={copy} rows={copy.recentOrders.rows} />
       </div>
 
       <div className="pm-dash-card" style={{ gridColumn: "span 5", padding: 20 }}>
         <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div className="pm-dash-card__title">موجودی کم</div>
+          <div className="pm-dash-card__title">{copy.lowStock.title}</div>
           <span className="pm-badge" style={{ background: "var(--warning-soft)", color: "var(--warning-ink)" }}>
-            ۴ کالا
+            {copy.lowStock.badge}
           </span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {LOW_STOCK.map((item) => (
+          {copy.lowStock.items.map((item) => (
             <div key={item.sku} className="pm-ls-row">
               <span
                 className="pm-ls-icon"
@@ -532,54 +448,56 @@ function OrdersAndLowStock() {
   )
 }
 
-function DashboardPane() {
+function DashboardPane({ copy }: { copy: ReplicaCopy }) {
   return (
     <div className="pa-pane">
-      <HeroBanner />
-      <KpiRow />
-      <SalesAndTopProducts />
-      <OrdersAndLowStock />
+      <HeroBanner copy={copy} />
+      <KpiRow copy={copy} />
+      <SalesAndTopProducts copy={copy} />
+      <OrdersAndLowStock copy={copy} />
     </div>
   )
 }
 
-function OrdersPane() {
+function OrdersPane({ copy }: { copy: ReplicaCopy }) {
+  const rows = [...copy.recentOrders.rows, ...copy.ordersPane.extraRows]
+
   return (
     <div className="pa-pane">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
-          <div className="pm-dash-card__title" style={{ fontSize: 20 }}>سفارشات</div>
-          <div className="pm-dash-card__sub">۱۲۶ سفارش در ۳۰ روز گذشته</div>
+          <div className="pm-dash-card__title" style={{ fontSize: 20 }}>{copy.ordersPane.title}</div>
+          <div className="pm-dash-card__sub">{copy.ordersPane.sub}</div>
         </div>
         <span className="pm-badge" style={{ background: "var(--gold-soft)", color: "var(--gold-ink)" }}>
-          ۳ در انتظار ارسال
+          {copy.ordersPane.badge}
         </span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, flex: "none" }}>
-        {ORDER_STATS.map((stat) => (
+        {copy.ordersPane.stats.map((stat, index) => (
           <div key={stat.label} className="pa-stat">
             <p className="pa-stat__label">{stat.label}</p>
-            <p className={`pa-stat__value ${stat.tone ?? ""}`}>{stat.value}</p>
+            <p className={`pa-stat__value ${ORDER_STAT_TONES[index] ?? ""}`}>{stat.value}</p>
           </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", flex: "none" }}>
-        {ORDER_FILTERS.map((filter, index) => (
+        {copy.ordersPane.filters.map((filter, index) => (
           <span key={filter} className={`pm-chip ${index === 0 ? "pm-chip--active" : ""}`}>
             {filter}
           </span>
         ))}
       </div>
       <div className="pm-dash-card" style={{ overflow: "hidden", flex: "none" }}>
-        <OrdersTable rows={ALL_ORDERS} />
+        <OrdersTable copy={copy} rows={rows} />
         <div className="pa-table-footer">
-          <span>نمایش ۱۲ از ۱۲۶ سفارش</span>
+          <span>{copy.ordersPane.footer}</span>
           <span className="pa-pagination">
-            <span className="pa-page pa-page--active">۱</span>
-            <span className="pa-page">۲</span>
-            <span className="pa-page">۳</span>
-            <span className="pa-page">…</span>
-            <span className="pa-page">۱۱</span>
+            {copy.ordersPane.pages.map((page, index) => (
+              <span key={page} className={`pa-page ${index === 0 ? "pa-page--active" : ""}`}>
+                {page}
+              </span>
+            ))}
           </span>
         </div>
       </div>
@@ -587,37 +505,38 @@ function OrdersPane() {
   )
 }
 
-function ProductsPane() {
+function ProductsPane({ copy }: { copy: ReplicaCopy }) {
   return (
     <div className="pa-pane">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flex: "none" }}>
         <div>
-          <div className="pm-dash-card__title" style={{ fontSize: 20 }}>محصولات</div>
-          <div className="pm-dash-card__sub">۴۲ محصول فعال · ۴ کالا رو به اتمام</div>
+          <div className="pm-dash-card__title" style={{ fontSize: 20 }}>{copy.productsPane.title}</div>
+          <div className="pm-dash-card__sub">{copy.productsPane.sub}</div>
         </div>
         <span className="pa-header-primary-btn" style={{ height: 40 }}>
           <PaIcon name="PlusIcon" />
-          <span>محصول جدید</span>
+          <span>{copy.productsPane.newProduct}</span>
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 12, flex: "none" }}>
         <span className="pa-search">
           <PaIcon name="MagnifyingGlassIcon" />
-          جست‌وجو تو محصولات…
+          {copy.productsPane.search}
         </span>
-        <span className="pm-chip pm-chip--active">همه</span>
-        <span className="pm-chip">فعال</span>
-        <span className="pm-chip">پیش‌نویس</span>
-        <span className="pm-chip">رو به اتمام</span>
+        {copy.productsPane.filters.map((filter, index) => (
+          <span key={filter} className={`pm-chip ${index === 0 ? "pm-chip--active" : ""}`}>
+            {filter}
+          </span>
+        ))}
       </div>
       <div className="pm-dash-card" style={{ overflow: "hidden", flex: "none" }}>
         <div className="pm-otable-head" style={{ gridTemplateColumns: "2.2fr 0.9fr 0.9fr 0.9fr" }}>
-          <span className="pm-th">کالا</span>
-          <span className="pm-th">قیمت</span>
-          <span className="pm-th">موجودی</span>
-          <span className="pm-th">وضعیت</span>
+          <span className="pm-th">{copy.productsPane.columns.item}</span>
+          <span className="pm-th">{copy.productsPane.columns.price}</span>
+          <span className="pm-th">{copy.productsPane.columns.stock}</span>
+          <span className="pm-th">{copy.productsPane.columns.status}</span>
         </div>
-        {PRODUCTS.map((product) => (
+        {copy.productsPane.rows.map((product) => (
           <div key={product.name} className="pa-product-row">
             <div className="pa-product-main">
               <span className="pa-product-thumb">
@@ -632,7 +551,7 @@ function ProductsPane() {
             <span className="pm-td" style={{ color: "var(--text-body)" }}>{product.stock}</span>
             <span className={`pm-opill ${product.active ? "pm-opill--success" : "pm-opill--warning"}`}>
               <span className="pm-opill__dot" />
-              {product.active ? "فعال" : "پیش‌نویس"}
+              {product.active ? copy.productsPane.statusActive : copy.productsPane.statusDraft}
             </span>
           </div>
         ))}
@@ -641,24 +560,25 @@ function ProductsPane() {
   )
 }
 
-export function AppReplica({ label }: { label: string }) {
+export function AppReplica({ label, locale }: { label: string; locale: Locale }) {
   const [activeTab, setActiveTab] = useState<PaTab>("dashboard")
+  const copy = REPLICA_COPY[locale]
 
   return (
     <div role="group" aria-label={label} className="pmapp-fit">
-      <div className="pmapp">
-        <Sidebar activeTab={activeTab} onSelect={setActiveTab} />
+      <div className={`pmapp ${locale === "fa" ? "pmapp--rtl" : "pmapp--ltr"}`}>
+        <Sidebar copy={copy} activeTab={activeTab} onSelect={setActiveTab} />
 
         <div className="pa-window">
           <span className="pa-window-border" />
           <span className="pa-window-highlight" />
           <span className="pa-window-glow" />
           <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0, position: "relative", zIndex: 10, height: "100%" }}>
-            <WindowHeader activeTab={activeTab} />
+            <WindowHeader copy={copy} activeTab={activeTab} />
             <div className="pa-content">
-              {activeTab === "dashboard" ? <DashboardPane key="dashboard" /> : null}
-              {activeTab === "orders" ? <OrdersPane key="orders" /> : null}
-              {activeTab === "products" ? <ProductsPane key="products" /> : null}
+              {activeTab === "dashboard" ? <DashboardPane key="dashboard" copy={copy} /> : null}
+              {activeTab === "orders" ? <OrdersPane key="orders" copy={copy} /> : null}
+              {activeTab === "products" ? <ProductsPane key="products" copy={copy} /> : null}
             </div>
           </div>
         </div>

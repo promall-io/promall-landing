@@ -56,7 +56,7 @@ function Callout({ title, text }: { title: string; text: string }) {
 
 function DataTable({ head, rows }: { head: string[]; rows: string[][] }) {
   return (
-    <div className="pw-card overflow-x-auto">
+    <div data-lenis-prevent-wheel className="pw-card overflow-x-auto">
       <table className="w-full min-w-[520px] border-collapse text-start">
         <thead>
           <tr>
