@@ -3,6 +3,8 @@ import { defaultLocale, isValidLocale, LOCALE_COOKIE_NAME, type Locale } from '@
 
 const IRAN_COUNTRY_CODE = 'IR';
 
+export const GEO_LOCALE_REDIRECT_ENABLED = false;
+
 const GEO_COUNTRY_HEADERS = [
   'x-vercel-ip-country',
   'cf-ipcountry',

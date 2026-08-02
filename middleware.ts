@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextResponse, type NextRequest } from 'next/server';
 import { locales, defaultLocale } from './i18n/config';
-import { detectLocale } from './lib/geo-locale';
+import { detectLocale, GEO_LOCALE_REDIRECT_ENABLED } from './lib/geo-locale';
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -22,7 +22,7 @@ function isDocumentNavigation(request: NextRequest): boolean {
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (!hasLocalePrefix(pathname) && isDocumentNavigation(request)) {
+  if (GEO_LOCALE_REDIRECT_ENABLED && !hasLocalePrefix(pathname) && isDocumentNavigation(request)) {
     const locale = detectLocale(request);
 
     if (locale !== defaultLocale) {
