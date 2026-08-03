@@ -44,50 +44,44 @@ function BillingToggle({ checked, label, labelId, onToggle }: BillingToggleProps
 type PlanCardProps = {
   plan: PricingPlan;
   yearly: boolean;
-  billingLabel: string;
   latinNumerals: boolean;
   ctaHref: string;
   isFirst: boolean;
   isLast: boolean;
+  dividerStart: boolean;
   priceFade: { duration: number; ease: readonly number[] };
-  onToggle: () => void;
 };
 
 function PlanCard({
   plan,
   yearly,
-  billingLabel,
   latinNumerals,
   ctaHref,
   isFirst,
   isLast,
+  dividerStart,
   priceFade,
-  onToggle,
 }: PlanCardProps) {
   const price = plan.hasToggle && yearly ? plan.yearlyPrice : plan.price;
 
   const surface = plan.featured
-    ? 'bg-[var(--pw-surface-raised)] min-[811px]:z-[1] min-[811px]:-my-6 min-[811px]:py-[52px]'
+    ? 'bg-[var(--pw-surface-raised)] min-[1100px]:z-[1] min-[1100px]:-my-6 min-[1100px]:py-[52px]'
     : 'bg-[var(--pw-surface-1)]';
 
   const corners = plan.featured
     ? ''
-    : `${isFirst ? 'min-[811px]:rounded-e-none' : ''} ${isLast ? 'min-[811px]:rounded-s-none' : ''}`;
+    : `${isFirst ? '' : 'min-[1100px]:rounded-s-none'} ${isLast ? '' : 'min-[1100px]:rounded-e-none'}`;
+
+  const divider = dividerStart
+    ? 'min-[1100px]:border-s min-[1100px]:border-[var(--pw-line)]'
+    : '';
 
   return (
-    <div className={`relative flex flex-col rounded-[24px] p-7 ${surface} ${corners}`}>
-      <div className="flex h-5 items-center justify-between gap-3">
+    <div className={`relative flex flex-col rounded-[24px] p-7 ${surface} ${corners} ${divider}`}>
+      <div className="flex h-5 items-center">
         <span className="text-xs uppercase tracking-[0.12em] text-[var(--pw-text-dim)]">
           {plan.name}
         </span>
-        {plan.hasToggle ? (
-          <BillingToggle
-            checked={yearly}
-            label={billingLabel}
-            labelId={`pricing-billing-${plan.id}`}
-            onToggle={onToggle}
-          />
-        ) : null}
       </div>
 
       <span aria-hidden className="pw-rail my-5 block" />
@@ -173,24 +167,34 @@ export function PricingCards({
   const priceFade = { duration: reduceMotion ? 0 : 0.25, ease: REVEAL_EASE };
 
   return (
-    <div
-      className="pw-pricing-grid"
-      style={{ '--pw-pricing-columns': plans.length } as CSSProperties}
-    >
-      {plans.map((plan, index) => (
-        <PlanCard
-          key={plan.id}
-          plan={plan}
-          yearly={yearly}
-          billingLabel={yearly ? yearlyLabel : monthlyLabel}
-          latinNumerals={latinNumerals}
-          ctaHref={ctaHref}
-          isFirst={index === 0}
-          isLast={index === plans.length - 1}
-          priceFade={priceFade}
+    <div className="flex flex-col gap-8">
+      <div className="flex justify-end">
+        <BillingToggle
+          checked={yearly}
+          label={yearly ? yearlyLabel : monthlyLabel}
+          labelId="pricing-billing"
           onToggle={() => setYearly((current) => !current)}
         />
-      ))}
+      </div>
+
+      <div
+        className="pw-pricing-grid"
+        style={{ '--pw-pricing-columns': plans.length } as CSSProperties}
+      >
+        {plans.map((plan, index) => (
+          <PlanCard
+            key={plan.id}
+            plan={plan}
+            yearly={yearly}
+            latinNumerals={latinNumerals}
+            ctaHref={ctaHref}
+            isFirst={index === 0}
+            isLast={index === plans.length - 1}
+            dividerStart={index > 0 && !plan.featured && !plans[index - 1].featured}
+            priceFade={priceFade}
+          />
+        ))}
+      </div>
     </div>
   );
 }

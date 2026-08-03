@@ -268,31 +268,6 @@
         }
       ]
     },
-    "why": {
-      "eyebrow": "چرا پرومال",
-      "titleLead": "سه چیزی که",
-      "titleTrail": "کار شاپت رو عوض می‌کنه",
-      "description": "انبار خودت، اتصال رسمی اینستاگرام و اجرای کار از دل گفتگو — همه تو یه پنل.",
-      "prevLabel": "قبلی",
-      "nextLabel": "بعدی",
-      "cards": [
-        {
-          "title": "همه‌چی از انبار خودت",
-          "description": "محصول، سایز، قیمت و موجودی؛ یه منبع درست برای همه‌ی جواب‌ها.",
-          "illustration": "/illustrations/iso-layers.svg"
-        },
-        {
-          "title": "اتصال رسمی اینستاگرام",
-          "description": "از API رسمی متا وصل می‌شه، نه ربات غیررسمی و پرخطر.",
-          "illustration": "/illustrations/iso-key.svg"
-        },
-        {
-          "title": "سفارش، همون‌جا تو دایرکت",
-          "description": "فاکتور و لینک پرداخت، بدون این‌که از چت بیای بیرون.",
-          "illustration": "/illustrations/iso-dial.svg"
-        }
-      ]
-    },
     "about": {
       "eyebrow": "چی گیرت میاد",
       "titleLead": "یه پیام بیاد،",
@@ -445,10 +420,18 @@
       "priceThousands": "{value} هزار",
       "customPrice": "قیمت سفارشی",
       "cta": "دمو رایگان بگیر",
+      "customCta": "تماس بگیرید",
       "unlimited": "نامحدود",
       "metaProducts": "{value} محصول",
       "metaOrders": "{value} سفارش در ماه",
       "metaUsers": "{value} کاربر",
+      "slaLabel": "SLA {value}٪",
+      "names": {
+        "STARTER": "لایت",
+        "PROFESSIONAL": "پرو",
+        "BUSINESS": "پرو مکس",
+        "ENTERPRISE": "بیزینس"
+      },
       "descriptions": {
         "STARTER": "برای شاپ‌های کوچیکی که تازه راه افتادن.",
         "PROFESSIONAL": "برای شاپ‌هایی که دایرکتشون شلوغه.",
@@ -460,11 +443,6 @@
         "instagramAi": "دستیار هوش مصنوعی دایرکت",
         "domainApi": "دامنه اختصاصی و API",
         "realtimeSupport": "گزارش لحظه‌ای و پشتیبانی تلفنی"
-      },
-      "enterprise": {
-        "unlimitedLabel": "محصول، سفارش و کاربر نامحدود",
-        "slaLabel": "SLA {value}٪",
-        "cta": "تماس بگیرید"
       }
     },
     "faq": {

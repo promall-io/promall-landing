@@ -57,12 +57,15 @@ export type PlanCopy = {
   priceThousands: (value: string) => string;
   customPrice: string;
   cta: string;
+  customCta: string;
   unlimited: string;
   meta: {
     products: (value: string) => string;
     orders: (value: string) => string;
     users: (value: string) => string;
   };
+  slaLabel: (value: string) => string;
+  name: (planId: string) => string | undefined;
   description: (planId: string) => string | undefined;
   featureRows: Array<{ key: FeatureRowKey; label: string }>;
 };
@@ -187,13 +190,6 @@ export function isCustomPricedPlan(plan: ApiPlan): boolean {
   return (findCycle(plan, MONTHLY_CYCLE)?.finalPrice ?? CUSTOM_PRICE) === CUSTOM_PRICE;
 }
 
-export function splitPlans(catalog: PlanCatalog): { fixed: ApiPlan[]; custom: ApiPlan[] } {
-  return {
-    fixed: catalog.plans.filter((plan) => !isCustomPricedPlan(plan)),
-    custom: catalog.plans.filter((plan) => isCustomPricedPlan(plan)),
-  };
-}
-
 export function monthlyTomanRange(catalog: PlanCatalog): { low: number; high: number } | null {
   const prices = catalog.plans
     .map((plan) => findCycle(plan, MONTHLY_CYCLE)?.finalPrice ?? CUSTOM_PRICE)
@@ -253,23 +249,31 @@ export function planSlaPercent(plan: ApiPlan, locale: string): string | null {
 export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
   const monthly = findCycle(plan, MONTHLY_CYCLE);
   const yearly = findCycle(plan, YEARLY_CYCLE);
+  const custom = isCustomPricedPlan(plan);
+  const sla = planSlaPercent(plan, copy.locale);
   const { features } = plan;
+
+  const meta = [
+    copy.meta.products(formatCount(features.maxProducts, copy.locale, copy.unlimited)),
+    copy.meta.orders(formatCount(features.maxOrders, copy.locale, copy.unlimited)),
+    copy.meta.users(formatCount(features.maxUsers, copy.locale, copy.unlimited)),
+  ];
+
+  if (sla) {
+    meta.push(copy.slaLabel(sla));
+  }
 
   return {
     id: plan.id,
-    name: planName(plan, copy.locale),
-    price: monthly ? formatPrice(monthly.finalPrice, copy) : copy.customPrice,
-    yearlyPrice: yearly ? formatPrice(yearly.monthlyEquivalent, copy) : copy.customPrice,
-    period: copy.period,
+    name: copy.name(plan.id) ?? planName(plan, copy.locale),
+    price: custom || !monthly ? copy.customPrice : formatPrice(monthly.finalPrice, copy),
+    yearlyPrice: custom || !yearly ? copy.customPrice : formatPrice(yearly.monthlyEquivalent, copy),
+    period: custom ? '' : copy.period,
     description: planDescription(plan, copy),
-    cta: copy.cta,
-    meta: [
-      copy.meta.products(formatCount(features.maxProducts, copy.locale, copy.unlimited)),
-      copy.meta.orders(formatCount(features.maxOrders, copy.locale, copy.unlimited)),
-      copy.meta.users(formatCount(features.maxUsers, copy.locale, copy.unlimited)),
-    ],
+    cta: custom ? copy.customCta : copy.cta,
+    meta,
     featured: plan.isRecommended,
-    hasToggle: Boolean(yearly && yearly.monthlyEquivalent !== monthly?.finalPrice),
+    hasToggle: !custom && Boolean(yearly && yearly.monthlyEquivalent !== monthly?.finalPrice),
     features: copy.featureRows.map((row) => ({
       label: row.label,
       included: FEATURE_ROW_PREDICATES[row.key](features),

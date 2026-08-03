@@ -48,12 +48,12 @@ const RELATED_TOPICS = {
   ],
 } as const;
 
-function planOffer(plan: ApiPlan, locale: string, topic: string, pageUrl: string): JsonValue {
+function planOffer(plan: ApiPlan, name: string, topic: string, pageUrl: string): JsonValue {
   const rial = planMonthlyRial(plan);
 
   return {
     '@type': 'Offer',
-    name: planName(plan, locale),
+    name,
     url: `${pageUrl}#pricing`,
     priceCurrency: 'IRR',
     availability: 'https://schema.org/InStock',
@@ -79,6 +79,7 @@ export async function StructuredData({ locale }: { locale: string }) {
   const tFaq = await getTranslations({ locale, namespace: 'sections.faq' });
   const tFeatures = await getTranslations({ locale, namespace: 'sections.features' });
   const tInstagram = await getTranslations({ locale, namespace: 'sections.instagram' });
+  const tPricing = await getTranslations({ locale, namespace: 'sections.pricing' });
   const tBlog = await getTranslations({ locale, namespace: 'blog' });
 
   const isFa = locale === 'fa';
@@ -93,6 +94,7 @@ export async function StructuredData({ locale }: { locale: string }) {
   const ogImage = `${SITE_URL}${isFa ? '/og.png' : '/og-en.png'}`;
 
   const categories = tFaq.raw('categories') as FaqCategory[];
+  const planNames = tPricing.raw('names') as Record<string, string | undefined>;
   const catalog = await fetchPlanCatalog();
   const priceRange = monthlyRialRange(catalog);
   const featureTabs = tFeatures.raw('tabs') as FeatureTab[];
@@ -187,7 +189,9 @@ export async function StructuredData({ locale }: { locale: string }) {
         availability: 'https://schema.org/InStock',
         url: `${pageUrl}#pricing`,
         eligibleCustomerType: 'https://schema.org/Business',
-        offers: catalog.plans.map((plan) => planOffer(plan, locale, topic, pageUrl)),
+        offers: catalog.plans.map((plan) =>
+          planOffer(plan, planNames[plan.id] ?? planName(plan, locale), topic, pageUrl),
+        ),
       },
       isAccessibleForFree: false,
       termsOfService: `${SITE_URL}/terms`,

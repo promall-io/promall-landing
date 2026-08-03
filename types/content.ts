@@ -40,12 +40,6 @@ export type FeatureTab = {
   alt: string;
 };
 
-export type WhyCard = {
-  title: string;
-  description: string;
-  illustration: string;
-};
-
 export type AboutCard = {
   eyebrow: string;
   title: string;

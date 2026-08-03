@@ -1,15 +1,10 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { ArrowLink, SectionHeading } from '@/components/ui/Primitives';
 import { Reveal } from '@/components/Reveal';
-import { EnterprisePlan } from '@/components/sections/EnterprisePlan';
 import { PricingCards } from '@/components/sections/PricingCards';
 import {
   fetchPlanCatalog,
   formatNumber,
-  planDescription,
-  planName,
-  planSlaPercent,
-  splitPlans,
   toPricingPlan,
   type FeatureRowKey,
   type PlanCopy,
@@ -27,7 +22,7 @@ export async function Pricing() {
   const t = await getTranslations('sections.pricing');
   const locale = await getLocale();
   const catalog = await fetchPlanCatalog();
-  const { fixed, custom } = splitPlans(catalog);
+  const names = t.raw('names') as Record<string, string | undefined>;
   const descriptions = t.raw('descriptions') as Record<string, string | undefined>;
   const latinNumerals = locale === 'en';
 
@@ -37,12 +32,15 @@ export async function Pricing() {
     priceThousands: (value) => t('priceThousands', { value }),
     customPrice: t('customPrice'),
     cta: t('cta'),
+    customCta: t('customCta'),
     unlimited: t('unlimited'),
     meta: {
       products: (value) => t('metaProducts', { value }),
       orders: (value) => t('metaOrders', { value }),
       users: (value) => t('metaUsers', { value }),
     },
+    slaLabel: (value) => t('slaLabel', { value }),
+    name: (planId) => names[planId],
     description: (planId) => descriptions[planId],
     featureRows: FEATURE_ROW_KEYS.map((key) => ({ key, label: t(`featureRows.${key}`) })),
   };
@@ -67,35 +65,15 @@ export async function Pricing() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="flex flex-col gap-10">
-            <PricingCards
-              plans={fixed.map((plan) => toPricingPlan(plan, copy))}
-              yearlyLabel={t('yearlyLabel', {
-                percent: formatNumber(catalog.yearlyDiscountPercent, locale),
-              })}
-              monthlyLabel={t('monthlyLabel')}
-              latinNumerals={latinNumerals}
-              ctaHref={ctaHref}
-            />
-
-            {custom.map((plan) => {
-              const sla = planSlaPercent(plan, locale);
-
-              return (
-                <EnterprisePlan
-                  key={plan.id}
-                  name={planName(plan, locale)}
-                  description={planDescription(plan, copy)}
-                  priceLabel={t('customPrice')}
-                  unlimitedLabel={t('enterprise.unlimitedLabel')}
-                  slaLabel={sla ? t('enterprise.slaLabel', { value: sla }) : null}
-                  cta={t('enterprise.cta')}
-                  ctaHref={ctaHref}
-                  latinNumerals={latinNumerals}
-                />
-              );
+          <PricingCards
+            plans={catalog.plans.map((plan) => toPricingPlan(plan, copy))}
+            yearlyLabel={t('yearlyLabel', {
+              percent: formatNumber(catalog.yearlyDiscountPercent, locale),
             })}
-          </div>
+            monthlyLabel={t('monthlyLabel')}
+            latinNumerals={latinNumerals}
+            ctaHref={ctaHref}
+          />
         </Reveal>
       </div>
     </section>

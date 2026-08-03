@@ -7,7 +7,6 @@ import { Hero } from '@/components/sections/Hero';
 import { Intro } from '@/components/sections/Intro';
 import { InstagramDemo } from '@/components/sections/InstagramDemo';
 import { Features } from '@/components/sections/Features';
-import { Why } from '@/components/sections/Why';
 import { About } from '@/components/sections/About';
 import { Integrations } from '@/components/sections/Integrations';
 import { Changelog } from '@/components/sections/Changelog';
@@ -36,7 +35,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Intro />
         <InstagramDemo />
         {hasScreenshotSections ? <Features /> : null}
-        <Why />
         {hasScreenshotSections ? <About /> : null}
         <Integrations />
         <Changelog />

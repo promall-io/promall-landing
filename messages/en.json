@@ -245,31 +245,6 @@
         }
       ]
     },
-    "why": {
-      "eyebrow": "Why ProMall",
-      "titleLead": "Three things that",
-      "titleTrail": "change how your shop runs",
-      "description": "Your own stock, an official Instagram connection, and work that gets done inside the conversation.",
-      "prevLabel": "Previous",
-      "nextLabel": "Next",
-      "cards": [
-        {
-          "title": "Everything from your own stock",
-          "description": "Products, variants, prices and availability — one source of truth for every answer.",
-          "illustration": "/illustrations/iso-layers.svg"
-        },
-        {
-          "title": "Official Instagram connection",
-          "description": "Connected through Meta's official API, not an unofficial bot.",
-          "illustration": "/illustrations/iso-key.svg"
-        },
-        {
-          "title": "Orders, right inside the DM",
-          "description": "Invoice and payment link without ever leaving the chat.",
-          "illustration": "/illustrations/iso-dial.svg"
-        }
-      ]
-    },
     "integrations": {
       "eyebrow": "Integrations",
       "titleLead": "It connects to everything",
@@ -390,10 +365,18 @@
       "priceThousands": "{value}K",
       "customPrice": "Custom pricing",
       "cta": "Get a free demo",
+      "customCta": "Contact sales",
       "unlimited": "Unlimited",
       "metaProducts": "{value} products",
       "metaOrders": "{value} orders / month",
       "metaUsers": "{value} users",
+      "slaLabel": "{value}% SLA",
+      "names": {
+        "STARTER": "Lite",
+        "PROFESSIONAL": "Pro",
+        "BUSINESS": "Pro Max",
+        "ENTERPRISE": "Business"
+      },
       "descriptions": {
         "STARTER": "For small shops that are just getting going.",
         "PROFESSIONAL": "For shops with busy DMs.",
@@ -405,11 +388,6 @@
         "instagramAi": "AI assistant for DMs",
         "domainApi": "Custom domain and API",
         "realtimeSupport": "Real-time reports and phone support"
-      },
-      "enterprise": {
-        "unlimitedLabel": "Unlimited products, orders and users",
-        "slaLabel": "{value}% SLA",
-        "cta": "Contact sales"
       }
     },
     "faq": {
