@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { indexedLocales, locales } from '@/i18n/config';
+import { locales } from '@/i18n/config';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Reveal } from '@/components/Reveal';
@@ -10,7 +10,7 @@ import { EyebrowPill } from '@/components/ui/Primitives';
 import { BlogIndexStructuredData } from '@/components/blog/BlogStructuredData';
 import { getArticles, readingMinutes } from '@/lib/blog';
 import { articleHref, BLOG_PATH, localeHref } from '@/lib/routes';
-import { absoluteUrl, languageAlternates } from '@/lib/site';
+import { absoluteUrl, pageAlternates, robotsForLocale, SITE_NAME } from '@/lib/site';
 import { localizeDigits } from '@/lib/demo-form';
 
 export function generateStaticParams() {
@@ -24,7 +24,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const isIndexed = (indexedLocales as readonly string[]).includes(locale);
   const ogImage = {
     url: locale === 'fa' ? '/og.png' : '/og-en.png',
     width: 1200,
@@ -36,13 +35,12 @@ export async function generateMetadata({
     title: t('metaTitle'),
     description: t('metaDescription'),
     keywords: t.raw('keywords') as string[],
-    alternates: {
-      canonical: absoluteUrl(locale, BLOG_PATH),
-      languages: languageAlternates(BLOG_PATH),
-    },
-    robots: isIndexed ? { index: true, follow: true } : { index: false, follow: true },
+    alternates: pageAlternates(locale, BLOG_PATH),
+    robots: robotsForLocale(locale),
     openGraph: {
       type: 'website',
+      siteName: locale === 'fa' ? SITE_NAME.fa : SITE_NAME.en,
+      locale: locale === 'fa' ? 'fa_IR' : 'en_US',
       url: absoluteUrl(locale, BLOG_PATH),
       title: t('metaTitle'),
       description: t('metaDescription'),

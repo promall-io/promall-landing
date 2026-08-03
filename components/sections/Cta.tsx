@@ -85,7 +85,7 @@ export async function Cta() {
                   <span className="flex items-center gap-2.5">
                     <span
                       aria-hidden
-                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[rgba(255,255,255,0.06)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]"
+                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/6%)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]"
                     >
                       <Glyph />
                     </span>
@@ -105,7 +105,7 @@ export async function Cta() {
               placeholder={tMockup('placeholder')}
               tabs={tabs}
               suggestions={suggestions}
-              className="max-[810px]:[mask-image:linear-gradient(to_bottom,#000_82%,transparent_100%)]"
+              className="max-[810px]:[mask-image:linear-gradient(to_bottom,rgb(var(--shade-rgb))_82%,transparent_100%)]"
             />
           </div>
         </div>

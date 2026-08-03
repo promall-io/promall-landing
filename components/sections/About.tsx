@@ -33,7 +33,7 @@ function AboutStackCard({ card, index }: { card: AboutCard; index: number }) {
 
   return (
     <div className="min-[810px]:sticky min-[810px]:top-[120px]" style={{ zIndex: index + 1 }}>
-      <article className="grid h-auto grid-cols-1 overflow-hidden rounded-[24px] bg-[var(--pw-surface-solid)] ring-1 ring-[var(--pw-line)] min-[810px]:h-[628px] min-[810px]:grid-cols-2">
+      <article className="grid h-auto grid-cols-1 overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[810px]:h-[628px] min-[810px]:grid-cols-2">
         <div className={`${textOrder} flex flex-col p-8 min-[810px]:p-10`}>
           <span className="inline-flex items-center gap-2 text-sm text-[var(--pw-text-dim)]">
             <span aria-hidden className="size-1.5 rounded-full bg-[var(--pw-text-faint)]" />

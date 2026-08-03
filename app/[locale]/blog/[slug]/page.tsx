@@ -3,16 +3,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { indexedLocales, locales } from '@/i18n/config';
+import { locales } from '@/i18n/config';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Reveal } from '@/components/Reveal';
 import { EyebrowPill } from '@/components/ui/Primitives';
 import { ArticleBody } from '@/components/blog/ArticleBody';
 import { ArticleStructuredData } from '@/components/blog/BlogStructuredData';
-import { ARTICLE_SLUGS, getArticle, getRelatedArticles, readingMinutes } from '@/lib/blog';
+import {
+  ARTICLE_SLUGS,
+  articleTimestamp,
+  getArticle,
+  getRelatedArticles,
+  readingMinutes,
+} from '@/lib/blog';
 import { articleHref, BLOG_PATH, DEMO_PATH, localeHref } from '@/lib/routes';
-import { absoluteUrl, languageAlternates } from '@/lib/site';
+import { absoluteUrl, pageAlternates, robotsForLocale, SITE_NAME } from '@/lib/site';
 import { localizeDigits } from '@/lib/demo-form';
 
 export function generateStaticParams() {
@@ -32,25 +38,23 @@ export async function generateMetadata({
   }
 
   const path = `${BLOG_PATH}/${article.slug}`;
-  const isIndexed = (indexedLocales as readonly string[]).includes(locale);
   const ogImage = { url: article.image, alt: article.imageAlt };
 
   return {
     title: article.metaTitle,
     description: article.description,
     keywords: article.keywords,
-    alternates: {
-      canonical: absoluteUrl(locale, path),
-      languages: languageAlternates(path),
-    },
-    robots: isIndexed ? { index: true, follow: true } : { index: false, follow: true },
+    alternates: pageAlternates(locale, path),
+    robots: robotsForLocale(locale),
     openGraph: {
       type: 'article',
+      siteName: locale === 'fa' ? SITE_NAME.fa : SITE_NAME.en,
+      locale: locale === 'fa' ? 'fa_IR' : 'en_US',
       url: absoluteUrl(locale, path),
       title: article.metaTitle,
       description: article.description,
-      publishedTime: article.publishedIso,
-      modifiedTime: article.modifiedIso,
+      publishedTime: articleTimestamp(article.publishedIso),
+      modifiedTime: articleTimestamp(article.modifiedIso),
       section: article.category,
       tags: article.keywords,
       images: [ogImage],

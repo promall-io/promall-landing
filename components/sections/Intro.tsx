@@ -1,34 +1,22 @@
-import { getTranslations } from 'next-intl/server';
-import { EyebrowPill } from '@/components/ui/Primitives';
-import { Reveal } from '@/components/Reveal';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { IntroScene } from '@/components/sections/IntroScene';
+import type { IntroTiles } from '@/types/content';
 
 export async function Intro() {
   const t = await getTranslations('sections.intro');
-  const paragraphs = t.raw('paragraphs') as string[];
+  const locale = await getLocale();
+  const tiles = t.raw('tiles') as IntroTiles;
 
   return (
     <section id="intro" className="pw-section">
-      <div className="pw-container pw-section-top flex flex-col items-center text-center">
-        <Reveal spring distance={0} duration={0.5}>
-          <EyebrowPill label={t('eyebrow')} />
-        </Reveal>
-
-        <Reveal delay={0.08} className="w-full">
-          <h2 className="pw-h2 mx-auto mt-9 max-w-[42ch] text-balance">{t('lead')}</h2>
-        </Reveal>
-
-        <Reveal delay={0.16} className="w-full">
-          <div className="mx-auto mt-16 grid max-w-[860px] grid-cols-1 gap-x-16 gap-y-10 min-[720px]:grid-cols-2">
-            {paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="border-t border-[var(--pw-line)] pt-7 leading-[1.9] text-[var(--pw-text)]"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </Reveal>
+      <div className="pw-container relative pt-[88px] min-[900px]:pt-[112px]">
+        <IntroScene
+          eyebrow={t('eyebrow')}
+          lead={t('lead')}
+          note={t('note')}
+          tiles={tiles}
+          locale={locale}
+        />
       </div>
     </section>
   );

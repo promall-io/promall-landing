@@ -59,7 +59,7 @@ function RadialGuides() {
       aria-hidden
       className="absolute inset-0 size-full"
       fill="none"
-      stroke="rgba(255,255,255,0.07)"
+      stroke="rgb(var(--white-rgb) / 7%)"
       strokeWidth={1}
       vectorEffect="non-scaling-stroke"
     >
@@ -122,7 +122,7 @@ function RadialDiagram({ nodes, hubLabel }: { nodes: string[]; hubLabel: string 
         <div className="pointer-events-none absolute bottom-11 start-0 end-0 flex translate-y-1/2 justify-center min-[810px]:bottom-16">
           <span
             className="flex size-[88px] items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line-strong)] min-[810px]:size-32"
-            style={{ boxShadow: '0 0 60px rgba(255,255,255,0.06)' }}
+            style={{ boxShadow: 'var(--pw-shadow-glow)' }}
           >
             <ProMallMark size={40} />
           </span>

@@ -22,8 +22,26 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.promall.io' }],
+        destination: 'https://promall.io/:path*',
+        permanent: true,
+      },
+      { source: '/opengraph-image', destination: '/og.png', permanent: true },
+      { source: '/twitter-image', destination: '/og.png', permanent: true },
+      { source: '/en/opengraph-image', destination: '/og-en.png', permanent: true },
+      { source: '/en/twitter-image', destination: '/og-en.png', permanent: true },
+    ];
+  },
   async headers() {
     return [
+      {
+        source: '/fonts/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
       {
         source: '/(.*)',
         headers: [

@@ -32,6 +32,7 @@ export type DemoFormLabels = {
   formSubtitle: string;
   phoneLabel: string;
   phonePlaceholder: string;
+  phoneHint: string;
   phoneError: string;
   instagramLabel: string;
   instagramPlaceholder: string;
@@ -70,12 +71,14 @@ function Field({
   id,
   label,
   error,
+  hint,
   prefix,
   children,
 }: {
   id: string;
   label: string;
   error: string | null;
+  hint?: string;
   prefix?: string;
   children: ReactNode;
 }) {
@@ -86,7 +89,7 @@ function Field({
       </label>
       <div
         dir="ltr"
-        className={`flex items-center rounded-2xl bg-[var(--pw-surface-2)] px-4 py-3.5 ring-1 [transition:box-shadow_0.4s_var(--pw-ease)] focus-within:ring-[var(--pw-line-strong)] ${
+        className={`flex items-center rounded-2xl bg-[var(--pw-surface-2)] px-4 py-3.5 ring-1 [transition:box-shadow_0.4s_var(--pw-ease)] focus-within:ring-[var(--ring)] ${
           error ? 'ring-[var(--pw-danger)]' : 'ring-[var(--pw-line)]'
         }`}
       >
@@ -96,8 +99,12 @@ function Field({
         {children}
       </div>
       {error ? (
-        <p id={`${id}-error`} role="alert" className="mt-2 text-xs text-[var(--pw-danger)]">
+        <p id={`${id}-error`} role="alert" className="mt-2 text-xs text-[var(--danger-ink)]">
           {error}
+        </p>
+      ) : hint ? (
+        <p id={`${id}-hint`} className="pw-micro mt-2 text-[var(--pw-text-faint)]">
+          {hint}
         </p>
       ) : null}
     </div>
@@ -119,7 +126,7 @@ function FormAlert({ message }: { message: string }) {
   return (
     <p
       role="alert"
-      className="rounded-2xl bg-[rgba(229,115,106,0.1)] px-4 py-3 text-sm text-[var(--pw-danger)]"
+      className="rounded-2xl bg-[var(--danger-soft)] px-4 py-3 text-sm text-[var(--danger-ink)]"
     >
       {message}
     </p>
@@ -130,7 +137,7 @@ function SuccessMark() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <span className="flex size-16 items-center justify-center rounded-full bg-[rgba(127,214,164,0.12)]">
+    <span className="flex size-16 items-center justify-center rounded-full bg-[var(--success-soft)]">
       <svg viewBox="0 0 52 52" className="size-9" aria-hidden>
         <motion.path
           d="M15.5 27.5l7 7L37 19.5"
@@ -484,6 +491,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
               id="demo-phone"
               label={labels.phoneLabel}
               error={errors.phone ? labels.phoneError : null}
+              hint={labels.phoneHint}
             >
               <input
                 id="demo-phone"
@@ -495,7 +503,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
                 value={localizeDigits(phone, locale)}
                 onChange={(event) => handlePhoneChange(event.target.value)}
                 aria-invalid={errors.phone || undefined}
-                aria-describedby={errors.phone ? 'demo-phone-error' : undefined}
+                aria-describedby={errors.phone ? 'demo-phone-error' : 'demo-phone-hint'}
                 className="pw-num w-full bg-transparent text-base text-[var(--pw-cream)] outline-none placeholder:text-[var(--pw-text-faint)]"
               />
             </Field>

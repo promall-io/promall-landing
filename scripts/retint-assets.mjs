@@ -1,48 +1,69 @@
 import { createRequire } from 'node:module';
 import { mkdir, copyFile, access, stat } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
-const sharp = require('E:/PROMALL/promall-ui/node_modules/sharp');
+const sharp = require('sharp');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC = path.join(ROOT, 'public');
 const SOURCE = path.join(PUBLIC, '_source');
 const QA = path.join(ROOT, 'docs', 'qa');
 
-const PAGE_BG = '#080d17';
+const TOKENS = readTokens();
 
+function readTokens() {
+  const css = readFileSync(path.join(ROOT, 'app', 'globals.css'), 'utf8');
+  const tokens = new Map();
+  for (const [, name, value] of css.matchAll(/^\s*(--[a-z0-9-]+):\s*(#[0-9a-f]{6});\s*$/gim)) {
+    tokens.set(name, value.toLowerCase());
+  }
+  return tokens;
+}
+
+function token(name) {
+  const value = TOKENS.get(name);
+  if (!value) throw new Error(`${name} is not authored in app/globals.css`);
+  return value;
+}
+
+const PAGE_BG = token('--pw-black');
+
+/* Luminance→colour ramp every landscape and blog asset is remapped onto: the
+   page canvas at black, the ink surfaces through the midtones, sky and gold at
+   the highlights. */
 const INK_RAMP = [
-  [0.0, '#060a12'],
-  [0.16, '#0e1524'],
-  [0.34, '#18233a'],
-  [0.5, '#243349'],
-  [0.66, '#3d4f6e'],
-  [0.8, '#728299'],
-  [0.9, '#aebbd0'],
-  [1.0, '#d9d0b8'],
+  [0.0, PAGE_BG],
+  [0.16, token('--pw-retint-deep')],
+  [0.34, token('--surface-card')],
+  [0.5, token('--ink-700')],
+  [0.66, token('--pw-rose')],
+  [0.8, token('--pw-retint-steel')],
+  [0.9, token('--sky')],
+  [1.0, token('--gold')],
 ];
 
 const PALETTE = [
-  ['--pw-black', '#080d17'],
-  ['--pw-paper', '#0a1120'],
-  ['--pw-surface-1', '#131c2e'],
-  ['--pw-surface-2', '#18233a'],
-  ['--pw-surface-3', '#243349'],
-  ['--pw-rose', '#3d4f6e'],
-  ['--pw-sky', '#aebbd0'],
-  ['--pw-text', '#d7deea'],
-  ['--pw-gold', '#d9d0b8'],
-];
+  '--pw-black',
+  '--pw-paper',
+  '--pw-surface-1',
+  '--surface-card',
+  '--ink-700',
+  '--pw-rose',
+  '--sky',
+  '--text-body',
+  '--gold',
+].map((name) => [name, token(name)]);
 
 const ASSETS = [
   { src: 'landscape/hill-back.png', lo: 0.002, hi: 0.999, gamma: 1.5, lift: 0.02, top: 0.92, chroma: 0.14 },
   { src: 'landscape/hill-mid.png', lo: 0.002, hi: 0.998, gamma: 1.45, lift: 0.015, top: 0.74, chroma: 0.14 },
   { src: 'landscape/hill-front.png', lo: 0.002, hi: 0.998, gamma: 1.45, lift: 0.01, top: 0.62, chroma: 0.12 },
   { src: 'landscape/dunes.png', lo: 0.002, hi: 0.999, gamma: 1.25, lift: 0.02, top: 1.0, chroma: 0.16 },
-  { src: 'landscape/stat-card-a.png', solid: '#6b7c96' },
-  { src: 'landscape/stat-card-b.png', solid: '#5c6b84' },
+  { src: 'landscape/stat-card-a.png', solid: token('--pw-retint-card-a') },
+  { src: 'landscape/stat-card-b.png', solid: token('--pw-retint-card-b') },
   { src: 'blog/post-1.jpg', lo: 0.004, hi: 0.996, gamma: 1.12, lift: 0.03, top: 0.95, chroma: 0.18 },
   { src: 'blog/post-2.jpg', lo: 0.004, hi: 0.996, gamma: 1.18, lift: 0.03, top: 0.88, chroma: 0.18 },
   { src: 'blog/post-3.jpg', lo: 0.004, hi: 0.997, gamma: 1.05, lift: 0.03, top: 0.96, chroma: 0.18 },
@@ -233,7 +254,7 @@ async function contactSheet(items, outPath, { cols = 3, cellW = 560, withPalette
       composites.push({ input: t.buf, left: x, top: y + 24 });
       composites.push({
         input: Buffer.from(
-          `<svg width="${cellW}" height="22"><text x="0" y="16" font-family="monospace" font-size="14" fill="#aebbd0">${t.label}</text></svg>`,
+          `<svg width="${cellW}" height="22"><text x="0" y="16" font-family="monospace" font-size="14" fill="${token('--sky')}">${t.label}</text></svg>`,
         ),
         left: x,
         top: y,
@@ -257,7 +278,7 @@ async function paletteStrip(width) {
     input: Buffer.from(
       `<svg width="${swatchW - 6}" height="${height}">` +
         `<rect width="${swatchW - 6}" height="52" fill="${hex}" rx="4"/>` +
-        `<text x="0" y="70" font-family="monospace" font-size="11" fill="#9aa7bc">${name} ${hex}</text>` +
+        `<text x="0" y="70" font-family="monospace" font-size="11" fill="${token('--text-muted')}">${name} ${hex}</text>` +
         `</svg>`,
     ),
     left: i * swatchW,

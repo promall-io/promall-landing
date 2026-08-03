@@ -1,4 +1,4 @@
-{
+﻿{
   "metadata": {
     "title": "Online Shop Management | Orders, Stock & DM Replies — ProMall",
     "description": "ProMall is the panel that runs your online shop: AI answers your Instagram DMs, places orders and invoices, and keeps products, stock, customers and sales reports in one place. 10 days free.",
@@ -92,11 +92,49 @@
     },
     "intro": {
       "eyebrow": "What ProMall is",
-      "lead": "ProMall is an online shop management panel with an AI assistant built in: the customer asks in the DM, gets the right answer, and the order is placed right there.",
-      "paragraphs": [
-        "It is wired to your own products, prices and stock, so it never invents a number or quotes the wrong price.",
-        "Everything that piles up after the sale — invoices, stock, customers, tracking codes and sales reports — lives in that same panel."
-      ]
+      "lead": "The online shop management panel that answers the DM and places the order right there.",
+      "note": "Everything below is a real piece of the panel, not a marketing render.",
+      "tiles": {
+        "dm": {
+          "title": "The DM answers itself",
+          "caption": "The answer is read off your own stock, never a guess.",
+          "chip": "Auto reply",
+          "contact": "Maryam Karimi",
+          "customer": "Hi! Is the cream linen coat in size 38 available?",
+          "typing": "ProMall is replying",
+          "assistant": "Yes, it is in stock 🌿 1,280,000 Toman. Want me to place it for you?",
+          "card": {
+            "title": "Order #1087",
+            "meta": "1 × Cream linen coat · Size 38",
+            "action": "Payment link"
+          }
+        },
+        "stock": {
+          "title": "Stock stays current",
+          "caption": "You hear about an empty size before your customer does.",
+          "chip": "Running low",
+          "items": [
+            { "name": "Cream linen coat", "meta": "Size 38 · 12 left" },
+            { "name": "Silk blouse", "meta": "Size 40 · 3 left" },
+            { "name": "Black linen trousers", "meta": "Size 36 · 24 left" }
+          ]
+        },
+        "revenue": {
+          "title": "Sales, live",
+          "caption": "Revenue and best sellers day by day, no spreadsheet.",
+          "chip": "+24%",
+          "label": "Sales this week",
+          "amount": 48200000,
+          "unit": "Toman",
+          "columns": ["S", "S", "M", "T", "W", "T", "F"]
+        },
+        "order": {
+          "title": "Order to parcel",
+          "caption": "Invoice, payment and tracking code are filed for you.",
+          "chip": "Invoice #1087",
+          "steps": ["Order placed", "Payment received", "Tracking code issued"]
+        }
+      }
     },
     "instagram": {
       "eyebrow": "Smart DMs",
@@ -521,17 +559,18 @@
   },
   "demo": {
     "metaTitle": "Free online shop management demo",
-    "metaDescription": "Leave your number and your shop's Instagram handle, and we'll prepare a ProMall demo built around your own shop.",
+    "metaDescription": "Leave your WhatsApp number and your shop's Instagram handle, and we'll prepare a ProMall demo built around your own shop.",
     "backHome": "Back to home",
     "badge": "Personal demo, completely free",
     "titleLine1": "See ProMall live,",
     "titleLine2": "with your own shop",
-    "subtitle": "Just your number and your shop's Instagram handle. The ProMall team prepares a demo with your own products and calls you.",
+    "subtitle": "Just your WhatsApp number and your shop's Instagram handle. The ProMall team prepares a demo with your own products and messages you on WhatsApp.",
     "formTitle": "Request a demo",
     "formSubtitle": "Two fields, under thirty seconds.",
-    "phoneLabel": "Mobile number",
+    "phoneLabel": "Your WhatsApp number",
     "phonePlaceholder": "0912 345 6789",
-    "phoneError": "Enter a valid Iranian mobile number, e.g. 09123456789",
+    "phoneHint": "Enter a number that has WhatsApp — we text the code and arrange the demo on WhatsApp.",
+    "phoneError": "Enter a valid Iranian mobile number with WhatsApp, e.g. 09123456789",
     "instagramLabel": "Your shop's Instagram handle",
     "instagramPlaceholder": "yourshop",
     "instagramError": "Enter a valid handle — a full profile link works too",
@@ -551,16 +590,16 @@
     "rateLimitError": "Too many attempts. Please wait a bit and try again.",
     "sendFailedError": "We couldn't send the SMS. Please try again in a moment.",
     "submitError": "Something went wrong. Please try again in a moment.",
-    "privacyNote": "Your number is only used to arrange the demo. Nothing else.",
+    "privacyNote": "Your number is only used to arrange the demo on WhatsApp. Nothing else.",
     "successTitle": "Request received 🎉",
-    "successSubtitle": "The ProMall team will call you shortly to walk through a demo of your own shop.",
-    "successPhoneLabel": "Phone number",
+    "successSubtitle": "The ProMall team will message you on WhatsApp shortly to walk through a demo of your own shop.",
+    "successPhoneLabel": "WhatsApp number",
     "successHandleLabel": "Your shop's handle",
     "successCta": "Back to home",
     "steps": {
-      "call": {
-        "title": "We call you fast",
-        "description": "Someone from ProMall calls you within one working day."
+      "whatsapp": {
+        "title": "We message you fast",
+        "description": "Someone from ProMall messages you on WhatsApp within one working day."
       },
       "demo": {
         "title": "A demo made for your shop",
@@ -568,7 +607,7 @@
       },
       "launch": {
         "title": "Go live in the same session",
-        "description": "Like what you see? We build your shop on that same call."
+        "description": "Like what you see? We build your shop in that same session."
       }
     }
   },

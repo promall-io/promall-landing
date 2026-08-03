@@ -1,9 +1,12 @@
-import { absoluteUrl, SITE_NAME, SITE_URL } from '@/lib/site';
-import { countWords, readingMinutes } from '@/lib/blog';
+import { absoluteUrl, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from '@/lib/site';
+import { articleTimestamp, countWords, readingMinutes } from '@/lib/blog';
 import { BLOG_PATH } from '@/lib/routes';
 import type { Article } from '@/types/blog';
 
 type JsonValue = Record<string, unknown>;
+
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
 
 function JsonLd({ graph }: { graph: JsonValue[] }) {
   return (
@@ -21,6 +24,38 @@ function JsonLd({ graph }: { graph: JsonValue[] }) {
 
 function brandName(locale: string) {
   return locale === 'fa' ? SITE_NAME.fa : SITE_NAME.en;
+}
+
+function publisherNodes(locale: string, inLanguage: string): JsonValue[] {
+  const brand = brandName(locale);
+
+  return [
+    {
+      '@type': 'Organization',
+      '@id': ORGANIZATION_ID,
+      name: brand,
+      ...(locale === 'fa' ? { alternateName: SITE_NAME.en } : {}),
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${SITE_URL}/#logo`,
+        url: `${SITE_URL}/brand/logo.png`,
+        width: 512,
+        height: 512,
+        caption: brand,
+      },
+      image: { '@id': `${SITE_URL}/#logo` },
+      sameAs: SOCIAL_PROFILES,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      name: brand,
+      url: SITE_URL,
+      inLanguage,
+      publisher: { '@id': ORGANIZATION_ID },
+    },
+  ];
 }
 
 function breadcrumb(
@@ -61,6 +96,7 @@ export function BlogIndexStructuredData({
   return (
     <JsonLd
       graph={[
+        ...publisherNodes(locale, inLanguage),
         {
           '@type': 'Blog',
           '@id': `${pageUrl}#blog`,
@@ -68,17 +104,18 @@ export function BlogIndexStructuredData({
           description,
           url: pageUrl,
           inLanguage,
-          publisher: { '@id': `${SITE_URL}/#organization` },
-          isPartOf: { '@id': `${SITE_URL}/#website` },
+          publisher: { '@id': ORGANIZATION_ID },
+          isPartOf: { '@id': WEBSITE_ID },
           blogPost: articles.map((article) => ({
             '@type': 'BlogPosting',
             '@id': `${absoluteUrl(locale, `${BLOG_PATH}/${article.slug}`)}#article`,
             headline: article.title,
             url: absoluteUrl(locale, `${BLOG_PATH}/${article.slug}`),
-            datePublished: article.publishedIso,
-            dateModified: article.modifiedIso,
+            datePublished: articleTimestamp(article.publishedIso),
+            dateModified: articleTimestamp(article.modifiedIso),
             image: `${SITE_URL}${article.image}`,
-            author: { '@id': `${SITE_URL}/#organization` },
+            author: { '@id': ORGANIZATION_ID },
+            publisher: { '@id': ORGANIZATION_ID },
           })),
         },
         breadcrumb(
@@ -108,7 +145,18 @@ export function ArticleStructuredData({
   const pageUrl = absoluteUrl(locale, `${BLOG_PATH}/${article.slug}`);
   const inLanguage = locale === 'fa' ? 'fa-IR' : 'en-US';
 
+  const blogUrl = absoluteUrl(locale, BLOG_PATH);
+
   const graph: JsonValue[] = [
+    ...publisherNodes(locale, inLanguage),
+    {
+      '@type': 'Blog',
+      '@id': `${blogUrl}#blog`,
+      url: blogUrl,
+      inLanguage,
+      publisher: { '@id': ORGANIZATION_ID },
+      isPartOf: { '@id': WEBSITE_ID },
+    },
     {
       '@type': 'BlogPosting',
       '@id': `${pageUrl}#article`,
@@ -118,8 +166,8 @@ export function ArticleStructuredData({
       url: pageUrl,
       mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
       inLanguage,
-      datePublished: article.publishedIso,
-      dateModified: article.modifiedIso,
+      datePublished: articleTimestamp(article.publishedIso),
+      dateModified: articleTimestamp(article.modifiedIso),
       wordCount: countWords(article),
       timeRequired: `PT${readingMinutes(article)}M`,
       keywords: article.keywords.join(', '),
@@ -129,14 +177,20 @@ export function ArticleStructuredData({
         url: `${SITE_URL}${article.image}`,
         caption: article.imageAlt,
       },
-      author: { '@id': `${SITE_URL}/#organization` },
-      publisher: { '@id': `${SITE_URL}/#organization` },
-      isPartOf: { '@id': `${absoluteUrl(locale, BLOG_PATH)}#blog` },
+      author: { '@id': ORGANIZATION_ID },
+      publisher: { '@id': ORGANIZATION_ID },
+      isPartOf: { '@id': `${blogUrl}#blog` },
       about: {
         '@type': 'Thing',
         name: locale === 'fa' ? 'مدیریت آنلاین شاپ' : 'Online shop management',
       },
-      mentions: { '@id': `${SITE_URL}/#software` },
+      mentions: {
+        '@type': 'SoftwareApplication',
+        name: brandName(locale),
+        url: SITE_URL,
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'Web',
+      },
       speakable: {
         '@type': 'SpeakableSpecification',
         cssSelector: ['h1', '[data-speakable]'],

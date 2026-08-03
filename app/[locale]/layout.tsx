@@ -3,13 +3,13 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { Inter, Fragment_Mono } from 'next/font/google';
-import localFont from 'next/font/local';
 import { getTranslations } from 'next-intl/server';
-import { locales, localeDirection, indexedLocales, type Locale } from '@/i18n/config';
+import { locales, localeDirection, type Locale } from '@/i18n/config';
 import { SmoothScroll } from '@/components/SmoothScroll';
 import { PageviewTracker } from '@/components/PageviewTracker';
-import { absoluteUrl, languageAlternates, SITE_NAME, SITE_URL } from '@/lib/site';
+import { absoluteUrl, pageAlternates, robotsForLocale, SITE_NAME, SITE_URL } from '@/lib/site';
 import { GOOGLE_SITE_VERIFICATION } from '@/lib/seo-config';
+import { PAGE_BACKGROUND } from '@/lib/tokens';
 import '../globals.css';
 
 const inter = Inter({
@@ -26,11 +26,7 @@ const fragmentMono = Fragment_Mono({
   variable: '--font-fragment',
 });
 
-const estedad = localFont({
-  src: '../../public/fonts/estedaad.woff2',
-  display: 'swap',
-  variable: '--font-estedad',
-});
+const ESTEDAD_FONT_URL = '/fonts/estedaad.woff2';
 
 export async function generateMetadata({
   params,
@@ -39,7 +35,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
-  const isIndexed = (indexedLocales as readonly string[]).includes(locale);
   const ogImage = {
     url: locale === 'fa' ? '/og.png' : '/og-en.png',
     width: 1200,
@@ -63,23 +58,8 @@ export async function generateMetadata({
     creator: siteName,
     publisher: siteName,
     formatDetection: { telephone: false, address: false, email: false },
-    alternates: {
-      canonical: absoluteUrl(locale, '/'),
-      languages: languageAlternates('/'),
-    },
-    robots: isIndexed
-      ? {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            'max-snippet': -1,
-            'max-image-preview': 'large',
-            'max-video-preview': -1,
-          },
-        }
-      : { index: false, follow: true },
+    alternates: pageAlternates(locale, '/'),
+    robots: robotsForLocale(locale),
     verification: GOOGLE_SITE_VERIFICATION ? { google: GOOGLE_SITE_VERIFICATION } : undefined,
     openGraph: {
       type: 'website',
@@ -100,7 +80,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
+  themeColor: PAGE_BACKGROUND,
 };
 
 export function generateStaticParams() {
@@ -127,10 +107,17 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={direction}
-      className={`${inter.variable} ${fragmentMono.variable} ${estedad.variable}`}
+      className={`${inter.variable} ${fragmentMono.variable}`}
       suppressHydrationWarning
     >
       <body>
+        <link
+          rel="preload"
+          href={ESTEDAD_FONT_URL}
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <NextIntlClientProvider locale={locale} messages={{}}>
           <SmoothScroll />
           <PageviewTracker locale={locale} />

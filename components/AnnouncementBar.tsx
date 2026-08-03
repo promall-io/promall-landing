@@ -20,9 +20,9 @@ export async function AnnouncementBar() {
         <span
           className="block max-w-[300px] overflow-hidden"
           style={{
-            maskImage: 'linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)',
+            maskImage: 'linear-gradient(to right, transparent 0, rgb(var(--shade-rgb)) 20px, rgb(var(--shade-rgb)) calc(100% - 20px), transparent 100%)',
             WebkitMaskImage:
-              'linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)',
+              'linear-gradient(to right, transparent 0, rgb(var(--shade-rgb)) 20px, rgb(var(--shade-rgb)) calc(100% - 20px), transparent 100%)',
           }}
         >
           <span className="pw-marquee flex w-max group-hover:[animation-play-state:paused] group-focus-visible:[animation-play-state:paused] motion-reduce:animate-none">
@@ -34,7 +34,7 @@ export async function AnnouncementBar() {
         </span>
         <span
           aria-hidden
-          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] group-hover:bg-[rgba(255,255,255,0.18)]"
+          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] group-hover:bg-[rgb(var(--white-rgb)/18%)]"
         >
           <ArrowRightIcon width={14} height={14} className="rtl:-scale-x-100" />
         </span>

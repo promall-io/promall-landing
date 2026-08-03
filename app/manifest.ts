@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { PAGE_BACKGROUND } from '@/lib/tokens';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -8,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'پنل مدیریت آنلاین شاپ؛ دایرکت اینستاگرامت رو با هوش مصنوعی جواب می‌ده، سفارش و فاکتور ثبت می‌کنه و محصول، انبار و گزارش فروش رو یه‌جا نگه می‌داره.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#080d17',
-    theme_color: '#080d17',
+    background_color: PAGE_BACKGROUND,
+    theme_color: PAGE_BACKGROUND,
     lang: 'fa',
     dir: 'rtl',
     icons: [

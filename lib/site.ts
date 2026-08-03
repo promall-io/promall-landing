@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { defaultLocale, indexedLocales, type Locale } from '@/i18n/config';
 
 export const SITE_URL = 'https://promall.io';
@@ -6,7 +7,11 @@ export const SITE_NAME: Record<Locale, string> = { fa: 'پرومال', en: 'ProM
 
 export const SUPPORT_EMAIL = 'support@promall.io';
 
-export const SOCIAL_PROFILES = ['https://instagram.com/promall.io'];
+export const SOCIAL_PROFILES = [
+  'https://instagram.com/promall.io',
+  'https://t.me/promall_io',
+  'https://linkedin.com/company/promall',
+];
 
 export const SITE_SECTIONS = [
   'hero',
@@ -44,4 +49,30 @@ export function languageAlternates(path: string): Record<string, string> {
     ...Object.fromEntries(entries),
     'x-default': localePath(defaultLocale, path),
   };
+}
+
+export function isIndexedLocale(locale: string): boolean {
+  return (indexedLocales as readonly string[]).includes(locale);
+}
+
+const INDEXED_ROBOTS = {
+  index: true,
+  follow: true,
+  googleBot: {
+    index: true,
+    follow: true,
+    'max-snippet': -1,
+    'max-image-preview': 'large',
+    'max-video-preview': -1,
+  },
+} as const satisfies Metadata['robots'];
+
+const EXCLUDED_ROBOTS = { index: false, follow: true } as const satisfies Metadata['robots'];
+
+export function robotsForLocale(locale: string): Metadata['robots'] {
+  return isIndexedLocale(locale) ? INDEXED_ROBOTS : EXCLUDED_ROBOTS;
+}
+
+export function pageAlternates(locale: string, path: string): Metadata['alternates'] {
+  return { canonical: absoluteUrl(locale, path), languages: languageAlternates(path) };
 }

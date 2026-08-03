@@ -13,7 +13,7 @@ const GEO_COUNTRY_HEADERS = [
 ] as const;
 
 const CRAWLER_USER_AGENT_PATTERN =
-  /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|embedly|quora|pinterest|ia_archiver|w3c_validator|google-inspectiontool|googleother|google-extended|mediapartners|chatgpt-user|perplexity|lighthouse|headlesschrome|prerender|archiver|validator|scraper|feedfetcher/i;
+  /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|skypeuripreview|discord|linkedinbot|embedly|quora|pinterest|redditbot|vkshare|ia_archiver|w3c_validator|google-inspectiontool|googleother|google-extended|google-pagespeed|mediapartners|chatgpt-user|oai-searchbot|gptbot|perplexity|claude|anthropic|cohere|diffbot|youbot|duckassist|lighthouse|pagespeed|pingdom|gtmetrix|webpagetest|headlesschrome|chrome-headless|phantomjs|puppeteer|playwright|prerender|archiver|validator|scraper|feedfetcher|yandex|baidu|sogou|seznam|petalbot|applebot|bingpreview|ahrefs|semrush|moz\.com|dotbot|screaming frog|sitebulb|serpstat|majestic|dataforseo/i;
 
 export function isCrawler(userAgent: string | null): boolean {
   return userAgent !== null && CRAWLER_USER_AGENT_PATTERN.test(userAgent);

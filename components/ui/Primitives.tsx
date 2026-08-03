@@ -68,7 +68,7 @@ export function CircleButton({
       aria-label={label}
       onClick={onClick}
       disabled={disabled}
-      className="flex size-11 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-text)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease),opacity_0.4s_var(--pw-ease)] hover:bg-[rgba(255,255,255,0.16)] disabled:opacity-40"
+      className="flex size-11 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-text)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease),opacity_0.4s_var(--pw-ease)] hover:bg-[rgb(var(--white-rgb)/16%)] disabled:opacity-40"
     >
       {children}
     </button>

@@ -5,6 +5,8 @@ import type { Article, ArticleBlock } from '@/types/blog';
 
 const WORDS_PER_MINUTE = 200;
 const MIN_READING_MINUTES = 2;
+const TEHRAN_UTC_OFFSET = '+03:30';
+const PUBLISH_HOUR = '09:00:00';
 
 const ARTICLES_BY_LOCALE: Record<Locale, Article[]> = {
   fa: FA_ARTICLES,
@@ -67,6 +69,10 @@ export function countWords(article: Article): number {
 
 export function readingMinutes(article: Article): number {
   return Math.max(MIN_READING_MINUTES, Math.round(countWords(article) / WORDS_PER_MINUTE));
+}
+
+export function articleTimestamp(isoDate: string): string {
+  return isoDate.includes('T') ? isoDate : `${isoDate}T${PUBLISH_HOUR}${TEHRAN_UTC_OFFSET}`;
 }
 
 export const ARTICLE_SLUGS = FA_ARTICLES.map((article) => article.slug);

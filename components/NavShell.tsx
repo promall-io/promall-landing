@@ -107,7 +107,7 @@ export function NavShell({
               aria-controls={DRAWER_ID}
               aria-label={menuOpen ? menuCloseLabel : menuOpenLabel}
               onClick={() => setMenuOpen((current) => !current)}
-              className="flex size-9 items-center justify-center rounded-full text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] hover:bg-[rgba(255,255,255,0.1)] min-[1200px]:hidden"
+              className="flex size-9 items-center justify-center rounded-full text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] hover:bg-[rgb(var(--white-rgb)/10%)] min-[1200px]:hidden"
             >
               {menuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
@@ -118,7 +118,7 @@ export function NavShell({
       <div
         id={DRAWER_ID}
         hidden={!menuOpen}
-        className="fixed inset-0 z-40 flex-col items-center justify-center gap-8 bg-[rgba(0,0,0,0.72)] backdrop-blur-[12px] data-[open=true]:flex min-[1200px]:hidden!"
+        className="fixed inset-0 z-40 flex-col items-center justify-center gap-8 bg-[rgb(var(--shade-rgb)/72%)] backdrop-blur-[12px] data-[open=true]:flex min-[1200px]:hidden!"
         data-open={menuOpen}
       >
         <ul className="flex flex-col items-center gap-8">

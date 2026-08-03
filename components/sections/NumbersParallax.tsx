@@ -2,7 +2,8 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useReducedMotionAfterMount } from '@/components/reduced-motion';
 
 const CLOUDS = [
   {
@@ -21,7 +22,7 @@ const CLOUDS = [
 
 export function NumbersParallax() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionAfterMount();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

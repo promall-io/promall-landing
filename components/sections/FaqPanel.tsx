@@ -44,7 +44,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => selectCategory(category.id)}
-                className={`shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-center text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--pw-line-strong)] ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-center text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
                   isActive
                     ? 'bg-[var(--pw-surface-2)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]'
                     : 'text-[var(--pw-text-dim)]'
@@ -78,7 +78,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenKey(isOpen ? null : rowKey)}
-                  className="flex w-full items-center justify-between gap-6 px-7 py-[26px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--pw-line-strong)]"
+                  className="flex w-full items-center justify-between gap-6 px-7 py-[26px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)]"
                 >
                   <span className="text-base leading-[1.5] text-[var(--pw-cream)]">
                     {item.question}

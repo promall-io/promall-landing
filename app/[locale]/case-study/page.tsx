@@ -12,15 +12,7 @@ const CSS = `
 .cs{
   --font-fa: var(--font-estedad), "SF Pro Display", system-ui, sans-serif;
   --font-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-  --ink:#f3f5f8; --ink-deep:#f8fafc; --cream:#f3f5f8; --slate:#8b99b3; --slate-soft:#6f7d96; --sky:#aebbd0;
-  --gold:#d9d0b8; --gold-deep:#c4b894; --gold-tint:rgba(217,208,184,0.1);
-  --paper:#0a1120; --white:#18233a; --surface-page:#080d17;
-  --text-body:#d7deea; --text-muted:#9aa7bc;
-  --border-subtle:rgba(255,255,255,0.1); --input-border:rgba(255,255,255,0.14);
   --radius-lg:16px; --radius-xl:20px; --radius-2xl:24px; --radius-3xl:32px; --radius-full:9999px;
-  --shadow-soft:0 1px 2px rgba(0,0,0,0.3), 0 6px 16px -8px rgba(0,0,0,0.35);
-  --shadow-card:0 4px 24px rgba(0,0,0,0.4);
-  --shadow-float:0 24px 60px -28px rgba(0,0,0,0.6);
   --fw-medium:500; --fw-semibold:600; --fw-bold:700; --fw-extrabold:800;
   --dur:0.4s; --ease-smooth:cubic-bezier(0.16,1,0.3,1);
   direction:rtl; text-align:right;
@@ -33,161 +25,162 @@ const CSS = `
 .cs .pm-btn{ display:inline-flex; align-items:center; gap:8px; height:42px; padding:0 18px; border-radius:var(--radius-full);
   font:var(--fw-semibold) 14px/1 var(--font-fa); border:1px solid transparent; cursor:pointer; transition:all var(--dur) var(--ease-smooth); }
 .cs .pm-btn .ic{ font-size:17px; }
-.cs .pm-btn--primary{ background:var(--cream); color:#11192a; }
-.cs .pm-btn--gold{ background:var(--gold); color:#11192a; }
-.cs .pm-btn--secondary{ background:#1b2740; color:var(--cream); }
+.cs .pm-btn--primary{ background:var(--text-strong); color:var(--text-inverse); }
+.cs .pm-btn--gold{ background:var(--gold); color:var(--text-on-gold); }
+.cs .pm-btn--secondary{ background:var(--pw-surface-raised); color:var(--text-strong); }
 .cs .pm-btn--ghost{ background:transparent; color:var(--text-muted); }
 .cs .pm-badge{ display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 11px; border-radius:var(--radius-full);
   font:var(--fw-semibold) 12px/1 var(--font-fa); border:1px solid var(--border-subtle); }
 .cs .pm-badge__dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
 .cs .pm-badge .ic{ font-size:14px; }
-.cs .pm-badge--success{ color:#7fd6a4; background:rgba(76,195,138,0.12); }
-.cs .pm-badge--warning{ color:#e4bc6a; background:rgba(217,164,65,0.12); }
-.cs .pm-badge--info{ color:#6aa3d8; background:rgba(106,163,216,0.12); }
-.cs .pm-badge--danger{ color:#e5736a; background:rgba(229,115,106,0.12); }
-.cs .pm-badge--gold{ color:var(--gold); background:var(--gold-tint); }
+.cs .pm-badge--success{ color:var(--success-ink); background:var(--success-soft); }
+.cs .pm-badge--warning{ color:var(--warning-ink); background:var(--warning-soft); }
+.cs .pm-badge--info{ color:var(--info); background:var(--info-soft); }
+.cs .pm-badge--danger{ color:var(--danger-ink); background:var(--danger-soft); }
+.cs .pm-badge--gold{ color:var(--gold); background:var(--gold-soft); }
 .cs .pm-inputwrap{ position:relative; display:flex; align-items:center; }
 .cs .pm-inputwrap__icon{ position:absolute; inset-inline-start:14px; color:var(--text-muted); font-size:18px; display:flex; }
 .cs .pm-input{ width:100%; height:42px; border-radius:var(--radius-full); border:1px solid var(--input-border);
-  background:var(--surface-page); padding-inline:42px 14px; font:var(--fw-medium) 14px/1 var(--font-fa); color:var(--ink); }
+  background:var(--pw-black); padding-inline:42px 14px; font:var(--fw-medium) 14px/1 var(--font-fa); color:var(--text-strong); }
 .cs .pm-avatar{ width:40px; height:40px; border-radius:var(--radius-full); display:inline-flex; align-items:center; justify-content:center;
-  background:#1b2740; color:var(--cream); font:var(--fw-bold) 14px/1 var(--font-fa); }
-.cs .pm-avatar--ring{ box-shadow:0 0 0 2px var(--white), 0 0 0 4px var(--gold); }
+  background:var(--pw-surface-raised); color:var(--text-strong); font:var(--fw-bold) 14px/1 var(--font-fa); }
+.cs .pm-avatar--ring{ box-shadow:0 0 0 2px var(--surface-card), 0 0 0 4px var(--gold); }
 .cs .pm-tag{ display:inline-flex; align-items:center; height:32px; padding:0 14px; border-radius:var(--radius-full);
-  font:var(--fw-semibold) 13px/1 var(--font-fa); border:1px solid var(--border-subtle); color:var(--text-muted); background:var(--white); }
-.cs .pm-tag--active{ background:var(--cream); color:#11192a; border-color:var(--cream); }
+  font:var(--fw-semibold) 13px/1 var(--font-fa); border:1px solid var(--border-subtle); color:var(--text-muted); background:var(--surface-card); }
+.cs .pm-tag--active{ background:var(--text-strong); color:var(--text-inverse); border-color:var(--text-strong); }
 
-.cs{margin: 0; font-family: var(--font-fa); color: var(--text-body);
-    background: #080d17;}
+.cs{margin: 0; font-family: var(--font-fa); color: var(--text-body); background: var(--pw-black);}
 .cs .wrap{max-width: 1080px; margin: 0 auto; padding: 0 28px;}
 .cs section{padding: 72px 0;}
 .cs .eyebrow{display: inline-flex; align-items: center; gap: 7px; font: var(--fw-bold) 13px/1 var(--font-fa);
-    color: var(--gold); background: var(--gold-tint); padding: 7px 14px; border-radius: var(--radius-full);}
+    color: var(--gold); background: var(--gold-soft); padding: 7px 14px; border-radius: var(--radius-full);}
 .cs .eyebrow .ic{font-size: 16px; color: var(--gold);}
-.cs h2.t{font: var(--fw-extrabold) 38px/1.4 var(--font-fa); color: var(--ink); margin: 16px 0 0; letter-spacing: -0.01em; text-wrap: balance;}
+.cs h2.t{font: var(--fw-extrabold) 38px/1.4 var(--font-fa); color: var(--text-strong); margin: 16px 0 0; letter-spacing: -0.01em; text-wrap: balance;}
 .cs .lead{font: var(--fw-medium) 17px/2 var(--font-fa); color: var(--text-muted); margin: 14px 0 0; max-width: 620px;}
 .cs .hero{position: relative; overflow: hidden; padding: 0;}
-.cs .hero__bg{position: absolute; inset: 0; z-index: 0;
-    background: #080d17;}
+.cs .hero__bg{position: absolute; inset: 0; z-index: 0; background: var(--pw-black);}
 .cs .hero__in{position: relative; z-index: 2; padding: 96px 0 84px; text-align: center;}
 .cs .hero__brand{display: inline-flex; align-items: center; gap: 11px; margin-bottom: 26px;}
-.cs .hero__brand .m{width: 40px; height: 40px; border-radius: 12px; background: #1b2740; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft);}
+.cs .hero__brand .m{width: 40px; height: 40px; border-radius: 12px; background: var(--pw-surface-raised); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft);}
 .cs .hero__brand .m img{width: 22px;}
-.cs .hero__brand b{font: var(--fw-bold) 22px/1 var(--font-fa); color: var(--ink);}
-.cs h1{font: var(--fw-extrabold) 50px/1.5 var(--font-fa); color: var(--ink); margin: 20px auto 0; max-width: 820px; letter-spacing: -0.02em; text-wrap: balance;}
+.cs .hero__brand b{font: var(--fw-bold) 22px/1 var(--font-fa); color: var(--text-strong);}
+.cs h1{font: var(--fw-extrabold) 50px/1.5 var(--font-fa); color: var(--text-strong); margin: 20px auto 0; max-width: 820px; letter-spacing: -0.02em; text-wrap: balance;}
 .cs h1 .grad{color: var(--gold);}
-.cs .hero__sub{font: var(--fw-medium) 19px/2 var(--font-fa); color: rgba(243,245,248,0.72); margin: 24px auto 0; max-width: 580px; text-wrap: pretty;}
+.cs .hero__sub{font: var(--fw-medium) 19px/2 var(--font-fa); color: var(--showcase-ink-muted); margin: 24px auto 0; max-width: 580px; text-wrap: pretty;}
 .cs .chips{display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px;}
-.cs .chip{display: inline-flex; align-items: center; gap: 7px; background: rgba(27,39,64,0.6); border: 1px solid var(--border-subtle);
+.cs .chip{display: inline-flex; align-items: center; gap: 7px; background: var(--surface-chip); border: 1px solid var(--border-subtle);
     -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); padding: 9px 15px; border-radius: var(--radius-full);
-    font: var(--fw-semibold) 13.5px/1 var(--font-fa); color: var(--ink);}
+    font: var(--fw-semibold) 13.5px/1 var(--font-fa); color: var(--text-strong);}
 .cs .chip .ic{font-size: 17px; color: var(--gold);}
 .cs .meta{display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-subtle);
     border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); overflow: hidden; margin-top: 56px; box-shadow: var(--shadow-card);}
-.cs .meta div{background: var(--white); padding: 22px 20px;}
+.cs .meta div{background: var(--surface-card); padding: 22px 20px;}
 .cs .meta .k{font: var(--fw-semibold) 12px/1 var(--font-fa); color: var(--text-muted);}
-.cs .meta .v{font: var(--fw-bold) 16px/1.5 var(--font-fa); color: var(--ink); margin-top: 8px;}
-.cs .card{background: var(--white); border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card);}
+.cs .meta .v{font: var(--fw-bold) 16px/1.5 var(--font-fa); color: var(--text-strong); margin-top: 8px;}
+.cs .card{background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card);}
 .cs .two{display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px;}
 .cs .pcard{padding: 28px;}
-.cs .pcard h3{font: var(--fw-bold) 19px/1.5 var(--font-fa); color: var(--ink); margin: 14px 0 0;}
+.cs .pcard h3{font: var(--fw-bold) 19px/1.5 var(--font-fa); color: var(--text-strong); margin: 14px 0 0;}
 .cs .pcard p{font: var(--fw-medium) 14px/1.9 var(--font-fa); color: var(--text-muted); margin: 8px 0 0;}
-.cs .pcard .ic{width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--gold-tint); display: flex; align-items: center; justify-content: center;}
+.cs .pcard .ic{width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--gold-soft); display: flex; align-items: center; justify-content: center;}
 .cs .pcard .ic .ic{font-size: 26px; color: var(--gold);}
 .cs .logos{display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px;}
 .cs .logobox{border-radius: var(--radius-2xl); border: 1px solid var(--border-subtle); height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; box-shadow: var(--shadow-soft);}
 .cs .logobox img.lock{height: 46px;}
-.cs .logobox .cap{font: var(--fw-semibold) 12px/1 var(--font-fa); color: #9aa7bc;}
-.cs .logobox.ink{background: #1b2740;}
-.cs .logobox.ink .cap{color: rgba(243,245,248,0.6);}
+.cs .logobox .cap{font: var(--fw-semibold) 12px/1 var(--font-fa); color: var(--text-muted);}
+.cs .logobox.ink{background: var(--pw-surface-raised);}
+.cs .logobox.ink .cap{color: var(--showcase-ink-muted);}
 .cs .logobox .app{width: 84px; height: 84px; border-radius: 20px; box-shadow: var(--shadow-float);}
 .cs .swatches{display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 40px;}
 .cs .sw{border-radius: var(--radius-lg); height: 110px; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft);}
 .cs .sw .n{font: var(--fw-bold) 12px/1.3 var(--font-fa);}
 .cs .sw .h{font: var(--fw-medium) 10px/1.4 var(--font-mono); opacity: .7; direction: ltr; text-align: right;}
-.cs .sw.d{color: #fff;}
-.cs .sw.d .h{color: rgba(255,255,255,0.8); opacity: 1;}
-.cs .sw.l{color: #1b263b;}
+.cs .sw.d{color: var(--text-strong);}
+.cs .sw.d .h{color: rgb(var(--white-rgb) / 80%); opacity: 1;}
+.cs .sw.l{color: var(--text-inverse);}
 .cs .type{margin-top: 40px; padding: 36px;}
-.cs .type .big{font-weight: 800; font-size: 56px; line-height: 1.3; color: var(--ink); letter-spacing: -0.01em;}
+.cs .type .big{font-weight: 800; font-size: 56px; line-height: 1.3; color: var(--text-strong); letter-spacing: -0.01em;}
 .cs .type .num{font-weight: 700; font-size: 34px; color: var(--gold); margin-top: 6px;}
 .cs .type .body{font-weight: 400; font-size: 17px; line-height: 2; color: var(--text-body); margin-top: 16px; max-width: 600px;}
 .cs .type .scale{display: flex; gap: 22px; flex-wrap: wrap; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border-subtle);}
 .cs .type .scale span{font: var(--fw-semibold) 13px/1 var(--font-fa); color: var(--text-muted);}
-.cs .type .scale b{color: var(--ink);}
+.cs .type .scale b{color: var(--text-strong);}
 .cs .comp{margin-top: 40px; padding: 32px; display: flex; flex-direction: column; gap: 20px;}
 .cs .comp .row{display: flex; gap: 12px; align-items: center; flex-wrap: wrap;}
 .cs .comp .rl{width: 100%; font: var(--fw-semibold) 11px/1 var(--font-fa); color: var(--text-muted); margin-bottom: -6px;}
-.cs .shot{margin-top: 22px; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: #18233a;}
-.cs .shot__bar{display: flex; align-items: center; gap: 7px; padding: 11px 15px; background: #131c2e; border-bottom: 1px solid var(--border-subtle); direction: ltr;}
+.cs .shot{margin-top: 22px; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: var(--surface-card);}
+.cs .shot__bar{display: flex; align-items: center; gap: 7px; padding: 11px 15px; background: var(--pw-surface-1); border-bottom: 1px solid var(--border-subtle); direction: ltr;}
 .cs .shot__bar i{width: 11px; height: 11px; border-radius: 50%;}
+.cs .shot__bar i:nth-child(1){background: var(--mac-close);}
+.cs .shot__bar i:nth-child(2){background: var(--mac-minimise);}
+.cs .shot__bar i:nth-child(3){background: var(--mac-zoom);}
 .cs .shot__bar .u{margin: 0 auto; font: var(--fw-medium) 11px/1 var(--font-mono); color: var(--text-muted);}
 .cs .shot img{width: 100%; display: block;}
 .cs .shotgrid{display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px;}
 .cs .princ{display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px;}
 .cs .pr{padding: 24px;}
 .cs .pr .n{font: var(--fw-extrabold) 22px/1 var(--font-fa); color: var(--gold);}
-.cs .pr h4{font: var(--fw-bold) 16px/1.5 var(--font-fa); color: var(--ink); margin: 12px 0 0;}
+.cs .pr h4{font: var(--fw-bold) 16px/1.5 var(--font-fa); color: var(--text-strong); margin: 12px 0 0;}
 .cs .pr p{font: var(--fw-medium) 13px/1.85 var(--font-fa); color: var(--text-muted); margin: 6px 0 0;}
 .cs .persona{display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px;}
 .cs .pp{padding: 26px; display: flex; gap: 16px;}
-.cs .pp__av{width: 56px; height: 56px; border-radius: var(--radius-full); flex: none; display: flex; align-items: center; justify-content: center; color: #fff; font: var(--fw-bold) 17px/1 var(--font-fa);}
-.cs .pp h4{font: var(--fw-bold) 17px/1.5 var(--font-fa); color: var(--ink); margin: 0;}
-.cs .pp .role{font: var(--fw-semibold) 12px/1.4 var(--font-fa); color: var(--slate); margin-top: 2px;}
+.cs .pp__av{width: 56px; height: 56px; border-radius: var(--radius-full); flex: none; display: flex; align-items: center; justify-content: center; color: var(--brand-solid-ink); font: var(--fw-bold) 17px/1 var(--font-fa);}
+.cs .pp h4{font: var(--fw-bold) 17px/1.5 var(--font-fa); color: var(--text-strong); margin: 0;}
+.cs .pp .role{font: var(--fw-semibold) 12px/1.4 var(--font-fa); color: var(--pw-text-faint); margin-top: 2px;}
 .cs .pp p{font: var(--fw-medium) 13px/1.9 var(--font-fa); color: var(--text-muted); margin: 10px 0 0;}
 .cs .pp ul{margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px;}
 .cs .pp li{font: var(--fw-medium) 12.5px/1.6 var(--font-fa); color: var(--text-body); display: flex; gap: 7px;}
 .cs .pp li .ic{color: var(--gold); font-size: 15px; margin-top: 2px; flex: none;}
 .cs .steps{display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px;}
 .cs .step{padding: 22px;}
-.cs .step .n{width: 34px; height: 34px; border-radius: var(--radius-full); background: var(--cream); color: #11192a; display: flex; align-items: center; justify-content: center; font: var(--fw-bold) 14px/1 var(--font-fa);}
-.cs .step h4{font: var(--fw-bold) 15px/1.5 var(--font-fa); color: var(--ink); margin: 14px 0 0;}
+.cs .step .n{width: 34px; height: 34px; border-radius: var(--radius-full); background: var(--text-strong); color: var(--text-inverse); display: flex; align-items: center; justify-content: center; font: var(--fw-bold) 14px/1 var(--font-fa);}
+.cs .step h4{font: var(--fw-bold) 15px/1.5 var(--font-fa); color: var(--text-strong); margin: 14px 0 0;}
 .cs .step p{font: var(--fw-medium) 12.5px/1.85 var(--font-fa); color: var(--text-muted); margin: 6px 0 0;}
 .cs .wf-wrap{display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px;}
-.cs .wf{background: #131c2e; border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); padding: 16px; box-shadow: var(--shadow-soft);}
+.cs .wf{background: var(--pw-surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); padding: 16px; box-shadow: var(--shadow-soft);}
 .cs .wf__cap{font: var(--fw-semibold) 12.5px/1 var(--font-fa); color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;}
 .cs .wf__cap .ic{font-size: 16px; color: var(--gold);}
 .cs .wf__win{display: grid; grid-template-columns: 64px 1fr; gap: 10px; height: 226px; direction: rtl;}
-.cs .wf__sb{background: #18233a; border: 1px dashed rgba(255,255,255,0.18); border-radius: 12px; padding: 12px 8px; display: flex; flex-direction: column; gap: 9px;}
-.cs .wf__sb i{height: 9px; border-radius: 4px; background: rgba(255,255,255,0.12); display: block;}
-.cs .wf__sb i.on{background: rgba(255,255,255,0.32); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);}
+.cs .wf__sb{background: var(--surface-card); border: 1px dashed var(--border-strong); border-radius: 12px; padding: 12px 8px; display: flex; flex-direction: column; gap: 9px;}
+.cs .wf__sb i{height: 9px; border-radius: 4px; background: rgb(var(--white-rgb) / 12%); display: block;}
+.cs .wf__sb i.on{background: rgb(var(--white-rgb) / 32%); box-shadow: inset 0 0 0 1px rgb(var(--white-rgb) / 35%);}
 .cs .wf__main{display: flex; flex-direction: column; gap: 10px; min-width: 0;}
-.cs .wf__bar{height: 26px; border-radius: 8px; background: #1b2740; border: 1px dashed rgba(255,255,255,0.16); flex: none;}
+.cs .wf__bar{height: 26px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%); flex: none;}
 .cs .wf__stats{display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;}
-.cs .wf__stats span{height: 42px; border-radius: 8px; background: #1b2740; border: 1px dashed rgba(255,255,255,0.16);}
+.cs .wf__stats span{height: 42px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%);}
 .cs .wf__cols{display: grid; grid-template-columns: 1.6fr 1fr; gap: 8px; flex: 1;}
-.cs .wf__cols span{border-radius: 10px; background: #1b2740; border: 1px dashed rgba(255,255,255,0.16);}
-.cs section.warm{background: #0a1120;}
-.cs .store{margin-top: 40px; border-radius: var(--radius-3xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: var(--white);}
+.cs .wf__cols span{border-radius: 10px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%);}
+.cs section.warm{background: var(--pw-paper);}
+.cs .store{margin-top: 40px; border-radius: var(--radius-3xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: var(--surface-card);}
 .cs .store__cover{height: 120px; background: var(--gold);}
 .cs .store__head{display: flex; align-items: flex-end; gap: 16px; padding: 0 26px 18px; margin-top: -36px; position: relative;}
-.cs .store__av{width: 78px; height: 78px; border-radius: 22px; background: #11192a; color: var(--cream); display: flex; align-items: center; justify-content: center; font: var(--fw-bold) 27px/1 var(--font-fa); border: 4px solid var(--white); box-shadow: var(--shadow-soft); flex: none;}
+.cs .store__av{width: 78px; height: 78px; border-radius: 22px; background: var(--showcase-surface-deep); color: var(--text-strong); display: flex; align-items: center; justify-content: center; font: var(--fw-bold) 27px/1 var(--font-fa); border: 4px solid var(--surface-card); box-shadow: var(--shadow-soft); flex: none;}
 .cs .store__meta{flex: 1; padding-bottom: 4px; min-width: 0;}
-.cs .store__nm{font: var(--fw-extrabold) 22px/1.5 var(--font-fa); color: var(--ink);}
+.cs .store__nm{font: var(--fw-extrabold) 22px/1.5 var(--font-fa); color: var(--text-strong);}
 .cs .store__sub{font: var(--fw-medium) 13px/1.5 var(--font-fa); color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 4px;}
 .cs .store__sub span{display: inline-flex; align-items: center; gap: 5px;}
-.cs .store__sub .ic{font-size: 16px; color: var(--slate-soft);}
+.cs .store__sub .ic{font-size: 16px; color: var(--pw-text-faint);}
 .cs .store__body{padding: 4px 26px 26px;}
 .cs .store__search{position: relative; margin-bottom: 18px;}
 .cs .store__search .ic{position: absolute; inset-inline-start: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 18px;}
-.cs .store__search input{width: 100%; height: 44px; border-radius: var(--radius-full); border: 1px solid var(--input-border); background: var(--surface-page); padding-inline: 42px 14px; font: var(--fw-medium) 14px/1 var(--font-fa); color: var(--ink);}
+.cs .store__search input{width: 100%; height: 44px; border-radius: var(--radius-full); border: 1px solid var(--input-border); background: var(--pw-black); padding-inline: 42px 14px; font: var(--fw-medium) 14px/1 var(--font-fa); color: var(--text-strong);}
 .cs .store__grid{display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;}
-.cs .pc{border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--white); box-shadow: var(--shadow-soft); transition: transform var(--dur) var(--ease-smooth), box-shadow var(--dur) var(--ease-smooth);}
+.cs .pc{border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface-card); box-shadow: var(--shadow-soft); transition: transform var(--dur) var(--ease-smooth), box-shadow var(--dur) var(--ease-smooth);}
 .cs .pc:hover{transform: translateY(-3px); box-shadow: var(--shadow-float);}
-.cs .pc__img{height: 108px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.92); font-size: 40px;}
+.cs .pc__img{height: 108px; display: flex; align-items: center; justify-content: center; color: rgb(var(--white-rgb) / 92%); font-size: 40px;}
 .cs .pc__b{padding: 11px 13px 13px;}
-.cs .pc__nm{font: var(--fw-semibold) 13px/1.6 var(--font-fa); color: var(--ink);}
-.cs .pc__pr{font: var(--fw-bold) 13px/1 var(--font-fa); color: var(--ink); margin-top: 8px;}
+.cs .pc__nm{font: var(--fw-semibold) 13px/1.6 var(--font-fa); color: var(--text-strong);}
+.cs .pc__pr{font: var(--fw-bold) 13px/1 var(--font-fa); color: var(--text-strong); margin-top: 8px;}
 .cs .quote{text-align: center; padding: 70px 0;}
 .cs .quote .mk{font: 800 56px/0.6 var(--font-fa); color: var(--gold);}
-.cs .quote p{font: var(--fw-bold) 28px/1.8 var(--font-fa); color: var(--ink); max-width: 780px; margin: 12px auto 0; text-wrap: balance;}
-.cs footer{background: #0a1120; color: rgba(243,245,248,0.7); padding: 48px 0; margin-top: 24px;}
+.cs .quote p{font: var(--fw-bold) 28px/1.8 var(--font-fa); color: var(--text-strong); max-width: 780px; margin: 12px auto 0; text-wrap: balance;}
+.cs footer{background: var(--pw-paper); color: var(--showcase-ink-muted); padding: 48px 0; margin-top: 24px;}
 .cs footer .f{display: flex; align-items: center; gap: 12px;}
-.cs footer .f .m{width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;}
+.cs footer .f .m{width: 34px; height: 34px; border-radius: 10px; background: rgb(var(--white-rgb) / 8%); display: flex; align-items: center; justify-content: center;}
 .cs footer .f .m img{width: 18px;}
-.cs footer .f b{font: var(--fw-bold) 18px/1 var(--font-fa); color: var(--cream);}
+.cs footer .f b{font: var(--fw-bold) 18px/1 var(--font-fa); color: var(--text-strong);}
 .cs footer .f p{font: var(--fw-medium) 13px/1 var(--font-fa); margin: 5px 0 0;}
-.cs footer .meta-line{margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); font: var(--fw-medium) 12.5px/1.8 var(--font-fa);}`;
+.cs footer .meta-line{margin-top: 28px; padding-top: 20px; border-top: 1px solid rgb(var(--white-rgb) / 12%); font: var(--fw-medium) 12.5px/1.8 var(--font-fa);}`;
 
 const BODY = `
 
@@ -246,7 +239,7 @@ const BODY = `
     <p class="lead">پرومال دو نوع کاربر دارد که با یک پل به هم می‌رسند؛ هر خریدار می‌تواند با یک کلیک فروشنده شود.</p>
     <div class="persona">
       <div class="card pp">
-        <span class="pp__av" style="background:#415a77">م‌ا</span>
+        <span class="pp__av" style="background:var(--slate)">م‌ا</span>
         <div>
           <h4>مریم — فروشنده</h4>
           <div class="role">مدیر بوتیک ترمه · تهران</div>
@@ -259,7 +252,7 @@ const BODY = `
         </div>
       </div>
       <div class="card pp">
-        <span class="pp__av" style="background:#c4b894">س‌م</span>
+        <span class="pp__av" style="background:var(--gold-deep)">س‌م</span>
         <div>
           <h4>سارا — خریدار</h4>
           <div class="role">کاربر بازارگاه پرومال</div>
@@ -330,9 +323,9 @@ const BODY = `
     <h2 class="t">نشان پرومال — هندسی، گرم، ماندگار</h2>
     <p class="lead">یک مونوگرام برگرفته از حرف P که روی سطح روشن، روی جوهرِ تیره، و به‌عنوان آیکون اپ کار می‌کند.</p>
     <div class="logos">
-      <div class="logobox" style="background:var(--paper)"><img class="lock" src="/case-study/logo-mark-ink.png" alt="نشان پرومال" /><span class="cap">روی سطح روشن</span></div>
+      <div class="logobox" style="background:var(--pw-paper)"><img class="lock" src="/case-study/logo-mark-ink.png" alt="نشان پرومال" /><span class="cap">روی سطح روشن</span></div>
       <div class="logobox ink"><img class="lock" src="/case-study/logo-mark-white.png" alt="نشان پرومال" /><span class="cap">روی جوهر تیره</span></div>
-      <div class="logobox" style="background:var(--paper)"><img class="app" src="/case-study/favicon.png" alt="آیکون اپ" /><span class="cap">آیکون اپلیکیشن</span></div>
+      <div class="logobox" style="background:var(--pw-paper)"><img class="app" src="/case-study/favicon.png" alt="آیکون اپ" /><span class="cap">آیکون اپلیکیشن</span></div>
     </div>
   </div>
 </section>
@@ -344,12 +337,12 @@ const BODY = `
     <h2 class="t">جوهر آبی، گرم‌شده با طلایی</h2>
     <p class="lead">پالت اصلی از زبان بصری پرومال؛ آبیِ جوهری برای متن و سطوح تیره، اسلیت به‌عنوان رنگ برند، و طلاییِ کرمی برای گرما و تأکید.</p>
     <div class="swatches">
-      <div class="sw d" style="background:#11192a"><span class="n">جوهر تیره</span><span class="h">#11192A</span></div>
-      <div class="sw d" style="background:#1b263b"><span class="n">جوهر</span><span class="h">#1B263B</span></div>
-      <div class="sw d" style="background:#415a77"><span class="n">اسلیت</span><span class="h">#415A77</span></div>
-      <div class="sw l" style="background:#aebbd0"><span class="n">آسمانی</span><span class="h">#AEBBD0</span></div>
-      <div class="sw l" style="background:#d9d0b8"><span class="n">طلایی</span><span class="h">#D9D0B8</span></div>
-      <div class="sw l" style="background:#f6f7f9"><span class="n">کاغذی</span><span class="h">#F6F7F9</span></div>
+      <div class="sw d" style="background:var(--ink-deep)"><span class="n">جوهر تیره</span><span class="h">#11192A</span></div>
+      <div class="sw d" style="background:var(--ink)"><span class="n">جوهر</span><span class="h">#1B263B</span></div>
+      <div class="sw d" style="background:var(--slate)"><span class="n">اسلیت</span><span class="h">#415A77</span></div>
+      <div class="sw l" style="background:var(--sky)"><span class="n">آسمانی</span><span class="h">#AEBBD0</span></div>
+      <div class="sw l" style="background:var(--gold)"><span class="n">طلایی</span><span class="h">#D9D0B8</span></div>
+      <div class="sw l" style="background:var(--paper)"><span class="n">کاغذی</span><span class="h">#F6F7F9</span></div>
     </div>
   </div>
 </section>
@@ -411,16 +404,16 @@ const BODY = `
     <h2 class="t">یک پنجره‌ی شناور، آرام و کامل</h2>
     <p class="lead">داشبورد فروشگاه در قالب یک پنجره‌ی گرد و شناور روی پس‌زمینه‌ای روشن — با نوار کناری جدا، در دو حالت روشن و تیره.</p>
     <div class="shot">
-      <div class="shot__bar"><i style="background:#ec6a5e"></i><i style="background:#f4bf4f"></i><i style="background:#61c554"></i><span class="u">app.promall.io / پیشخوان</span></div>
+      <div class="shot__bar"><i></i><i></i><i></i><span class="u">app.promall.io / پیشخوان</span></div>
       <img src="/case-study/case/shot-dashboard.png" alt="داشبورد فروشگاه پرومال" />
     </div>
     <div class="shotgrid">
       <div class="shot">
-        <div class="shot__bar"><i style="background:#ec6a5e"></i><i style="background:#f4bf4f"></i><i style="background:#61c554"></i><span class="u">حالت تیره</span></div>
+        <div class="shot__bar"><i></i><i></i><i></i><span class="u">حالت تیره</span></div>
         <img src="/case-study/case/shot-dashboard-dark.png" alt="داشبورد در حالت تیره" />
       </div>
       <div class="shot">
-        <div class="shot__bar"><i style="background:#ec6a5e"></i><i style="background:#f4bf4f"></i><i style="background:#61c554"></i><span class="u">حساب خریدار</span></div>
+        <div class="shot__bar"><i></i><i></i><i></i><span class="u">حساب خریدار</span></div>
         <img src="/case-study/case/shot-account.png" alt="پنل حساب خریدار" />
       </div>
     </div>
@@ -451,10 +444,10 @@ const BODY = `
       <div class="store__body">
         <div class="store__search"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11.5" cy="11.5" r="9.5"/><path stroke-linecap="round" d="M18.5 18.5L22 22"/></g></svg></span><input placeholder="جست‌وجو در این فروشگاه…" /></div>
         <div class="store__grid">
-          <div class="pc"><div class="pc__img" style="background:#415a77"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.286 3.91c0-.568.538-1.16 1.374-1.16s1.374.592 1.374 1.16c0 .311-.112.581-.294.78a11 11 0 0 1-.38.385l-.08.08a9 9 0 0 0-.529.558c-.265.312-.553.723-.658 1.23a4.3 4.3 0 0 0-1.774.722l-7.095 4.992c-.927.652-1.166 1.702-.828 2.582c.332.866 1.194 1.511 2.306 1.511H6.01C6 17.113 6 17.527 6 18c0 1.886 0 2.828.587 3.414C7.17 22 8.114 22 10 22h4c1.885 0 2.828 0 3.414-.586S18 19.886 18 18c0-.473 0-.887-.01-1.25h2.307c1.125 0 1.99-.657 2.316-1.533c.33-.891.073-1.948-.877-2.588l-7.433-5.01a4.3 4.3 0 0 0-1.614-.66q.075-.121.205-.274c.126-.149.274-.298.44-.464l.075-.072c.14-.14.295-.292.435-.445c.443-.48.69-1.115.69-1.795c0-1.542-1.364-2.659-2.874-2.659S8.786 2.367 8.786 3.91a.75.75 0 0 0 1.5 0m7.521 11.34h2.49c.509 0 .806-.277.91-.555c.097-.264.047-.582-.31-.822l-7.432-5.01a2.9 2.9 0 0 0-1.655-.483a2.9 2.9 0 0 0-1.628.512l-7.095 4.991c-.346.243-.391.558-.29.819c.105.275.403.548.905.548h2.49c.087-.267.212-.483.394-.664C7.17 14 8.114 14 10 14h4c1.885 0 2.828 0 3.414.586c.181.181.307.397.393.664" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">مانتو نخی کرم</div><div class="pc__pr">۱٬۲۸۰٬۰۰۰ تومان</div></div></div>
-          <div class="pc"><div class="pc__img" style="background:#1b263b"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M5.777 10.296v7.969c0 1.323 0 1.985.449 2.547c.448.562.985.66 2.058.858c.992.182 2.249.33 3.716.33s2.724-.148 3.716-.33c1.073-.198 1.61-.296 2.059-.858c.448-.562.448-1.224.448-2.547v-7.97c0-.683 0-1.025.132-1.326c.131-.3.378-.523.871-.968l.186-.167c1.056-.952 1.584-1.429 1.588-2.118c.004-.69-.465-1.122-1.401-1.988a8 8 0 0 0-.418-.362c-.472-.378-1.138-.792-1.648-1.09a2.05 2.05 0 0 0-1.567-.205l-.49.129a1.6 1.6 0 0 0-.949.703c-1.202 1.897-3.852 1.897-5.054 0a1.6 1.6 0 0 0-.948-.703l-.49-.129a2.05 2.05 0 0 0-1.568.205c-.51.298-1.176.712-1.648 1.09a8 8 0 0 0-.418.362C3.464 4.594 2.996 5.027 3 5.716s.532 1.166 1.588 2.118l.186.167c.493.445.74.668.871.968c.132.3.132.643.132 1.327"/></svg></span></div><div class="pc__b"><div class="pc__nm">شومیز ساتن مشکی</div><div class="pc__pr">۸۹۰٬۰۰۰ تومان</div></div></div>
-          <div class="pc"><div class="pc__img" style="background:#c4b894"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8.25 7.013V6a3.75 3.75 0 1 1 7.5 0v1.013c1.297.037 2.087.17 2.692.667c.83.68 1.06 1.834 1.523 4.143l.6 3c.664 3.32.996 4.98.096 6.079S18.067 22 14.68 22H9.32c-3.386 0-5.08 0-5.98-1.098s-.568-2.758.096-6.079l.6-3c.462-2.309.693-3.463 1.522-4.143c.606-.496 1.396-.63 2.693-.667M9.75 6a2.25 2.25 0 0 1 4.5 0v1h-4.5zM15 11a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-5-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">روسری ابریشمی</div><div class="pc__pr">۴۲۰٬۰۰۰ تومان</div></div></div>
-          <div class="pc"><div class="pc__img" style="background:#778da9"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.66 5.75c-.836 0-1.374.592-1.374 1.16a.75.75 0 0 1-1.5 0c0-1.543 1.364-2.66 2.874-2.66s2.874 1.117 2.874 2.66c0 .68-.248 1.314-.69 1.794c-.14.153-.294.305-.435.445l-.074.072a8 8 0 0 0-.441.464a2.4 2.4 0 0 0-.205.274a4.3 4.3 0 0 1 1.614.66l7.433 5.01c.95.64 1.207 1.697.877 2.588c-.325.876-1.191 1.533-2.316 1.533H3.702c-1.112 0-1.974-.645-2.306-1.51c-.338-.88-.1-1.931.828-2.583l7.095-4.992a4.3 4.3 0 0 1 1.774-.722c.105-.507.393-.918.658-1.23c.172-.202.36-.391.529-.558l.08-.08c.143-.14.267-.263.38-.386c.182-.198.294-.468.294-.78c0-.567-.538-1.159-1.374-1.159m1.805 6.112a2.9 2.9 0 0 0-1.655-.482a2.9 2.9 0 0 0-1.628.512l-7.095 4.991c-.346.243-.391.558-.29.819c.105.275.403.548.905.548h16.595c.509 0 .806-.277.91-.555c.097-.264.047-.582-.31-.822z" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">پیراهن ابریشمی</div><div class="pc__pr">۱٬۴۵۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:var(--slate)"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.286 3.91c0-.568.538-1.16 1.374-1.16s1.374.592 1.374 1.16c0 .311-.112.581-.294.78a11 11 0 0 1-.38.385l-.08.08a9 9 0 0 0-.529.558c-.265.312-.553.723-.658 1.23a4.3 4.3 0 0 0-1.774.722l-7.095 4.992c-.927.652-1.166 1.702-.828 2.582c.332.866 1.194 1.511 2.306 1.511H6.01C6 17.113 6 17.527 6 18c0 1.886 0 2.828.587 3.414C7.17 22 8.114 22 10 22h4c1.885 0 2.828 0 3.414-.586S18 19.886 18 18c0-.473 0-.887-.01-1.25h2.307c1.125 0 1.99-.657 2.316-1.533c.33-.891.073-1.948-.877-2.588l-7.433-5.01a4.3 4.3 0 0 0-1.614-.66q.075-.121.205-.274c.126-.149.274-.298.44-.464l.075-.072c.14-.14.295-.292.435-.445c.443-.48.69-1.115.69-1.795c0-1.542-1.364-2.659-2.874-2.659S8.786 2.367 8.786 3.91a.75.75 0 0 0 1.5 0m7.521 11.34h2.49c.509 0 .806-.277.91-.555c.097-.264.047-.582-.31-.822l-7.432-5.01a2.9 2.9 0 0 0-1.655-.483a2.9 2.9 0 0 0-1.628.512l-7.095 4.991c-.346.243-.391.558-.29.819c.105.275.403.548.905.548h2.49c.087-.267.212-.483.394-.664C7.17 14 8.114 14 10 14h4c1.885 0 2.828 0 3.414.586c.181.181.307.397.393.664" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">مانتو نخی کرم</div><div class="pc__pr">۱٬۲۸۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:var(--ink)"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M5.777 10.296v7.969c0 1.323 0 1.985.449 2.547c.448.562.985.66 2.058.858c.992.182 2.249.33 3.716.33s2.724-.148 3.716-.33c1.073-.198 1.61-.296 2.059-.858c.448-.562.448-1.224.448-2.547v-7.97c0-.683 0-1.025.132-1.326c.131-.3.378-.523.871-.968l.186-.167c1.056-.952 1.584-1.429 1.588-2.118c.004-.69-.465-1.122-1.401-1.988a8 8 0 0 0-.418-.362c-.472-.378-1.138-.792-1.648-1.09a2.05 2.05 0 0 0-1.567-.205l-.49.129a1.6 1.6 0 0 0-.949.703c-1.202 1.897-3.852 1.897-5.054 0a1.6 1.6 0 0 0-.948-.703l-.49-.129a2.05 2.05 0 0 0-1.568.205c-.51.298-1.176.712-1.648 1.09a8 8 0 0 0-.418.362C3.464 4.594 2.996 5.027 3 5.716s.532 1.166 1.588 2.118l.186.167c.493.445.74.668.871.968c.132.3.132.643.132 1.327"/></svg></span></div><div class="pc__b"><div class="pc__nm">شومیز ساتن مشکی</div><div class="pc__pr">۸۹۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:var(--gold-deep)"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8.25 7.013V6a3.75 3.75 0 1 1 7.5 0v1.013c1.297.037 2.087.17 2.692.667c.83.68 1.06 1.834 1.523 4.143l.6 3c.664 3.32.996 4.98.096 6.079S18.067 22 14.68 22H9.32c-3.386 0-5.08 0-5.98-1.098s-.568-2.758.096-6.079l.6-3c.462-2.309.693-3.463 1.522-4.143c.606-.496 1.396-.63 2.693-.667M9.75 6a2.25 2.25 0 0 1 4.5 0v1h-4.5zM15 11a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-5-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">روسری ابریشمی</div><div class="pc__pr">۴۲۰٬۰۰۰ تومان</div></div></div>
+          <div class="pc"><div class="pc__img" style="background:var(--slate-soft)"><span class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.66 5.75c-.836 0-1.374.592-1.374 1.16a.75.75 0 0 1-1.5 0c0-1.543 1.364-2.66 2.874-2.66s2.874 1.117 2.874 2.66c0 .68-.248 1.314-.69 1.794c-.14.153-.294.305-.435.445l-.074.072a8 8 0 0 0-.441.464a2.4 2.4 0 0 0-.205.274a4.3 4.3 0 0 1 1.614.66l7.433 5.01c.95.64 1.207 1.697.877 2.588c-.325.876-1.191 1.533-2.316 1.533H3.702c-1.112 0-1.974-.645-2.306-1.51c-.338-.88-.1-1.931.828-2.583l7.095-4.992a4.3 4.3 0 0 1 1.774-.722c.105-.507.393-.918.658-1.23c.172-.202.36-.391.529-.558l.08-.08c.143-.14.267-.263.38-.386c.182-.198.294-.468.294-.78c0-.567-.538-1.159-1.374-1.159m1.805 6.112a2.9 2.9 0 0 0-1.655-.482a2.9 2.9 0 0 0-1.628.512l-7.095 4.991c-.346.243-.391.558-.29.819c.105.275.403.548.905.548h16.595c.509 0 .806-.277.91-.555c.097-.264.047-.582-.31-.822z" clip-rule="evenodd"/></svg></span></div><div class="pc__b"><div class="pc__nm">پیراهن ابریشمی</div><div class="pc__pr">۱٬۴۵۰٬۰۰۰ تومان</div></div></div>
         </div>
       </div>
     </div>

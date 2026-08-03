@@ -8,7 +8,7 @@ import { DemoRequestForm, type DemoFormLabels } from '@/components/DemoRequestFo
 import { locales, defaultLocale } from '@/i18n/config';
 import { localizeDigits } from '@/lib/demo-form';
 
-const STEP_KEYS = ['call', 'demo', 'launch'] as const;
+const STEP_KEYS = ['whatsapp', 'demo', 'launch'] as const;
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -41,6 +41,7 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
     formSubtitle: t('formSubtitle'),
     phoneLabel: t('phoneLabel'),
     phonePlaceholder: t('phonePlaceholder'),
+    phoneHint: t('phoneHint'),
     phoneError: t('phoneError'),
     instagramLabel: t('instagramLabel'),
     instagramPlaceholder: t('instagramPlaceholder'),

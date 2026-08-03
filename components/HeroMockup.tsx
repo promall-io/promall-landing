@@ -63,13 +63,13 @@ export function HeroMockup({
 }: HeroMockupProps) {
   return (
     <div
-      className={`relative w-full max-w-[960px] overflow-hidden rounded-t-3xl border border-b-0 border-[var(--pw-line)] bg-[rgba(24,35,58,0.66)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_-30px_90px_-40px_rgba(0,0,0,0.8)] backdrop-blur-[28px] sm:p-9 ${className ?? ''}`}
+      className={`relative w-full max-w-[960px] overflow-hidden rounded-t-3xl border border-b-0 border-[var(--pw-line)] bg-[rgb(var(--surface-card-rgb)/66%)] p-5 shadow-[var(--pw-shadow-hero)] backdrop-blur-[28px] sm:p-9 ${className ?? ''}`}
     >
       <div className="flex h-12 items-center justify-between">
         <ProMallMark size={32} className="text-[var(--pw-text-dim)]" />
         <span
           aria-hidden
-          className="flex size-9 items-center justify-center rounded-full bg-[rgba(255,255,255,0.05)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]"
+          className="flex size-9 items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/5%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]"
         >
           <MenuIcon width={20} height={20} />
         </span>
@@ -83,7 +83,7 @@ export function HeroMockup({
               <p className="pw-small">{prompt}</p>
             </div>
 
-            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[rgba(255,255,255,0.05)] p-4 ring-1 ring-[var(--pw-line)] backdrop-blur-sm">
+            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[rgb(var(--white-rgb)/5%)] p-4 ring-1 ring-[var(--pw-line)] backdrop-blur-sm">
               <p className="min-h-12 text-start text-sm leading-[1.5] text-[var(--pw-text-faint)]">
                 {placeholder}
               </p>
@@ -94,7 +94,7 @@ export function HeroMockup({
                   <BoltIcon width={20} height={20} />
                 </span>
                 <span aria-hidden className="flex items-center gap-2">
-                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[rgba(255,255,255,0.08)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]">
+                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/8%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]">
                     <MicGlyph size={16} />
                   </span>
                   <span className="flex size-[30px] items-center justify-center rounded-full bg-[var(--pw-cream)] text-[var(--pw-black)]">
@@ -107,13 +107,13 @@ export function HeroMockup({
 
           <div className="flex w-full flex-col items-start gap-6">
             <div className="flex w-full items-center gap-4">
-              <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden [mask-image:linear-gradient(to_right,#000_86%,transparent)] rtl:[mask-image:linear-gradient(to_left,#000_86%,transparent)]">
+              <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden [mask-image:linear-gradient(to_right,rgb(var(--shade-rgb))_86%,transparent)] rtl:[mask-image:linear-gradient(to_left,rgb(var(--shade-rgb))_86%,transparent)]">
                 {tabs.map((tab, index) => (
                   <span
                     key={tab}
                     className={
                       index === 0
-                        ? 'whitespace-nowrap rounded-full bg-[rgba(255,255,255,0.1)] px-3 py-1 text-sm leading-[1.5] text-[var(--pw-cream)]'
+                        ? 'whitespace-nowrap rounded-full bg-[rgb(var(--white-rgb)/10%)] px-3 py-1 text-sm leading-[1.5] text-[var(--pw-cream)]'
                         : 'whitespace-nowrap rounded-full px-3 py-1 text-sm leading-[1.5] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]'
                     }
                   >

@@ -65,7 +65,8 @@ function HillLayer({ hill }: { hill: Hill }) {
           height={hill.height}
           sizes="100vw"
           quality={HILL_QUALITY}
-          priority
+          loading="eager"
+          fetchPriority="low"
           className="h-auto w-full object-cover"
           style={{ minHeight: hill.minHeight }}
         />
@@ -85,6 +86,7 @@ export function HeroLandscape() {
       <div aria-hidden className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
         <HillLayer hill={FOREGROUND_HILL} />
       </div>
+      <div aria-hidden className="pw-hill-fade" />
     </>
   );
 }

@@ -1,3 +1,37 @@
+export type IntroTiles = {
+  dm: {
+    title: string;
+    caption: string;
+    chip: string;
+    contact: string;
+    customer: string;
+    typing: string;
+    assistant: string;
+    card: { title: string; meta: string; action: string };
+  };
+  stock: {
+    title: string;
+    caption: string;
+    chip: string;
+    items: { name: string; meta: string }[];
+  };
+  revenue: {
+    title: string;
+    caption: string;
+    chip: string;
+    label: string;
+    amount: number;
+    unit: string;
+    columns: string[];
+  };
+  order: {
+    title: string;
+    caption: string;
+    chip: string;
+    steps: string[];
+  };
+};
+
 export type FeatureTab = {
   id: string;
   label: string;

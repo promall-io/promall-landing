@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { defaultLocale } from '@/i18n/config';
 import { getArticles, PILLAR_SLUG } from '@/lib/blog';
-import { BLOG_PATH } from '@/lib/routes';
+import { BLOG_PATH, PRIVACY_PATH, TERMS_PATH } from '@/lib/routes';
 import { absoluteUrl } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -29,6 +29,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: article.modifiedIso,
       changeFrequency: 'monthly' as const,
       priority: article.slug === PILLAR_SLUG ? 0.9 : 0.7,
+    })),
+    ...[PRIVACY_PATH, TERMS_PATH].map((path) => ({
+      url: absoluteUrl(defaultLocale, path),
+      changeFrequency: 'yearly' as const,
+      priority: 0.2,
     })),
   ];
 }

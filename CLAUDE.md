@@ -48,7 +48,9 @@ The `en` locale must contain **zero Persian characters**, so anything Persian-on
 
 ## Styling
 
-- Tailwind **v4** (`@import "tailwindcss"`), no `tailwind.config.js`. Theme = CSS variables in `app/globals.css`: `--pw-*` (Powder-derived layout/palette: ink-blue surfaces, `--pw-gold`, cream/sky text), plus `--pw-success` / `--pw-danger`.
+- **Colour = `docs/color-system.md`, no exceptions.** The `:root` block at the top of `app/globals.css` is the ONLY place this repo authors a colour value; `components/app-replica.css`, the case study and every `.ts`/`.tsx` file reference it through `var()`. It carries promall-ui's **dark** values because landing ships one theme (`color-scheme: dark` on `<html>`, no `.dark` class) — keep it in lock-step with `promall-ui/src/app/globals.css`.
+- Tailwind **v4** (`@import "tailwindcss"`), no `tailwind.config.js`. Tokens are grouped by the spec's families (ramp / surface / text / semantic / status / border+focus / glass), with `--pw-*` as the landing-facing aliases and a clearly-labelled landing-only section for values with no promall-ui counterpart.
+- **Never author a `color-mix()` whose first operand is a `var()`** — Lightning CSS cannot fold it and emits the bare operand as the legacy fallback, i.e. a fully opaque colour where you wanted 5%. Write the complete `rgba()` instead.
 - `pw-*` utility classes MUST live in `@layer components` or Tailwind's cascade wins over them.
 - Flat, token-driven surfaces — no gradient/glossy "AI-template" look. **Sanctioned exception:** the `--ig-*` tokens (Instagram gradient bubble + story ring) are real Instagram values and are scoped to the DM mockup only.
 - Scroll reveals are CSS-driven (`.pw-reveal` + `IntersectionObserver` in `components/Reveal.tsx`), not framer-motion.

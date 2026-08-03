@@ -50,7 +50,7 @@ function PaLogo({ size = 32 }: { size?: number }) {
       aria-hidden="true"
       style={{ flexShrink: 0 }}
     >
-      <path d={LOGO_BOWL} fill="#f3f5f8" />
+      <path d={LOGO_BOWL} fill="var(--text-strong)" />
       <path d={LOGO_STEM} fill="var(--gold)" />
     </svg>
   )
@@ -104,11 +104,11 @@ const KPI_VISUALS: Array<{ id: ReplicaKpiId; icon: PaIconName; iconBg: string; i
 ]
 
 const RANK_BADGES = [
-  { bg: "var(--gold)", fg: "var(--ink)" },
-  { bg: "var(--slate)", fg: "#ffffff" },
-  { bg: "#2f6ca2", fg: "#ffffff" },
-  { bg: "var(--slate-soft)", fg: "#ffffff" },
-  { bg: "var(--slate-soft)", fg: "#ffffff" },
+  { bg: "var(--gold)", fg: "var(--text-on-gold)" },
+  { bg: "var(--slate)", fg: "var(--brand-solid-ink)" },
+  { bg: "var(--brand-solid)", fg: "var(--brand-solid-ink)" },
+  { bg: "var(--slate-soft)", fg: "var(--brand-solid-ink)" },
+  { bg: "var(--slate-soft)", fg: "var(--brand-solid-ink)" },
 ]
 
 const ORDER_STATUS_TONE: Record<ReplicaOrderStatus, string> = {
@@ -243,9 +243,7 @@ function HeroBanner({ copy }: { copy: ReplicaCopy }) {
             <PaIcon name="SparklesIcon" variant="bold" />
             {copy.hero.eyebrow}
           </span>
-          <p className="pm-hero__title" style={{ color: "#fff" }}>
-            {copy.hero.title}
-          </p>
+          <p className="pm-hero__title">{copy.hero.title}</p>
           <p className="pm-hero__sub">{copy.hero.sub}</p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>

@@ -13,14 +13,15 @@ const MINI_STAT_ICONS = {
   clock: ClockIcon,
 };
 
-const CARD_SCRIM = 'linear-gradient(180deg, rgba(10,14,20,0.55) 0%, rgba(10,14,20,0) 45%)';
+const CARD_SCRIM =
+  'linear-gradient(180deg, color-mix(in srgb, var(--pw-black) 55%, transparent) 0%, transparent 45%)';
 
 const CARD_SKY =
-  'radial-gradient(160% 70% at 50% 0, var(--pw-slate) 0%, var(--pw-slate-light) 40%, var(--pw-rose) 100%)';
+  'radial-gradient(160% 70% at 50% 0, var(--pw-paper) 0%, var(--pw-surface-raised) 40%, var(--pw-rose) 100%)';
 
 function StatTag({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center gap-3 rounded-full bg-[rgba(255,255,255,0.1)] px-4 py-[7px] text-sm leading-[1.5] text-[var(--pw-text)] backdrop-blur-[6px]">
+    <span className="inline-flex items-center gap-3 rounded-full bg-[rgb(var(--white-rgb)/10%)] px-4 py-[7px] text-sm leading-[1.5] text-[var(--pw-text)] backdrop-blur-[6px]">
       <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-[var(--pw-cream)]" />
       {label}
     </span>
@@ -52,8 +53,8 @@ function StatCardTile({
         sizes="(max-width: 810px) 100vw, 522px"
         className="scale-[1.6] object-cover object-bottom"
         style={{
-          maskImage: 'linear-gradient(to bottom, transparent 0%, #000 22%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 22%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, rgb(var(--shade-rgb)) 22%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgb(var(--shade-rgb)) 22%)',
         }}
       />
       <span aria-hidden className="absolute inset-0" style={{ background: CARD_SCRIM }} />

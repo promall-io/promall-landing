@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LegalDocument, type LegalSection } from '@/components/LegalDocument';
 import { locales } from '@/i18n/config';
+import { TERMS_PATH } from '@/lib/routes';
+import { pageAlternates, robotsForLocale } from '@/lib/site';
 
 const SECTION_IDS = [
   'acceptance',
@@ -29,7 +31,8 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('subtitle'),
-    robots: { index: false, follow: true },
+    alternates: pageAlternates(locale, TERMS_PATH),
+    robots: robotsForLocale(locale),
   };
 }
 

@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState, type SVGProps } from 'react';
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { REVEAL_EASE } from '@/components/Reveal';
+import { useReducedMotionAfterMount } from '@/components/reduced-motion';
 import { localizeDigits } from '@/lib/demo-form';
 import type { DmMessage, DmStep, DmThreadChrome } from '@/types/content';
 
@@ -164,7 +165,7 @@ function AutoReplyStrip({ label }: { label: string }) {
     <div className="flex shrink-0 items-center gap-2 border-b border-[var(--ig-separator)] bg-[var(--ig-surface)] px-3.5 py-1.5">
       <BoltGlyph size={13} className="shrink-0 text-[var(--pw-gold)]" />
       <span className="truncate text-[10.5px] text-[var(--ig-text-secondary)]">{label}</span>
-      <span className="ms-auto size-1.5 shrink-0 rounded-full bg-[#4ade80]" />
+      <span className="ms-auto size-1.5 shrink-0 rounded-full bg-[var(--pw-success)]" />
     </div>
   );
 }
@@ -318,7 +319,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
   const stageRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inView = useInView(stageRef, { margin: '-120px 0px' });
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotionAfterMount();
   const playing = inView && !reduceMotion;
 
   const { visible, typing } = useScriptPlayer(script, playing);
@@ -353,7 +354,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
             />
           ))}
 
-          <div className="relative rounded-[42px] bg-[var(--pw-surface-2)] p-[6px] ring-1 ring-[var(--pw-line-strong)] shadow-[0_30px_70px_-30px_rgba(0,0,0,0.75)]">
+          <div className="relative rounded-[42px] bg-[var(--pw-surface-2)] p-[6px] ring-1 ring-[var(--pw-line-strong)] shadow-[var(--pw-shadow-device)]">
             <div
               dir={locale === 'fa' ? 'rtl' : 'ltr'}
               className="relative flex aspect-[393/852] w-full flex-col overflow-hidden rounded-[36px] bg-[var(--ig-canvas)] ring-1 ring-inset ring-white/[0.06]"
@@ -391,8 +392,8 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
 
         <p className="mt-5 flex items-center justify-center gap-2 text-[13px] text-[var(--pw-text-faint)]">
           <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full rounded-full bg-[#4ade80] opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-[#4ade80]" />
+            <span className="absolute inline-flex size-full rounded-full bg-[var(--pw-success)] opacity-60" />
+            <span className="relative inline-flex size-2 rounded-full bg-[var(--pw-success)]" />
           </span>
           {chrome.liveLabel}
         </p>

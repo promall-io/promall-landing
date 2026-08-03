@@ -52,9 +52,13 @@ export function useRevealState<T extends HTMLElement>(): {
   const [phase, setPhase] = useState<RevealPhase>('idle');
 
   useIsomorphicLayoutEffect(() => {
-    if (motionAllowed()) {
-      setPhase('pending');
+    const node = ref.current;
+
+    if (!node || !motionAllowed() || node.getBoundingClientRect().top < window.innerHeight) {
+      return;
     }
+
+    setPhase('pending');
   }, []);
 
   useEffect(() => {

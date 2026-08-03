@@ -89,7 +89,7 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
               aria-controls={PANEL_ID}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveIndex(index)}
-              className={`flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-4 text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--pw-line-strong)] ${
+              className={`flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-4 text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
                 selected
                   ? 'bg-[var(--pw-surface-2)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]'
                   : 'text-[var(--pw-text-faint)]'
@@ -106,7 +106,7 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
         role="tabpanel"
         tabIndex={0}
         aria-labelledby={tabId(active.id)}
-        className="relative mt-8 aspect-[1080/610] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-solid)] ring-1 ring-[var(--pw-line)] focus-visible:outline-none focus-visible:ring-[var(--pw-line-strong)]"
+        className="relative mt-8 aspect-[1080/610] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] focus-visible:outline-none focus-visible:ring-[var(--ring)]"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
