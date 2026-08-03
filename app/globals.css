@@ -636,13 +636,28 @@
     gap: 24px;
   }
 
-  /* The intro tiles are live fragments of the panel, so their choreography only
-     runs once the scene is on screen — every rule below is gated on data-play.
-     Without it the markup already sits in its finished state, which is what a
-     crawler, a no-JS visitor and prefers-reduced-motion all get. */
+  /* The bento widgets are live fragments of the panel, so every beat below is
+     gated on data-play — set only while the scene is on screen. A crawler, a
+     no-JS visitor and prefers-reduced-motion never set it, and with no
+     animation applied the markup already sits in its finished state. The DM
+     and order widgets remount on a timer while playing, which restarts their
+     one-shot beats and turns the cards into looping widgets. */
   .pw-intro-scene[data-play='true'] [data-beat='in'] {
     animation: pw-beat-in 0.62s var(--pw-spring) both;
     animation-delay: var(--pw-beat, 0s);
+  }
+
+  .pw-intro-scene[data-play='true'] [data-beat='pop'] {
+    animation: pw-beat-pop 0.72s var(--pw-spring) both;
+    animation-delay: var(--pw-beat, 0s);
+  }
+
+  /* the typing indicator is layered over the reply it precedes, so its resting
+     state has to be invisible — the beat is what reveals it, and every reader
+     that gets no beats (crawler, no-JS, reduced motion) skips straight to the
+     reply instead of seeing the two stacked */
+  .pw-intro-scene [data-beat='pass'] {
+    opacity: 0;
   }
 
   .pw-intro-scene[data-play='true'] [data-beat='pass'] {
@@ -668,19 +683,13 @@
     transform-origin: bottom center;
   }
 
-  .pw-intro-scene[data-play='true'] [data-trail] {
-    animation: pw-grow-y 1.4s var(--pw-ease) both;
-    animation-delay: var(--pw-beat, 0s);
-    transform-origin: top center;
-  }
-
   .pw-intro-scene[data-play='true'] [data-draw] {
     stroke-dasharray: 18;
     animation: pw-draw 0.45s var(--pw-ease) both;
     animation-delay: var(--pw-beat, 0s);
   }
 
-  /* the hero ends on the dashboard's cut-off edge and the tiles pick that same
+  /* the hero ends on the dashboard's cut-off edge and the scene picks that same
      1080px column back up, so the seam between them is a hairline the eye can
      follow rather than a band of empty canvas */
   .pw-intro-scene {
@@ -725,19 +734,136 @@
 
   .pw-intro-halo {
     position: absolute;
-    inset: -22px;
+    inset: -9px;
     border-radius: 9999px;
     border: 1px solid var(--pw-line);
     pointer-events: none;
   }
 
   .pw-intro-scene[data-play='true'] .pw-intro-halo {
-    animation: pw-halo 4.6s var(--pw-ease) infinite;
+    animation: pw-halo 3.2s var(--pw-ease) infinite;
   }
 
   .pw-intro-scene[data-play='true'] .pw-intro-flash {
     animation: pw-flash 2.8s var(--pw-ease) infinite;
-    animation-delay: var(--pw-beat, 0s);
+  }
+
+  .pw-pulse-dot {
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: 9999px;
+    background: var(--pw-success);
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-pulse-dot {
+    animation: pw-flash 2.4s var(--pw-ease) infinite;
+  }
+
+  .pw-bento-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: clamp(20px, 2.2vw, 26px);
+    border: 1px solid var(--pw-line);
+    border-radius: 24px;
+    background: var(--pw-surface-1);
+  }
+
+  /* entrance uses backwards fill only, so once a card has landed the animation
+     stops owning transform and the hover lift can take over */
+  .pw-intro-scene[data-play='true'] .pw-bento-card {
+    animation: pw-beat-in 0.8s var(--pw-spring) backwards;
+    animation-delay: var(--pw-enter, 0s);
+  }
+
+  @media (hover: hover) {
+    .pw-bento-card {
+      transition:
+        transform 0.6s var(--pw-spring),
+        border-color 0.6s var(--pw-ease),
+        box-shadow 0.6s var(--pw-ease);
+    }
+
+    .pw-bento-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-card);
+    }
+  }
+
+  .pw-intro-card {
+    position: relative;
+    box-shadow: 0 0 0 1px var(--pw-line);
+  }
+
+  .pw-intro-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 1px solid var(--pw-gold);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-intro-card::after {
+    animation: pw-ring 2.8s var(--pw-ease) infinite;
+    animation-delay: calc(var(--pw-beat, 0s) + 0.6s);
+  }
+
+  .pw-order-trail {
+    transform-origin: left center;
+  }
+
+  [dir='rtl'] .pw-order-trail {
+    transform-origin: right center;
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-order-trail {
+    animation: pw-grow-x 2.4s var(--pw-ease) 0.5s both;
+  }
+
+  .pw-order-dot {
+    position: absolute;
+    top: 50%;
+    inline-size: 7px;
+    block-size: 7px;
+    border-radius: 9999px;
+    background: var(--pw-gold);
+    box-shadow: 0 0 10px 1px var(--pw-glow-gold);
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-order-dot {
+    animation: pw-order-travel 2.4s var(--pw-ease) 0.5s both;
+  }
+
+  .pw-revenue-bar[data-peak='true'] {
+    box-shadow: 0 0 14px -5px var(--pw-glow-gold);
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-revenue-bar[data-peak='true'] {
+    animation:
+      pw-grow-y 0.8s var(--pw-spring) both,
+      pw-bar-glow 3.8s ease-in-out 2.2s infinite;
+    animation-delay: var(--pw-beat, 0s), 2.2s;
+    transform-origin: bottom center;
+  }
+
+  .pw-revenue-tick {
+    position: absolute;
+    inset-inline-end: 0;
+    top: 2px;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--pw-success);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pw-intro-scene[data-play='true'] .pw-revenue-tick {
+    animation: pw-float-up 1.8s var(--pw-ease) both;
   }
 
   @media (min-width: 900px) {
@@ -762,6 +888,75 @@
   to {
     opacity: 0;
     transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes pw-beat-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pw-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  24% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+}
+
+@keyframes pw-order-travel {
+  0% {
+    inset-inline-start: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    inset-inline-start: calc(100% - 7px);
+    opacity: 0;
+  }
+}
+
+@keyframes pw-float-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+}
+
+@keyframes pw-bar-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 14px -5px var(--pw-glow-gold);
+  }
+  50% {
+    box-shadow: 0 0 24px -2px var(--pw-glow-gold);
   }
 }
 
