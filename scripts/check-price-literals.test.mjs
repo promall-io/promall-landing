@@ -124,3 +124,37 @@ for (const relativePath of TS_CONTENT_FILES) {
     assert.deepEqual(violations, []);
   });
 }
+
+const COPY_TOKEN_PATTERN = /__[A-Z][A-Z0-9_]*__/g;
+const TOKEN_RESOLVER_FILE = 'lib/faq-tokens.ts';
+const TOKEN_RENDER_FILES = ['components/sections/Faq.tsx', 'components/StructuredData.tsx'];
+
+function collectCopyTokens(relativePath) {
+  const text = readFileSync(path.join(repoRoot, relativePath), 'utf8');
+  return new Set(text.match(COPY_TOKEN_PATTERN) ?? []);
+}
+
+test('every price token in copy has a resolver in lib/faq-tokens.ts', () => {
+  const resolver = readFileSync(path.join(repoRoot, TOKEN_RESOLVER_FILE), 'utf8');
+  const unresolved = [];
+
+  for (const relativePath of JSON_FILES) {
+    for (const token of collectCopyTokens(relativePath)) {
+      if (!resolver.includes(token)) {
+        unresolved.push(`${relativePath}: ${token}`);
+      }
+    }
+  }
+
+  assert.deepEqual(unresolved, []);
+});
+
+for (const relativePath of TOKEN_RENDER_FILES) {
+  test(`${relativePath} resolves FAQ tokens instead of rendering them raw`, () => {
+    const text = readFileSync(path.join(repoRoot, relativePath), 'utf8');
+    assert.ok(
+      text.includes('resolveFaqCategories'),
+      `${relativePath} renders FAQ copy but never calls resolveFaqCategories, so authored tokens reach the page`,
+    );
+  });
+}

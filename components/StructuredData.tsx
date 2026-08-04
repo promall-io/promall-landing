@@ -7,6 +7,7 @@ import {
   type ApiPlan,
 } from '@/lib/plans';
 import { getArticles } from '@/lib/blog';
+import { resolveFaqCategories } from '@/lib/faq-tokens';
 import { BLOG_PATH, DEMO_PATH } from '@/lib/routes';
 import { absoluteUrl, SITE_NAME, SITE_URL, SOCIAL_PROFILES, SUPPORT_EMAIL } from '@/lib/site';
 
@@ -93,9 +94,13 @@ export async function StructuredData({ locale }: { locale: string }) {
   const softwareId = `${SITE_URL}/#software`;
   const ogImage = `${SITE_URL}${isFa ? '/og.png' : '/og-en.png'}`;
 
-  const categories = tFaq.raw('categories') as FaqCategory[];
   const planNames = tPricing.raw('names') as Record<string, string | undefined>;
   const catalog = await fetchPlanCatalog();
+  const categories = resolveFaqCategories(
+    tFaq.raw('categories') as FaqCategory[],
+    catalog,
+    locale,
+  );
   const priceRange = monthlyRialRange(catalog);
   const featureTabs = tFeatures.raw('tabs') as FeatureTab[];
   const featureList = featureTabs.map((tab) => `${tab.label} — ${tab.caption}`);

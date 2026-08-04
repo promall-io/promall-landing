@@ -2,45 +2,9 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { ArrowLink, SectionHeading } from '@/components/ui/Primitives';
 import { Reveal } from '@/components/Reveal';
 import { FaqPanel } from '@/components/sections/FaqPanel';
-import {
-  entryPlanWithInstagramAi,
-  fetchPlanCatalog,
-  formatNumber,
-  monthlyTomanRange,
-  planName,
-} from '@/lib/plans';
+import { resolveFaqCategories } from '@/lib/faq-tokens';
+import { fetchPlanCatalog } from '@/lib/plans';
 import type { FaqCategory } from '@/types/content';
-
-const MONTHLY_FROM_TOKEN = '__MONTHLY_FROM__';
-const YEARLY_DISCOUNT_TOKEN = '__YEARLY_DISCOUNT__';
-const AI_ENTRY_PLAN_TOKEN = '__AI_ENTRY_PLAN__';
-const FA_LOCALE = 'fa';
-const TOMAN_THOUSANDS_UNIT = 1000;
-
-function formatMonthlyFromToken(monthlyLow: number, locale: string): string {
-  return locale === FA_LOCALE
-    ? formatNumber(Math.round(monthlyLow / TOMAN_THOUSANDS_UNIT), locale)
-    : formatNumber(monthlyLow, locale);
-}
-
-function substituteFaqTokens(
-  categories: FaqCategory[],
-  replacements: Record<string, string>,
-): FaqCategory[] {
-  const applyTokens = (text: string): string =>
-    Object.entries(replacements).reduce(
-      (result, [token, value]) => result.split(token).join(value),
-      text,
-    );
-
-  return categories.map((category) => ({
-    ...category,
-    items: category.items.map((item) => ({
-      question: applyTokens(item.question),
-      answer: applyTokens(item.answer),
-    })),
-  }));
-}
 
 function FaqContactCard({
   title,
@@ -68,16 +32,8 @@ export async function Faq() {
   const t = await getTranslations('sections.faq');
   const locale = await getLocale();
   const catalog = await fetchPlanCatalog();
-  const monthlyRange = monthlyTomanRange(catalog);
-  const aiEntryPlan = entryPlanWithInstagramAi(catalog);
   const rawCategories = t.raw('categories') as FaqCategory[];
-  const categories = substituteFaqTokens(rawCategories, {
-    [MONTHLY_FROM_TOKEN]: monthlyRange
-      ? formatMonthlyFromToken(monthlyRange.low, locale)
-      : '',
-    [YEARLY_DISCOUNT_TOKEN]: formatNumber(catalog.yearlyDiscountPercent, locale),
-    [AI_ENTRY_PLAN_TOKEN]: aiEntryPlan ? planName(aiEntryPlan, locale) : '',
-  });
+  const categories = resolveFaqCategories(rawCategories, catalog, locale);
 
   return (
     <section id="faq" className="pw-section">
