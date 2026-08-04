@@ -41,7 +41,7 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
             <Link
               href={localeHref(locale, '/')}
               aria-label={t('brand')}
-              className="pw-link inline-flex shrink-0 text-[var(--pw-text-dim)]"
+              className="pw-touch-target pw-link relative inline-flex shrink-0 text-[var(--pw-text-dim)]"
             >
               <ProMallMark size={28} />
             </Link>
@@ -51,7 +51,10 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
             ) : null}
           </div>
 
-          <div className="flex flex-col gap-12 min-[810px]:flex-row min-[810px]:gap-24">
+          {/* Three link groups end to end is most of a screen on a phone. Two
+              columns fold the same content into a third of the height without
+              changing a single row's rhythm. */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 min-[810px]:flex min-[810px]:flex-row min-[810px]:gap-24">
             {columns.map((column, columnIndex) => {
               const titleId = `footer-column-${columnIndex}`;
 
@@ -60,12 +63,13 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
                   <p id={titleId} className="text-sm font-normal text-[var(--pw-cream)]">
                     {column.title}
                   </p>
-                  <ul className="mt-6 flex flex-col gap-[14px]">
+                  <ul className="mt-4 flex flex-col min-[810px]:mt-6">
                     {column.links.map((link, linkIndex) => {
-                      const className =
+                      const tone =
                         columnIndex === 0 && linkIndex === 0
-                          ? 'pw-link text-sm text-[var(--pw-cream)]'
-                          : 'pw-link text-sm text-[var(--pw-text-dim)]';
+                          ? 'text-[var(--pw-cream)]'
+                          : 'text-[var(--pw-text-dim)]';
+                      const className = `pw-link flex min-h-[var(--pw-touch)] items-center text-sm ${tone}`;
 
                       return (
                         <li key={link.label}>
@@ -93,7 +97,9 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
         <div className="mt-14 flex flex-col gap-8 min-[810px]:flex-row min-[810px]:items-center min-[810px]:justify-between">
           <p className="pw-micro">{t('copyright')}</p>
 
-          <ul aria-label={t('socialLabel')} className="flex items-center gap-6">
+          {/* -ms-3 pulls the first icon's new padding back off the edge so the
+              row still starts flush with the column above it. */}
+          <ul aria-label={t('socialLabel')} className="-ms-3 flex items-center">
             {socialChannels.map(({ name, href, Icon }) => (
               <li key={name}>
                 <a
@@ -101,7 +107,7 @@ export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolea
                   aria-label={name}
                   target="_blank"
                   rel="noreferrer"
-                  className="pw-link inline-flex text-[var(--pw-text-faint)]"
+                  className="pw-link inline-flex size-[var(--pw-touch)] items-center justify-center rounded-full text-[var(--pw-text-faint)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)]"
                 >
                   <Icon />
                 </a>

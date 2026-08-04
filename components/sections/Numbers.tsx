@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { EyebrowPill } from '@/components/ui/Primitives';
+import { ThemedImage } from '@/components/ThemedImage';
 import { Reveal } from '@/components/Reveal';
 import { NumbersParallax } from '@/components/sections/NumbersParallax';
 import { CheckCircleIcon, ClockIcon, GaugeIcon, SparkIcon } from '@/components/icons';
@@ -14,14 +14,14 @@ const MINI_STAT_ICONS = {
 };
 
 const CARD_SCRIM =
-  'linear-gradient(180deg, color-mix(in srgb, var(--pw-black) 55%, transparent) 0%, transparent 45%)';
+  'linear-gradient(180deg, rgb(var(--pw-canvas-rgb) / 55%) 0%, transparent 45%)';
 
 const CARD_SKY =
-  'radial-gradient(160% 70% at 50% 0, var(--pw-paper) 0%, var(--pw-surface-raised) 40%, var(--pw-rose) 100%)';
+  'radial-gradient(160% 70% at 50% 0, var(--pw-canvas-2) 0%, var(--pw-scene-mid) 40%, var(--pw-scene-dusk) 100%)';
 
 function StatTag({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center gap-3 rounded-full bg-[rgb(var(--white-rgb)/10%)] px-4 py-[7px] text-sm leading-[1.5] text-[var(--pw-text)] backdrop-blur-[6px]">
+    <span className="inline-flex items-center gap-3 rounded-full bg-[rgb(var(--pw-veil-rgb)/10%)] px-4 py-[7px] text-sm leading-[1.5] text-[var(--pw-text)] backdrop-blur-[6px]">
       <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-[var(--pw-cream)]" />
       {label}
     </span>
@@ -46,7 +46,7 @@ function StatCardTile({
       }`}
       style={{ backgroundImage: CARD_SKY }}
     >
-      <Image
+      <ThemedImage
         src={card.image}
         alt=""
         fill

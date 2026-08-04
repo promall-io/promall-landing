@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { ThemedImage } from '@/components/ThemedImage';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -94,7 +94,7 @@ export default async function ArticlePage({
         blogLabel={t('blogLabel')}
       />
       <Nav anchorsToHome />
-      <main id="main" className="pw-section pb-24">
+      <main id="main" tabIndex={-1} className="pw-section pb-24">
         <div className="pw-container">
           <article className="mx-auto w-full max-w-[760px]">
             <Reveal className="pt-[140px]">
@@ -132,7 +132,7 @@ export default async function ArticlePage({
 
             <Reveal className="mt-12" delay={0.06}>
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[20px]">
-                <Image
+                <ThemedImage
                   src={article.image}
                   alt={article.imageAlt}
                   fill

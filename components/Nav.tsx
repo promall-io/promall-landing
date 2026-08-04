@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { NavShell } from '@/components/NavShell';
+import { SkipLink } from '@/components/SkipLink';
 import { DEMO_PATH, localeHref } from '@/lib/routes';
 import type { NavLink } from '@/types/content';
 
@@ -19,15 +20,20 @@ export async function Nav({ anchorsToHome = false }: { anchorsToHome?: boolean }
   });
 
   return (
-    <NavShell
-      brand={t('brand')}
-      links={links}
-      cta={t('cta')}
-      ctaHref={localeHref(locale, DEMO_PATH)}
-      homeHref={homeHref}
-      menuOpenLabel={t('menuOpen')}
-      menuCloseLabel={t('menuClose')}
-      skipToContent={t('skipToContent')}
-    />
+    <>
+      <SkipLink label={t('skipToContent')} />
+      <NavShell
+        brand={t('brand')}
+        links={links}
+        cta={t('cta')}
+        ctaHref={localeHref(locale, DEMO_PATH)}
+        homeHref={homeHref}
+        menuLabel={t('menuLabel')}
+        menuOpenLabel={t('menuOpen')}
+        menuCloseLabel={t('menuClose')}
+        themeToLightLabel={t('themeToLight')}
+        themeToDarkLabel={t('themeToDark')}
+      />
+    </>
   );
 }

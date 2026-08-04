@@ -41,7 +41,7 @@ const CSS = `
 .cs .pm-inputwrap{ position:relative; display:flex; align-items:center; }
 .cs .pm-inputwrap__icon{ position:absolute; inset-inline-start:14px; color:var(--text-muted); font-size:18px; display:flex; }
 .cs .pm-input{ width:100%; height:42px; border-radius:var(--radius-full); border:1px solid var(--input-border);
-  background:var(--pw-black); padding-inline:42px 14px; font:var(--fw-medium) 14px/1 var(--font-fa); color:var(--text-strong); }
+  background:var(--pw-canvas); padding-inline:42px 14px; font:var(--fw-medium) 14px/1 var(--font-fa); color:var(--text-strong); }
 .cs .pm-avatar{ width:40px; height:40px; border-radius:var(--radius-full); display:inline-flex; align-items:center; justify-content:center;
   background:var(--pw-surface-raised); color:var(--text-strong); font:var(--fw-bold) 14px/1 var(--font-fa); }
 .cs .pm-avatar--ring{ box-shadow:0 0 0 2px var(--surface-card), 0 0 0 4px var(--gold); }
@@ -49,7 +49,7 @@ const CSS = `
   font:var(--fw-semibold) 13px/1 var(--font-fa); border:1px solid var(--border-subtle); color:var(--text-muted); background:var(--surface-card); }
 .cs .pm-tag--active{ background:var(--text-strong); color:var(--text-inverse); border-color:var(--text-strong); }
 
-.cs{margin: 0; font-family: var(--font-fa); color: var(--text-body); background: var(--pw-black);}
+.cs{margin: 0; font-family: var(--font-fa); color: var(--text-body); background: var(--pw-canvas);}
 .cs .wrap{max-width: 1080px; margin: 0 auto; padding: 0 28px;}
 .cs section{padding: 72px 0;}
 .cs .eyebrow{display: inline-flex; align-items: center; gap: 7px; font: var(--fw-bold) 13px/1 var(--font-fa);
@@ -58,7 +58,7 @@ const CSS = `
 .cs h2.t{font: var(--fw-extrabold) 38px/1.4 var(--font-fa); color: var(--text-strong); margin: 16px 0 0; letter-spacing: -0.01em; text-wrap: balance;}
 .cs .lead{font: var(--fw-medium) 17px/2 var(--font-fa); color: var(--text-muted); margin: 14px 0 0; max-width: 620px;}
 .cs .hero{position: relative; overflow: hidden; padding: 0;}
-.cs .hero__bg{position: absolute; inset: 0; z-index: 0; background: var(--pw-black);}
+.cs .hero__bg{position: absolute; inset: 0; z-index: 0; background: var(--pw-canvas);}
 .cs .hero__in{position: relative; z-index: 2; padding: 96px 0 84px; text-align: center;}
 .cs .hero__brand{display: inline-flex; align-items: center; gap: 11px; margin-bottom: 26px;}
 .cs .hero__brand .m{width: 40px; height: 40px; border-radius: 12px; background: var(--pw-surface-raised); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft);}
@@ -96,7 +96,7 @@ const CSS = `
 .cs .sw .n{font: var(--fw-bold) 12px/1.3 var(--font-fa);}
 .cs .sw .h{font: var(--fw-medium) 10px/1.4 var(--font-mono); opacity: .7; direction: ltr; text-align: right;}
 .cs .sw.d{color: var(--text-strong);}
-.cs .sw.d .h{color: rgb(var(--white-rgb) / 80%); opacity: 1;}
+.cs .sw.d .h{color: rgb(var(--pw-veil-rgb) / 80%); opacity: 1;}
 .cs .sw.l{color: var(--text-inverse);}
 .cs .type{margin-top: 40px; padding: 36px;}
 .cs .type .big{font-weight: 800; font-size: 56px; line-height: 1.3; color: var(--text-strong); letter-spacing: -0.01em;}
@@ -142,15 +142,15 @@ const CSS = `
 .cs .wf__cap .ic{font-size: 16px; color: var(--gold);}
 .cs .wf__win{display: grid; grid-template-columns: 64px 1fr; gap: 10px; height: 226px; direction: rtl;}
 .cs .wf__sb{background: var(--surface-card); border: 1px dashed var(--border-strong); border-radius: 12px; padding: 12px 8px; display: flex; flex-direction: column; gap: 9px;}
-.cs .wf__sb i{height: 9px; border-radius: 4px; background: rgb(var(--white-rgb) / 12%); display: block;}
-.cs .wf__sb i.on{background: rgb(var(--white-rgb) / 32%); box-shadow: inset 0 0 0 1px rgb(var(--white-rgb) / 35%);}
+.cs .wf__sb i{height: 9px; border-radius: 4px; background: rgb(var(--pw-veil-rgb) / 12%); display: block;}
+.cs .wf__sb i.on{background: rgb(var(--pw-veil-rgb) / 32%); box-shadow: inset 0 0 0 1px rgb(var(--pw-veil-rgb) / 35%);}
 .cs .wf__main{display: flex; flex-direction: column; gap: 10px; min-width: 0;}
-.cs .wf__bar{height: 26px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%); flex: none;}
+.cs .wf__bar{height: 26px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--pw-veil-rgb) / 16%); flex: none;}
 .cs .wf__stats{display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;}
-.cs .wf__stats span{height: 42px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%);}
+.cs .wf__stats span{height: 42px; border-radius: 8px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--pw-veil-rgb) / 16%);}
 .cs .wf__cols{display: grid; grid-template-columns: 1.6fr 1fr; gap: 8px; flex: 1;}
-.cs .wf__cols span{border-radius: 10px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--white-rgb) / 16%);}
-.cs section.warm{background: var(--pw-paper);}
+.cs .wf__cols span{border-radius: 10px; background: var(--pw-surface-raised); border: 1px dashed rgb(var(--pw-veil-rgb) / 16%);}
+.cs section.warm{background: var(--pw-canvas-2);}
 .cs .store{margin-top: 40px; border-radius: var(--radius-3xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-float); background: var(--surface-card);}
 .cs .store__cover{height: 120px; background: var(--gold);}
 .cs .store__head{display: flex; align-items: flex-end; gap: 16px; padding: 0 26px 18px; margin-top: -36px; position: relative;}
@@ -163,24 +163,24 @@ const CSS = `
 .cs .store__body{padding: 4px 26px 26px;}
 .cs .store__search{position: relative; margin-bottom: 18px;}
 .cs .store__search .ic{position: absolute; inset-inline-start: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 18px;}
-.cs .store__search input{width: 100%; height: 44px; border-radius: var(--radius-full); border: 1px solid var(--input-border); background: var(--pw-black); padding-inline: 42px 14px; font: var(--fw-medium) 14px/1 var(--font-fa); color: var(--text-strong);}
+.cs .store__search input{width: 100%; height: 44px; border-radius: var(--radius-full); border: 1px solid var(--input-border); background: var(--pw-canvas); padding-inline: 42px 14px; font: var(--fw-medium) 14px/1 var(--font-fa); color: var(--text-strong);}
 .cs .store__grid{display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;}
 .cs .pc{border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface-card); box-shadow: var(--shadow-soft); transition: transform var(--dur) var(--ease-smooth), box-shadow var(--dur) var(--ease-smooth);}
 .cs .pc:hover{transform: translateY(-3px); box-shadow: var(--shadow-float);}
-.cs .pc__img{height: 108px; display: flex; align-items: center; justify-content: center; color: rgb(var(--white-rgb) / 92%); font-size: 40px;}
+.cs .pc__img{height: 108px; display: flex; align-items: center; justify-content: center; color: rgb(var(--pw-veil-rgb) / 92%); font-size: 40px;}
 .cs .pc__b{padding: 11px 13px 13px;}
 .cs .pc__nm{font: var(--fw-semibold) 13px/1.6 var(--font-fa); color: var(--text-strong);}
 .cs .pc__pr{font: var(--fw-bold) 13px/1 var(--font-fa); color: var(--text-strong); margin-top: 8px;}
 .cs .quote{text-align: center; padding: 70px 0;}
 .cs .quote .mk{font: 800 56px/0.6 var(--font-fa); color: var(--gold);}
 .cs .quote p{font: var(--fw-bold) 28px/1.8 var(--font-fa); color: var(--text-strong); max-width: 780px; margin: 12px auto 0; text-wrap: balance;}
-.cs footer{background: var(--pw-paper); color: var(--showcase-ink-muted); padding: 48px 0; margin-top: 24px;}
+.cs footer{background: var(--pw-canvas-2); color: var(--showcase-ink-muted); padding: 48px 0; margin-top: 24px;}
 .cs footer .f{display: flex; align-items: center; gap: 12px;}
-.cs footer .f .m{width: 34px; height: 34px; border-radius: 10px; background: rgb(var(--white-rgb) / 8%); display: flex; align-items: center; justify-content: center;}
+.cs footer .f .m{width: 34px; height: 34px; border-radius: 10px; background: rgb(var(--pw-veil-rgb) / 8%); display: flex; align-items: center; justify-content: center;}
 .cs footer .f .m img{width: 18px;}
 .cs footer .f b{font: var(--fw-bold) 18px/1 var(--font-fa); color: var(--text-strong);}
 .cs footer .f p{font: var(--fw-medium) 13px/1 var(--font-fa); margin: 5px 0 0;}
-.cs footer .meta-line{margin-top: 28px; padding-top: 20px; border-top: 1px solid rgb(var(--white-rgb) / 12%); font: var(--fw-medium) 12.5px/1.8 var(--font-fa);}`;
+.cs footer .meta-line{margin-top: 28px; padding-top: 20px; border-top: 1px solid rgb(var(--pw-veil-rgb) / 12%); font: var(--fw-medium) 12.5px/1.8 var(--font-fa);}`;
 
 const BODY = `
 
@@ -323,9 +323,9 @@ const BODY = `
     <h2 class="t">نشان پرومال — هندسی، گرم، ماندگار</h2>
     <p class="lead">یک مونوگرام برگرفته از حرف P که روی سطح روشن، روی جوهرِ تیره، و به‌عنوان آیکون اپ کار می‌کند.</p>
     <div class="logos">
-      <div class="logobox" style="background:var(--pw-paper)"><img class="lock" src="/case-study/logo-mark-ink.png" alt="نشان پرومال" /><span class="cap">روی سطح روشن</span></div>
+      <div class="logobox" style="background:var(--pw-canvas-2)"><img class="lock" src="/case-study/logo-mark-ink.png" alt="نشان پرومال" /><span class="cap">روی سطح روشن</span></div>
       <div class="logobox ink"><img class="lock" src="/case-study/logo-mark-white.png" alt="نشان پرومال" /><span class="cap">روی جوهر تیره</span></div>
-      <div class="logobox" style="background:var(--pw-paper)"><img class="app" src="/case-study/favicon.png" alt="آیکون اپ" /><span class="cap">آیکون اپلیکیشن</span></div>
+      <div class="logobox" style="background:var(--pw-canvas-2)"><img class="app" src="/case-study/favicon.png" alt="آیکون اپ" /><span class="cap">آیکون اپلیکیشن</span></div>
     </div>
   </div>
 </section>
@@ -499,7 +499,16 @@ export default async function CaseStudyPage({
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className="cs" dir="rtl" lang="fa" dangerouslySetInnerHTML={{ __html: BODY }} />
+      {/* The case study documents the ink brand itself — its swatch grid names
+          the hexes it paints with — so it opts back into dark whatever the
+          visitor picked for the rest of the site. */}
+      <div
+        className="cs"
+        dir="rtl"
+        lang="fa"
+        data-theme="dark"
+        dangerouslySetInnerHTML={{ __html: BODY }}
+      />
     </>
   );
 }

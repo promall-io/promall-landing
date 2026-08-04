@@ -13,7 +13,7 @@ import { HeroStarfield } from '@/components/sections/HeroStarfield';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 
 const SKY_GRADIENT =
-  'radial-gradient(200% 83% at 50% 0, var(--pw-black) 0%, var(--pw-surface-raised) 42%, var(--pw-gold-deep) 100%)';
+  'radial-gradient(200% 83% at 50% 0, var(--pw-scene-far) 0%, var(--pw-scene-mid) 42%, var(--pw-scene-near) 100%)';
 
 const HERO_RISE = 24;
 

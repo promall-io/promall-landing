@@ -30,7 +30,16 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
 
   const active = tabs[activeIndex];
 
-  const step = (delta: number) => setActiveIndex((current) => (current + delta + tabs.length) % tabs.length);
+  const revealTab = (index: number) => {
+    setActiveIndex(index);
+    tabRefs.current[index]?.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'nearest',
+      inline: 'nearest',
+    });
+  };
+
+  const step = (delta: number) => revealTab((activeIndex + delta + tabs.length) % tabs.length);
 
   const focusTab = (index: number) => {
     setActiveIndex(index);
@@ -65,13 +74,17 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
   }
 
   return (
-    <div className="mt-[90px]">
+    <div className="mt-12 min-[811px]:mt-[90px]">
+      {/* The strip scrolls on a phone, so the tab the arrows move to has to be
+          brought into view — a keyboard or arrow-button step that lands on an
+          off-screen tab looks like nothing happened. Snapping keeps a tab from
+          resting half-cut after a flick. */}
       <div
         role="tablist"
         aria-orientation="horizontal"
         onKeyDown={handleTablistKeyDown}
         data-lenis-prevent-wheel
-        className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:grid min-[811px]:grid-cols-4 min-[811px]:gap-0 min-[811px]:overflow-visible"
+        className="-mx-[var(--pw-gutter)] flex snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-[var(--pw-gutter)] px-[var(--pw-gutter)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:mx-0 min-[811px]:grid min-[811px]:grid-cols-4 min-[811px]:gap-0 min-[811px]:overflow-visible min-[811px]:px-0"
       >
         {tabs.map((tab, index) => {
           const selected = index === activeIndex;
@@ -89,7 +102,7 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
               aria-controls={PANEL_ID}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveIndex(index)}
-              className={`flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-4 text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
+              className={`flex h-[var(--pw-control)] shrink-0 snap-start items-center justify-center whitespace-nowrap rounded-full px-4 text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
                 selected
                   ? 'bg-[var(--pw-surface-2)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]'
                   : 'text-[var(--pw-text-faint)]'

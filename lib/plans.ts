@@ -24,13 +24,9 @@ type ApiPlanFeatures = {
   maxProducts: number;
   maxOrders: number;
   maxUsers: number;
-  hasInvoice: boolean;
   hasInstagramDM: boolean;
-  hasRealTimeAnalytics: boolean;
-  hasApiAccess: boolean;
-  hasCustomDomain: boolean;
-  hasPhoneSupport: boolean;
-  slaGuarantee?: number;
+  hasAnalytics: boolean;
+  hasPrioritySupport: boolean;
 };
 
 type ApiPlan = {
@@ -64,28 +60,24 @@ export type PlanCopy = {
     orders: (value: string) => string;
     users: (value: string) => string;
   };
-  slaLabel: (value: string) => string;
   name: (planId: string) => string | undefined;
   description: (planId: string) => string | undefined;
   featureRows: Array<{ key: FeatureRowKey; label: string }>;
 };
 
-export type FeatureRowKey = 'orders' | 'instagramAi' | 'domainApi' | 'realtimeSupport';
+export type FeatureRowKey = 'orders' | 'instagramAi' | 'analytics' | 'prioritySupport';
 
 const FEATURE_ROW_PREDICATES: Record<FeatureRowKey, (features: ApiPlanFeatures) => boolean> = {
-  orders: (features) => features.hasInvoice,
+  orders: () => true,
   instagramAi: (features) => features.hasInstagramDM,
-  domainApi: (features) => features.hasCustomDomain && features.hasApiAccess,
-  realtimeSupport: (features) => features.hasRealTimeAnalytics && features.hasPhoneSupport,
+  analytics: (features) => features.hasAnalytics,
+  prioritySupport: (features) => features.hasPrioritySupport,
 };
 
 const REQUIRED_FEATURE_FLAGS = [
-  'hasInvoice',
   'hasInstagramDM',
-  'hasRealTimeAnalytics',
-  'hasApiAccess',
-  'hasCustomDomain',
-  'hasPhoneSupport',
+  'hasAnalytics',
+  'hasPrioritySupport',
 ] as const;
 
 /* a missing flag would render every comparison row as excluded rather than
@@ -240,17 +232,10 @@ export function planDescription(plan: ApiPlan, copy: PlanCopy): string {
   );
 }
 
-export function planSlaPercent(plan: ApiPlan, locale: string): string | null {
-  return typeof plan.features.slaGuarantee === 'number'
-    ? formatNumber(plan.features.slaGuarantee, locale)
-    : null;
-}
-
 export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
   const monthly = findCycle(plan, MONTHLY_CYCLE);
   const yearly = findCycle(plan, YEARLY_CYCLE);
   const custom = isCustomPricedPlan(plan);
-  const sla = planSlaPercent(plan, copy.locale);
   const { features } = plan;
 
   const meta = [
@@ -258,10 +243,6 @@ export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
     copy.meta.orders(formatCount(features.maxOrders, copy.locale, copy.unlimited)),
     copy.meta.users(formatCount(features.maxUsers, copy.locale, copy.unlimited)),
   ];
-
-  if (sla) {
-    meta.push(copy.slaLabel(sla));
-  }
 
   return {
     id: plan.id,

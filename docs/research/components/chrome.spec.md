@@ -35,7 +35,15 @@ Below 1200px: brand + hamburger only; links move into a drawer.
   ease `[0.44,0,0.56,1]`. Use `motion.header`, animate on mount (not whileInView).
 - Mobile drawer: full-screen overlay, `backdrop-filter: blur(12px)`, links stacked at 20px.
   Close on link click and on Escape. Trap nothing fancy — but restore focus to the toggle.
-- Include a visually-hidden skip link using `nav.skipToContent` pointing at `#main`.
+- Theme toggle (`.pw-theme-toggle`, 36px circle) sits at the start of the right-hand
+  cluster, before the CTA, in both the desktop bar and the mobile row. Both glyphs ship
+  in the markup; CSS shows the one naming the DESTINATION theme.
+- Skip link (`.pw-skip-link`, `nav.skipToContent` → `#main`) is rendered by `Nav` ahead of
+  `NavShell`, so it is the first focusable node on every page that has a `#main`. One CSS
+  rule owns it: a `--pw-cta-*` pill parked above the viewport with `translateY`, slid in on
+  `:focus`. Do NOT rebuild it out of `sr-only` + `focus:` utilities — un-clipping a 1px
+  clipped box mid-cascade is what broke the previous one. `#main` carries `tabindex="-1"`
+  so activation lands focus inside the landmark.
 
 ## Footer
 

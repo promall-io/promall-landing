@@ -9,7 +9,12 @@ import { SmoothScroll } from '@/components/SmoothScroll';
 import { PageviewTracker } from '@/components/PageviewTracker';
 import { absoluteUrl, pageAlternates, robotsForLocale, SITE_NAME, SITE_URL } from '@/lib/site';
 import { GOOGLE_SITE_VERIFICATION } from '@/lib/seo-config';
-import { PAGE_BACKGROUND } from '@/lib/tokens';
+import {
+  defaultTheme,
+  PAGE_BACKGROUND,
+  THEME_ATTRIBUTE,
+  THEME_BOOTSTRAP_SCRIPT,
+} from '@/lib/theme';
 import '../globals.css';
 
 const inter = Inter({
@@ -80,7 +85,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: PAGE_BACKGROUND,
+  themeColor: PAGE_BACKGROUND[defaultTheme],
 };
 
 export function generateStaticParams() {
@@ -108,8 +113,12 @@ export default async function LocaleLayout({
       lang={locale}
       dir={direction}
       className={`${inter.variable} ${fragmentMono.variable}`}
+      {...{ [THEME_ATTRIBUTE]: defaultTheme }}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
+      </head>
       <body>
         <link
           rel="preload"

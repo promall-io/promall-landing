@@ -423,7 +423,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
             >
               <span
                 aria-hidden
-                className={`absolute -start-8 top-[9px] size-[7px] rounded-full ring-4 ring-[var(--pw-black)] ${
+                className={`absolute -start-8 top-[9px] size-[7px] rounded-full ring-4 ring-[var(--pw-canvas)] ${
                   active ? 'bg-[var(--pw-gold)]' : 'bg-[var(--pw-text-faint)]'
                 }`}
               />

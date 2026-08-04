@@ -59,7 +59,7 @@ function RadialGuides() {
       aria-hidden
       className="absolute inset-0 size-full"
       fill="none"
-      stroke="rgb(var(--white-rgb) / 7%)"
+      stroke="var(--pw-line)"
       strokeWidth={1}
       vectorEffect="non-scaling-stroke"
     >
@@ -77,9 +77,16 @@ function RadialGuides() {
   );
 }
 
+/* The diagram is laid out in a fixed 1080×540 space and drawn at whatever
+   width it is given, so how far apart two nodes land is purely a function of
+   that width. Inside the 24px gutters of a 390px phone the compact set sits
+   65px apart while each node is 72px across — they overlapped, and the labels
+   with them. Two things buy the room back: the figure runs to the full
+   viewport on small screens (the guides are a bled backdrop, not content, so
+   they lose nothing at the edge) and the nodes step down a size. */
 function RadialDiagram({ nodes, hubLabel }: { nodes: string[]; hubLabel: string }) {
   return (
-    <figure className="w-full">
+    <figure className="w-auto max-[809px]:-mx-[var(--pw-gutter)]">
       <div className="relative w-full pb-11 min-[810px]:pb-16">
         <div
           dir="ltr"
@@ -101,7 +108,7 @@ function RadialDiagram({ nodes, hubLabel }: { nodes: string[]; hubLabel: string 
             return (
               <span
                 key={node}
-                className={`${visibility} absolute size-[72px] items-center justify-center rounded-full bg-[var(--pw-surface-2)] px-1.5 text-center ring-1 ring-[var(--pw-line)] min-[810px]:size-24 min-[810px]:px-2.5`}
+                className={`${visibility} absolute size-[60px] items-center justify-center rounded-full bg-[var(--pw-surface-2)] px-1 text-center ring-1 ring-[var(--pw-line)] min-[810px]:size-24 min-[810px]:px-2.5`}
                 style={{
                   insetInlineStart: `${(point.x / DIAGRAM_WIDTH) * 100}%`,
                   insetBlockStart: `${(point.y / DIAGRAM_HEIGHT) * 100}%`,
@@ -110,7 +117,7 @@ function RadialDiagram({ nodes, hubLabel }: { nodes: string[]; hubLabel: string 
               >
                 <span
                   aria-hidden
-                  className="text-[10px] leading-[1.35] text-[var(--pw-text-faint)] min-[810px]:text-[11px]"
+                  className="text-[9px] leading-[1.3] text-[var(--pw-text-faint)] min-[810px]:text-[11px]"
                 >
                   {node}
                 </span>
@@ -121,7 +128,7 @@ function RadialDiagram({ nodes, hubLabel }: { nodes: string[]; hubLabel: string 
 
         <div className="pointer-events-none absolute bottom-11 start-0 end-0 flex translate-y-1/2 justify-center min-[810px]:bottom-16">
           <span
-            className="flex size-[88px] items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line-strong)] min-[810px]:size-32"
+            className="flex size-[76px] items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line-strong)] min-[810px]:size-32"
             style={{ boxShadow: 'var(--pw-shadow-glow)' }}
           >
             <ProMallMark size={40} />
@@ -150,7 +157,9 @@ function IntegrationFeatureCell({ feature }: { feature: IntegrationFeature }) {
       <p className="mt-1 max-w-[26ch] text-sm leading-[1.5] text-[var(--pw-text-dim)]">
         {feature.description}
       </p>
-      <span className="mt-8 text-[var(--pw-text-faint)] min-[810px]:mt-9">
+      {/* The icon anchors the foot of a tall desktop column; stacked single-file
+          on a phone that same gap is just a hole between two rows of text. */}
+      <span className="mt-4 text-[var(--pw-text-faint)] min-[391px]:mt-8 min-[810px]:mt-9">
         <Icon width={20} height={20} />
       </span>
     </li>

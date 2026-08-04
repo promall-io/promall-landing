@@ -40,9 +40,16 @@ export function SectionHeading({
   );
 }
 
+/* An inline text link is only as tall as its line box, which is roughly half a
+   thumb. The padding buys the height back and the matching negative margin
+   gives it to the tap target rather than to the layout, so nothing around it
+   moves. */
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <Link href={href} className="pw-link pw-small inline-flex items-center gap-2 whitespace-nowrap">
+    <Link
+      href={href}
+      className="pw-link pw-small -my-2 inline-flex min-h-[var(--pw-touch)] items-center gap-2 whitespace-nowrap"
+    >
       {children}
       <span aria-hidden className="rtl:-scale-x-100">
         →
@@ -68,7 +75,7 @@ export function CircleButton({
       aria-label={label}
       onClick={onClick}
       disabled={disabled}
-      className="flex size-11 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-text)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease),opacity_0.4s_var(--pw-ease)] hover:bg-[rgb(var(--white-rgb)/16%)] disabled:opacity-40"
+      className="flex size-11 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-text)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease),opacity_0.4s_var(--pw-ease)] hover:bg-[rgb(var(--pw-veil-rgb)/16%)] focus-visible:outline-none focus-visible:ring-[var(--ring)] disabled:opacity-40"
     >
       {children}
     </button>

@@ -33,7 +33,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
       <div className="contents min-[811px]:flex min-[811px]:min-w-0 min-[811px]:flex-col">
         <div
           data-lenis-prevent-wheel
-          className="order-1 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:sticky min-[811px]:top-[120px] min-[811px]:flex-col min-[811px]:overflow-visible"
+          className="order-1 -mx-[var(--pw-gutter)] flex snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-[var(--pw-gutter)] px-[var(--pw-gutter)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[811px]:sticky min-[811px]:top-[120px] min-[811px]:mx-0 min-[811px]:flex-col min-[811px]:overflow-visible min-[811px]:px-0"
         >
           {categories.map((category) => {
             const isActive = category.id === active.id;
@@ -44,7 +44,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => selectCategory(category.id)}
-                className={`shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-center text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
+                className={`shrink-0 snap-start whitespace-nowrap rounded-full px-5 py-3 text-center text-base [transition:color_0.4s_var(--pw-ease),background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
                   isActive
                     ? 'bg-[var(--pw-surface-2)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]'
                     : 'text-[var(--pw-text-dim)]'
@@ -78,7 +78,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpenKey(isOpen ? null : rowKey)}
-                  className="flex w-full items-center justify-between gap-6 px-7 py-[26px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)]"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-[22px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] min-[391px]:gap-6 min-[391px]:px-7 min-[391px]:py-[26px]"
                 >
                   <span className="text-base leading-[1.5] text-[var(--pw-cream)]">
                     {item.question}
@@ -106,7 +106,7 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                     transition={panelMotion}
                     className="overflow-hidden"
                   >
-                    <p className="px-7 pb-[26px] text-sm leading-[1.85] text-[var(--pw-text-dim)]">
+                    <p className="px-5 pb-[22px] text-sm leading-[1.85] text-[var(--pw-text-dim)] min-[391px]:px-7 min-[391px]:pb-[26px]">
                       {item.answer}
                     </p>
                   </motion.div>

@@ -28,7 +28,7 @@ export function EnamadSeal({ label, alt }: EnamadSealProps) {
       rel="noreferrer"
       referrerPolicy="origin"
       aria-label={label}
-      className="inline-flex h-[84px] w-[84px] items-center justify-center rounded-[20px] border border-[var(--pw-line)] bg-[var(--pw-cream)] p-2 transition-colors duration-300 hover:border-[var(--pw-line-strong)]"
+      className="inline-flex h-[84px] w-[84px] items-center justify-center rounded-[20px] border border-[var(--partner-mark-border)] bg-[var(--partner-mark-surface)] p-2 transition-colors duration-300 hover:border-[var(--partner-mark-border-strong)]"
     >
       <Image
         src={sealLogo}

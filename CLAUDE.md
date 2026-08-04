@@ -4,6 +4,7 @@ Public marketing site — own git repo (`promall-landing.git`), **not** the dash
 
 - DON'T comment — self-documenting via clear naming. Generated code ships to prod: type-safe, lint-clean.
 - No fixed-port mandate: `npm run dev` (Next default `:3000`); this codebase is usually run on `-p 4531`.
+- **Follow the Claude Design System** — see the root `CLAUDE.md` § "Design System". This site's components are specced at `components/promall-landing/<Component>/<Component>.prompt.md` in the ProMall Design System project (`8b79dc67-0489-4900-a023-24791761f6b1`, via `DesignSync`). Configure DS components through `variant`/`size` props; never re-style them at the call site. Glass/gradient treatments are landing-only — they must never leak into `promall-ui`.
 
 ## Commands & Quality
 
@@ -48,9 +49,21 @@ The `en` locale must contain **zero Persian characters**, so anything Persian-on
 
 ## Styling
 
-- **Colour = `docs/color-system.md`, no exceptions.** The `:root` block at the top of `app/globals.css` is the ONLY place this repo authors a colour value; `components/app-replica.css`, the case study and every `.ts`/`.tsx` file reference it through `var()`. It carries promall-ui's **dark** values because landing ships one theme (`color-scheme: dark` on `<html>`, no `.dark` class) — keep it in lock-step with `promall-ui/src/app/globals.css`.
+- **Colour = `docs/color-system.md`, no exceptions.** `white`/`black` count as Tailwind stock colours and never re-theme — the one sanctioned use is `components/sections/InstagramThread.tsx`, which replicates Instagram's own fixed-dark app chrome (white bubbles text, black notch); that is third-party product UI, not ProMall chrome, so it must NOT be re-tokenised. The two blocks at the top of `app/globals.css` are the ONLY place this repo authors a colour value; `components/app-replica.css`, the case study and every `.ts`/`.tsx` file reference them through `var()`. Keep both in lock-step with `promall-ui/src/app/globals.css`.
 - Tailwind **v4** (`@import "tailwindcss"`), no `tailwind.config.js`. Tokens are grouped by the spec's families (ramp / surface / text / semantic / status / border+focus / glass), with `--pw-*` as the landing-facing aliases and a clearly-labelled landing-only section for values with no promall-ui counterpart.
-- **Never author a `color-mix()` whose first operand is a `var()`** — Lightning CSS cannot fold it and emits the bare operand as the legacy fallback, i.e. a fully opaque colour where you wanted 5%. Write the complete `rgba()` instead.
+
+### Two themes
+
+`:root, [data-theme='dark']` carries promall-ui's **dark** values and is what ships by default; `[data-theme='light']` re-authors **only the tokens whose role flips**. `prefers-color-scheme` is deliberately ignored — light is opt-in through the nav toggle alone.
+
+- `lib/theme.ts` owns the storage key, the `data-theme` attribute name, the `PAGE_BACKGROUND` mirror the OS shell needs (`<meta name="theme-color">` + the manifest can't read a CSS variable), and `THEME_BOOTSTRAP_SCRIPT`, which the layout inlines in `<head>` so a returning light visitor never sees a dark frame. `components/ThemeToggle.tsx` is the only writer.
+- **Never author a `dark:`-style second ruleset.** If a component needs one, the token is wrong — that is rule 3, and it holds here too. The handful of genuinely per-theme rules that remain are all in `globals.css` and all structural, not colour: hiding the star field, swapping which retint variant is displayed.
+- **Channel tokens split by intent.** `--white-rgb`/`--shade-rgb` are fixed literals and carry only mask stops (`mask-image` reads alpha, so the hue is inert), true shadow tints, and the star field. Anything that must read as *elevation* uses `--pw-veil-rgb` and anything that must read as *the page* uses `--pw-canvas-rgb`; both invert with the theme.
+- **Tokens that stay put in both themes:** the ink/slate/gold ramp, `--showcase-*` (those panels are ink at night and by day, so they get their own `--showcase-line/-veil` instead of the page's border tokens), `--partner-mark-*` (the e-Namad seal is a fixed dark asset and needs a light tile always), and the `--ig-*`/`--mac-*` facsimiles.
+- **Gold has two jobs in light.** `--pw-gold` is the accent that must be SEEN, so it drops to `--gold-ink` bronze on paper (champagne is 1.4:1 there — rule 11); `--pw-gold-fill` stays champagne in both and always pairs with `--text-on-gold`. The primary CTA follows rule 10's asymmetry via `--pw-cta-*`: gold in dark, ink in light. The mark's stem is `--pw-mark-stem`, which becomes `currentColor` in light to match the brand's monochrome light lockup.
+- **`/case-study` is pinned to `data-theme="dark"`** — it documents the ink brand and names its own hexes.
+- **Retinted rasters ship twice.** `scripts/retint-assets.mjs` reads BOTH token blocks and writes a `-light` sibling for every landscape and blog asset from the pristine copy in `public/_source`; the light ramp inverts polarity (hills are masses against a pale sky, not silhouettes catching light), so each asset carries its own `light:` tone curve. `components/ThemedImage.tsx` renders both and CSS picks one — the hidden copy is `loading="lazy"` inside a `display:none` box, so the browser never fetches it. Re-run the script after touching either block, and check the `docs/qa/retint-*-{dark,light}.png` sheets.
+- **Never author a `color-mix()` whose first operand is a `var()`** — Lightning CSS cannot fold it and emits the bare operand as the legacy fallback, i.e. a fully opaque colour where you wanted 5%. Write the complete `rgba()` instead. There are now **zero** in the repo; the two places that had them got real tokens instead — family E gained a `--{status}-border` member (plus `--brand-soft`/`--brand-border`) for the hairline that closes a soft pill, and each star tone carries `--pw-star-halo`/`-wide` alongside its tint so nothing is re-mixed at runtime.
 - `pw-*` utility classes MUST live in `@layer components` or Tailwind's cascade wins over them.
 - Flat, token-driven surfaces — no gradient/glossy "AI-template" look. **Sanctioned exception:** the `--ig-*` tokens (Instagram gradient bubble + story ring) are real Instagram values and are scoped to the DM mockup only.
 - Scroll reveals are CSS-driven (`.pw-reveal` + `IntersectionObserver` in `components/Reveal.tsx`), not framer-motion.

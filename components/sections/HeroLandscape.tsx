@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
-import Image from 'next/image';
 import { HERO_PARALLAX_RATE } from '@/lib/hero-parallax';
 import { HeroParallax } from '@/components/HeroParallax';
+import { ThemedImage } from '@/components/ThemedImage';
 
 type Hill = {
   src: string;
@@ -58,7 +58,7 @@ function HillLayer({ hill }: { hill: Hill }) {
       }
     >
       <HeroParallax rate={hill.rate}>
-        <Image
+        <ThemedImage
           src={hill.src}
           alt=""
           width={hill.width}

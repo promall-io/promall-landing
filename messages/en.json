@@ -60,9 +60,12 @@
       }
     ],
     "cta": "Free demo",
+    "menuLabel": "Menu",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "themeToLight": "Switch to light mode",
+    "themeToDark": "Switch to dark mode"
   },
   "sections": {
     "hero": {
@@ -300,8 +303,8 @@
           "date": "10 July 2026"
         },
         {
-          "title": "Multi-warehouse and stock reservation",
-          "description": "Stock is tracked per warehouse and items stay reserved until the customer pays.",
+          "title": "Stock reservation",
+          "description": "Items stay reserved from the moment of ordering until the customer pays, so nothing oversells.",
           "date": "21 June 2026"
         },
         {
@@ -370,12 +373,11 @@
       "metaProducts": "{value} products",
       "metaOrders": "{value} orders / month",
       "metaUsers": "{value} users",
-      "slaLabel": "{value}% SLA",
       "names": {
-        "STARTER": "Lite",
-        "PROFESSIONAL": "Pro",
-        "BUSINESS": "Pro Max",
-        "ENTERPRISE": "Business"
+        "STARTER": "Starter",
+        "PROFESSIONAL": "Professional",
+        "BUSINESS": "Business",
+        "ENTERPRISE": "Enterprise"
       },
       "descriptions": {
         "STARTER": "For small shops that are just getting going.",
@@ -386,8 +388,8 @@
       "featureRows": {
         "orders": "Orders, invoices and payment gateway",
         "instagramAi": "AI assistant for DMs",
-        "domainApi": "Custom domain and API",
-        "realtimeSupport": "Real-time reports and phone support"
+        "analytics": "Sales analytics and reports",
+        "prioritySupport": "Priority support"
       }
     },
     "faq": {
@@ -411,7 +413,7 @@
             },
             {
               "question": "My shop is Instagram-only, no website. Is it still useful?",
-              "answer": "That is exactly what it was built for. You add your products to ProMall and sell through DMs; later you can connect a custom domain if you want one."
+              "answer": "That is exactly what it was built for. You add your products to ProMall and sell through DMs — no website needed."
             },
             {
               "question": "How long does setup take?",

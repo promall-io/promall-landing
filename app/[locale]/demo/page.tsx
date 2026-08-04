@@ -107,7 +107,7 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                   <li key={key} className="relative">
                     <span
                       aria-hidden
-                      className="absolute -start-8 top-[7px] size-[7px] rounded-full bg-[var(--pw-gold)] ring-4 ring-[var(--pw-black)]"
+                      className="absolute -start-8 top-[7px] size-[7px] rounded-full bg-[var(--pw-gold)] ring-4 ring-[var(--pw-canvas)]"
                     />
                     <span className="pw-num block text-[11px] text-[var(--pw-text-faint)]">
                       {localizeDigits(String(index + 1).padStart(2, '0'), locale)}

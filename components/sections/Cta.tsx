@@ -1,13 +1,13 @@
 import { Fragment, type SVGProps } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { DEMO_PATH, localeHref } from '@/lib/routes';
 import { Reveal } from '@/components/Reveal';
 import { HeroMockup } from '@/components/HeroMockup';
+import { ThemedImage } from '@/components/ThemedImage';
 
 const CTA_GRADIENT =
-  'linear-gradient(180deg, var(--pw-black) 0%, var(--pw-paper) 42%, var(--pw-surface-2) 74%, var(--pw-rose) 100%)';
+  'linear-gradient(180deg, var(--pw-canvas) 0%, var(--pw-canvas-2) 42%, var(--pw-scene-mid) 74%, var(--pw-scene-dusk) 100%)';
 
 type BadgeGlyphProps = SVGProps<SVGSVGElement>;
 
@@ -85,7 +85,7 @@ export async function Cta() {
                   <span className="flex items-center gap-2.5">
                     <span
                       aria-hidden
-                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/6%)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]"
+                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/6%)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)]"
                     >
                       <Glyph />
                     </span>
@@ -111,7 +111,7 @@ export async function Cta() {
         </div>
       </div>
 
-      <Image
+      <ThemedImage
         src="/landscape/dunes.png"
         alt=""
         aria-hidden

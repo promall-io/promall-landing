@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ThemedImage } from '@/components/ThemedImage';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { ArrowLink, SectionHeading } from '@/components/ui/Primitives';
@@ -14,7 +14,7 @@ function BlogCard({ article, href }: { article: Article; href: string }) {
       className="pw-card group block h-full overflow-hidden p-2 transition-colors duration-500 ease-[var(--pw-ease)] hover:bg-[var(--pw-surface-2)]"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px]">
-        <Image
+        <ThemedImage
           src={article.image}
           alt={article.imageAlt}
           fill

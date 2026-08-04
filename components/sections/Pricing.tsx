@@ -14,8 +14,8 @@ import { DEMO_PATH, localeHref } from '@/lib/routes';
 const FEATURE_ROW_KEYS: FeatureRowKey[] = [
   'orders',
   'instagramAi',
-  'domainApi',
-  'realtimeSupport',
+  'analytics',
+  'prioritySupport',
 ];
 
 export async function Pricing() {
@@ -39,7 +39,6 @@ export async function Pricing() {
       orders: (value) => t('metaOrders', { value }),
       users: (value) => t('metaUsers', { value }),
     },
-    slaLabel: (value) => t('slaLabel', { value }),
     name: (planId) => names[planId],
     description: (planId) => descriptions[planId],
     featureRows: FEATURE_ROW_KEYS.map((key) => ({ key, label: t(`featureRows.${key}`) })),

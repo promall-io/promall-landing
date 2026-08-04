@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { ThemedImage } from '@/components/ThemedImage';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { locales } from '@/i18n/config';
@@ -73,7 +73,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         blogLabel={t('blogLabel')}
       />
       <Nav anchorsToHome />
-      <main id="main" className="pw-section pb-24">
+      <main id="main" tabIndex={-1} className="pw-section pb-24">
         <div className="pw-container">
           <Reveal className="pt-[140px]">
             <nav aria-label={t('breadcrumbLabel')} className="pw-micro flex items-center gap-2">
@@ -100,7 +100,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                 className="pw-card group grid gap-2 overflow-hidden p-2 transition-colors duration-500 ease-[var(--pw-ease)] hover:bg-[var(--pw-surface-2)] min-[810px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]"
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[14px]">
-                  <Image
+                  <ThemedImage
                     src={featured.image}
                     alt={featured.imageAlt}
                     fill
@@ -137,7 +137,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                   className="pw-card group block h-full overflow-hidden p-2 transition-colors duration-500 ease-[var(--pw-ease)] hover:bg-[var(--pw-surface-2)]"
                 >
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px]">
-                    <Image
+                    <ThemedImage
                       src={article.image}
                       alt={article.imageAlt}
                       fill

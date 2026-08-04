@@ -69,7 +69,7 @@ export function HeroMockup({
         <ProMallMark size={32} className="text-[var(--pw-text-dim)]" />
         <span
           aria-hidden
-          className="flex size-9 items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/5%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]"
+          className="flex size-9 items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/5%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]"
         >
           <MenuIcon width={20} height={20} />
         </span>
@@ -83,7 +83,7 @@ export function HeroMockup({
               <p className="pw-small">{prompt}</p>
             </div>
 
-            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[rgb(var(--white-rgb)/5%)] p-4 ring-1 ring-[var(--pw-line)] backdrop-blur-sm">
+            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[rgb(var(--pw-veil-rgb)/5%)] p-4 ring-1 ring-[var(--pw-line)] backdrop-blur-sm">
               <p className="min-h-12 text-start text-sm leading-[1.5] text-[var(--pw-text-faint)]">
                 {placeholder}
               </p>
@@ -94,10 +94,10 @@ export function HeroMockup({
                   <BoltIcon width={20} height={20} />
                 </span>
                 <span aria-hidden className="flex items-center gap-2">
-                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/8%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]">
+                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/8%)] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]">
                     <MicGlyph size={16} />
                   </span>
-                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[var(--pw-cream)] text-[var(--pw-black)]">
+                  <span className="flex size-[30px] items-center justify-center rounded-full bg-[var(--pw-cream)] text-[var(--pw-canvas)]">
                     <ArrowUpGlyph size={16} />
                   </span>
                 </span>
@@ -113,7 +113,7 @@ export function HeroMockup({
                     key={tab}
                     className={
                       index === 0
-                        ? 'whitespace-nowrap rounded-full bg-[rgb(var(--white-rgb)/10%)] px-3 py-1 text-sm leading-[1.5] text-[var(--pw-cream)]'
+                        ? 'whitespace-nowrap rounded-full bg-[rgb(var(--pw-veil-rgb)/10%)] px-3 py-1 text-sm leading-[1.5] text-[var(--pw-cream)]'
                         : 'whitespace-nowrap rounded-full px-3 py-1 text-sm leading-[1.5] text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)]'
                     }
                   >

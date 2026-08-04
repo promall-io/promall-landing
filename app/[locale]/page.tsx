@@ -30,7 +30,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <StructuredData locale={locale} />
       <Nav />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero />
         <Intro />
         <InstagramDemo />

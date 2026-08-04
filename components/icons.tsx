@@ -132,6 +132,19 @@ export const PlayIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const SunIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 3.5v1.7M12 18.8v1.7M20.5 12h-1.7M5.2 12H3.5M18 6l-1.2 1.2M7.2 16.8 6 18M18 18l-1.2-1.2M7.2 7.2 6 6" />
+  </Icon>
+);
+
+export const MoonIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M20 13.4A8.2 8.2 0 0 1 10.6 4a8.2 8.2 0 1 0 9.4 9.4Z" />
+  </Icon>
+);
+
 export const MenuIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M4 8h16M4 16h16" />
@@ -186,6 +199,6 @@ export const ProMallMark = ({ size = 28, ...rest }: IconProps & { size?: number 
     {...rest}
   >
     <path d={MARK_BOWL} fill="currentColor" />
-    <path d={MARK_STEM} fill="var(--pw-gold)" />
+    <path d={MARK_STEM} fill="var(--pw-mark-stem)" />
   </svg>
 );

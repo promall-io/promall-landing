@@ -11,14 +11,14 @@ export async function AnnouncementBar() {
   return (
     <aside
       aria-label={t('ariaLabel')}
-      className="pw-section flex h-24 items-center justify-center"
+      className="flex h-16 items-center justify-center min-[811px]:h-24"
     >
       <Link
         href={ANNOUNCEMENT_HREF}
-        className="group flex h-9 items-center gap-2 rounded-full bg-[var(--pw-surface-2)] ps-[18px] pe-1.5 ring-1 ring-[var(--pw-line)] backdrop-blur-[8px]"
+        className="pw-touch-target group relative flex h-9 max-w-full items-center gap-2 rounded-full bg-[var(--pw-surface-2)] ps-[18px] pe-1.5 ring-1 ring-[var(--pw-line)] backdrop-blur-[8px]"
       >
         <span
-          className="block max-w-[300px] overflow-hidden"
+          className="block w-[300px] min-w-0 shrink overflow-hidden"
           style={{
             maskImage: 'linear-gradient(to right, transparent 0, rgb(var(--shade-rgb)) 20px, rgb(var(--shade-rgb)) calc(100% - 20px), transparent 100%)',
             WebkitMaskImage:
@@ -34,7 +34,7 @@ export async function AnnouncementBar() {
         </span>
         <span
           aria-hidden
-          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] group-hover:bg-[rgb(var(--white-rgb)/18%)]"
+          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--pw-surface-3)] text-[var(--pw-cream)] ring-1 ring-[var(--pw-line)] [transition:background-color_0.4s_var(--pw-ease),color_0.4s_var(--pw-ease)] group-hover:bg-[rgb(var(--pw-veil-rgb)/18%)]"
         >
           <ArrowRightIcon width={14} height={14} className="rtl:-scale-x-100" />
         </span>

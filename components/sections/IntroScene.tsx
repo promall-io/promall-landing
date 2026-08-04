@@ -123,7 +123,7 @@ function DmWidget({ dm, paid, cycle }: { dm: IntroTiles['dm']; paid: string; cyc
           <span className="block text-[13px] text-[var(--pw-cream)]">{dm.card.title}</span>
           <span className="pw-micro block truncate">{dm.card.meta}</span>
         </span>
-        <span className="flex h-9 shrink-0 items-center rounded-full bg-[var(--pw-gold)] px-4 text-[12px] text-[var(--text-on-gold)]">
+        <span className="flex h-9 shrink-0 items-center rounded-full bg-[var(--pw-gold-fill)] px-4 text-[12px] text-[var(--text-on-gold)]">
           {dm.card.action}
         </span>
       </div>

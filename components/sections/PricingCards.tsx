@@ -23,8 +23,8 @@ function BillingToggle({ checked, label, labelId, onToggle }: BillingToggleProps
         aria-checked={checked}
         aria-labelledby={labelId}
         onClick={onToggle}
-        className={`flex h-[18px] w-9 shrink-0 items-center rounded-full p-[3px] [transition:background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
-          checked ? 'bg-[var(--pw-teal)]' : 'bg-[rgb(var(--white-rgb)/16%)]'
+        className={`pw-touch-target relative flex h-[18px] w-9 shrink-0 items-center rounded-full p-[3px] [transition:background-color_0.4s_var(--pw-ease)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] ${
+          checked ? 'bg-[var(--pw-teal)]' : 'bg-[rgb(var(--pw-veil-rgb)/16%)]'
         }`}
       >
         <span
@@ -133,7 +133,7 @@ function PlanCard({
             }`}
           >
             {feature.included ? (
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--white-rgb)/14%)] text-[var(--pw-cream)]">
+              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/14%)] text-[var(--pw-cream)]">
                 <CheckIcon width={12} height={12} />
               </span>
             ) : (

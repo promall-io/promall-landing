@@ -216,7 +216,7 @@
 	align-items: center;
 	justify-content: center;
 	background: var(--gold-soft);
-	color: var(--gold);
+	color: var(--pw-gold);
 	font-size: 15px;
 	font-weight: 800;
 	box-shadow: 0 0 0 2px var(--gold);
@@ -349,8 +349,8 @@
 	align-items: center;
 	gap: 8px;
 	border-radius: 12px;
-	background: color-mix(in srgb, var(--gold) 15%, transparent);
-	color: var(--gold);
+	background: var(--gold-soft);
+	color: var(--pw-gold);
 	font-weight: 500;
 	font-size: 14px;
 }
@@ -361,7 +361,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 12px;
-	color: var(--showcase-ink-muted);
+	color: var(--muted-foreground);
 }
 .pmapp .pa-header-icon-btn .pa-icon,
 .pmapp .pa-header-primary-btn .pa-icon {
@@ -499,14 +499,14 @@
 	font-size: 13px;
 	background: transparent;
 	color: var(--showcase-ink);
-	border: 1px solid var(--border-strong);
+	border: 1px solid var(--showcase-line-strong);
 }
 .pmapp .pm-hero__cta--ghost .pa-icon {
 	width: 16px;
 	height: 16px;
 }
 .pmapp .pm-hero__divider {
-	border-top: 1px solid var(--border-subtle);
+	border-top: 1px solid var(--showcase-line);
 }
 .pmapp .pm-hero__tile {
 	display: flex;
@@ -515,9 +515,9 @@
 	width: 100%;
 	text-align: start;
 	padding: 13px 15px;
-	border: 1px solid var(--glass-border);
+	border: 1px solid var(--showcase-line);
 	border-radius: 14px;
-	background: rgb(var(--white-rgb) / 6%);
+	background: var(--showcase-veil);
 	color: var(--showcase-ink);
 	text-decoration: none;
 }
@@ -536,7 +536,7 @@
 }
 .pmapp .pm-hero__tile-icon--gold {
 	background: var(--gold-soft);
-	color: var(--gold);
+	color: var(--gold-ink);
 }
 .pmapp .pm-hero__tile-icon--mint {
 	background: var(--success-soft);
@@ -740,7 +740,7 @@
 }
 .pmapp .pm-td--id {
 	font-weight: 700;
-	color: var(--slate-soft);
+	color: var(--muted-foreground);
 }
 .pmapp .pm-td--name {
 	color: var(--text-strong);
@@ -774,27 +774,27 @@
 .pmapp .pm-opill--success {
 	background: var(--success-soft);
 	color: var(--success-ink);
-	border-color: color-mix(in srgb, var(--success) 25%, transparent);
+	border-color: var(--success-border);
 }
 .pmapp .pm-opill--info {
 	background: var(--info-soft);
 	color: var(--info);
-	border-color: color-mix(in srgb, var(--info) 25%, transparent);
+	border-color: var(--info-border);
 }
 .pmapp .pm-opill--warning {
 	background: var(--warning-soft);
 	color: var(--warning-ink);
-	border-color: color-mix(in srgb, var(--warning) 25%, transparent);
+	border-color: var(--warning-border);
 }
 .pmapp .pm-opill--brand {
-	background: color-mix(in srgb, var(--brand) 12%, transparent);
+	background: var(--brand-soft);
 	color: var(--brand);
-	border-color: color-mix(in srgb, var(--brand) 25%, transparent);
+	border-color: var(--brand-border);
 }
 .pmapp .pm-opill--danger {
 	background: var(--danger-soft);
 	color: var(--danger-ink);
-	border-color: color-mix(in srgb, var(--danger) 25%, transparent);
+	border-color: var(--danger-border);
 }
 
 /* ===== Filter chips (orders page) ===== */
@@ -974,7 +974,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background: var(--surface-raised);
+	background: var(--pw-surface-3);
 	color: var(--muted-foreground);
 }
 .pmapp .pa-product-thumb .pa-icon {
