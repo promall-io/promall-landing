@@ -116,32 +116,35 @@ function PlanCard({
       </Link>
 
       <div className="mt-7 flex flex-col">
+        <p className="border-t border-[var(--pw-line)] pb-3 pt-4 text-xs font-medium text-[var(--pw-text-dim)]">
+          {plan.metaHeading}
+        </p>
+
         {plan.meta.map((item) => (
-          <p
-            key={item}
-            className="border-t border-[var(--pw-line)] py-4 text-sm text-[var(--pw-text)]"
-          >
+          <p key={item} className="py-2 text-sm text-[var(--pw-cream)]">
             {item}
           </p>
         ))}
 
-        {plan.features.map((feature) => (
-          <p
-            key={feature.label}
-            className={`flex items-center gap-3 border-t border-[var(--pw-line)] py-4 text-sm ${
-              feature.included ? 'text-[var(--pw-cream)]' : 'text-[var(--pw-text-faint)]'
-            }`}
-          >
-            {feature.included ? (
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/14%)] text-[var(--pw-cream)]">
-                <CheckIcon width={12} height={12} />
-              </span>
-            ) : (
-              <CrossIcon width={16} height={16} className="shrink-0 text-[var(--pw-text-faint)]" />
-            )}
-            {feature.label}
-          </p>
-        ))}
+        <div className="mt-3 flex flex-col">
+          {plan.features.map((feature) => (
+            <p
+              key={feature.label}
+              className={`flex items-center gap-3 border-t border-[var(--pw-line)] py-4 text-sm ${
+                feature.included ? 'text-[var(--pw-cream)]' : 'text-[var(--pw-text-faint)]'
+              }`}
+            >
+              {feature.included ? (
+                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--pw-veil-rgb)/14%)] text-[var(--pw-cream)]">
+                  <CheckIcon width={12} height={12} />
+                </span>
+              ) : (
+                <CrossIcon width={16} height={16} className="shrink-0 text-[var(--pw-text-faint)]" />
+              )}
+              {feature.label}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );

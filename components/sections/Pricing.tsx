@@ -5,7 +5,7 @@ import { PricingCards } from '@/components/sections/PricingCards';
 import {
   fetchPlanCatalog,
   formatNumber,
-  toPricingPlan,
+  toPricingPlans,
   type FeatureRowKey,
   type PlanCopy,
 } from '@/lib/plans';
@@ -33,12 +33,11 @@ export async function Pricing() {
     customPrice: t('customPrice'),
     cta: t('cta'),
     customCta: t('customCta'),
-    unlimited: t('unlimited'),
-    meta: {
-      products: (value) => t('metaProducts', { value }),
-      orders: (value) => t('metaOrders', { value }),
-      users: (value) => t('metaUsers', { value }),
-    },
+    includes: t('includes'),
+    everythingInPlus: (plan) => t('everythingInPlus', { plan }),
+    limit: (key, value) => t(`limits.${key}`, { value }),
+    unlimitedLimit: (key) => t(`limits.${key}Unlimited`),
+    storageSize: (value, unit) => t(`limits.${unit}`, { value }),
     name: (planId) => names[planId],
     description: (planId) => descriptions[planId],
     featureRows: FEATURE_ROW_KEYS.map((key) => ({ key, label: t(`featureRows.${key}`) })),
@@ -65,7 +64,7 @@ export async function Pricing() {
 
         <Reveal delay={0.08}>
           <PricingCards
-            plans={catalog.plans.map((plan) => toPricingPlan(plan, copy))}
+            plans={toPricingPlans(catalog, copy)}
             yearlyLabel={t('yearlyLabel', {
               percent: formatNumber(catalog.yearlyDiscountPercent, locale),
             })}

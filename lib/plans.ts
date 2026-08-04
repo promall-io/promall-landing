@@ -12,6 +12,8 @@ const CUSTOM_PRICE = 0;
 const UNLIMITED = -1;
 const TOMANS_PER_UNIT = 1000;
 const RIALS_PER_TOMAN = 10;
+const BYTES_PER_MEGABYTE = 1024 * 1024;
+const BYTES_PER_GIGABYTE = BYTES_PER_MEGABYTE * 1024;
 
 type ApiPlanPricing = {
   cycle: string;
@@ -22,8 +24,13 @@ type ApiPlanPricing = {
 
 type ApiPlanFeatures = {
   maxProducts: number;
+  maxCategories: number;
+  maxVariantsPerProduct: number;
+  maxMediaPerProduct: number;
   maxOrders: number;
   maxUsers: number;
+  storageBytes: number;
+  instagramDMLimit: number;
   hasInstagramDM: boolean;
   hasAnalytics: boolean;
   hasPrioritySupport: boolean;
@@ -54,18 +61,51 @@ export type PlanCopy = {
   customPrice: string;
   cta: string;
   customCta: string;
-  unlimited: string;
-  meta: {
-    products: (value: string) => string;
-    orders: (value: string) => string;
-    users: (value: string) => string;
-  };
+  includes: string;
+  everythingInPlus: (plan: string) => string;
+  limit: (key: LimitRowKey, value: string) => string;
+  unlimitedLimit: (key: LimitRowKey) => string;
+  storageSize: (value: string, unit: StorageUnit) => string;
   name: (planId: string) => string | undefined;
   description: (planId: string) => string | undefined;
   featureRows: Array<{ key: FeatureRowKey; label: string }>;
 };
 
 export type FeatureRowKey = 'orders' | 'instagramAi' | 'analytics' | 'prioritySupport';
+
+export type StorageUnit = 'gigabytes' | 'megabytes';
+
+export type LimitRowKey =
+  | 'aiReplies'
+  | 'products'
+  | 'orders'
+  | 'categories'
+  | 'variants'
+  | 'media'
+  | 'users'
+  | 'storage';
+
+type LimitRow = {
+  key: LimitRowKey;
+  read: (features: ApiPlanFeatures) => number;
+  isOffered?: (features: ApiPlanFeatures) => boolean;
+  isStorage?: boolean;
+};
+
+const LIMIT_ROWS: LimitRow[] = [
+  {
+    key: 'aiReplies',
+    read: (features) => features.instagramDMLimit,
+    isOffered: (features) => features.hasInstagramDM,
+  },
+  { key: 'products', read: (features) => features.maxProducts },
+  { key: 'orders', read: (features) => features.maxOrders },
+  { key: 'categories', read: (features) => features.maxCategories },
+  { key: 'variants', read: (features) => features.maxVariantsPerProduct },
+  { key: 'media', read: (features) => features.maxMediaPerProduct },
+  { key: 'users', read: (features) => features.maxUsers },
+  { key: 'storage', read: (features) => features.storageBytes, isStorage: true },
+];
 
 const FEATURE_ROW_PREDICATES: Record<FeatureRowKey, (features: ApiPlanFeatures) => boolean> = {
   orders: () => true,
@@ -80,15 +120,35 @@ const REQUIRED_FEATURE_FLAGS = [
   'hasPrioritySupport',
 ] as const;
 
+const REQUIRED_FEATURE_QUOTAS = [
+  'maxProducts',
+  'maxCategories',
+  'maxVariantsPerProduct',
+  'maxMediaPerProduct',
+  'maxOrders',
+  'maxUsers',
+  'storageBytes',
+  'instagramDMLimit',
+] as const;
+
 /* a missing flag would render every comparison row as excluded rather than
-   failing, so the shape is checked before anything reaches the page */
+   failing, and a missing quota would print "up to NaN", so the shape is checked
+   before anything reaches the page */
 function assertPlanShape(plan: ApiPlan): void {
-  const missing = REQUIRED_FEATURE_FLAGS.filter(
+  const missingFlags = REQUIRED_FEATURE_FLAGS.filter(
     (flag) => typeof plan.features?.[flag] !== 'boolean',
   );
 
-  if (missing.length > 0) {
-    throw new Error(`Plan ${plan.id} is missing feature flags: ${missing.join(', ')}`);
+  if (missingFlags.length > 0) {
+    throw new Error(`Plan ${plan.id} is missing feature flags: ${missingFlags.join(', ')}`);
+  }
+
+  const missingQuotas = REQUIRED_FEATURE_QUOTAS.filter(
+    (quota) => !Number.isFinite(plan.features?.[quota]),
+  );
+
+  if (missingQuotas.length > 0) {
+    throw new Error(`Plan ${plan.id} is missing feature quotas: ${missingQuotas.join(', ')}`);
   }
 
   if (!Array.isArray(plan.pricing) || plan.pricing.length === 0) {
@@ -220,8 +280,31 @@ export function formatNumber(value: number, locale: string): string {
   return new Intl.NumberFormat(locale).format(value);
 }
 
-function formatCount(value: number, locale: string, unlimited: string): string {
-  return value === UNLIMITED ? unlimited : formatNumber(value, locale);
+function formatStorage(bytes: number, copy: PlanCopy): string {
+  const gigabytes = bytes / BYTES_PER_GIGABYTE;
+
+  return gigabytes >= 1
+    ? copy.storageSize(formatNumber(gigabytes, copy.locale), 'gigabytes')
+    : copy.storageSize(formatNumber(bytes / BYTES_PER_MEGABYTE, copy.locale), 'megabytes');
+}
+
+function limitLabel(row: LimitRow, features: ApiPlanFeatures, copy: PlanCopy): string {
+  const value = row.read(features);
+
+  if (value === UNLIMITED) {
+    return copy.unlimitedLimit(row.key);
+  }
+
+  return copy.limit(
+    row.key,
+    row.isStorage ? formatStorage(value, copy) : formatNumber(value, copy.locale),
+  );
+}
+
+function planLimits(features: ApiPlanFeatures, copy: PlanCopy): string[] {
+  return LIMIT_ROWS.filter((row) => row.isOffered?.(features) ?? true).map((row) =>
+    limitLabel(row, features, copy),
+  );
 }
 
 function formatPrice(tomans: number, copy: PlanCopy): string {
@@ -240,17 +323,15 @@ export function planDescription(plan: ApiPlan, copy: PlanCopy): string {
   );
 }
 
-export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
+export function toPricingPlan(
+  plan: ApiPlan,
+  copy: PlanCopy,
+  previousPlan?: ApiPlan,
+): PricingPlan {
   const monthly = findCycle(plan, MONTHLY_CYCLE);
   const yearly = findCycle(plan, YEARLY_CYCLE);
   const custom = isCustomPricedPlan(plan);
   const { features } = plan;
-
-  const meta = [
-    copy.meta.products(formatCount(features.maxProducts, copy.locale, copy.unlimited)),
-    copy.meta.orders(formatCount(features.maxOrders, copy.locale, copy.unlimited)),
-    copy.meta.users(formatCount(features.maxUsers, copy.locale, copy.unlimited)),
-  ];
 
   return {
     id: plan.id,
@@ -260,7 +341,10 @@ export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
     period: custom ? '' : copy.period,
     description: planDescription(plan, copy),
     cta: custom ? copy.customCta : copy.cta,
-    meta,
+    metaHeading: previousPlan
+      ? copy.everythingInPlus(copy.name(previousPlan.id) ?? planName(previousPlan, copy.locale))
+      : copy.includes,
+    meta: planLimits(features, copy),
     featured: plan.isRecommended,
     hasToggle: !custom && Boolean(yearly && yearly.monthlyEquivalent !== monthly?.finalPrice),
     features: copy.featureRows.map((row) => ({
@@ -268,6 +352,12 @@ export function toPricingPlan(plan: ApiPlan, copy: PlanCopy): PricingPlan {
       included: FEATURE_ROW_PREDICATES[row.key](features),
     })),
   };
+}
+
+/* the catalog is already sorted by tier, so each card can name the plan it
+   builds on instead of restating what the visitor read one column earlier */
+export function toPricingPlans(catalog: PlanCatalog, copy: PlanCopy): PricingPlan[] {
+  return catalog.plans.map((plan, index) => toPricingPlan(plan, copy, catalog.plans[index - 1]));
 }
 
 export type { ApiPlan };

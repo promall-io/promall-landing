@@ -88,6 +88,7 @@ export type PricingPlan = {
   period: string;
   description: string;
   cta: string;
+  metaHeading: string;
   meta: string[];
   features: PricingFeature[];
   featured: boolean;
