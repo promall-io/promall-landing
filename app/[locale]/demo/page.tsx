@@ -76,11 +76,14 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
         <Link
           href={homeHref}
           aria-label={t('badge')}
-          className="pw-link inline-flex text-[var(--pw-text-dim)]"
+          className="pw-touch-target pw-link relative inline-flex text-[var(--pw-text-dim)]"
         >
           <ProMallMark size={26} />
         </Link>
-        <Link href={homeHref} className="pw-link pw-small inline-flex items-center gap-2">
+        <Link
+          href={homeHref}
+          className="pw-link pw-small -my-2 inline-flex min-h-[var(--pw-touch)] items-center gap-2"
+        >
           <ArrowLeftIcon width={16} height={16} className="rtl:-scale-x-100" />
           {t('backHome')}
         </Link>

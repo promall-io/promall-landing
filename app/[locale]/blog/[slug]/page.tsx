@@ -97,13 +97,22 @@ export default async function ArticlePage({
       <main id="main" tabIndex={-1} className="pw-section pb-24">
         <div className="pw-container">
           <article className="mx-auto w-full max-w-[760px]">
-            <Reveal className="pt-[140px]">
-              <nav aria-label={t('breadcrumbLabel')} className="pw-micro flex flex-wrap items-center gap-2">
-                <Link href={localeHref(locale, '/')} className="pw-link">
+            <Reveal className="pt-28 min-[811px]:pt-[140px]">
+              <nav
+                aria-label={t('breadcrumbLabel')}
+                className="pw-micro -my-3 flex flex-wrap items-center gap-x-2"
+              >
+                <Link
+                  href={localeHref(locale, '/')}
+                  className="pw-link flex min-h-[var(--pw-touch)] items-center"
+                >
                   {t('homeLabel')}
                 </Link>
                 <span aria-hidden>/</span>
-                <Link href={localeHref(locale, BLOG_PATH)} className="pw-link">
+                <Link
+                  href={localeHref(locale, BLOG_PATH)}
+                  className="pw-link flex min-h-[var(--pw-touch)] items-center"
+                >
                   {t('blogLabel')}
                 </Link>
                 <span aria-hidden>/</span>
@@ -147,12 +156,12 @@ export default async function ArticlePage({
               <Reveal className="mt-12" delay={0.08}>
                 <nav aria-label={article.tocLabel} className="pw-card p-6">
                   <p className="text-sm text-[var(--pw-cream)]">{article.tocLabel}</p>
-                  <ol className="mt-4 flex flex-col gap-2.5">
+                  <ol className="mt-2 flex flex-col">
                     {tocEntries.map((entry, index) => (
                       <li key={entry.kind === 'heading' ? entry.id : index}>
                         <Link
                           href={`#${entry.kind === 'heading' ? entry.id : ''}`}
-                          className="pw-link pw-small text-[var(--pw-text-dim)]"
+                          className="pw-link pw-small flex min-h-[var(--pw-touch)] items-center text-[var(--pw-text-dim)]"
                         >
                           {entry.kind === 'heading' ? entry.text : ''}
                         </Link>
@@ -218,7 +227,10 @@ export default async function ArticlePage({
             ) : null}
 
             <Reveal className="mt-16">
-              <Link href={localeHref(locale, BLOG_PATH)} className="pw-link pw-small">
+              <Link
+                href={localeHref(locale, BLOG_PATH)}
+                className="pw-link pw-small -my-2 inline-flex min-h-[var(--pw-touch)] items-center"
+              >
                 {t('backToBlog')}
               </Link>
             </Reveal>

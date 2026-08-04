@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { ThemedImage } from '@/components/ThemedImage';
 import { useReducedMotionAfterMount } from '@/components/reduced-motion';
 
 const CLOUDS = [
@@ -41,7 +41,7 @@ export function NumbersParallax() {
           style={prefersReducedMotion ? undefined : { x: drifts[index] }}
           className={cloud.className}
         >
-          <Image
+          <ThemedImage
             src={cloud.src}
             alt=""
             width={cloud.width}

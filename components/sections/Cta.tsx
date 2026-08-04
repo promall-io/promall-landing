@@ -9,6 +9,15 @@ import { ThemedImage } from '@/components/ThemedImage';
 const CTA_GRADIENT =
   'linear-gradient(180deg, var(--pw-canvas) 0%, var(--pw-canvas-2) 42%, var(--pw-scene-mid) 74%, var(--pw-scene-dusk) 100%)';
 
+/* The dune plate's first opaque row is its far sky, and the band it lands on is
+   this section's gradient — two tones the retint ramp can bring close but never
+   make identical at every viewport height, since the stop the plate meets moves
+   with the section. So the plate arrives already dissolved: its far ridge is
+   carried by the band rather than drawn over it, which is what the horizon
+   looks like anyway. --shade-rgb is a mask stop, so only its alpha is read. */
+const DUNE_HORIZON =
+  'linear-gradient(to bottom, transparent 0%, rgb(var(--shade-rgb)) 14%)';
+
 type BadgeGlyphProps = SVGProps<SVGSVGElement>;
 
 const badgeGlyphBase = {
@@ -120,7 +129,9 @@ export async function Cta() {
         sizes="100vw"
         quality={85}
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full object-cover"
+        style={{ maskImage: DUNE_HORIZON, WebkitMaskImage: DUNE_HORIZON }}
       />
+      <div aria-hidden className="pw-hill-fade" />
     </section>
   );
 }

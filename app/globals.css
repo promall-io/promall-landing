@@ -141,13 +141,19 @@
   /* M · channel tokens — for rgb(var(--x) / <alpha>) fills, never for text.
      --white-rgb and --shade-rgb are fixed literals: they carry mask stops
      (mask-image reads alpha only, so their hue is inert) and true shadow
-     tints. Anything that has to READ as elevation or as the page canvas uses
-     the two re-theming channels instead, which invert with the theme. */
+     tints. Anything that has to READ as elevation, as the page canvas or as
+     light in the sky uses one of the three re-theming channels instead, which
+     invert with the theme. */
   --white-rgb: 255 255 255;
   --shade-rgb: 0 0 0;
   --surface-card-rgb: 24 35 58;
   --pw-canvas-rgb: 8 13 23;
   --pw-veil-rgb: 255 255 255;
+  /* The spark channel is the sky's own light: comet trails, comet heads and the
+     cross-glint on a tuned star. It is not a mask stop and not a shadow, so it
+     is the third re-theming channel rather than a fixed literal — on paper a
+     speck brighter than the page is invisible and the field inverts to ink. */
+  --pw-spark-rgb: 255 255 255;
 
   /* O · shadows */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.28);
@@ -340,6 +346,7 @@
   --surface-card-rgb: 255 255 255;
   --pw-canvas-rgb: 246 247 249;
   --pw-veil-rgb: 27 38 59;
+  --pw-spark-rgb: 43 58 86;
 
   /* O · shadows */
   --shadow-soft: 0 1px 2px rgba(27, 38, 59, 0.04), 0 4px 12px rgba(27, 38, 59, 0.06);
@@ -365,13 +372,39 @@
   --pw-rose: #ccd6e6;
   --pw-line-strong: rgba(27, 38, 59, 0.28);
 
-  --pw-scene-far: #e8eef6;
-  --pw-scene-mid: #f2f5f9;
-  --pw-scene-near: #f8f1e0;
-  --pw-scene-dusk: #d6dfeb;
+  /* The same three-stop scene the night sky runs, read as an overcast morning:
+     zenith, mid air, horizon glow. The zenith is as deep as it is allowed to
+     get — the nav's --pw-text-dim links sit on it, and one more step of blue
+     puts them under 4.5:1 — so the depth dark buys with tone is carried here by
+     the blooms, the galaxy band and the mote field instead. --pw-scene-dusk
+     closes the CTA band and the stat-card sky, and both of those meet the
+     retinted dunes, so it tracks the tone that ramp lands their sky on. */
+  --pw-scene-far: #e5ecf6;
+  --pw-scene-mid: #eef2f8;
+  --pw-scene-near: #f9f2e1;
+  --pw-scene-dusk: #dfe7f2;
 
-  --pw-bloom-cool: rgba(96, 133, 205, 0.16);
-  --pw-bloom-warm: rgba(196, 184, 148, 0.3);
+  /* The field over the hero. On paper a star cannot glow — a speck brighter
+     than a pale sky is invisible — so daylight inverts the field's polarity the
+     same way the landscape ramp does and it reads as motes hanging in the air
+     rather than as points of light. Each tint keeps both halo strengths, and
+     the halos are written out in full for the same reason the status borders
+     are: a color-mix() opening on a var() folds to the bare operand, and an
+     opaque halo turns a 1px mote into a 16px disc. */
+  --pw-star-tint-white: #7d8ca6;
+  --pw-star-tint-cool: #6b83a8;
+  --pw-star-tint-gold: #9c8659;
+  --pw-star-halo-white: rgba(125, 140, 166, 0.38);
+  --pw-star-halo-white-wide: rgba(125, 140, 166, 0.12);
+  --pw-star-halo-cool: rgba(107, 131, 168, 0.38);
+  --pw-star-halo-cool-wide: rgba(107, 131, 168, 0.12);
+  --pw-star-halo-gold: rgba(156, 134, 89, 0.38);
+  --pw-star-halo-gold-wide: rgba(156, 134, 89, 0.12);
+  --pw-galaxy-core: rgba(118, 143, 189, 0.1);
+  --pw-galaxy-edge: rgba(118, 143, 189, 0.05);
+
+  --pw-bloom-cool: rgba(96, 133, 205, 0.2);
+  --pw-bloom-warm: rgba(196, 174, 118, 0.26);
   --pw-bloom-gold: rgba(196, 184, 148, 0.5);
   --pw-glow-gold: rgba(125, 107, 64, 0.3);
   --pw-shadow-device: 0 30px 70px -30px rgba(27, 38, 59, 0.35);
@@ -382,13 +415,20 @@
      ramp: scripts/retint-assets.mjs reads this block and no CSS rule paints
      with it. Polarity is inverted — the hills are now MASSES against a pale
      sky rather than silhouettes lit from above — so the ramp runs from the
-     page canvas at the highlights down to slate at the shadows. */
+     page canvas at the highlights down to slate at the shadows.
+
+     The stat-card clouds are painted as one solid through the asset's own
+     alpha, so their token IS the cloud. At night they are the brightest thing
+     in the section and can be read straight off the ramp's top; by day a cloud
+     brighter than the paper is nothing at all, so the pair sits a few steps
+     BELOW the canvas — a soft underside, which is the only part of a daylight
+     cloud that carries any tone. */
   --pw-retint-haze: #e7ecf3;
   --pw-retint-mist: #cfd9e7;
   --pw-retint-steel: #93a2b8;
   --pw-retint-slate: #6d7f9a;
-  --pw-retint-card-a: #8b9ab1;
-  --pw-retint-card-b: #7a89a2;
+  --pw-retint-card-a: #d8e2f0;
+  --pw-retint-card-b: #cbd7e9;
 }
 
 /* ==========================================================================
@@ -401,9 +441,10 @@
   --pw-gutter: 24px;
   /* One section rhythm for every breakpoint. A flat 180px is right at 1080px
      wide and is a tenth of the page on a phone — ten sections of it buried the
-     mobile page under 1800px of empty canvas. The clamp lands on 96px at 390px
-     and reaches the authored 180px by the time the container stops growing. */
-  --pw-section-top: clamp(96px, 6.2rem + 6vw, 180px);
+     mobile page under 1800px of empty canvas. The line is drawn through the two
+     widths that matter: 96px at 390px, and the authored 180px at 1080px, where
+     the container stops growing and the clamp takes over. */
+  --pw-section-top: clamp(96px, 3rem + 12.2vw, 180px);
   --pw-stack: 64px;
   /* Rule 6 — a control a thumb has to hit is never smaller than 44px.
      --pw-control is the DRAWN height of a pill control and --pw-touch the
@@ -786,10 +827,14 @@
     animation: pw-hill-in 1s var(--pw-spring) both;
   }
 
-  /* the landscape is a raster, so its darkest tone survives image encoding only
-     to within a level or two of the canvas; this settles the last stretch onto
-     the canvas exactly so the hero has no horizon to read as a section edge.
-     Eased rather than linear — the ridge above it must not pick up any dimming. */
+  /* Every full-bleed landscape plate ends flush with a section edge, and a
+     raster's last row only ever survives encoding to within a level or two of
+     the canvas — at night. By day the ramp's polarity puts the plate's DARKEST
+     tone on that row, so the step is real and the fade is what closes it: this
+     settles the last stretch onto the canvas exactly, in both themes, so
+     nothing reads as a horizon where a section ends. Eased rather than linear —
+     the ridge above it must not pick up any dimming. Worn by the hero's hills
+     and by the closing band's dunes. */
   .pw-hill-fade {
     position: absolute;
     inset-inline: 0;
@@ -921,18 +966,40 @@
     filter: blur(24px);
   }
 
-  /* Daylight keeps the sky's two blooms — they are what stops the hero band
-     reading as flat paint — and drops everything that only exists because the
-     sky is dark. The markup is identical in both themes; nothing is
-     conditionally rendered, so there is no hydration seam at the switch. */
-  [data-theme='light'] .pw-star,
-  [data-theme='light'] .pw-comet {
-    display: none;
-  }
+  /* Daylight runs the whole sky — the same markup, the same beats, the same
+     comets, re-tinted to motes by the star tokens in the light block. Nothing
+     is conditionally rendered in either theme, so there is no hydration seam at
+     the switch.
 
+     The two blooms are what stops the band reading as flat paint, and by day
+     they have to reach further down than the field does — so the fade that
+     night puts on .pw-starfield (blooms included) moves onto the layer, which
+     holds only the galaxy, the motes and the comets. It ends earlier than the
+     night mask too: past the middle of the band the sky is lit, and a mote
+     there stops reading as air and starts reading as a smudge.
+
+     Damped as one layer rather than per mote, because the tuned field, the dust
+     behind it and the comets all have to come down together for the depth
+     between them to survive. */
   [data-theme='light'] .pw-starfield {
     -webkit-mask-image: none;
     mask-image: none;
+  }
+
+  [data-theme='light'] .pw-starfield-layer {
+    opacity: 0.6;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(var(--shade-rgb)) 0%,
+      rgb(var(--shade-rgb)) 20%,
+      transparent 78%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(var(--shade-rgb)) 0%,
+      rgb(var(--shade-rgb)) 20%,
+      transparent 78%
+    );
   }
 
   [data-theme='light'] .pw-starfield::before {
@@ -1014,10 +1081,6 @@
       radial-gradient(42% 26% at 24% 40%, var(--pw-galaxy-edge), transparent 76%);
   }
 
-  [data-theme='light'] .pw-galaxy {
-    display: none;
-  }
-
   .pw-star-glint::before,
   .pw-star-glint::after {
     content: '';
@@ -1030,13 +1093,13 @@
   .pw-star-glint::before {
     width: 10px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgb(var(--white-rgb) / 80%), transparent);
+    background: linear-gradient(90deg, transparent, rgb(var(--pw-spark-rgb) / 80%), transparent);
   }
 
   .pw-star-glint::after {
     width: 1px;
     height: 10px;
-    background: linear-gradient(180deg, transparent, rgb(var(--white-rgb) / 80%), transparent);
+    background: linear-gradient(180deg, transparent, rgb(var(--pw-spark-rgb) / 80%), transparent);
   }
 
   .pw-star-blaze {
@@ -1051,10 +1114,10 @@
     height: 2.5px;
     background: linear-gradient(
       90deg,
-      rgb(var(--white-rgb) / 0%) 0%,
-      rgb(var(--white-rgb) / 22%) 46%,
-      rgb(var(--white-rgb) / 55%) 78%,
-      rgb(var(--white-rgb) / 88%) 100%
+      rgb(var(--pw-spark-rgb) / 0%) 0%,
+      rgb(var(--pw-spark-rgb) / 22%) 46%,
+      rgb(var(--pw-spark-rgb) / 55%) 78%,
+      rgb(var(--pw-spark-rgb) / 88%) 100%
     );
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     opacity: 0;
@@ -1072,10 +1135,10 @@
     height: 2px;
     margin-top: -1px;
     border-radius: 50%;
-    background: var(--white);
+    background: rgb(var(--pw-spark-rgb));
     box-shadow:
-      0 0 5px 1.5px rgb(var(--white-rgb) / 70%),
-      0 0 12px 4px rgb(var(--white-rgb) / 22%);
+      0 0 5px 1.5px rgb(var(--pw-spark-rgb) / 70%),
+      0 0 12px 4px rgb(var(--pw-spark-rgb) / 22%);
   }
 
   .pw-pricing-grid {

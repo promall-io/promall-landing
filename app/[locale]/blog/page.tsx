@@ -75,9 +75,15 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
       <Nav anchorsToHome />
       <main id="main" tabIndex={-1} className="pw-section pb-24">
         <div className="pw-container">
-          <Reveal className="pt-[140px]">
-            <nav aria-label={t('breadcrumbLabel')} className="pw-micro flex items-center gap-2">
-              <Link href={localeHref(locale, '/')} className="pw-link">
+          <Reveal className="pt-28 min-[811px]:pt-[140px]">
+            <nav
+              aria-label={t('breadcrumbLabel')}
+              className="pw-micro -my-3 flex min-h-[var(--pw-touch)] items-center gap-2"
+            >
+              <Link
+                href={localeHref(locale, '/')}
+                className="pw-link flex min-h-[var(--pw-touch)] items-center"
+              >
                 {t('homeLabel')}
               </Link>
               <span aria-hidden>/</span>

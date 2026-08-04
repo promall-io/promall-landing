@@ -182,6 +182,14 @@ export function isCustomPricedPlan(plan: ApiPlan): boolean {
   return (findCycle(plan, MONTHLY_CYCLE)?.finalPrice ?? CUSTOM_PRICE) === CUSTOM_PRICE;
 }
 
+/* the entry tier that unlocks Instagram AI moves whenever plans are repriced, so
+   the marketing claim is read from the catalog instead of naming a plan in copy */
+export function entryPlanWithInstagramAi(catalog: PlanCatalog): ApiPlan | null {
+  return (
+    catalog.plans.find((plan) => plan.features.hasInstagramDM && !isCustomPricedPlan(plan)) ?? null
+  );
+}
+
 export function monthlyTomanRange(catalog: PlanCatalog): { low: number; high: number } | null {
   const prices = catalog.plans
     .map((plan) => findCycle(plan, MONTHLY_CYCLE)?.finalPrice ?? CUSTOM_PRICE)

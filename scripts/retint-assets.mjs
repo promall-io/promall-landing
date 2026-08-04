@@ -129,7 +129,14 @@ const PALETTES = {
    its brightest does. Dark parks the bases on the canvas so the silhouettes
    dissolve into the page instead of stepping against it at a section edge;
    light parks the RIDGES there for the same reason and walks the mass down the
-   ramp by distance, which is what atmospheric perspective does in daylight. */
+   ramp by distance, which is what atmospheric perspective does in daylight.
+
+   The light lifts stay in the ramp's first half. Past it the mass stops being
+   air and becomes a slab: a hill-front lifted to 0.95 lands its base on --slate,
+   which against the paper canvas is a step of a hundred and sixty levels — the
+   one edge no bottom fade can dissolve, because the fade has to cross all of it
+   inside 160px. Held here the three layers separate by haze alone, each base
+   lands within a few steps of the canvas, and the fade has nothing left to do. */
 const ASSETS = [
   {
     src: 'landscape/hill-back.png',
@@ -137,7 +144,7 @@ const ASSETS = [
     hi: 0.999,
     condition: true,
     dark: { gamma: 1.5, lift: 0.02, top: 0.92, chroma: 0.14 },
-    light: { gamma: 1.7, lift: 0.4, top: 0.03, chroma: 0.08 },
+    light: { gamma: 1.7, lift: 0.15, top: 0.02, chroma: 0.08 },
   },
   {
     src: 'landscape/hill-mid.png',
@@ -145,7 +152,7 @@ const ASSETS = [
     hi: 0.998,
     condition: true,
     dark: { gamma: 1.45, lift: 0.015, top: 0.74, chroma: 0.14 },
-    light: { gamma: 2.0, lift: 0.62, top: 0.03, chroma: 0.08 },
+    light: { gamma: 2.0, lift: 0.36, top: 0.02, chroma: 0.08 },
   },
   {
     src: 'landscape/hill-front.png',
@@ -153,7 +160,7 @@ const ASSETS = [
     hi: 0.998,
     condition: true,
     dark: { gamma: 1.45, lift: 0.01, top: 0.62, chroma: 0.12 },
-    light: { gamma: 2.4, lift: 0.95, top: 0.04, chroma: 0.07 },
+    light: { gamma: 2.4, lift: 0.52, top: 0.03, chroma: 0.07 },
   },
   {
     src: 'landscape/dunes.png',
@@ -161,7 +168,12 @@ const ASSETS = [
     hi: 0.999,
     condition: true,
     dark: { gamma: 1.25, lift: 0.02, top: 1.0, chroma: 0.16 },
-    light: { gamma: 2.0, lift: 0.74, top: 0.03, chroma: 0.08 },
+    /* the dunes carry more tone than the hills do because they never meet the
+       canvas raw: the closing band masks their far ridge into its own gradient
+       and .pw-hill-fade closes their base, and the stat cards — where the plate
+       is a contained surface rather than a full-bleed one — need the ridge to
+       still be a ridge at a sixth of the size */
+    light: { gamma: 2.0, lift: 0.52, top: 0.03, chroma: 0.08 },
   },
   {
     src: 'landscape/stat-card-a.png',

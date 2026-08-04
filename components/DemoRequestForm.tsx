@@ -87,14 +87,20 @@ function Field({
       <label htmlFor={id} className="pw-micro mb-2 block text-[var(--pw-text-dim)]">
         {label}
       </label>
+      {/* The field's height comes from the input's own padding, not the
+          wrapper's. Both draw the same box, but only this way does the whole
+          52px answer to a tap — with the padding on the wrapper the input is a
+          24px line of text floating in dead space. */}
       <div
         dir="ltr"
-        className={`flex items-center rounded-2xl bg-[var(--pw-surface-2)] px-4 py-3.5 ring-1 [transition:box-shadow_0.4s_var(--pw-ease)] focus-within:ring-[var(--ring)] ${
+        className={`flex items-stretch rounded-2xl bg-[var(--pw-surface-2)] px-4 ring-1 [transition:box-shadow_0.4s_var(--pw-ease)] focus-within:ring-[var(--ring)] ${
           error ? 'ring-[var(--pw-danger)]' : 'ring-[var(--pw-line)]'
         }`}
       >
         {prefix ? (
-          <span className="pw-latin select-none text-sm text-[var(--pw-text-faint)]">{prefix}</span>
+          <span className="pw-latin flex select-none items-center text-sm text-[var(--pw-text-faint)]">
+            {prefix}
+          </span>
         ) : null}
         {children}
       </div>
@@ -419,7 +425,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
               <button
                 type="button"
                 onClick={backToDetails}
-                className="pw-link pw-micro mt-2 inline-flex"
+                className="pw-link pw-micro -mb-3 mt-1 inline-flex min-h-[var(--pw-touch)] items-center"
               >
                 {labels.editPhone}
               </button>
@@ -442,7 +448,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
                 onChange={(event) => handleCodeChange(event.target.value)}
                 aria-invalid={errors.code || undefined}
                 aria-describedby={errors.code ? 'demo-code-error' : undefined}
-                className="pw-num w-full bg-transparent text-center text-lg tracking-[0.4em] text-[var(--pw-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--pw-text-faint)]"
+                className="pw-num w-full bg-transparent py-3.5 text-center text-lg tracking-[0.4em] text-[var(--pw-cream)] outline-none placeholder:tracking-normal placeholder:text-[var(--pw-text-faint)]"
               />
             </Field>
 
@@ -461,7 +467,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
               type="button"
               onClick={handleResend}
               disabled={resendIn > 0 || status === 'pending'}
-              className="pw-link pw-micro text-center disabled:cursor-default disabled:opacity-60"
+              className="pw-link pw-micro -my-3 flex min-h-[var(--pw-touch)] items-center justify-center text-center disabled:cursor-default disabled:opacity-60"
             >
               {resendIn > 0
                 ? labels.resendCountdown.replace(
@@ -504,7 +510,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
                 onChange={(event) => handlePhoneChange(event.target.value)}
                 aria-invalid={errors.phone || undefined}
                 aria-describedby={errors.phone ? 'demo-phone-error' : 'demo-phone-hint'}
-                className="pw-num w-full bg-transparent text-base text-[var(--pw-cream)] outline-none placeholder:text-[var(--pw-text-faint)]"
+                className="pw-num w-full bg-transparent py-3.5 text-base text-[var(--pw-cream)] outline-none placeholder:text-[var(--pw-text-faint)]"
               />
             </Field>
 
@@ -526,7 +532,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
                 onChange={(event) => handleInstagramChange(event.target.value)}
                 aria-invalid={errors.instagram || undefined}
                 aria-describedby={errors.instagram ? 'demo-instagram-error' : undefined}
-                className="pw-latin w-full bg-transparent text-base text-[var(--pw-cream)] outline-none placeholder:text-[var(--pw-text-faint)]"
+                className="pw-latin w-full bg-transparent py-3.5 text-base text-[var(--pw-cream)] outline-none placeholder:text-[var(--pw-text-faint)]"
               />
             </Field>
 
