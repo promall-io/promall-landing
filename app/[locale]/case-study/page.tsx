@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { defaultLocale } from '@/i18n/config';
+import { CASE_STUDY_PATH } from '@/lib/routes';
+import { absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: { absolute: "پرومال — مطالعه موردی سیستم طراحی" },
   description:
     "مطالعه موردی سیستم طراحی پرومال: زبان بصری یکپارچه و فارسی‌محور برای پنل مدیریت فروشگاه، بازارگاه و وب‌سایت.",
+  alternates: { canonical: absoluteUrl(defaultLocale, CASE_STUDY_PATH) },
   robots: { index: false, follow: true },
 };
 

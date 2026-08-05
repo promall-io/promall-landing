@@ -8,6 +8,7 @@ const intlMiddleware = createMiddleware({
   defaultLocale,
   localePrefix: 'as-needed',
   localeDetection: false,
+  alternateLinks: false,
 });
 
 function hasLocalePrefix(pathname: string): boolean {

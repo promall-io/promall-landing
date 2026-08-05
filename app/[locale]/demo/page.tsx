@@ -6,6 +6,8 @@ import { EyebrowPill } from '@/components/ui/Primitives';
 import { ArrowLeftIcon, ProMallMark } from '@/components/icons';
 import { DemoRequestForm, type DemoFormLabels } from '@/components/DemoRequestForm';
 import { locales, defaultLocale } from '@/i18n/config';
+import { DEMO_PATH } from '@/lib/routes';
+import { absoluteUrl } from '@/lib/site';
 import { localizeDigits } from '@/lib/demo-form';
 
 const STEP_KEYS = ['whatsapp', 'demo', 'launch'] as const;
@@ -25,6 +27,7 @@ export async function generateMetadata({
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
+    alternates: { canonical: absoluteUrl(locale, DEMO_PATH) },
     robots: { index: false, follow: true },
   };
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDownIcon } from '@/components/icons';
 import { REVEAL_EASE } from '@/components/Reveal';
 import type { FaqCategory } from '@/types/content';
@@ -59,50 +59,53 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
         <div className="order-3 min-[811px]:mt-auto min-[811px]:pt-12">{contact}</div>
       </div>
 
-      <div className="order-2 flex flex-col gap-3">
-        {active.items.map((item, index) => {
-          const rowKey = `${active.id}-${index}`;
-          const isOpen = openKey === rowKey;
-          const triggerId = `faq-trigger-${rowKey}`;
-          const panelId = `faq-panel-${rowKey}`;
+      <div className="order-2">
+        {categories.map((category) => (
+          <div
+            key={category.id}
+            className={category.id === active.id ? 'flex flex-col gap-3' : 'hidden'}
+          >
+            {category.items.map((item, index) => {
+              const rowKey = `${category.id}-${index}`;
+              const isOpen = openKey === rowKey;
+              const triggerId = `faq-trigger-${rowKey}`;
+              const panelId = `faq-panel-${rowKey}`;
 
-          return (
-            <div
-              key={rowKey}
-              className="overflow-hidden rounded-[18px] bg-[var(--pw-surface-1)] ring-1 ring-[var(--pw-line)]"
-            >
-              <h3>
-                <button
-                  id={triggerId}
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenKey(isOpen ? null : rowKey)}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-[22px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] min-[391px]:gap-6 min-[391px]:px-7 min-[391px]:py-[26px]"
+              return (
+                <div
+                  key={rowKey}
+                  className="overflow-hidden rounded-[18px] bg-[var(--pw-surface-1)] ring-1 ring-[var(--pw-line)]"
                 >
-                  <span className="text-base leading-[1.5] text-[var(--pw-cream)]">
-                    {item.question}
-                  </span>
-                  <span
-                    aria-hidden
-                    className={`flex size-[30px] shrink-0 items-center justify-center rounded-full text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)] transition-transform duration-[0.4s] ease-[var(--pw-ease)] ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
-                  >
-                    <ChevronDownIcon width={16} height={16} />
-                  </span>
-                </button>
-              </h3>
+                  <h3>
+                    <button
+                      id={triggerId}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => setOpenKey(isOpen ? null : rowKey)}
+                      className="flex w-full items-center justify-between gap-4 px-5 py-[22px] text-start focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--ring)] min-[391px]:gap-6 min-[391px]:px-7 min-[391px]:py-[26px]"
+                    >
+                      <span className="text-base leading-[1.5] text-[var(--pw-cream)]">
+                        {item.question}
+                      </span>
+                      <span
+                        aria-hidden
+                        className={`flex size-[30px] shrink-0 items-center justify-center rounded-full text-[var(--pw-text-dim)] ring-1 ring-[var(--pw-line)] transition-transform duration-[0.4s] ease-[var(--pw-ease)] ${
+                          isOpen ? 'rotate-180' : ''
+                        }`}
+                      >
+                        <ChevronDownIcon width={16} height={16} />
+                      </span>
+                    </button>
+                  </h3>
 
-              <AnimatePresence initial={false}>
-                {isOpen ? (
                   <motion.div
                     id={panelId}
                     role="region"
                     aria-labelledby={triggerId}
+                    inert={!isOpen}
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
                     transition={panelMotion}
                     className="overflow-hidden"
                   >
@@ -110,11 +113,11 @@ export function FaqPanel({ categories, contact }: FaqPanelProps) {
                       {item.answer}
                     </p>
                   </motion.div>
-                ) : null}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
     </div>
   );
