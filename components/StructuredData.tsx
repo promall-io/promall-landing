@@ -11,6 +11,7 @@ import { resolveFaqCategories } from '@/lib/faq-tokens';
 import { BLOG_PATH, DEMO_PATH } from '@/lib/routes';
 import {
   absoluteUrl,
+  HOME_URL,
   LATIN_BRAND_VARIANTS,
   SITE_NAME,
   SITE_URL,
@@ -120,7 +121,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       '@id': organizationId,
       name: brand,
       ...(isFa ? { alternateName: LATIN_BRAND_VARIANTS } : {}),
-      url: SITE_URL,
+      url: HOME_URL,
       logo: {
         '@type': 'ImageObject',
         url: `${SITE_URL}/brand/logo.png`,
@@ -145,7 +146,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       '@type': 'WebSite',
       '@id': websiteId,
       name: brand,
-      url: SITE_URL,
+      url: HOME_URL,
       description: tMeta('description'),
       inLanguage,
       publisher: { '@id': organizationId },
@@ -175,7 +176,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       '@type': 'SoftwareApplication',
       '@id': softwareId,
       name: brand,
-      url: SITE_URL,
+      url: HOME_URL,
       description: tMeta('description'),
       applicationCategory: 'BusinessApplication',
       applicationSubCategory: topic,

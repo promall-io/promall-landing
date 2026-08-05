@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next';
+import { SITE_NAME } from '@/lib/site';
 import { defaultTheme, PAGE_BACKGROUND } from '@/lib/theme';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'ProMall — پرومال',
-    short_name: 'ProMall',
+    name: SITE_NAME.fa,
+    short_name: SITE_NAME.fa,
     description:
       'پنل مدیریت آنلاین شاپ؛ دایرکت اینستاگرامت رو با هوش مصنوعی جواب می‌ده، سفارش و فاکتور ثبت می‌کنه و محصول، انبار و گزارش فروش رو یه‌جا نگه می‌داره.',
     start_url: '/',

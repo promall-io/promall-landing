@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { localeHref } from '@/lib/routes';
 import { EnamadSeal } from '@/components/EnamadSeal';
-import { InstagramIcon, LinkedinIcon, ProMallMark, TelegramIcon } from '@/components/icons';
+import { InstagramIcon, LinkedinIcon, ProMallMark, TelegramIcon, XIcon } from '@/components/icons';
 import { SOCIAL_CHANNELS, type SocialChannelName } from '@/lib/site';
 import type { FooterColumn } from '@/types/content';
 
@@ -10,6 +10,7 @@ const socialIcons = {
   Instagram: InstagramIcon,
   Telegram: TelegramIcon,
   LinkedIn: LinkedinIcon,
+  X: XIcon,
 } satisfies Record<SocialChannelName, typeof InstagramIcon>;
 
 const socialChannels = SOCIAL_CHANNELS.map(({ name, url }) => ({

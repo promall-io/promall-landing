@@ -3,6 +3,8 @@ import { defaultLocale, indexedLocales, type Locale } from '@/i18n/config';
 
 export const SITE_URL = 'https://promall.io';
 
+export const HOME_URL = `${SITE_URL}/`;
+
 export const SITE_NAME: Record<Locale, string> = { fa: 'پرومال', en: 'ProMall' };
 
 export const LATIN_BRAND_VARIANTS = ['ProMall', 'Promall', 'promall'];
@@ -13,6 +15,7 @@ export const SOCIAL_CHANNELS = [
   { name: 'Instagram', url: 'https://www.instagram.com/promall.io' },
   { name: 'Telegram', url: 'https://t.me/promall_io' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/company/promall-io' },
+  { name: 'X', url: 'https://x.com/promall_io' },
 ] as const;
 
 export type SocialChannelName = (typeof SOCIAL_CHANNELS)[number]['name'];
@@ -44,7 +47,7 @@ export function localePath(locale: string, path: string): string {
 
 export function absoluteUrl(locale: string, path: string): string {
   const resolved = localePath(locale, path);
-  return resolved === '/' ? SITE_URL : `${SITE_URL}${resolved}`;
+  return resolved === '/' ? HOME_URL : `${SITE_URL}${resolved}`;
 }
 
 export function languageAlternates(path: string): Record<string, string> {

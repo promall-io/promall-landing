@@ -1,4 +1,4 @@
-import { absoluteUrl, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from '@/lib/site';
+import { absoluteUrl, HOME_URL, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from '@/lib/site';
 import { articleTimestamp, countWords, readingMinutes } from '@/lib/blog';
 import { BLOG_PATH } from '@/lib/routes';
 import type { Article } from '@/types/blog';
@@ -35,7 +35,7 @@ function publisherNodes(locale: string, inLanguage: string): JsonValue[] {
       '@id': ORGANIZATION_ID,
       name: brand,
       ...(locale === 'fa' ? { alternateName: SITE_NAME.en } : {}),
-      url: SITE_URL,
+      url: HOME_URL,
       logo: {
         '@type': 'ImageObject',
         '@id': `${SITE_URL}/#logo`,
@@ -51,7 +51,7 @@ function publisherNodes(locale: string, inLanguage: string): JsonValue[] {
       '@type': 'WebSite',
       '@id': WEBSITE_ID,
       name: brand,
-      url: SITE_URL,
+      url: HOME_URL,
       inLanguage,
       publisher: { '@id': ORGANIZATION_ID },
     },
@@ -187,7 +187,7 @@ export function ArticleStructuredData({
       mentions: {
         '@type': 'SoftwareApplication',
         name: brandName(locale),
-        url: SITE_URL,
+        url: HOME_URL,
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
       },

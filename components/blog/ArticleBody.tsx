@@ -1,8 +1,27 @@
+import { Fragment } from 'react';
+import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
-import type { ArticleBlock } from '@/types/blog';
+import { articleHref } from '@/lib/routes';
+import type { ArticleBlock, ArticleSpan } from '@/types/blog';
 
 function Paragraph({ text }: { text: string }) {
   return <p className="pw-body text-[var(--pw-text)]">{text}</p>;
+}
+
+function LinkedParagraph({ spans, locale }: { spans: ArticleSpan[]; locale: string }) {
+  return (
+    <p className="pw-body text-[var(--pw-text)]">
+      {spans.map((span, index) =>
+        typeof span === 'string' ? (
+          <Fragment key={index}>{span}</Fragment>
+        ) : (
+          <Link key={index} href={articleHref(locale, span.slug)} className="pw-link">
+            {span.text}
+          </Link>
+        ),
+      )}
+    </p>
+  );
 }
 
 function Heading({ id, text }: { id: string; text: string }) {
@@ -94,8 +113,10 @@ function DataTable({ head, rows }: { head: string[]; rows: string[][] }) {
   );
 }
 
-function Block({ block }: { block: ArticleBlock }) {
+function Block({ block, locale }: { block: ArticleBlock; locale: string }) {
   switch (block.kind) {
+    case 'linkedParagraph':
+      return <LinkedParagraph spans={block.spans} locale={locale} />;
     case 'heading':
       return <Heading id={block.id} text={block.text} />;
     case 'subheading':
@@ -113,12 +134,12 @@ function Block({ block }: { block: ArticleBlock }) {
   }
 }
 
-export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
+export function ArticleBody({ blocks, locale }: { blocks: ArticleBlock[]; locale: string }) {
   return (
     <div className="flex flex-col gap-6">
       {blocks.map((block, index) => (
         <Reveal key={`${block.kind}-${index}`} distance={20}>
-          <Block block={block} />
+          <Block block={block} locale={locale} />
         </Reveal>
       ))}
     </div>

@@ -1,7 +1,7 @@
 import { FA_ARTICLES } from '@/content/blog.fa';
 import { EN_ARTICLES } from '@/content/blog.en';
 import { defaultLocale, type Locale } from '@/i18n/config';
-import type { Article, ArticleBlock } from '@/types/blog';
+import type { Article, ArticleBlock, ArticleSpan } from '@/types/blog';
 
 const WORDS_PER_MINUTE = 200;
 const MIN_READING_MINUTES = 2;
@@ -28,6 +28,32 @@ function assertSlugParity(): void {
 
 assertSlugParity();
 
+function assertInBodyLinksResolve(): void {
+  const known = new Set(FA_ARTICLES.map((article) => article.slug));
+  const broken: string[] = [];
+
+  for (const [locale, articles] of Object.entries(ARTICLES_BY_LOCALE)) {
+    for (const article of articles) {
+      for (const block of article.blocks) {
+        if (block.kind !== 'linkedParagraph') {
+          continue;
+        }
+        for (const span of block.spans) {
+          if (typeof span !== 'string' && !known.has(span.slug)) {
+            broken.push(`${locale}/${article.slug} → ${span.slug}`);
+          }
+        }
+      }
+    }
+  }
+
+  if (broken.length > 0) {
+    throw new Error(`Blog in-body links point at unknown slugs: [${broken.join(', ')}]`);
+  }
+}
+
+assertInBodyLinksResolve();
+
 function resolveLocale(locale: string): Locale {
   return locale in ARTICLES_BY_LOCALE ? (locale as Locale) : defaultLocale;
 }
@@ -46,8 +72,14 @@ export function getRelatedArticles(locale: string, article: Article): Article[] 
     .filter((related): related is Article => Boolean(related));
 }
 
+function spanText(span: ArticleSpan): string {
+  return typeof span === 'string' ? span : span.text;
+}
+
 function blockText(block: ArticleBlock): string {
   switch (block.kind) {
+    case 'linkedParagraph':
+      return block.spans.map(spanText).join('');
     case 'list':
     case 'steps':
       return block.items.join(' ');

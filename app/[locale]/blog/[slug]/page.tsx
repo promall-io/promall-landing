@@ -173,7 +173,7 @@ export default async function ArticlePage({
             ) : null}
 
             <div className="mt-14">
-              <ArticleBody blocks={article.blocks} />
+              <ArticleBody blocks={article.blocks} locale={locale} />
             </div>
 
             {article.faq.length > 0 ? (

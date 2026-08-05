@@ -1,5 +1,8 @@
+export type ArticleSpan = string | { text: string; slug: string };
+
 export type ArticleBlock =
   | { kind: 'paragraph'; text: string }
+  | { kind: 'linkedParagraph'; spans: ArticleSpan[] }
   | { kind: 'heading'; id: string; text: string }
   | { kind: 'subheading'; text: string }
   | { kind: 'list'; items: string[] }
