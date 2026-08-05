@@ -9,7 +9,14 @@ import {
 import { getArticles } from '@/lib/blog';
 import { resolveFaqCategories } from '@/lib/faq-tokens';
 import { BLOG_PATH, DEMO_PATH } from '@/lib/routes';
-import { absoluteUrl, SITE_NAME, SITE_URL, SOCIAL_PROFILES, SUPPORT_EMAIL } from '@/lib/site';
+import {
+  absoluteUrl,
+  LATIN_BRAND_VARIANTS,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_PROFILES,
+  SUPPORT_EMAIL,
+} from '@/lib/site';
 
 type FaqCategory = {
   items: Array<{ question: string; answer: string }>;
@@ -112,7 +119,7 @@ export async function StructuredData({ locale }: { locale: string }) {
       '@type': 'Organization',
       '@id': organizationId,
       name: brand,
-      ...(isFa ? { alternateName: SITE_NAME.en } : {}),
+      ...(isFa ? { alternateName: LATIN_BRAND_VARIANTS } : {}),
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',

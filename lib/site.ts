@@ -5,13 +5,19 @@ export const SITE_URL = 'https://promall.io';
 
 export const SITE_NAME: Record<Locale, string> = { fa: 'پرومال', en: 'ProMall' };
 
+export const LATIN_BRAND_VARIANTS = ['ProMall', 'Promall', 'promall'];
+
 export const SUPPORT_EMAIL = 'support@promall.io';
 
-export const SOCIAL_PROFILES = [
-  'https://instagram.com/promall.io',
-  'https://t.me/promall_io',
-  'https://linkedin.com/company/promall',
-];
+export const SOCIAL_CHANNELS = [
+  { name: 'Instagram', url: 'https://www.instagram.com/promall.io' },
+  { name: 'Telegram', url: 'https://t.me/promall_io' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/company/promall-io' },
+] as const;
+
+export type SocialChannelName = (typeof SOCIAL_CHANNELS)[number]['name'];
+
+export const SOCIAL_PROFILES = SOCIAL_CHANNELS.map((channel) => channel.url);
 
 export const SITE_SECTIONS = [
   'hero',

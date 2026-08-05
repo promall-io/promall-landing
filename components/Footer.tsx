@@ -2,21 +2,21 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { localeHref } from '@/lib/routes';
 import { EnamadSeal } from '@/components/EnamadSeal';
-import {
-  InstagramIcon,
-  LinkedinIcon,
-  ProMallMark,
-  TelegramIcon,
-  XIcon,
-} from '@/components/icons';
+import { InstagramIcon, LinkedinIcon, ProMallMark, TelegramIcon } from '@/components/icons';
+import { SOCIAL_CHANNELS, type SocialChannelName } from '@/lib/site';
 import type { FooterColumn } from '@/types/content';
 
-const socialChannels = [
-  { name: 'Instagram', href: 'https://instagram.com/promall.io', Icon: InstagramIcon },
-  { name: 'Telegram', href: 'https://t.me/promall_io', Icon: TelegramIcon },
-  { name: 'LinkedIn', href: 'https://linkedin.com/company/promall', Icon: LinkedinIcon },
-  { name: 'X', href: 'https://x.com/promall_io', Icon: XIcon },
-];
+const socialIcons = {
+  Instagram: InstagramIcon,
+  Telegram: TelegramIcon,
+  LinkedIn: LinkedinIcon,
+} satisfies Record<SocialChannelName, typeof InstagramIcon>;
+
+const socialChannels = SOCIAL_CHANNELS.map(({ name, url }) => ({
+  name,
+  href: url,
+  Icon: socialIcons[name],
+}));
 
 export async function Footer({ anchorsToHome = false }: { anchorsToHome?: boolean } = {}) {
   const t = await getTranslations('footer');
