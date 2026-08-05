@@ -20,7 +20,12 @@ export async function Features() {
           />
         </Reveal>
         <Reveal delay={0.1}>
-          <FeaturesTabs tabs={tabs} prevLabel={t('prevLabel')} nextLabel={t('nextLabel')} />
+          <FeaturesTabs
+            tabs={tabs}
+            prevLabel={t('prevLabel')}
+            nextLabel={t('nextLabel')}
+            stageLabel={t('stageLabel')}
+          />
         </Reveal>
       </div>
     </section>

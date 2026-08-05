@@ -4,6 +4,7 @@ import { useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { CheckIcon, CrossIcon } from '@/components/icons';
+import { Carousel } from '@/components/ui/Carousel';
 import { REVEAL_EASE } from '@/components/Reveal';
 import type { PricingPlan } from '@/types/content';
 
@@ -77,7 +78,9 @@ function PlanCard({
     : '';
 
   return (
-    <div className={`relative flex flex-col rounded-[24px] p-7 ${surface} ${corners} ${divider}`}>
+    <div
+      className={`relative flex h-full flex-col rounded-[24px] p-7 ${surface} ${corners} ${divider}`}
+    >
       <div className="flex h-5 items-center">
         <span className="text-xs uppercase tracking-[0.12em] text-[var(--pw-text-dim)]">
           {plan.name}
@@ -154,6 +157,7 @@ type PricingCardsProps = {
   plans: PricingPlan[];
   yearlyLabel: string;
   monthlyLabel: string;
+  railLabel: string;
   latinNumerals: boolean;
   ctaHref: string;
 };
@@ -162,6 +166,7 @@ export function PricingCards({
   plans,
   yearlyLabel,
   monthlyLabel,
+  railLabel,
   latinNumerals,
   ctaHref,
 }: PricingCardsProps) {
@@ -180,8 +185,11 @@ export function PricingCards({
         />
       </div>
 
-      <div
-        className="pw-pricing-grid"
+      <Carousel
+        label={railLabel}
+        railClassName="pw-pricing-grid"
+        slideClassName="w-[82vw] max-w-[340px] min-[811px]:w-auto min-[811px]:max-w-none"
+        dotsClassName="min-[811px]:hidden"
         style={{ '--pw-pricing-columns': plans.length } as CSSProperties}
       >
         {plans.map((plan, index) => (
@@ -197,7 +205,7 @@ export function PricingCards({
             priceFade={priceFade}
           />
         ))}
-      </div>
+      </Carousel>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useRef, useState, type KeyboardEvent } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { CircleButton } from '@/components/ui/Primitives';
+import { Carousel } from '@/components/ui/Carousel';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/icons';
 import { REVEAL_EASE } from '@/components/Reveal';
 import type { FeatureTab } from '@/types/content';
@@ -20,9 +21,10 @@ type FeaturesTabsProps = {
   tabs: FeatureTab[];
   prevLabel: string;
   nextLabel: string;
+  stageLabel: string;
 };
 
-export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) {
+export function FeaturesTabs({ tabs, prevLabel, nextLabel, stageLabel }: FeaturesTabsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const reduceMotion = useReducedMotion();
@@ -114,34 +116,42 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel }: FeaturesTabsProps) 
         })}
       </div>
 
-      <div
+      {/* The stage is a rail, not a crossfade: on a phone the way to change a
+          screenshot is to push it, and a tab that only responds to a tap leaves
+          the visitor swiping at a picture that never moves. Selecting a tab
+          scrolls the rail, swiping the rail selects the tab. */}
+      <Carousel
         id={PANEL_ID}
-        role="tabpanel"
-        tabIndex={0}
-        aria-labelledby={tabId(active.id)}
-        className="relative mt-8 aspect-[1080/610] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] focus-visible:outline-none focus-visible:ring-[var(--ring)]"
+        label={stageLabel}
+        activeIndex={activeIndex}
+        onActiveChange={revealTab}
+        dots={false}
+        bleed={false}
+        className="mt-8"
+        railClassName="gap-3"
+        slideClassName="w-full"
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={active.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={crossfade}
-            className="absolute inset-0"
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[811px]:aspect-[1080/610]"
           >
+            {/* A 2500px-wide desktop panel letterboxed into 342px is 0.14 scale
+                — a picture of text, not text. The portrait crop trades the
+                panel's edges for 2.2x the type size, which is the difference
+                between a screenshot you read and one you scroll past. */}
             <Image
-              src={active.image}
-              alt={active.alt}
+              src={tab.image}
+              alt={tab.alt}
               fill
               sizes={STAGE_SIZES}
               quality={STAGE_QUALITY}
               priority={false}
-              className="object-cover"
+              className="object-cover object-center"
             />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+        ))}
+      </Carousel>
 
       <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
         <CircleButton label={prevLabel} onClick={() => step(-1)}>

@@ -31,7 +31,10 @@ export async function Hero() {
       <HeroStarfield />
       <HeroLandscape />
 
-      <div className="pw-container relative z-10 pt-[120px] text-center">
+      {/* The foreground ridge is z-20 and deliberately swallows the bottom of
+          the desktop window. A phone is portrait, so the same ridge would take
+          its whole dock — the mobile padding is what lifts the device clear. */}
+      <div className="pw-container relative z-10 pt-[120px] text-center max-[810px]:pb-[132px]">
         <Reveal spring distance={HERO_RISE}>
           <AnnouncementBar />
         </Reveal>
@@ -66,7 +69,7 @@ export async function Hero() {
 
         <HeroParallax
           rate={HERO_PARALLAX_RATE.dashboard}
-          className="mt-20 flex justify-center max-[810px]:-mx-6 max-[810px]:mt-14 max-[810px]:justify-start"
+          className="mt-20 flex justify-center max-[810px]:mt-14"
         >
           <HeroDashboard alt={t('dashboard.alt')} locale={heroLocale} />
         </HeroParallax>

@@ -19,8 +19,14 @@
 	direction: rtl;
 }
 
+/* Estedad shapes Latin digits as Persian glyphs, so an English visitor was
+   reading "84,250,000" as ۸۴٬۲۵۰٬۰۰۰ — the same reason .pw-num exists in
+   globals.css. The replica has no per-number spans to hang that class on, so
+   the whole English panel takes the Latin stack, which is what promall-ui in
+   English would use anyway. */
 .pmapp--ltr {
 	direction: ltr;
+	font-family: var(--font-inter), sans-serif;
 }
 
 .pmapp--ltr .pa-icon--mirror {

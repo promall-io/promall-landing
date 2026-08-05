@@ -318,6 +318,7 @@
       "eyebrow": "Numbers",
       "titleLead": "Numbers you feel",
       "titleTrail": "in the first week",
+      "railLabel": "Numbers",
       "cards": [
         {
           "value": "24",
@@ -362,6 +363,7 @@
       "titleLead": "Transparent pricing,",
       "titleTrail": "with a {days}-day free trial",
       "linkLabel": "Compare all plans",
+      "railLabel": "Pricing plans",
       "yearlyLabel": "Yearly, up to {percent}% cheaper",
       "monthlyLabel": "Monthly",
       "period": "Toman / month",
@@ -493,7 +495,8 @@
       "eyebrow": "Blog",
       "titleLead": "Ideas, experience",
       "titleTrail": "and the things that actually work",
-      "linkLabel": "Go to the blog"
+      "linkLabel": "Go to the blog",
+      "railLabel": "Blog posts"
     },
     "cta": {
       "title": "Hand your shop to ProMall",

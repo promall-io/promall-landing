@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { SectionHeading } from '@/components/ui/Primitives';
+import { Carousel } from '@/components/ui/Carousel';
 import { Reveal } from '@/components/Reveal';
 import type { AboutCard } from '@/types/content';
 
@@ -83,11 +84,16 @@ export async function About() {
           />
         </Reveal>
 
-        <div className="flex flex-col gap-6 min-[810px]:pb-[120px]">
+        <Carousel
+          label={t('railLabel')}
+          railClassName="min-[810px]:mx-0 min-[810px]:flex-col min-[810px]:gap-6 min-[810px]:overflow-visible min-[810px]:px-0 min-[810px]:pb-[120px] min-[810px]:snap-none"
+          slideClassName="w-[84vw] max-w-[380px] min-[810px]:w-auto min-[810px]:max-w-none"
+          dotsClassName="min-[810px]:hidden"
+        >
           {cards.map((card, index) => (
             <AboutStackCard key={card.title} card={card} index={index} />
           ))}
-        </div>
+        </Carousel>
       </div>
     </section>
   );

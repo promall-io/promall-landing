@@ -69,6 +69,7 @@ export async function Pricing() {
               percent: formatNumber(catalog.yearlyDiscountPercent, locale),
             })}
             monthlyLabel={t('monthlyLabel')}
+            railLabel={t('railLabel')}
             latinNumerals={latinNumerals}
             ctaHref={ctaHref}
           />

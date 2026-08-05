@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { EyebrowPill } from '@/components/ui/Primitives';
+import { Carousel } from '@/components/ui/Carousel';
 import { ThemedImage } from '@/components/ThemedImage';
 import { Reveal } from '@/components/Reveal';
 import { NumbersParallax } from '@/components/sections/NumbersParallax';
@@ -108,7 +109,12 @@ export async function Numbers() {
     : 'text-[2.75rem] min-[810px]:text-[3rem] min-[1128px]:text-[5rem]';
 
   return (
-    <section id="numbers" className="pw-section">
+    /* The drifting cloud plates in NumbersParallax are hung past the container
+       on purpose ([inset-inline-start:-14%]) and nothing between them and the
+       viewport clipped, so they were adding up to 50px of phantom document
+       width. Clipping at the section keeps the bleed past the gutter — which
+       is the effect — and stops it reaching the page. */
+    <section id="numbers" className="pw-section overflow-hidden">
       <div className="pw-container pw-section-top">
         <Reveal>
           <div className="flex flex-col items-start gap-6">
@@ -120,7 +126,12 @@ export async function Numbers() {
         </Reveal>
 
         <Reveal className="relative mt-16" delay={0.08}>
-          <div className="grid grid-cols-1 gap-9 min-[810px]:grid-cols-2">
+          <Carousel
+            label={t('railLabel')}
+            railClassName="items-start min-[810px]:mx-0 min-[810px]:grid min-[810px]:grid-cols-2 min-[810px]:gap-9 min-[810px]:overflow-visible min-[810px]:px-0 min-[810px]:snap-none"
+            slideClassName="w-[78vw] max-w-[420px] min-[810px]:w-auto min-[810px]:max-w-none"
+            dotsClassName="min-[810px]:hidden"
+          >
             {cards.map((card, index) => (
               <StatCardTile
                 key={card.tag}
@@ -130,7 +141,7 @@ export async function Numbers() {
                 offset={index === 1}
               />
             ))}
-          </div>
+          </Carousel>
           <NumbersParallax />
         </Reveal>
 

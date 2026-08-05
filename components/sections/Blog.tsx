@@ -2,6 +2,7 @@ import { ThemedImage } from '@/components/ThemedImage';
 import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { ArrowLink, SectionHeading } from '@/components/ui/Primitives';
+import { Carousel } from '@/components/ui/Carousel';
 import { Reveal } from '@/components/Reveal';
 import { getArticles } from '@/lib/blog';
 import { articleHref, BLOG_PATH, localeHref } from '@/lib/routes';
@@ -59,13 +60,18 @@ export async function Blog() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 min-[810px]:grid-cols-3">
+        <Carousel
+          label={t('railLabel')}
+          railClassName="min-[810px]:mx-0 min-[810px]:grid min-[810px]:grid-cols-3 min-[810px]:gap-6 min-[810px]:overflow-visible min-[810px]:px-0 min-[810px]:snap-none"
+          slideClassName="w-[78vw] max-w-[340px] min-[810px]:w-auto min-[810px]:max-w-none"
+          dotsClassName="min-[810px]:hidden"
+        >
           {articles.map((article, index) => (
-            <Reveal key={article.slug} delay={index * 0.08}>
+            <Reveal key={article.slug} delay={index * 0.08} className="h-full">
               <BlogCard article={article} href={articleHref(locale, article.slug)} />
             </Reveal>
           ))}
-        </div>
+        </Carousel>
       </div>
     </section>
   );

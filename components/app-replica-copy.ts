@@ -52,6 +52,7 @@ type ReplicaStat = {
 
 export type ReplicaCopy = {
   brand: { name: string; sub: string };
+  mobile: { statusTime: string; more: string; attention: string; viewOrders: string };
   navGroups: { shop: string; growth: string; account: string };
   nav: {
     dashboard: string;
@@ -111,6 +112,12 @@ export type ReplicaCopy = {
 
 const fa: ReplicaCopy = {
   brand: { name: 'پرومال', sub: 'پنل فروشگاه' },
+  mobile: {
+    statusTime: '۹:۴۱',
+    more: 'بیشتر',
+    attention: 'نیاز به رسیدگی',
+    viewOrders: 'رسیدگی کن',
+  },
   navGroups: { shop: 'فروشگاه', growth: 'رشد', account: 'حساب' },
   nav: {
     dashboard: 'داشبورد',
@@ -262,6 +269,12 @@ const fa: ReplicaCopy = {
 
 const en: ReplicaCopy = {
   brand: { name: 'ProMall', sub: 'Shop panel' },
+  mobile: {
+    statusTime: '9:41',
+    more: 'More',
+    attention: 'Needs attention',
+    viewOrders: 'Handle them',
+  },
   navGroups: { shop: 'Shop', growth: 'Growth', account: 'Account' },
   nav: {
     dashboard: 'Dashboard',
