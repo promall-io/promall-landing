@@ -84,21 +84,21 @@
      out in full: Lightning CSS cannot fold a color-mix() whose first operand
      is a var() and emits the bare operand as the legacy fallback, which turns
      a quarter-strength hairline into an opaque slab. */
-  --success: #4cc38a;
-  --success-ink: #5fd6a0;
-  --success-soft: rgba(20, 147, 92, 0.16);
-  --success-border: rgba(76, 195, 138, 0.25);
-  --warning: #d9a441;
-  --warning-ink: #e8b85e;
-  --warning-soft: rgba(183, 121, 31, 0.18);
-  --warning-border: rgba(217, 164, 65, 0.25);
-  --info: #7db4e6;
-  --info-soft: rgba(47, 108, 162, 0.18);
-  --info-border: rgba(125, 180, 230, 0.25);
-  --danger: #e5736a;
-  --danger-ink: #f0998d;
-  --danger-soft: rgba(192, 57, 43, 0.18);
-  --danger-border: rgba(229, 115, 106, 0.25);
+  --success: #2dbf80;
+  --success-ink: #60d99d;
+  --success-soft: rgba(0, 159, 102, 0.20);
+  --success-border: rgba(45, 191, 128, 0.25);
+  --warning: #ef9736;
+  --warning-ink: #ffb266;
+  --warning-soft: rgba(207, 122, 0, 0.22);
+  --warning-border: rgba(239, 151, 54, 0.25);
+  --info: #52b4fd;
+  --info-soft: rgba(0, 108, 169, 0.22);
+  --info-border: rgba(82, 180, 253, 0.25);
+  --danger: #f86d77;
+  --danger-ink: #ff9da0;
+  --danger-soft: rgba(211, 45, 61, 0.22);
+  --danger-border: rgba(248, 109, 119, 0.25);
   /* the same contract for the brand pill, which has no -soft of its own */
   --brand-soft: rgba(174, 187, 208, 0.12);
   --brand-border: rgba(174, 187, 208, 0.25);
@@ -295,21 +295,21 @@
   --muted: var(--surface-sunken);
 
   /* E · status */
-  --success: #14935c;
-  --success-ink: #0f6e44;
-  --success-soft: #e7f4ee;
-  --success-border: rgba(20, 147, 92, 0.25);
-  --warning: #b7791f;
-  --warning-ink: #8a5a12;
-  --warning-soft: #fbf1dd;
-  --warning-border: rgba(183, 121, 31, 0.25);
-  --info: #2f6ca2;
-  --info-soft: #e4eef6;
-  --info-border: rgba(47, 108, 162, 0.25);
-  --danger: #c0392b;
-  --danger-ink: #97271b;
-  --danger-soft: #fbe9e7;
-  --danger-border: rgba(192, 57, 43, 0.25);
+  --success: #009f66;
+  --success-ink: #007c4e;
+  --success-soft: #e3faec;
+  --success-border: rgba(0, 159, 102, 0.25);
+  --warning: #cf7a00;
+  --warning-ink: #a55800;
+  --warning-soft: #fff1e5;
+  --warning-border: rgba(207, 122, 0, 0.25);
+  --info: #006ca9;
+  --info-soft: #e8f4ff;
+  --info-border: rgba(0, 108, 169, 0.25);
+  --danger: #d32d3d;
+  --danger-ink: #b32035;
+  --danger-soft: #ffedec;
+  --danger-border: rgba(211, 45, 61, 0.25);
   --brand-soft: rgba(65, 90, 119, 0.12);
   --brand-border: rgba(65, 90, 119, 0.25);
 

@@ -14,7 +14,7 @@ Never referenced directly from a component.
 | Ink | `--ink-deep` `#11192a` · `--ink` `#1b263b` · `--ink-700` `#243349` · `--ink-600` `#2e3f59` |
 | Slate & sky | `--slate` `#415a77` · `--slate-soft` `#778da9` · `--sky` `#aebbd0` · `--sky-soft` `#cdd6e2` |
 | Champagne gold | `--gold-deep` `#c4b894` · `--gold` `#d9d0b8` · `--gold-tint` `#efe9da` · `--ice` `#e3e5e9` |
-| Status | `--success` `#14935c` · `--warning` `#b7791f` · `--info` `#2f6ca2` · `--danger` `#c0392b` |
+| Status | `--success` `#009f66` · `--warning` `#cf7a00` · `--info` `#006ca9` · `--danger` `#d32d3d` |
 
 ## 02 — Semantic roles: same token, two modes
 
@@ -30,7 +30,7 @@ Never referenced directly from a component.
 | primary / ring | `#415a77` · white 7.1:1 | `#d9d0b8` gold · ink 9.9:1 |
 | brand / ring (dark) | — | `#aebbd0` · 9.1:1 |
 | accent | `#d9d0b8` · ink 9.9:1 | gold, ink text |
-| destructive | `#c0392b` · white 5.4:1 | `#e5736a` · **ink text** |
+| destructive | `#d32d3d` · white 5.0:1 | `#f86d77` · **ink text** 5.4:1 |
 | border / input | ink @ 9% / 12% | white @ 10% / 14% |
 
 The one deliberate asymmetry: `--primary` is slate blue in light and champagne gold in dark. That is correct — slate has no contrast on ink-deep, gold has none on paper. The primary CTA changes hue with the theme. Keep it; never hard-code either hex for a CTA.
@@ -43,6 +43,15 @@ The one deliberate asymmetry: `--primary` is slate blue in light and champagne g
 - **D Semantic roles** — the layer product code touches. `--background`/`--foreground`, `--card`/`--card-foreground` (always paired), `--popover`/`--popover-foreground` (lighter than card in dark — that lightness IS the elevation cue), `--primary`/`--primary-foreground` (one per view), `--secondary`, `--muted`/`--muted-foreground` (also the standard hover fill), `--accent` (gold both themes — selected item, active tab, premium badge; never page-wide), `--destructive` (irreversible only), `--border`/`--input`/`--ring`.
 - **E Status — three-part contract**: `base` = fill · `-ink` = text · `-soft` = background.
   `--success` paid/in-stock/published/approved · `--warning` recoverable and time-bound · `--info` neutral notice (no `-ink`; base passes 5.5:1 on white) · `--danger` failure state.
+  One hue per family, set in OKLCH so the four read as one system and none of them collides with the brand: success emerald H159, warning amber H64 (clear of the champagne gold ramp), info azure H244 (clear of `--slate` at H253), danger crimson H22. Each base sits at the lightness that carries its own foreground token, so the fill is legible before a component pairs anything with it.
+
+  | | light base · `-ink` · `-soft` | dark base · `-ink` · `-soft` |
+  |---|---|---|
+  | success | `#009f66` · `#007c4e` · `#e3faec` | `#2dbf80` · `#60d99d` · base @ 20% |
+  | warning | `#cf7a00` · `#a55800` · `#fff1e5` | `#ef9736` · `#ffb266` · base @ 22% |
+  | info | `#006ca9` · — · `#e8f4ff` | `#52b4fd` · — · base @ 22% |
+  | danger | `#d32d3d` · `#b32035` · `#ffedec` | `#f86d77` · `#ff9da0` · base @ 22% |
+
   Color is never the only signal — always pair with an icon or a word (~8% of Iranian men have a color-vision deficiency).
 - **F Borders, focus, selection** — `--border-subtle` (decorative, ~1.3:1 — may never be the only thing defining a control) · `--border-strong` · `--input-border` · `--ring`/`--shadow-ring` (7.1:1 light, 9.1:1 dark — this is what carries focus contrast) · `--selection-bg` (set once globally).
 - **G Brand aliases `--brand-*`** — legacy naming for landing components. Must resolve to families B/C/E; never a new value. Keep `--brand-*` status in lock-step with family E.
@@ -53,6 +62,7 @@ The one deliberate asymmetry: `--primary` is slate blue in light and champagne g
 - **L Data visualisation** — `--chart-1 … --chart-5`, assigned in order, already mode-aware. Five is the ceiling. A series with status meaning uses the status token instead, consistently across every chart.
 - **M Channel tokens `--*-rgb`** — space-separated channels for `rgb(var(--x) / 12%)`. Never for text.
 - **N Asset & effect** — `--logo-filter` (one logo asset, flipped in dark), `--canvas-fill-white`, `--svg-blur-start/-end` (read in JS), `--confetti-*` (celebration moment only, never UI chrome).
+- **N2 Media scrim** — `--scrim-soft` (25%) · `--scrim` (45%) · `--scrim-strong` (65%) · `--scrim-foreground`. The one sanctioned pure-black wash, and only over user photography, where the pixel behind the text is unknown and so cannot be a themed surface. Deliberately identical in both modes — the photo does not re-theme, so neither may the scrim. Never for UI chrome: a panel, sheet, dropdown or disabled state has a real surface token.
 - **O Shadow & radius** — `--shadow-soft/-card/-float/-ink` in that order; already re-tuned for dark. `--radius` (20px) + `xs/sm/md/lg/xl/2xl/3xl/full`. Buttons are `--radius-full` pills, cards and inputs `--radius-md`.
 - **P Off-limits** — `--tw-*` (Tailwind internals) and `--color-red-50 …` (Tailwind's stock 192-color palette). Shipped, but NOT ProMall colors.
 
@@ -114,7 +124,7 @@ Apply to every screen, both themes.
 31. `--confetti-*` is deliberately off-brand and exists for the celebration moment only. It never appears in UI chrome.
 
 ### Never touch
-32. `--tw-*` (Tailwind internals) and `--color-red-50 …` (Tailwind's stock 192-color palette) are shipped but are NOT ProMall colors. Reading either is the fastest way to make a screen look off-brand.
+32. `--tw-*` (Tailwind internals) and `--color-red-50 …` (Tailwind's stock 192-color palette) are shipped but are NOT ProMall colors. Reading either is the fastest way to make a screen look off-brand. **`white` and `black` are stock colors too** — `bg-white`, `text-white`, `bg-black/40`, `ring-black/10` never re-theme, so any of them on a surface that flips between modes is a contrast bug waiting to happen. Use the fill's `-foreground` token, a surface token, or `--scrim*` for a photo wash. The two print templates are the sole exception: they render to physical paper, where white stock and black ink are the medium, not a theme.
 
 ### Floor
 33. Body text ≥ 4.5:1, large text and UI boundaries ≥ 3:1, in BOTH themes, measured with the WCAG 2.2 formula. If a pairing you want fails, change the pairing — not the token.
