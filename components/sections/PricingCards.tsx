@@ -63,7 +63,9 @@ function PlanCard({
   dividerStart,
   priceFade,
 }: PlanCardProps) {
-  const price = plan.hasToggle && yearly ? plan.yearlyPrice : plan.price;
+  const onYearlyRate = plan.hasToggle && yearly;
+  const price = onYearlyRate ? plan.yearlyPrice : plan.price;
+  const period = onYearlyRate ? plan.periodYearly : plan.period;
 
   const surface = plan.featured
     ? 'bg-[var(--pw-surface-raised)] min-[1100px]:z-[1] min-[1100px]:-my-6 min-[1100px]:py-[52px]'
@@ -102,8 +104,8 @@ function PlanCard({
             {price}
           </motion.span>
         </AnimatePresence>
-        {plan.period ? (
-          <span className="text-base text-[var(--pw-text-dim)]">{plan.period}</span>
+        {period ? (
+          <span className="text-base text-[var(--pw-text-dim)]">{period}</span>
         ) : null}
       </p>
 

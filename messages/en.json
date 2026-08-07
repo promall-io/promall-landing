@@ -367,6 +367,7 @@
       "yearlyLabel": "Yearly, up to {percent}% cheaper",
       "monthlyLabel": "Monthly",
       "period": "Toman / month",
+      "periodYearly": "Toman / month, billed yearly",
       "priceThousands": "{value}K",
       "customPrice": "Custom pricing",
       "cta": "Get a free demo",

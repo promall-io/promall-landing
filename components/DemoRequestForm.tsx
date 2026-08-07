@@ -26,6 +26,7 @@ import {
   sanitizeVerificationCodeInput,
   type DemoRequestErrorCode,
 } from '@/lib/demo-form';
+import { useSmsOtpAutofill } from '@/lib/use-sms-otp-autofill';
 
 export type DemoFormLabels = {
   formTitle: string;
@@ -178,6 +179,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
   const [status, setStatus] = useState<FormStatus>('idle');
   const [alertCode, setAlertCode] = useState<DemoRequestErrorCode | null>(null);
   const [resendIn, setResendIn] = useState(0);
+  const [codeRequestToken, setCodeRequestToken] = useState(0);
   const [submitted, setSubmitted] = useState<{ phone: string; instagram: string } | null>(
     null,
   );
@@ -259,6 +261,13 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
     }
   };
 
+  useSmsOtpAutofill({
+    enabled: step === 'code' && status !== 'pending',
+    length: DEMO_REQUEST.VERIFICATION_CODE_LENGTH,
+    requestToken: codeRequestToken,
+    onCode: handleCodeChange,
+  });
+
   const requestCode = async (normalizedPhone: string) => {
     setStatus('pending');
     setAlertCode(null);
@@ -272,6 +281,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
         return false;
       }
       setResendIn(resendAfterSeconds);
+      setCodeRequestToken((token) => token + 1);
       return true;
     } catch {
       setAlertCode(DEMO_REQUEST_ERROR_CODES.SEND_FAILED);

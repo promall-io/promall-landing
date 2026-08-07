@@ -57,6 +57,7 @@ export type PlanCatalog = {
 export type PlanCopy = {
   locale: string;
   period: string;
+  periodYearly: string;
   priceThousands: (value: string) => string;
   customPrice: string;
   cta: string;
@@ -339,6 +340,7 @@ export function toPricingPlan(
     price: custom || !monthly ? copy.customPrice : formatPrice(monthly.finalPrice, copy),
     yearlyPrice: custom || !yearly ? copy.customPrice : formatPrice(yearly.monthlyEquivalent, copy),
     period: custom ? '' : copy.period,
+    periodYearly: custom ? '' : copy.periodYearly,
     description: planDescription(plan, copy),
     cta: custom ? copy.customCta : copy.cta,
     metaHeading: previousPlan

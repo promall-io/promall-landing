@@ -424,6 +424,7 @@
       "yearlyLabel": "سالانه، تا {percent}٪ ارزون‌تر",
       "monthlyLabel": "ماهانه",
       "period": "تومان / ماه",
+      "periodYearly": "تومان / ماه، پرداخت سالانه",
       "priceThousands": "{value} هزار",
       "customPrice": "قیمت سفارشی",
       "cta": "دمو رایگان بگیر",

@@ -86,6 +86,7 @@ export type PricingPlan = {
   price: string;
   yearlyPrice: string;
   period: string;
+  periodYearly: string;
   description: string;
   cta: string;
   metaHeading: string;

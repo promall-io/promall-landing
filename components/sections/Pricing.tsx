@@ -29,6 +29,7 @@ export async function Pricing() {
   const copy: PlanCopy = {
     locale,
     period: t('period'),
+    periodYearly: t('periodYearly'),
     priceThousands: (value) => t('priceThousands', { value }),
     customPrice: t('customPrice'),
     cta: t('cta'),
