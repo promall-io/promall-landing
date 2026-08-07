@@ -134,7 +134,7 @@ export function Carousel({
 
   const goTo = useCallback((index: number) => {
     slideRefs.current[index]?.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      behavior: 'smooth',
       block: 'nearest',
       inline: 'start',
     });

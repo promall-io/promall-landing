@@ -451,9 +451,9 @@
         "megabytes": "{value} مگابایت"
       },
       "names": {
-        "STARTER": "استارتر",
-        "PROFESSIONAL": "حرفه‌ای",
-        "BUSINESS": "کسب‌وکار",
+        "STARTER": "لایت",
+        "PROFESSIONAL": "پرو",
+        "BUSINESS": "پرو مکس",
         "ENTERPRISE": "سازمانی"
       },
       "descriptions": {

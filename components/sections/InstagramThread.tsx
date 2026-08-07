@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type SVGProps } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { REVEAL_EASE } from '@/components/Reveal';
-import { useReducedMotionAfterMount } from '@/components/reduced-motion';
 import { localizeDigits } from '@/lib/demo-form';
 import type { DmMessage, DmStep, DmThreadChrome } from '@/types/content';
 
@@ -319,11 +318,9 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
   const stageRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inView = useInView(stageRef, { margin: '-120px 0px' });
-  const reduceMotion = useReducedMotionAfterMount();
-  const playing = inView && !reduceMotion;
 
-  const { visible, typing } = useScriptPlayer(script, playing);
-  const shown = reduceMotion ? script.length : visible;
+  const { visible, typing } = useScriptPlayer(script, inView);
+  const shown = visible;
   const activeStep = shown === 0 ? 0 : (script[Math.min(shown, script.length) - 1]?.step ?? 0);
   const progress = ((activeStep + 1) / steps.length) * 100;
 
@@ -332,11 +329,8 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
     if (!node) {
       return;
     }
-    node.scrollTo({
-      top: node.scrollHeight,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    });
-  }, [shown, typing, reduceMotion]);
+    node.scrollTo({ top: node.scrollHeight, behavior: 'smooth' });
+  }, [shown, typing]);
 
   return (
     <div
@@ -404,7 +398,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
           <motion.span
             className="block w-px bg-[var(--pw-gold)]"
             animate={{ height: `${progress}%` }}
-            transition={{ duration: reduceMotion ? 0 : 0.6, ease: REVEAL_EASE }}
+            transition={{ duration: 0.6, ease: REVEAL_EASE }}
           />
         </span>
 
@@ -416,10 +410,7 @@ export function InstagramThread({ script, steps, chrome, locale }: InstagramThre
               key={step.title}
               className="relative"
               animate={{ opacity: active ? 1 : 0.32 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.5,
-                ease: REVEAL_EASE,
-              }}
+              transition={{ duration: 0.5, ease: REVEAL_EASE }}
             >
               <span
                 aria-hidden

@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { REVEAL_EASE } from '@/components/Reveal';
 import { ArrowRightIcon, ShieldIcon } from '@/components/icons';
 import {
@@ -140,8 +140,6 @@ function FormAlert({ message }: { message: string }) {
 }
 
 function SuccessMark() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <span className="flex size-16 items-center justify-center rounded-full bg-[var(--success-soft)]">
       <svg viewBox="0 0 52 52" className="size-9" aria-hidden>
@@ -152,7 +150,7 @@ function SuccessMark() {
           strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          initial={reduceMotion ? false : { pathLength: 0 }}
+          initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 0.5, ease: REVEAL_EASE, delay: 0.15 }}
         />
@@ -168,7 +166,6 @@ type DemoRequestFormProps = {
 };
 
 export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormProps) {
-  const reduceMotion = useReducedMotion();
   const mountedAtRef = useRef(0);
   const codeInputRef = useRef<HTMLInputElement>(null);
 
@@ -379,7 +376,7 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
         {step === 'success' && submitted ? (
           <motion.div
             key="success"
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: REVEAL_EASE }}
             className="flex flex-col items-center py-2 text-center"
@@ -408,9 +405,9 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
             key="code"
             noValidate
             onSubmit={handleCodeSubmit}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: REVEAL_EASE }}
             className="flex flex-col gap-6"
           >
@@ -482,9 +479,9 @@ export function DemoRequestForm({ labels, locale, homeHref }: DemoRequestFormPro
             key="details"
             noValidate
             onSubmit={handleDetailsSubmit}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: REVEAL_EASE }}
             className="flex flex-col gap-6"
           >

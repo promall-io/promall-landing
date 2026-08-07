@@ -1,13 +1,19 @@
 /* 1:1 replica of the promall-ui shop dashboard — DARK theme (matches the landing).
    Colour comes from the token block in app/globals.css; this file authors none. */
 
+/* The fit ratio is a length divided by a length, and `calc(100cqw / <length>)`
+   is the one way to write it that Firefox drops on the floor — the whole
+   declaration goes invalid, zoom stays 1, and the 1280px panel renders at
+   native size inside a container ~20% narrower with the sidebar clipped off.
+   tan(atan2(a, b)) is the same ratio as a plain number and parses in every
+   engine this site already targets. Do NOT "simplify" it back to a division. */
 .pmapp {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: var(--pa-native-width);
 	height: var(--pa-native-height);
-	zoom: calc(100cqw / var(--pa-native-width));
+	zoom: tan(atan2(100cqw, var(--pa-native-width)));
 	overflow: hidden;
 	font-size: 16px;
 	line-height: 1.5;
@@ -423,11 +429,6 @@
 	to {
 		opacity: 1;
 		transform: translateY(0);
-	}
-}
-@media (prefers-reduced-motion: reduce) {
-	.pmapp .pa-pane {
-		animation: none;
 	}
 }
 

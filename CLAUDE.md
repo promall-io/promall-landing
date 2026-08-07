@@ -80,6 +80,11 @@ The `en` locale must contain **zero Persian characters**, so anything Persian-on
 - **`html[data-scroll-locked]`** is the nav drawer's scroll lock; `NavShell` measures the vanished scrollbar into `--pw-scrollbar-gutter` so the page doesn't jump. The drawer is a `role="dialog" aria-modal` with a Tab trap and focus return — scroll on the outer box, centring on an inner `min-h-full` child, because doing both on one element clips the top of an overflowing flex column.
 - Flat, token-driven surfaces — no gradient/glossy "AI-template" look. **Sanctioned exception:** the `--ig-*` tokens (Instagram gradient bubble + story ring) are real Instagram values and are scoped to the DM mockup only.
 - Scroll reveals are CSS-driven (`.pw-reveal` + `IntersectionObserver` in `components/Reveal.tsx`), not framer-motion.
+- **Motion policy — `prefers-reduced-motion: reduce` suppresses scroll-coupled motion ONLY.** There is deliberately no blanket `* { animation-duration: 0.01ms }` reset; it used to be at the foot of `globals.css` and turned every PC with Windows' animation effects switched off — the setting people flip on any low-spec machine — into a fully dead page (0 of 29 reveals, no marquee, no twinkle, no bento beats). The preference now gates exactly four things: the starfield's scroll timeline (the `no-preference` gate on `.pw-starfield-layer`), the hero and cloud parallax (`HeroParallax`, `NumbersParallax`), and lenis smooth scroll (`SmoothScroll`). Entrance fades, in-place UI transitions and ambient decoration run for every visitor. Don't reintroduce a global reset, and don't add `motion-reduce:` utilities to anything that isn't scroll-coupled.
+
+### Scaling the hero replicas
+
+Both device mockups scale a fixed native canvas to its container with `zoom`, and the ratio is written **`tan(atan2(100cqw, var(--…-width)))`, never `calc(100cqw / var(--…-width))`**. Firefox rejects `calc()` that divides a length by a length: the whole declaration goes invalid, `zoom` stays `1`, and the 1280px panel renders at native size inside a container ~20% narrower with the sidebar clipped off (same for the 393px phone). The trig identity is the same number and parses in every engine. Verified in Chromium, Firefox and WebKit; Lightning CSS passes it through minification untouched.
 
 ## Copy
 

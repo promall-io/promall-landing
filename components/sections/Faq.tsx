@@ -30,10 +30,12 @@ function FaqContactCard({
 
 export async function Faq() {
   const t = await getTranslations('sections.faq');
+  const tPricing = await getTranslations('sections.pricing');
   const locale = await getLocale();
   const catalog = await fetchPlanCatalog();
   const rawCategories = t.raw('categories') as FaqCategory[];
-  const categories = resolveFaqCategories(rawCategories, catalog, locale);
+  const planNames = tPricing.raw('names') as Record<string, string | undefined>;
+  const categories = resolveFaqCategories(rawCategories, catalog, locale, planNames);
 
   return (
     <section id="faq" className="pw-section">

@@ -11,6 +11,11 @@ import {
 type FaqItem = { question: string; answer: string };
 type FaqCategoryLike = { items: FaqItem[] };
 
+/* The pricing cards render `sections.pricing.names` over the catalog's own name, so
+   a plan named in an FAQ answer has to read the same override or the two surfaces
+   disagree until the catalog itself is renamed. */
+type PlanNameOverrides = Record<string, string | undefined>;
+
 /* The FAQ answers carry price claims, so they are authored with tokens and
    resolved from the live catalog at render time — a repricing must never leave
    a stale number in copy. Both surfaces that render these answers resolve them
@@ -31,6 +36,7 @@ function formatMonthlyFromToken(monthlyLow: number, locale: string): string {
 export function buildFaqTokenReplacements(
   catalog: PlanCatalog,
   locale: string,
+  planNames: PlanNameOverrides = {},
 ): Record<string, string> {
   const monthlyRange = monthlyTomanRange(catalog);
   const aiEntryPlan = entryPlanWithInstagramAi(catalog);
@@ -40,7 +46,9 @@ export function buildFaqTokenReplacements(
       ? formatMonthlyFromToken(monthlyRange.low, locale)
       : '',
     [YEARLY_DISCOUNT_TOKEN]: formatNumber(catalog.yearlyDiscountPercent, locale),
-    [AI_ENTRY_PLAN_TOKEN]: aiEntryPlan ? planName(aiEntryPlan, locale) : '',
+    [AI_ENTRY_PLAN_TOKEN]: aiEntryPlan
+      ? planNames[aiEntryPlan.id] ?? planName(aiEntryPlan, locale)
+      : '',
   };
 }
 
@@ -48,8 +56,9 @@ export function resolveFaqCategories<TCategory extends FaqCategoryLike>(
   categories: TCategory[],
   catalog: PlanCatalog,
   locale: string,
+  planNames: PlanNameOverrides = {},
 ): TCategory[] {
-  const replacements = buildFaqTokenReplacements(catalog, locale);
+  const replacements = buildFaqTokenReplacements(catalog, locale, planNames);
   const applyTokens = (text: string): string =>
     Object.entries(replacements).reduce(
       (result, [token, value]) => result.split(token).join(value),

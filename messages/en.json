@@ -394,9 +394,9 @@
         "megabytes": "{value} MB"
       },
       "names": {
-        "STARTER": "Starter",
-        "PROFESSIONAL": "Professional",
-        "BUSINESS": "Business",
+        "STARTER": "Lite",
+        "PROFESSIONAL": "Pro",
+        "BUSINESS": "Pro Max",
         "ENTERPRISE": "Enterprise"
       },
       "descriptions": {

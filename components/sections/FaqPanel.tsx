@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDownIcon } from '@/components/icons';
 import { REVEAL_EASE } from '@/components/Reveal';
 import type { FaqCategory } from '@/types/content';
@@ -14,8 +14,7 @@ type FaqPanelProps = {
 export function FaqPanel({ categories, contact }: FaqPanelProps) {
   const [activeId, setActiveId] = useState(categories[0]?.id ?? '');
   const [openKey, setOpenKey] = useState<string | null>(null);
-  const reduceMotion = useReducedMotion();
-  const panelMotion = { duration: reduceMotion ? 0 : 0.35, ease: REVEAL_EASE };
+  const panelMotion = { duration: 0.35, ease: REVEAL_EASE };
 
   const active = categories.find((category) => category.id === activeId) ?? categories[0];
 

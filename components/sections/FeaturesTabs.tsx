@@ -2,7 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CircleButton } from '@/components/ui/Primitives';
 import { Carousel } from '@/components/ui/Carousel';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/icons';
@@ -27,15 +27,14 @@ type FeaturesTabsProps = {
 export function FeaturesTabs({ tabs, prevLabel, nextLabel, stageLabel }: FeaturesTabsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const reduceMotion = useReducedMotion();
-  const crossfade = { duration: reduceMotion ? 0 : 0.4, ease: REVEAL_EASE };
+  const crossfade = { duration: 0.4, ease: REVEAL_EASE };
 
   const active = tabs[activeIndex];
 
   const revealTab = (index: number) => {
     setActiveIndex(index);
     tabRefs.current[index]?.scrollIntoView({
-      behavior: reduceMotion ? 'auto' : 'smooth',
+      behavior: 'smooth',
       block: 'nearest',
       inline: 'nearest',
     });

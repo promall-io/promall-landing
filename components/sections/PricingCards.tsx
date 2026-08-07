@@ -2,7 +2,7 @@
 
 import { useState, type CSSProperties } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CheckIcon, CrossIcon } from '@/components/icons';
 import { Carousel } from '@/components/ui/Carousel';
 import { REVEAL_EASE } from '@/components/Reveal';
@@ -171,8 +171,7 @@ export function PricingCards({
   ctaHref,
 }: PricingCardsProps) {
   const [yearly, setYearly] = useState(true);
-  const reduceMotion = useReducedMotion();
-  const priceFade = { duration: reduceMotion ? 0 : 0.25, ease: REVEAL_EASE };
+  const priceFade = { duration: 0.25, ease: REVEAL_EASE };
 
   return (
     <div className="flex flex-col gap-8">

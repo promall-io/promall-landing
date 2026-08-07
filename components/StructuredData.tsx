@@ -108,6 +108,7 @@ export async function StructuredData({ locale }: { locale: string }) {
     tFaq.raw('categories') as FaqCategory[],
     catalog,
     locale,
+    planNames,
   );
   const priceRange = monthlyRialRange(catalog);
   const featureTabs = tFeatures.raw('tabs') as FeatureTab[];

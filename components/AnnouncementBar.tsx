@@ -25,7 +25,7 @@ export async function AnnouncementBar() {
               'linear-gradient(to right, transparent 0, rgb(var(--shade-rgb)) 20px, rgb(var(--shade-rgb)) calc(100% - 20px), transparent 100%)',
           }}
         >
-          <span className="pw-marquee flex w-max group-hover:[animation-play-state:paused] group-focus-visible:[animation-play-state:paused] motion-reduce:animate-none">
+          <span className="pw-marquee flex w-max group-hover:[animation-play-state:paused] group-focus-visible:[animation-play-state:paused]">
             <span className="pw-micro whitespace-nowrap pe-10 text-[var(--pw-text)]">{text}</span>
             <span aria-hidden className="pw-micro whitespace-nowrap pe-10 text-[var(--pw-text)]">
               {text}

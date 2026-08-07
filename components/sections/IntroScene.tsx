@@ -155,7 +155,7 @@ function RevenueWidget({
   const [tick, setTick] = useState<{ gen: number; value: number } | null>(null);
 
   useEffect(() => {
-    if (!active || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!active) {
       setShown(revenue.amount);
       return;
     }
@@ -344,19 +344,8 @@ export function IntroScene({
 }) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState(false);
-  const [reduced, setReduced] = useState(false);
   const [dmCycle, setDmCycle] = useState(0);
   const [orderCycle, setOrderCycle] = useState(0);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const sync = () => setReduced(query.matches);
-
-    sync();
-    query.addEventListener('change', sync);
-
-    return () => query.removeEventListener('change', sync);
-  }, []);
 
   useEffect(() => {
     const scene = sceneRef.current;
@@ -376,7 +365,7 @@ export function IntroScene({
   }, []);
 
   useEffect(() => {
-    if (!play || reduced) {
+    if (!play) {
       return;
     }
 
@@ -387,7 +376,7 @@ export function IntroScene({
       clearInterval(dm);
       clearInterval(order);
     };
-  }, [play, reduced]);
+  }, [play]);
 
   return (
     <div ref={sceneRef} data-play={play || undefined} className="pw-intro-scene">
@@ -425,12 +414,7 @@ export function IntroScene({
           className="min-[900px]:col-span-5"
           style={enter(0.09)}
         >
-          <RevenueWidget
-            revenue={tiles.revenue}
-            locale={locale}
-            active={play}
-            live={play && !reduced}
-          />
+          <RevenueWidget revenue={tiles.revenue} locale={locale} active={play} live={play} />
         </BentoCard>
 
         <BentoCard

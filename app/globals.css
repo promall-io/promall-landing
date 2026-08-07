@@ -1185,11 +1185,11 @@
   }
 
   /* The bento widgets are live fragments of the panel, so every beat below is
-     gated on data-play — set only while the scene is on screen. A crawler, a
-     no-JS visitor and prefers-reduced-motion never set it, and with no
-     animation applied the markup already sits in its finished state. The DM
-     and order widgets remount on a timer while playing, which restarts their
-     one-shot beats and turns the cards into looping widgets. */
+     gated on data-play — set only while the scene is on screen. A crawler and a
+     no-JS visitor never set it, and with no animation applied the markup
+     already sits in its finished state. The DM and order widgets remount on a
+     timer while playing, which restarts their one-shot beats and turns the
+     cards into looping widgets. */
   .pw-intro-scene[data-play='true'] [data-beat='in'] {
     animation: pw-beat-in 0.62s var(--pw-spring) both;
     animation-delay: var(--pw-beat, 0s);
@@ -1750,33 +1750,17 @@ html.lenis body {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* MOTION POLICY — read before adding a `prefers-reduced-motion: reduce` rule.
+   This site does NOT blanket-disable motion on that preference, and the blanket
+   `* { animation-duration: 0.01ms }` reset that used to live here is gone on
+   purpose. It turned every machine with Windows' animation effects switched off
+   — a setting people flip on any low-spec PC — into a completely dead page: 0
+   of 29 scroll reveals, no marquee, no twinkle, no bento beats.
 
-  .pw-starfield {
-    opacity: 1;
-  }
-
-  .pw-starfield-layer {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  /* Each star rests at its own peak rather than a flat 0.5, so a still field
-     keeps the depth the twinkle was carrying — and the dust stays dust. */
-  .pw-star {
-    animation: none !important;
-    opacity: var(--pw-star-max, 0.5);
-  }
-
-  .pw-comet {
-    animation: none !important;
-    opacity: 0;
-  }
-}
+   What the preference suppresses here is SCROLL-COUPLED motion only, which is
+   where the vestibular risk actually lives: the starfield's scroll timeline
+   (see the `no-preference` gate on .pw-starfield-layer above), the hero and
+   cloud parallax (framer-motion `useReducedMotion` in HeroParallax and
+   NumbersParallax) and lenis smooth scroll (SmoothScroll). Entrance fades,
+   in-place UI transitions and ambient decoration run for everyone. Don't
+   reintroduce a global reset. */

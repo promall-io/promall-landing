@@ -24,7 +24,9 @@
 	left: 0;
 	width: var(--pm-phone-width);
 	height: var(--pm-phone-height);
-	zoom: calc(100cqw / var(--pm-phone-width));
+	/* tan(atan2(...)) not a division — see the note on .pmapp in app-replica.css;
+	   `calc(100cqw / <length>)` is invalid in Firefox and leaves zoom at 1. */
+	zoom: tan(atan2(100cqw, var(--pm-phone-width)));
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;

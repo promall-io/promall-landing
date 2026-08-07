@@ -18,15 +18,6 @@ export function NavScrim() {
 
     const targetOpacity = () => (window.scrollY > REVEAL_SCROLL_OFFSET ? 1 : 0);
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const snap = () => {
-        node.style.opacity = String(targetOpacity());
-      };
-      snap();
-      window.addEventListener('scroll', snap, { passive: true });
-      return () => window.removeEventListener('scroll', snap);
-    }
-
     let opacity = targetOpacity();
     let frame = 0;
     let previousTime = 0;

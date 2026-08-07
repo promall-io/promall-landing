@@ -23,23 +23,13 @@ type RevealVariantOptions = {
   spring?: boolean;
 };
 
+/* Reveals are a one-shot entrance fade, not scroll-coupled motion, so they run
+   for every visitor — see the motion policy in app/globals.css. This used to
+   also return false on `prefers-reduced-motion: reduce`, which left every
+   machine with Windows' animation effects turned off with a page where nothing
+   ever animated. The only hard requirement is an observer to arm them. */
 export function motionAllowed() {
-  return (
-    typeof IntersectionObserver !== 'undefined' &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
-}
-
-export function useRevealArmed() {
-  const [armed, setArmed] = useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    if (motionAllowed()) {
-      setArmed(true);
-    }
-  }, []);
-
-  return armed;
+  return typeof IntersectionObserver !== 'undefined';
 }
 
 type RevealPhase = 'idle' | 'pending' | 'in';
