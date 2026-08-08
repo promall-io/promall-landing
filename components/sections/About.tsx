@@ -33,38 +33,36 @@ function AboutStackCard({ card, index }: { card: AboutCard; index: number }) {
   const imageOrder = isMirrored ? 'order-1' : 'order-1 min-[810px]:order-2';
 
   return (
-    <div className="min-[810px]:sticky min-[810px]:top-[120px]" style={{ zIndex: index + 1 }}>
-      <article className="grid h-auto grid-cols-1 overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[810px]:h-[628px] min-[810px]:grid-cols-2">
-        <div className={`${textOrder} flex flex-col p-8 min-[810px]:p-10`}>
-          <span className="inline-flex items-center gap-2 text-sm text-[var(--pw-text-dim)]">
-            <span aria-hidden className="size-1.5 rounded-full bg-[var(--pw-text-faint)]" />
-            {card.eyebrow}
-          </span>
+    <article className="grid h-auto grid-cols-1 overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[810px]:h-[628px] min-[810px]:grid-cols-2">
+      <div className={`${textOrder} flex flex-col p-8 min-[810px]:p-10`}>
+        <span className="inline-flex items-center gap-2 text-sm text-[var(--pw-text-dim)]">
+          <span aria-hidden className="size-1.5 rounded-full bg-[var(--pw-text-faint)]" />
+          {card.eyebrow}
+        </span>
 
-          <h3 className="mt-8 max-w-[24ch] text-[1.5rem] font-medium leading-[1.6] text-[var(--pw-cream)] min-[810px]:mt-14">
-            {card.title}
-          </h3>
+        <h3 className="mt-8 max-w-[24ch] text-[1.5rem] font-medium leading-[1.6] text-[var(--pw-cream)] min-[810px]:mt-14">
+          {card.title}
+        </h3>
 
-          <p className="pw-small mt-4 max-w-[34ch]">{card.description}</p>
+        <p className="pw-small mt-4 max-w-[34ch]">{card.description}</p>
 
-          <p className="mt-10 flex items-center gap-3 text-sm text-[var(--pw-text-dim)] min-[810px]:mt-auto">
-            <CrosshairGlyph />
-            {card.footnote}
-          </p>
-        </div>
+        <p className="mt-10 flex items-center gap-3 text-sm text-[var(--pw-text-dim)] min-[810px]:mt-auto">
+          <CrosshairGlyph />
+          {card.footnote}
+        </p>
+      </div>
 
-        <div className={`${imageOrder} relative aspect-[16/10] w-full min-[810px]:aspect-auto min-[810px]:h-full`}>
-          <Image
-            src={card.image}
-            alt={card.alt}
-            fill
-            sizes={CARD_SIZES}
-            quality={CARD_QUALITY}
-            className="object-cover"
-          />
-        </div>
-      </article>
-    </div>
+      <div className={`${imageOrder} relative aspect-[1596/1692] w-full min-[810px]:aspect-auto min-[810px]:h-full`}>
+        <Image
+          src={card.image}
+          alt={card.alt}
+          fill
+          sizes={CARD_SIZES}
+          quality={CARD_QUALITY}
+          className="object-cover"
+        />
+      </div>
+    </article>
   );
 }
 
@@ -87,7 +85,7 @@ export async function About() {
         <Carousel
           label={t('railLabel')}
           railClassName="min-[810px]:mx-0 min-[810px]:flex-col min-[810px]:gap-6 min-[810px]:overflow-visible min-[810px]:px-0 min-[810px]:pb-[120px] min-[810px]:snap-none"
-          slideClassName="w-[84vw] max-w-[380px] min-[810px]:w-auto min-[810px]:max-w-none"
+          slideClassName="w-[84vw] max-w-[380px] min-[810px]:sticky min-[810px]:top-[120px] min-[810px]:w-auto min-[810px]:max-w-none"
           dotsClassName="min-[810px]:hidden"
         >
           {cards.map((card, index) => (

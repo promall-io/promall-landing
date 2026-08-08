@@ -133,12 +133,13 @@ export function FeaturesTabs({ tabs, prevLabel, nextLabel, stageLabel }: Feature
         {tabs.map((tab) => (
           <div
             key={tab.id}
-            className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[811px]:aspect-[1080/610]"
+            className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px] bg-[var(--pw-surface-2)] ring-1 ring-[var(--pw-line)] min-[811px]:aspect-[1080/610]"
           >
             {/* A 2500px-wide desktop panel letterboxed into 342px is 0.14 scale
-                — a picture of text, not text. The portrait crop trades the
-                panel's edges for 2.2x the type size, which is the difference
-                between a screenshot you read and one you scroll past. */}
+                — a picture of text, not text. Cropping to 4/3 keeps three
+                quarters of the panel and still buys a third more type size,
+                which is the difference between a screenshot you read and one
+                you scroll past. */}
             <Image
               src={tab.image}
               alt={tab.alt}
